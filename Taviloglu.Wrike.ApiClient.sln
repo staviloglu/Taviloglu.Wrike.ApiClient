@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.ApiClient", "Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj", "{D2C097E1-EEA7-4B0C-AD1E-9243349AD620}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.Core", "Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj", "{68B231B1-F196-42BF-91E8-8EF5749EE7CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D2C097E1-EEA7-4B0C-AD1E-9243349AD620}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2C097E1-EEA7-4B0C-AD1E-9243349AD620}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2C097E1-EEA7-4B0C-AD1E-9243349AD620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B231B1-F196-42BF-91E8-8EF5749EE7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B231B1-F196-42BF-91E8-8EF5749EE7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B231B1-F196-42BF-91E8-8EF5749EE7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B231B1-F196-42BF-91E8-8EF5749EE7CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
