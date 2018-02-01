@@ -17,7 +17,7 @@ namespace Taviloglu.Wrike.ApiClient
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Taviloglu.Wrinker.ApiClient");
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Taviloglu.Wrike.ApiClient");
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"bearer {bearerToken}");
         }
 
