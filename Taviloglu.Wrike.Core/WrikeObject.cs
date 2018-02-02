@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeObject
+    public abstract class WrikeObject
     {
         [DataMember(Name = "id")]
         public string Id { get; set; }
