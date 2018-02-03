@@ -12,7 +12,7 @@ namespace Taviloglu.Wrike.Core
         public string Title { get; set; }
 
         [DataMember(Name = "type")]
-        public string Type { get; set; }
+        public WrikeCustomFieldType Type { get; set; }
 
         [DataMember(Name = "sharedIds")]
         public List<string> SharedIds { get; set; }        

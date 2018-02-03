@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient;
+using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.Samples
 {
@@ -14,7 +16,7 @@ namespace Taviloglu.Wrike.Samples
 
         static async Task MainAsync(string[] args)
         {
-            var bearerToken = "";
+            var bearerToken = "7VIw0efGxvG3IrTYUrgCiSvZhrMsFUkh2VEcp0Noznc3QiYj6jrm0lbcd6nobFW5-N-WFIUKC";
             var wrikeClient = new WrikeClient(bearerToken);
 
             #region Colors
@@ -35,12 +37,19 @@ namespace Taviloglu.Wrike.Samples
             //var newCustomField = new WrikeCustomField
             //{
             //    AccountId = "IEABX2HE",
-            //    Title = "Sinan Test Custom Field",
-            //    Type = WrikeCustomFieldTypes.Numeric
+            //    Title = "Sinan Test Custom Duration",
+            //    Type = WrikeCustomFieldType.Duration
             //};
             //var field = await wrikeClient.CreateCustomFieldAsync(newCustomField);
             #endregion
 
+            #region Tasks
+            //var tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" });
+            #endregion
+
+            #region Users
+            var user = await wrikeClient.GetUserAsync("");
+            #endregion
         }
     }
 }

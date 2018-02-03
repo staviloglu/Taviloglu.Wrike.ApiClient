@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -27,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <remarks>Scopes: amReadOnlyUser, amReadWriteUser</remarks>
         /// <param name="id">userId</param>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-user"/>
-        public async Task<WrikeResDto<WrikeUser>> QueryUserAsync(string id)
+        public async Task<WrikeResDto<WrikeUser>> GetUserAsync(string id)
         {
             return await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get);
         }
@@ -45,6 +46,22 @@ namespace Taviloglu.Wrike.ApiClient
             //TODO: implement            
             //return await SendRequest<WrikeTask>($"api/v3/folders/{folderId}/tasks", HttpMethods.Post, postData);
             return new WrikeResDto<WrikeTask>();
+        }
+
+        public async Task<WrikeResDto<WrikeTask>> GetTasksAsync(List<string> taskIds)
+        {
+
+            if (taskIds == null || taskIds.Count < 1)
+            {
+                throw new ArgumentNullException("taskIds can not be null or empty");
+            }
+            if (taskIds.Count > 100)
+            {
+                throw new ArgumentException("taskIds max count is 100");
+            }
+
+            var taskIdsFieldValue = string.Join(",", taskIds);
+            return await SendRequest<WrikeTask>($"tasks/{taskIdsFieldValue}", HttpMethods.Get);            
         }
         #endregion
 
@@ -105,15 +122,11 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 throw new ArgumentNullException("customField.AccountId can not be null or empty");
             }
-            if (string.IsNullOrWhiteSpace(customField.Type))
-            {
-                throw new ArgumentNullException("customField.Type can not be null or empty");
-            }
 
             var data = new List<KeyValuePair<string, string>>();
 
             data.Add(new KeyValuePair<string, string>("title", customField.Title));
-            data.Add(new KeyValuePair<string, string>("type", customField.Type));
+            data.Add(new KeyValuePair<string, string>("type", customField.Type.ToString()));
             if (customField.SharedIds != null && customField.SharedIds.Count > 0)
             {
                 data.Add(new KeyValuePair<string, string>("shareds", GetArrayValue(customField.SharedIds)));
@@ -164,7 +177,6 @@ namespace Taviloglu.Wrike.ApiClient
         }
         #endregion
 
-
         #region Colors
         /// <summary>
         /// Get color name - code mapping
@@ -201,7 +213,8 @@ namespace Taviloglu.Wrike.ApiClient
                     throw new ArgumentException("Unknown HTTP METHOD!");
             }
             var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
+            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json,
+                new StringEnumConverter());
 
             if (responseMessage.IsSuccessStatusCode)
             {
