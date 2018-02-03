@@ -76,6 +76,15 @@ namespace Taviloglu.Wrike.ApiClient
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
         public async Task<WrikeResDto<WrikeCustomField>> GetCustomFiledInfoAsync(List<string> customFieldIds)
         {
+            if (customFieldIds==null || customFieldIds.Count<1)
+            {
+                throw new ArgumentNullException("customFieldIds can not be null or empty");
+            }
+            if (customFieldIds.Count>100)
+            {
+                throw new ArgumentException("customFieldIds max count is 100");
+            }
+
             var customFieldsValue = string.Join(",", customFieldIds);
             return await SendRequest<WrikeCustomField>($"customfields/{customFieldsValue}", HttpMethods.Get);
         }
