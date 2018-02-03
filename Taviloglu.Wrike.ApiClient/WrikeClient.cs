@@ -20,29 +20,33 @@ namespace Taviloglu.Wrike.ApiClient
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {bearerToken}");
         }
 
+        #region Users
+        /// <summary>
+        ///  Returns information about single user
+        /// </summary>
+        /// <remarks>Scopes: amReadOnlyUser, amReadWriteUser</remarks>
+        /// <param name="id">userId</param>
+        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-user"/>
         public async Task<WrikeResDto<WrikeUser>> QueryUserAsync(string id)
         {
-            var responseMessage = await _httpClient.GetAsync($"users/{id}");
-            var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<WrikeUser>>(json);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                wrikeResDto.IsSuccess = true;
-            }
-
-            return wrikeResDto;
+            return await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get);
         }
+        #endregion
 
+        #region Tasks
+        /// <summary>
+        ///  Create task in folder. You can specify rootFolderId to create task in user's account root. 
+        /// </summary>
+        /// <remarks>Scopes: Default, wsReadWrite</remarks>
+        /// <param name="folderId">folderId</param>
+        /// See <see cref="https://developers.wrike.com/documentation/api/methods/create-task"/>
         public async Task<WrikeResDto<WrikeTask>> CreateTaskAsync(string folderId)
         {
-            var postData = new CreateTaskRequest();
-            var responseMessage = await _httpClient.PostAsJsonAsync($"api/v3/folders/{folderId}/tasks", postData);
-            responseMessage.EnsureSuccessStatusCode();
-            var json = await responseMessage.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<WrikeResDto<WrikeTask>>(json);
+            //TODO: implement            
+            //return await SendRequest<WrikeTask>($"api/v3/folders/{folderId}/tasks", HttpMethods.Post, postData);
+            return new WrikeResDto<WrikeTask>();
         }
-
+        #endregion
 
 
 
@@ -61,20 +65,19 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"accounts/{accountId}/customfields";
             }
 
-            return await SendRequest<WrikeCustomField>(requestUri,HttpMethods.Get);
+            return await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Get);
         }
 
         /// <summary>
         /// Returns complete information about specified custom fields
         /// </summary>
         /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
+        /// <param name="customFieldIds">string list of customFiledIds</param>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
         public async Task<WrikeResDto<WrikeCustomField>> GetCustomFiledInfoAsync(List<string> customFieldIds)
         {
             var customFieldsValue = string.Join(",", customFieldIds);
-            var requestUri = $"customfields/{customFieldsValue}";
-
-            return await SendRequest<WrikeCustomField>(requestUri,HttpMethods.Get);
+            return await SendRequest<WrikeCustomField>($"customfields/{customFieldsValue}", HttpMethods.Get);
         }
 
         /// <summary>
@@ -98,8 +101,6 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException("customField.Type can not be null or empty");
             }
 
-            var requestUri = $"accounts/{customField.AccountId}/customfields";
-
             var data = new List<KeyValuePair<string, string>>();
 
             data.Add(new KeyValuePair<string, string>("title", customField.Title));
@@ -111,15 +112,15 @@ namespace Taviloglu.Wrike.ApiClient
 
             var postContent = new FormUrlEncodedContent(data);
 
-            return await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Post, postContent);
+            return await SendRequest<WrikeCustomField>($"accounts/{customField.AccountId}/customfields",
+                HttpMethods.Post, postContent);
         }
 
         /// <summary>
         /// Updates custom field
         /// </summary>
         /// <remarks>Scopes: Default, wsReadWrite</remarks>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>
-        /// <param name="customField">AccountId, Title and Text values should be set</param>
+        /// See <see cref="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>        
         public async Task<WrikeResDto<WrikeCustomField>> UpdateCustomFieldAsync(
             string id, string title = null, string type = null, List<string> addShareds = null, List<string> removeShareds = null)
         {
@@ -148,11 +149,9 @@ namespace Taviloglu.Wrike.ApiClient
                 data.Add(new KeyValuePair<string, string>("removeShareds", GetArrayValue(removeShareds)));
             }
 
-            var requestUri = $"customfields/{id}";
-
             var putContent = new FormUrlEncodedContent(data);
 
-            return await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Put, putContent);
+            return await SendRequest<WrikeCustomField>($"customfields/{id}", HttpMethods.Put, putContent);
         }
         #endregion
 
@@ -165,9 +164,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-colors"/>
         public async Task<WrikeResDto<WrikeColor>> GetColorsAsync()
         {
-            var requestUri = "colors";
-
-            return await SendRequest<WrikeColor>(requestUri, HttpMethods.Get);
+            return await SendRequest<WrikeColor>("colors", HttpMethods.Get);
         }
         #endregion
 
