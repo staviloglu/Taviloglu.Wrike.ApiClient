@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeCustomFieldType
+    public class WrikeCustomFieldTypes
     {
         public const string Text = "Text";
         public const string DropDown = "DropDown";

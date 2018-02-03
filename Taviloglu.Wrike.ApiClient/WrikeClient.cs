@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
@@ -55,7 +53,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// <param name="accountId">If provided; returns a list of custom fields in particular account</param>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
-        public async Task<WrikeResDto<WrikeCustomField>> GetCustomFields(string accountId = null)
+        public async Task<WrikeResDto<WrikeCustomField>> GetCustomFieldsAsync(string accountId = null)
         {
             var requestUri = $"customfields";
             if (!string.IsNullOrWhiteSpace(accountId))
@@ -63,16 +61,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"accounts/{accountId}/customfields";
             }
 
-            var responseMessage = await _httpClient.GetAsync(requestUri);
-            var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<WrikeCustomField>>(json);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                wrikeResDto.IsSuccess = true;
-            }
-
-            return wrikeResDto;
+            return await SendRequest<WrikeCustomField>(requestUri,HttpMethods.Get);
         }
 
         /// <summary>
@@ -80,21 +69,12 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
-        public async Task<WrikeResDto<WrikeCustomField>> GetCustomFiledInfo(List<string> customFieldIds)
+        public async Task<WrikeResDto<WrikeCustomField>> GetCustomFiledInfoAsync(List<string> customFieldIds)
         {
             var customFieldsValue = string.Join(",", customFieldIds);
             var requestUri = $"customfields/{customFieldsValue}";
 
-            var responseMessage = await _httpClient.GetAsync(requestUri);
-            var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<WrikeCustomField>>(json);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                wrikeResDto.IsSuccess = true;
-            }
-
-            return wrikeResDto;
+            return await SendRequest<WrikeCustomField>(requestUri,HttpMethods.Get);
         }
 
         /// <summary>
@@ -103,7 +83,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <remarks>Scopes: Default, wsReadWrite</remarks>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/create-custom-field"/>
         /// <param name="customField">AccountId, Title and Text values should be set</param>
-        public async Task<WrikeResDto<WrikeCustomField>> CreateCustomField(WrikeCustomField customField)
+        public async Task<WrikeResDto<WrikeCustomField>> CreateCustomFieldAsync(WrikeCustomField customField)
         {
             if (customField == null)
             {
@@ -128,16 +108,10 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 data.Add(new KeyValuePair<string, string>("shareds", GetArrayValue(customField.SharedIds)));
             }
+
             var postContent = new FormUrlEncodedContent(data);
 
-            var responseMessage = await _httpClient.PostAsync(requestUri, postContent);
-            var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<WrikeCustomField>>(json);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                wrikeResDto.IsSuccess = true;
-            }
-            return wrikeResDto;
+            return await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Post, postContent);
         }
 
         /// <summary>
@@ -146,7 +120,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <remarks>Scopes: Default, wsReadWrite</remarks>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>
         /// <param name="customField">AccountId, Title and Text values should be set</param>
-        public async Task<WrikeResDto<WrikeCustomField>> UpdateCustomField(
+        public async Task<WrikeResDto<WrikeCustomField>> UpdateCustomFieldAsync(
             string id, string title = null, string type = null, List<string> addShareds = null, List<string> removeShareds = null)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -165,7 +139,7 @@ namespace Taviloglu.Wrike.ApiClient
                 data.Add(new KeyValuePair<string, string>("type", type));
 
             }
-            if (addShareds!= null && addShareds.Count>0)
+            if (addShareds != null && addShareds.Count > 0)
             {
                 data.Add(new KeyValuePair<string, string>("addShareds", GetArrayValue(addShareds)));
             }
@@ -175,32 +149,53 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             var requestUri = $"customfields/{id}";
-            
-            var postContent = new FormUrlEncodedContent(data);
 
-            var responseMessage = await _httpClient.PutAsync(requestUri, postContent);
-            var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<WrikeCustomField>>(json);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                wrikeResDto.IsSuccess = true;
-            }
-            return wrikeResDto;
+            var putContent = new FormUrlEncodedContent(data);
+
+            return await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Put, putContent);
         }
         #endregion
 
+
+        #region Colors
         /// <summary>
         /// Get color name - code mapping
         /// </summary>
         /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-colors"/>
-        public async Task<WrikeResDto<WrikeColor>> GetColors()
+        public async Task<WrikeResDto<WrikeColor>> GetColorsAsync()
         {
             var requestUri = "colors";
 
-            var responseMessage = await _httpClient.GetAsync(requestUri);
+            return await SendRequest<WrikeColor>(requestUri, HttpMethods.Get);
+        }
+        #endregion
+
+        #region PrivateMethods
+        private async Task<WrikeResDto<T>> SendRequest<T>(string requestUri, string httpMethod,
+            HttpContent httpContent = null)
+        {
+            HttpResponseMessage responseMessage = null;
+
+
+            switch (httpMethod)
+            {
+                case HttpMethods.Get:
+                    responseMessage = await _httpClient.GetAsync(requestUri);
+                    break;
+                case HttpMethods.Post:
+                    responseMessage = await _httpClient.PostAsync(requestUri, httpContent);
+                    break;
+                case HttpMethods.Put:
+                    responseMessage = await _httpClient.PutAsync(requestUri, httpContent);
+                    break;
+                case HttpMethods.Delete:
+                    break;
+                default:
+                    throw new ArgumentException("Unknown HTTP METHOD!");
+            }
             var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<WrikeColor>>(json);
+            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -209,23 +204,31 @@ namespace Taviloglu.Wrike.ApiClient
 
             return wrikeResDto;
         }
-
 
         private string GetArrayValue(List<string> values)
         {
             var stringBuilder = new StringBuilder();
 
             if (values != null && values.Count > 0)
-            {                
+            {
                 stringBuilder.Append("[");
                 foreach (var value in values)
                 {
                     stringBuilder.Append($"\"{value}\"");
                 }
-                stringBuilder.Append("]");                
+                stringBuilder.Append("]");
             }
 
             return stringBuilder.ToString();
+        }
+        #endregion
+
+        private class HttpMethods
+        {
+            public const string Get = "GET";
+            public const string Post = "POST";
+            public const string Put = "PUT";
+            public const string Delete = "DELETE";
         }
 
     }

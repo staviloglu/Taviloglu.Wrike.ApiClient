@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient;
-using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.Samples
 {
     class Program
     {
-        //accountId = 1635809
-        //taskId = 209337199
-        //folderId = 158167125
-
-
-        private const string _bearerToken = "";
         static void Main(string[] args)
         {
 
@@ -25,21 +14,33 @@ namespace Taviloglu.Wrike.Samples
 
         static async Task MainAsync(string[] args)
         {
-            var wrikeClient = new WrikeClient(_bearerToken);
+            var bearerToken = "";
+            var wrikeClient = new WrikeClient(bearerToken);
+
+            #region Colors
+            //var colors = await wrikeClient.GetColorsAsync();
+            #endregion
+
+            #region CustomFields
+            //var customFields = await wrikeClient.GetCustomFieldsAsync();
+            //var customFields = await wrikeClient.GetCustomFiledInfoAsync(new List<string> { "IEABX2HEJUAAREOB", "IEABX2HEJUAAREOD" });
+
+            //TODO: returns invalid-parameter error if type is not Text
+            //var updatedCustomField = await wrikeClient.UpdateCustomFieldAsync(
+            //    "IEABX2HEJUAATMXD", 
+            //    title: "sinanTestField3",
+            //    type: WrikeCustomFieldType.Money);
 
 
+            //var newCustomField = new WrikeCustomField
+            //{
+            //    AccountId = "IEABX2HE",
+            //    Title = "Sinan Test Custom Field",
+            //    Type = WrikeCustomFieldTypes.Numeric
+            //};
+            //var field = await wrikeClient.CreateCustomFieldAsync(newCustomField);
+            #endregion
 
-            var customFields = await wrikeClient.GetCustomFields();
-            var updatedFildl = await wrikeClient.UpdateCustomField("IEABX2HEJUAATMXD", title: "sinanCustomField2");
-
-
-            var newCustomField = new WrikeCustomField {
-                AccountId = "IEABX2HE",
-                Title = "Sinan Test Custom Field",
-                Type = WrikeCustomFieldType.Text
-            };
-
-            var field = await wrikeClient.CreateCustomField(newCustomField);
         }
     }
 }
