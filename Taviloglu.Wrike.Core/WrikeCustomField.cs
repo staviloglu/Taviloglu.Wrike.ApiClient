@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Taviloglu.Wrike.Core
 {
     public class WrikeCustomField : WrikeObject
     {
-        [DataMember(Name = "accountId")]
+       [JsonProperty(PropertyName = "accountId")]
         public string AccountId { get; set; }
 
-        [DataMember(Name = "title")]
+       [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
-        [DataMember(Name = "type")]
+       [JsonProperty(PropertyName = "type", ItemConverterType =typeof(StringEnumConverter))]
         public WrikeCustomFieldType Type { get; set; }
 
-        [DataMember(Name = "sharedIds")]
+       [JsonProperty(PropertyName = "sharedIds")]
         public List<string> SharedIds { get; set; }        
     }
 }

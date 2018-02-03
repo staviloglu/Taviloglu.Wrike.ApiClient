@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Taviloglu.Wrike.Core
 {
@@ -7,12 +8,12 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Color name
         /// </summary>
-        [DataMember(Name = "name")]
+       [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         /// <summary>
         /// HEX code
         /// </summary>
-        [DataMember(Name = "hex")]
+       [JsonProperty(PropertyName = "hex")]
         public string Hex { get; set; }
     }
 

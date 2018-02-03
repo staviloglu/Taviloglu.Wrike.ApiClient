@@ -1,12 +1,13 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Taviloglu.Wrike.Core
 {
     public class WrikeKeyValue
     {
-        [DataMember(Name="key")]
+       [JsonProperty(PropertyName="key")]
         public string Key { get; set; }
-        [DataMember(Name = "value")]
+       [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
     }
 }

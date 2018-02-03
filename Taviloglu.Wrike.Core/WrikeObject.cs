@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,7 +10,7 @@ namespace Taviloglu.Wrike.Core
 {
     public abstract class WrikeObject
     {
-        [DataMember(Name = "id")]
+       [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
     }
 }

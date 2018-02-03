@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
@@ -9,105 +12,111 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Account ID
         /// </summary>
-        [DataMember(Name = "accountId")]
+        [JsonProperty(PropertyName = "accountId")]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Title, cannot be empty
         /// </summary>
-        [DataMember(Name = "title")]
+        [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
         /// <summary>
         /// Description
         /// </summary>
-        [DataMember(Name = "description")]
+        [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
 
         /// <summary>
         /// Brief description
         /// </summary>
-        [DataMember(Name = "briefDescription")]
+        [JsonProperty(PropertyName = "briefDescription")]
         public string BriefDescription { get; set; }
         /// <summary>
         /// List of task parent folder IDs
         /// </summary>
-        [DataMember(Name = "parentIds")]
+        [JsonProperty(PropertyName = "parentIds")]
         public List<string> ParentIds { get; set; }
         /// <summary>
         /// List of task super parent folder IDs
         /// </summary>
-        [DataMember(Name = "superParentIds")]
+        [JsonProperty(PropertyName = "superParentIds")]
         public List<string> SuperParentIds { get; set; }
         /// <summary>
         /// List of user IDs, who share the task
         /// </summary>
-        [DataMember(Name = "sharedIds")]
+        [JsonProperty(PropertyName = "sharedIds")]
         public List<string> SharedIds { get; set; }
 
         /// <summary>
         /// List of responsible user IDs
         /// </summary>
-        [DataMember(Name = "responsibleIds")]
+        [JsonProperty(PropertyName = "responsibleIds")]
         public List<string> ResponsibleIds { get; set; }
         /// <summary>
         /// Status of task 
         /// </summary>
-        [DataMember(Name = "status")]
+        [JsonProperty(PropertyName = "status", ItemConverterType = typeof(StringEnumConverter))]
         public WrikeTaskStatus Status { get; set; }
         /// <summary>
         /// Importance of task 
         /// </summary>
-        [DataMember(Name = "importance")]
+        [JsonProperty(PropertyName = "importance", ItemConverterType =typeof(StringEnumConverter))]
         public WrikeTaskImportance Importance { get; set; }
 
         /// <summary>
         /// Created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
-        /// </summary>
-        [DataMember(Name = "createdDate")]
+        /// </summary>        
+        [JsonProperty(PropertyName = "createdDate",
+            ItemConverterType = typeof(CustomDateTimeConverter),
+            ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CreatedDate { get; set; }
         /// <summary>
         /// Updated date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
-        [DataMember(Name = "updatedDate")]
+        [JsonProperty(PropertyName = "updatedDate",
+             ItemConverterType = typeof(CustomDateTimeConverter),
+             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime UpdatedDate { get; set; }
         /// <summary>
         /// Completed date, field is present for tasks with 'Completed' status Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
-        [DataMember(Name="completedDate")]
+        [JsonProperty(PropertyName = "completedDate",
+             ItemConverterType = typeof(CustomDateTimeConverter),
+             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CompletedDate { get; set; }
         /// <summary>
         /// Task dates
         /// </summary>
-        [DataMember(Name = "dates")]
+        [JsonProperty(PropertyName = "dates")]
         public Dates Dates { get; set; }
-        [DataMember(Name = "scope")]
+        [JsonProperty(PropertyName = "scope")]
         public string Scope { get; set; }
-        [DataMember(Name = "authorIds")]
+        [JsonProperty(PropertyName = "authorIds")]
         public List<string> AuthorIds { get; set; }
-        [DataMember(Name = "customStatusId")]
+        [JsonProperty(PropertyName = "customStatusId")]
         public string CustomStatusId { get; set; }
-        [DataMember(Name = "hasAttachments")]
+        [JsonProperty(PropertyName = "hasAttachments")]
         public bool HasAttachments { get; set; }
-        [DataMember(Name = "attachmentCount")]
+        [JsonProperty(PropertyName = "attachmentCount")]
         public int AttachmentCount { get; set; }
-        [DataMember(Name = "permalink")]
+        [JsonProperty(PropertyName = "permalink")]
         public string Permalink { get; set; }
-        [DataMember(Name = "priority")]
+        [JsonProperty(PropertyName = "priority")]
         public string Priority { get; set; }
-        [DataMember(Name = "followedByMe")]
+        [JsonProperty(PropertyName = "followedByMe")]
         public bool FollowedByMe { get; set; }
-        [DataMember(Name = "followerIds")]
+        [JsonProperty(PropertyName = "followerIds")]
         public List<string> FollowerIds { get; set; }
-        [DataMember(Name = "superTaskIds")]
+        [JsonProperty(PropertyName = "superTaskIds")]
         public List<string> SuperTaskIds { get; set; }
-        [DataMember(Name = "subTaskIds")]
+        [JsonProperty(PropertyName = "subTaskIds")]
         public List<string> SubTaskIds { get; set; }
-        [DataMember(Name = "dependencyIds")]
+        [JsonProperty(PropertyName = "dependencyIds")]
         public List<string> DependencyIds { get; set; }
-        [DataMember(Name = "metadata")]
+        [JsonProperty(PropertyName = "metadata")]
         public List<WrikeMetadata> Metadata { get; set; }
-        [DataMember(Name = "customFields")]
+        [JsonProperty(PropertyName = "customFields")]
         public List<WrikeCustomField> CustomFields { get; set; }
     }
 
@@ -116,22 +125,26 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Type 
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type", ItemConverterType =typeof(StringEnumConverter))]
         public WrikeTaskDateType Type { get; set; }
         /// <summary>
         ///  [0, 1800000)
         /// </summary>
-        [DataMember(Name = "duration")]
+        [JsonProperty(PropertyName = "duration")]
         public int Duration { get; set; }
         /// <summary>
         /// Start date is present only in Planned tasks Format: yyyy-MM-dd'T'HH:mm:ss('T'HH:mm:ss is optional)
         /// </summary>
-        [DataMember(Name = "start")]
+        [JsonProperty(PropertyName = "start",
+             ItemConverterType = typeof(CustomDateTimeConverter),
+             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss" })]
         public DateTime Start { get; set; }
         /// <summary>
         /// Due date is present only in Planned and Milestone tasks Format: yyyy-MM-dd'T'HH:mm:ss('T'HH:mm:ss is optional)
         /// </summary>
-        [DataMember(Name = "due")]
+        [JsonProperty(PropertyName = "due",
+             ItemConverterType = typeof(CustomDateTimeConverter),
+             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss" })]
         public DateTime Due { get; set; }
     }
 

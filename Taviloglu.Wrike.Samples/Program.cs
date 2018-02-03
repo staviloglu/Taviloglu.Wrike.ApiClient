@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.Samples
 
         static async Task MainAsync(string[] args)
         {
-            var bearerToken = "7VIw0efGxvG3IrTYUrgCiSvZhrMsFUkh2VEcp0Noznc3QiYj6jrm0lbcd6nobFW5-N-WFIUKC";
+            var bearerToken = "7cdRiiLog4h0Bp9zbiyYweSprrp3jkya5VeATadPmPRBAYyJw1FhFx8E2QARSyGQ-N-WFIUKC";
             var wrikeClient = new WrikeClient(bearerToken);
 
             #region Colors
@@ -48,8 +48,10 @@ namespace Taviloglu.Wrike.Samples
             #endregion
 
             #region Users
-            var user = await wrikeClient.GetUserAsync("");
+            //var user = await wrikeClient.GetUserAsync("");
             #endregion
+
+            //var version = await wrikeClient.GetVersion();
         }
     }
 }

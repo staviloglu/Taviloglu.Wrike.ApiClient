@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Taviloglu.Wrike.ApiClient.Dto
 {
     public class WrikeResDto<T>
     {
-        [DataMember(Name = "kind")]
+       [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
-        [DataMember(Name = "data")]
+       [JsonProperty(PropertyName = "data")]
         public List<T> Data { get; set; }
-        [DataMember(Name = "errorDescription")]
+       [JsonProperty(PropertyName = "errorDescription")]
         public string ErrorDescription { get; set; }
-        [DataMember(Name = "error")]
+       [JsonProperty(PropertyName = "error")]
         public string Error { get; set; }
         [IgnoreDataMember()]
         public bool IsSuccess { get; set; }

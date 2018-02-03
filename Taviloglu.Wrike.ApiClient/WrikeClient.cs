@@ -48,6 +48,13 @@ namespace Taviloglu.Wrike.ApiClient
             return new WrikeResDto<WrikeTask>();
         }
 
+
+        /// <summary>
+        ///  Returns complete information about single or multiple tasks. 
+        /// </summary>
+        /// <remarks>Scopes: Default, wsReadWrite</remarks>
+        /// <param name="taskIds">MaxCount 100</param>
+        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         public async Task<WrikeResDto<WrikeTask>> GetTasksAsync(List<string> taskIds)
         {
 
@@ -177,6 +184,16 @@ namespace Taviloglu.Wrike.ApiClient
         }
         #endregion
 
+        #region Version
+        /// <summary>
+        /// Returns current API version info
+        /// </summary>
+        public async Task<WrikeResDto<WrikeVersion>> GetVersion()
+        {
+            return await SendRequest<WrikeVersion>("version", HttpMethods.Get);
+        }
+        #endregion
+
         #region Colors
         /// <summary>
         /// Get color name - code mapping
@@ -213,8 +230,7 @@ namespace Taviloglu.Wrike.ApiClient
                     throw new ArgumentException("Unknown HTTP METHOD!");
             }
             var json = await responseMessage.Content.ReadAsStringAsync();
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json,
-                new StringEnumConverter());
+            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
 
             if (responseMessage.IsSuccessStatusCode)
             {
