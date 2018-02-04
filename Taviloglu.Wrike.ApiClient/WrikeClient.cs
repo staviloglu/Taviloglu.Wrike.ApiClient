@@ -72,7 +72,51 @@ namespace Taviloglu.Wrike.ApiClient
         }
         #endregion
 
+        #region Folders & Projects
+        /// <summary>
+        /// Returns complete information about specified folders
+        /// </summary>
+        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
+        /// <param name="folderIds">MaxCount 100</param>
+        /// <param name="optionalFields">Use WrikeFolder.OptionalField values</param>
+        /// See <see cref="https://developers.wrike.com/documentation/api/methods/get-folder"/>
+        public async Task<WrikeResDto<WrikeFolder>> GetFoldersAsync(List<string> folderIds, List<string> optionalFields=null)
+        {
+            if (folderIds == null || folderIds.Count < 1)
+            {
+                throw new ArgumentNullException("folderIds can not be null or empty");
+            }
+            if (folderIds.Count > 100)
+            {
+                throw new ArgumentException("folderIds max count is 100");
+            }
 
+            var requestUri = "folders/" + string.Join(",", folderIds);
+
+            if (optionalFields!= null && optionalFields.Count>0)
+            {
+                requestUri += "?fields=" + GetArrayValue(optionalFields);
+            }
+
+            return await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get);
+        }
+
+        /// <summary>
+        /// Returns a list of tree entries
+        /// </summary>
+        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
+        ///<param name="accountId">Returns a list of tree entries for the account</param>
+        /// See <see cref="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
+        public async Task<WrikeResDto<WrikeFolderTree>> GetFolderTreeAsync(string accountId=null)
+        {
+            if (accountId == null)
+            {
+                return await SendRequest<WrikeFolderTree>("folders", HttpMethods.Get);
+            }
+
+            return await SendRequest<WrikeFolderTree>($"accounts/{accountId}/folders", HttpMethods.Get);
+        }
+        #endregion
 
         #region CustomFields
         /// <summary>
@@ -249,9 +293,10 @@ namespace Taviloglu.Wrike.ApiClient
                 stringBuilder.Append("[");
                 foreach (var value in values)
                 {
-                    stringBuilder.Append($"\"{value}\"");
+                    stringBuilder.Append($",\"{value}\"");
                 }
                 stringBuilder.Append("]");
+                stringBuilder.Remove(1, 1); //remove first comma
             }
 
             return stringBuilder.ToString();

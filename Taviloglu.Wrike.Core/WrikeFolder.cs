@@ -1,47 +1,148 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
     public class WrikeFolder : WrikeObject
     {
-
-       [JsonProperty(PropertyName = "accountId")]
+        /// <summary>
+        /// Account ID
+        /// </summary>
+        [JsonProperty(PropertyName = "accountId")]
         public string AccountId { get; set; }
-       [JsonProperty(PropertyName = "title")]
+
+        /// <summary>
+        /// Title
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
-       [JsonProperty(PropertyName = "createdDate")]
+        /// <summary>
+        /// Created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+        /// </summary>
+       [JsonProperty(PropertyName = "createdDate",
+            ItemConverterType = typeof(CustomDateTimeConverter),
+            ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CreatedDate { get; set; }
-       [JsonProperty(PropertyName = "updatedDate")]
+
+        /// <summary>
+        /// Updated date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+        /// </summary>
+       [JsonProperty(PropertyName = "updatedDate",
+            ItemConverterType = typeof(CustomDateTimeConverter),
+            ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime UpdatedDate { get; set; }
 
-       [JsonProperty(PropertyName = "description")]
+        /// <summary>
+        /// Brief description
+        /// </summary>
+        [JsonProperty(PropertyName = "briefDescription")]
+        public string BriefDescription { get; set; }
+
+        /// <summary>
+        /// Description
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
-       [JsonProperty(PropertyName = "sharedIds")]
+
+        /// <summary>
+        /// Color 
+        /// </summary>
+        [JsonProperty(PropertyName = "color", ItemConverterType = typeof(StringEnumConverter))]
+        public WrikeColor.Value Color { get; set; }
+
+        /// <summary>
+        /// List of user IDs, who share the folder
+        /// </summary>
+        [JsonProperty(PropertyName = "sharedIds")]
         public List<string> SharedIds { get; set; }
-       [JsonProperty(PropertyName = "parentIds")]
+
+        /// <summary>
+        /// List of parent folder IDs
+        /// </summary>
+        [JsonProperty(PropertyName = "parentIds")]
         public List<string> ParentIds { get; set; }
-       [JsonProperty(PropertyName = "superParentIds")]
-        public List<string> SuperParentIds { get; set; }
-       [JsonProperty(PropertyName = "childIds")]
+        /// <summary>
+        /// List of child folder IDs
+        /// </summary>
+        [JsonProperty(PropertyName = "childIds")]
         public List<string> ChildIds { get; set; }
-       [JsonProperty(PropertyName = "scope")]
-        public string Scope { get; set; }
-       [JsonProperty(PropertyName = "hasAttachments")]
+
+        /// <summary>
+        /// List of super parent folder IDs
+        /// </summary>
+        [JsonProperty(PropertyName = "superParentIds")]
+        public List<string> SuperParentIds { get; set; }
+
+        /// <summary>
+        /// Folder scope 
+        /// </summary>
+        [JsonProperty(PropertyName = "scope", ItemConverterType = typeof(StringEnumConverter))]
+        public WrikeFolderScope Scope { get; set; }
+
+        /// <summary>
+        /// True if folder has attachments
+        /// </summary>
+        [JsonProperty(PropertyName = "hasAttachments")]
         public bool HasAttachments { get; set; }
-       [JsonProperty(PropertyName = "permalink")]
+        /// <summary>
+        /// Total count of folder attachments
+        /// </summary>
+        [JsonProperty(PropertyName = "attachmentCount")]
+        public string AttachmentCount { get; set; }
+        /// <summary>
+        /// Link to open folder in web workspace, if user has appropriate access
+        /// </summary>
+        [JsonProperty(PropertyName = "permalink")]
         public string Permalink { get; set; }
-       [JsonProperty(PropertyName = "workfloId")]
+        /// <summary>
+        /// Folder workflow ID
+        /// </summary>
+        [JsonProperty(PropertyName = "workfloId")]
         public string WorkflowId { get; set; }
-
-       [JsonProperty(PropertyName = "metadata")]
-        public List<WrikeMetadata> Metadata { get; set; }
-
-       [JsonProperty(PropertyName = "customFields")]
+        /// <summary>
+        /// List of folder metadata entries
+        /// </summary>
+        [JsonProperty(PropertyName = "metadata")]
+        public List<WrikeKeyValue> Metadata { get; set; }
+        /// <summary>
+        /// Custom fields
+        /// </summary>
+        [JsonProperty(PropertyName = "customFields")]
         public List<WrikeCustomField> CustomFields { get; set; }
+        /// <summary>
+        /// Custom column IDs
+        /// </summary>
+        [JsonProperty(PropertyName = "customColumnIds")]
+        public List<string> CustomColumnIds { get; set; }
+
+        /// <summary>
+        /// Project details, present only for project folders
+        /// </summary>
+        [JsonProperty(PropertyName = "project")]
+        public List<WrikeProject> Project { get; set; }
+
+        /// <summary>
+        /// Json string array of optional fields to be included in the response model
+        /// </summary>
+        public class OptionalFields
+        {
+            /// <summary>
+            /// Get brief description
+            /// </summary>
+            public const string BriefDescription = "briefDescription";
+            /// <summary>
+            /// Associated custom field IDs
+            /// </summary>
+            public const string CustomColumnIds = "customColumnIds"; //todo: check if there is an error - returned null not 0
+            /// <summary>
+            /// Attachment count
+            /// </summary>
+            public const string AttachmentCount = "attachmentCount";
+        }
 
     }
 }
