@@ -2,7 +2,7 @@
 C# Wrapper for Wrike v3 Rest API
 
 ## Usage
-Create your Wrike Client wtih your permanent token and just call function you need.
+Create your Wrike Client wtih your permanent token and just call the function you need.
 ```csharp
 //create client
 var bearerToken = "your_permanent_token";
