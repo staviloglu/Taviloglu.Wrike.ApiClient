@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,8 +55,9 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <remarks>Scopes: Default, wsReadWrite</remarks>
         /// <param name="taskIds">MaxCount 100</param>
+        /// <param name="optionalFields">Use WrikeTask.OptionalFields values Only Recurrent and AttachmentCount supported</param>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
-        public async Task<WrikeResDto<WrikeTask>> GetTasksAsync(List<string> taskIds)
+        public async Task<WrikeResDto<WrikeTask>> GetTasksAsync(List<string> taskIds, List<string> optionalFields = null)
         {
 
             if (taskIds == null || taskIds.Count < 1)
@@ -66,9 +68,21 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 throw new ArgumentException("taskIds max count is 100");
             }
+            if (optionalFields!= null && 
+                (optionalFields.Count > 2 || 
+                optionalFields.Any(o=> o != WrikeTask.OptionalFields.Recurrent && o != WrikeTask.OptionalFields.AttachmentCount)))
+            {
+                throw new ArgumentException("Only Recurrent and AttachmentCount is supported.");
+            }
+            var requestUri = "tasks/" + string.Join(",", taskIds);
 
-            var taskIdsFieldValue = string.Join(",", taskIds);
-            return await SendRequest<WrikeTask>($"tasks/{taskIdsFieldValue}", HttpMethods.Get);            
+            if (optionalFields != null && optionalFields.Count > 0)
+            {
+                requestUri += "?fields=" + GetArrayValue(optionalFields);
+            }
+            
+            //TODO: can not get recurrent property even it is provided bug?
+            return await SendRequest<WrikeTask>(requestUri, HttpMethods.Get);            
         }
         #endregion
 
@@ -78,7 +92,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// <param name="folderIds">MaxCount 100</param>
-        /// <param name="optionalFields">Use WrikeFolder.OptionalField values</param>
+        /// <param name="optionalFields">Use WrikeFolder.OptionalFields values</param>
         /// See <see cref="https://developers.wrike.com/documentation/api/methods/get-folder"/>
         public async Task<WrikeResDto<WrikeFolder>> GetFoldersAsync(List<string> folderIds, List<string> optionalFields=null)
         {

@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.Samples
 
         static async Task MainAsync(string[] args)
         {
-            var bearerToken = "7cdRiiLog4h0Bp9zbiyYweSprrp3jkya5VeATadPmPRBAYyJw1FhFx8E2QARSyGQ-N-WFIUKC";
+            var bearerToken = "WQIheQFM74FvIqZ5caumDvog1nrmNbgz8ehjGiJn9NSz3M7rR8rSir8bnib23M8T-N-WFIUKC";
             var wrikeClient = new WrikeClient(bearerToken);
 
             #region Colors
@@ -44,7 +44,10 @@ namespace Taviloglu.Wrike.Samples
             #endregion
 
             #region Tasks
-            //var tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" });
+            var tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" });
+
+            tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" },
+                new List<string> { WrikeTask.OptionalFields.AttachmentCount, WrikeTask.OptionalFields.Recurrent });
             #endregion
 
             #region Users
@@ -55,15 +58,17 @@ namespace Taviloglu.Wrike.Samples
             //var version = await wrikeClient.GetVersion();
             #endregion
 
+            #region Folders
             //var folders = await wrikeClient.GetFolderTreeAsync("IEABX2HE");
-            var folders = await wrikeClient.GetFoldersAsync(
-                new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" },
-                new List<string> { WrikeFolder.OptionalFields.AttachmentCount,
-                    WrikeFolder.OptionalFields.BriefDescription,
-                    WrikeFolder.OptionalFields.CustomColumnIds});
+            //var folders = await wrikeClient.GetFoldersAsync(
+            //    new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" },
+            //    new List<string> { WrikeFolder.OptionalFields.AttachmentCount,
+            //        WrikeFolder.OptionalFields.BriefDescription,
+            //        WrikeFolder.OptionalFields.CustomColumnIds});
 
-            folders = await wrikeClient.GetFoldersAsync(
-                new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" });
+            //folders = await wrikeClient.GetFoldersAsync(
+            //    new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" });
+            #endregion
         }
     }
 }

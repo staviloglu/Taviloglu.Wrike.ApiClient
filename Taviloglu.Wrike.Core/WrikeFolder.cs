@@ -81,7 +81,7 @@ namespace Taviloglu.Wrike.Core
         /// Folder scope 
         /// </summary>
         [JsonProperty(PropertyName = "scope", ItemConverterType = typeof(StringEnumConverter))]
-        public WrikeFolderScope Scope { get; set; }
+        public WrikeTreeScope Scope { get; set; }
 
         /// <summary>
         /// True if folder has attachments

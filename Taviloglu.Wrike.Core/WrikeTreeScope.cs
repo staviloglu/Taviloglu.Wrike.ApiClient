@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public enum WrikeFolderScope
+    public enum WrikeTreeScope
     {
         /// <summary>
         ///   Virtual root folder of account

@@ -61,7 +61,7 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Importance of task 
         /// </summary>
-        [JsonProperty(PropertyName = "importance", ItemConverterType =typeof(StringEnumConverter))]
+        [JsonProperty(PropertyName = "importance", ItemConverterType = typeof(StringEnumConverter))]
         public WrikeTaskImportance Importance { get; set; }
 
         /// <summary>
@@ -89,9 +89,12 @@ namespace Taviloglu.Wrike.Core
         /// Task dates
         /// </summary>
         [JsonProperty(PropertyName = "dates")]
-        public Dates Dates { get; set; }
-        [JsonProperty(PropertyName = "scope")]
-        public string Scope { get; set; }
+        public WrikeTaskDate Dates { get; set; }
+        [JsonProperty(PropertyName = "scope", ItemConverterType = typeof(StringEnumConverter))]
+        public WrikeTreeScope Scope { get; set; }
+        /// <summary>
+        /// List of author IDs (currently contains 1 element)
+        /// </summary>
         [JsonProperty(PropertyName = "authorIds")]
         public List<string> AuthorIds { get; set; }
         [JsonProperty(PropertyName = "customStatusId")]
@@ -100,14 +103,27 @@ namespace Taviloglu.Wrike.Core
         public bool HasAttachments { get; set; }
         [JsonProperty(PropertyName = "attachmentCount")]
         public int AttachmentCount { get; set; }
+        /// <summary>
+        /// Link to open task in web workspace, if user has appropriate access
+        /// </summary>
         [JsonProperty(PropertyName = "permalink")]
         public string Permalink { get; set; }
+        /// <summary>
+        /// Ordering key that defines task order in tasklist
+        /// </summary>
         [JsonProperty(PropertyName = "priority")]
         public string Priority { get; set; }
         [JsonProperty(PropertyName = "followedByMe")]
         public bool FollowedByMe { get; set; }
         [JsonProperty(PropertyName = "followerIds")]
         public List<string> FollowerIds { get; set; }
+
+        /// <summary>
+        /// Is a task recurrent
+        /// </summary>
+        [JsonProperty(PropertyName = "recurrent")]
+        public bool Recurrent { get; set; }
+
         [JsonProperty(PropertyName = "superTaskIds")]
         public List<string> SuperTaskIds { get; set; }
         [JsonProperty(PropertyName = "subTaskIds")]
@@ -117,35 +133,75 @@ namespace Taviloglu.Wrike.Core
         [JsonProperty(PropertyName = "metadata")]
         public List<WrikeMetadata> Metadata { get; set; }
         [JsonProperty(PropertyName = "customFields")]
-        public List<WrikeCustomField> CustomFields { get; set; }
-    }
+        public List<WrikeCustomFieldData> CustomFields { get; set; }
 
-    public class Dates
-    {
         /// <summary>
-        /// Type 
+        /// Json string array of optional fields to be included in the response model 
         /// </summary>
-        [JsonProperty(PropertyName = "type", ItemConverterType =typeof(StringEnumConverter))]
-        public WrikeTaskDateType Type { get; set; }
-        /// <summary>
-        ///  [0, 1800000)
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int Duration { get; set; }
-        /// <summary>
-        /// Start date is present only in Planned tasks Format: yyyy-MM-dd'T'HH:mm:ss('T'HH:mm:ss is optional)
-        /// </summary>
-        [JsonProperty(PropertyName = "start",
-             ItemConverterType = typeof(CustomDateTimeConverter),
-             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss" })]
-        public DateTime Start { get; set; }
-        /// <summary>
-        /// Due date is present only in Planned and Milestone tasks Format: yyyy-MM-dd'T'HH:mm:ss('T'HH:mm:ss is optional)
-        /// </summary>
-        [JsonProperty(PropertyName = "due",
-             ItemConverterType = typeof(CustomDateTimeConverter),
-             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss" })]
-        public DateTime Due { get; set; }
+        public class OptionalFields
+        {
+            /// <summary>
+            /// Author IDs
+            /// </summary>
+            public const string AuthorIds = "authorIds";
+            /// <summary>
+            /// Has attachments
+            /// </summary>
+            public const string HasAttachments = "hasAttachments";
+            /// <summary>
+            /// Attachment count
+            /// </summary>
+            public const string AttachmentCount = "attachmentCount";
+            /// <summary>
+            /// List of task parent folder
+            /// </summary>
+            public const string ParentIds = "parentIds";
+            /// <summary>
+            /// List of task super parent folder
+            /// </summary>
+            public const string SuperParentIds = "superParentIds";
+            /// <summary>
+            /// List of user IDs, who have task share
+            /// </summary>
+            public const string SharedIds = "sharedIds";
+            /// <summary>
+            /// List of responsible user IDs
+            /// </summary>
+            public const string ResponsibleIds = "responsibleIds";
+            /// <summary>
+            /// Description
+            /// </summary>
+            public const string Description = "description";
+            /// <summary>
+            /// Brief description
+            /// </summary>
+            public const string BriefDescription = "briefDescription";
+            /// <summary>
+            /// Is a task recurrent
+            /// </summary>
+            public const string Recurrent = "recurrent";
+            /// <summary>
+            /// List of supertask IDs
+            /// </summary>
+            public const string SuperTaskIds = "superTaskIds";
+            /// <summary>
+            /// List of subtask IDs
+            /// </summary>
+            public const string subTaskIds = "subTaskIds";
+            /// <summary>
+            /// Dependency IDs
+            /// </summary>
+            public const string dependencyIds = "dependencyIds";
+            /// <summary>
+            /// Task metadata entries
+            /// </summary>
+            public const string metadata = "metadata";
+            /// <summary>
+            /// Custom fields
+            /// </summary>
+            public const string CustomFields = "customFields";
+        }
     }
 
 }
+
