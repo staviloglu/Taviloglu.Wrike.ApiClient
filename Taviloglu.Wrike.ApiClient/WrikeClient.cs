@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
 using Taviloglu.Wrike.Core;
@@ -475,11 +473,7 @@ namespace Taviloglu.Wrike.ApiClient
             return await SendRequest<WrikeColor>("colors", HttpMethods.Get);
         }
         #endregion
-
-
-
-
-
+        
         private async Task<WrikeResDto<T>> SendRequest<T>(
             string requestUri,
             string httpMethod,
@@ -523,6 +517,5 @@ namespace Taviloglu.Wrike.ApiClient
             public const string Put = "PUT";
             public const string Delete = "DELETE";
         }
-
     }
 }

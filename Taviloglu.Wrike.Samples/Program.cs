@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient;
 using Taviloglu.Wrike.Core;
