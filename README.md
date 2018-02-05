@@ -10,7 +10,7 @@ var wrikeClient = new WrikeClient(bearerToken);
 
 //get the list of custom fields
 //https://developers.wrike.com/documentation/api/methods/query-custom-fields
-var customFields = await wrikeClient.GetCustomFieldsAsync();
+var customFields = await wrikeClient.CustomFields.GetAsync();
 
 //create new custom field
 //https://developers.wrike.com/documentation/api/methods/create-custom-field
@@ -20,5 +20,5 @@ var newCustomField = new WrikeCustomField
     Title = "Sinan's custom field",
     Type = WrikeCustomFieldType.Duration
 };
-var field = await wrikeClient.CreateCustomFieldAsync(newCustomField);
+var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
