@@ -10,7 +10,7 @@ var wrikeClient = new WrikeClient(bearerToken);
 
 //get the list of custom fields
 //https://developers.wrike.com/documentation/api/methods/query-custom-fields
-//var customFields = await wrikeClient.CustomFields.GetAsync();
+var customFields = await wrikeClient.CustomFields.GetAsync();
 
 //create new custom field
 //https://developers.wrike.com/documentation/api/methods/create-custom-field
