@@ -23,7 +23,7 @@ namespace Taviloglu.Wrike.ApiClient
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {bearerToken}");
         }
-        
+
         private async Task<WrikeResDto<T>> SendRequest<T>(
             string requestUri,
             string httpMethod,
@@ -57,7 +57,9 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             return wrikeResDto;
-        }       
+        }
+
+        
 
         private class HttpMethods
         {
@@ -69,5 +71,5 @@ namespace Taviloglu.Wrike.ApiClient
 
     }
 
-   
+
 }

@@ -22,6 +22,16 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         ///<param name="accountId">Returns a list of tree entries for the account</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
-        Task<WrikeResDto<WrikeFolderTree>> GetFolderTreeAsync(string accountId = null);
+        Task<WrikeResDto<WrikeFolderTree>> GetFolderTreeAsync(
+            string accountId = null, 
+            string folderId = null,
+            string permalink = null,
+            bool? addDescendants = null,
+            WrikeMetadata metadata = null,
+            WrikeCustomFieldData customField = null,
+            WrikeDateFilterRange updatedDate = null,
+            bool? isProject = null,
+            bool? isDeleted = null,
+            List<string> fields = null);
     }
 }

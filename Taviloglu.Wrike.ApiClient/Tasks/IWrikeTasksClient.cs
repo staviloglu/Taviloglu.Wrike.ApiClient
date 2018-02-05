@@ -28,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="accountId">Search among all tasks in the account</param>
         /// <param name="folderId">Search among tasks in the folder</param>
-        /// <param name="addDescendents">Adds all descendant folders to search scope</param>
+        /// <param name="addDescendants">Adds all descendant folders to search scope</param>
         /// <param name="title">Title filter, exact match</param>
         /// <param name="status">Status filter, match with any of specified constants </param>
         /// <param name="importance">Importance filter, exact match </param>
@@ -53,13 +53,13 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="metadata">Task metadata filter</param>
         /// <param name="customField">Custom field filter</param>
         /// <param name="customStatuses">Custom statuses filter</param>
-        /// <param name="optionalFields">optional fields to be included in the response model 
+        /// <param name="fields">optional fields to be included in the response model 
         /// Use WrikeTask.OptionalFields values</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         Task<WrikeResDto<WrikeTask>> GetAsync(
             string accountId = null,
             string folderId = null,
-            bool? addDescendents = null,
+            bool? addDescendants = null,
             string title = null,
             WrikeTaskStatus? status = null,
             WrikeTaskImportance? importance = null,
@@ -83,7 +83,7 @@ namespace Taviloglu.Wrike.ApiClient
             WrikeMetadata metadata = null,
             WrikeCustomFieldData customField = null,
             List<string> customStatuses = null,
-            List<string> optionalFields = null
+            List<string> fields = null
             );
 
 

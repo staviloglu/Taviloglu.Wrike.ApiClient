@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.ApiClient
 {
@@ -38,15 +39,40 @@ namespace Taviloglu.Wrike.ApiClient
             return await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get);
         }
 
-        async Task<WrikeResDto<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string accountId)
+        async Task<WrikeResDto<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string accountId, string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> fields)
         {
-
-            if (accountId == null)
+            if (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId))
             {
-                return await SendRequest<WrikeFolderTree>("folders", HttpMethods.Get);
+                throw new ArgumentException("only folderId or accountId can be used, not both!");
             }
 
-            return await SendRequest<WrikeFolderTree>($"accounts/{accountId}/folders", HttpMethods.Get);
+            var requestUri = "folders";
+
+            if (!string.IsNullOrWhiteSpace(accountId))
+            {
+                requestUri = $"accounts/{accountId}/folders";
+            }
+            else if (!string.IsNullOrWhiteSpace(folderId))
+            {
+                requestUri = $"folders/{folderId}/folders";
+            }
+
+            var filterHelper = new WrikeGetParametersHelper();
+            filterHelper.AddFilterIfNotNull("permalink", permalink);
+            filterHelper.AddFilterIfNotNull("descendants", addDescendants);
+            filterHelper.AddFilterIfNotNull("metadata", metadata);
+            filterHelper.AddFilterIfNotNull("customField", customField);
+            filterHelper.AddFilterIfNotNull("updatedDate",
+                updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+            filterHelper.AddFilterIfNotNull("project", isProject);
+            if (!string.IsNullOrWhiteSpace(folderId))
+            {
+                filterHelper.AddFilterIfNotNull("deleted", isDeleted);
+            }
+            filterHelper.AddFilterIfNotNull("fields", fields);
+            requestUri += filterHelper.GetFilterParametersText();
+
+            return await SendRequest<WrikeFolderTree>(requestUri, HttpMethods.Get);
         }
     }
 }

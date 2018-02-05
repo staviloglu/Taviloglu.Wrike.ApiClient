@@ -36,7 +36,7 @@ namespace Taviloglu.Wrike.ApiClient
             return await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Delete);
         }
 
-        async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.GetAsync(string accountId, string folderId, bool? addDescendents, string title, WrikeTaskStatus? status, WrikeTaskImportance? importance, IWrikeDateFilter startDate, IWrikeDateFilter dueDate, IWrikeDateFilter scheduledDate, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, WrikeDateFilterRange completedDate, List<string> authors, List<string> responsibles, List<string> shareds, string permalink, WrikeTaskDateType? type, int? limit, WrikeTaskSortField? sortField, WrikeSortOrder? sortOrder, bool? addSubTasks, int? pageSize, string nextPageToken, WrikeMetadata metadata, WrikeCustomFieldData customField, List<string> customStatuses, List<string> optionalFields)
+        async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.GetAsync(string accountId, string folderId, bool? addDescendants, string title, WrikeTaskStatus? status, WrikeTaskImportance? importance, IWrikeDateFilter startDate, IWrikeDateFilter dueDate, IWrikeDateFilter scheduledDate, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, WrikeDateFilterRange completedDate, List<string> authors, List<string> responsibles, List<string> shareds, string permalink, WrikeTaskDateType? type, int? limit, WrikeTaskSortField? sortField, WrikeSortOrder? sortOrder, bool? addSubTasks, int? pageSize, string nextPageToken, WrikeMetadata metadata, WrikeCustomFieldData customField, List<string> customStatuses, List<string> fields)
         {
             if (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId))
             {
@@ -54,117 +54,37 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"folders/{folderId}/tasks";
             }
 
-            List<string> filters = new List<string>();
-
-            #region filters            
-            if (addDescendents != null && addDescendents.Value == true)
-            {
-                filters.Add("descendants=true");
-
-            }
-            if (!string.IsNullOrWhiteSpace(title))
-            {
-                filters.Add($"title={title}");
-            }
-            if (status != null)
-            {
-                filters.Add($"status={status}");
-            }
-            if (importance != null)
-            {
-                filters.Add($"importance={importance}");
-            }
-            if (startDate != null)
-            {
-                filters.Add("startDate=" + JsonConvert.SerializeObject(startDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss")));
-            }
-            if (dueDate != null)
-            {
-                filters.Add("dueDate=" + JsonConvert.SerializeObject(dueDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss")));
-            }
-            if (scheduledDate != null)
-            {
-                filters.Add("scheduledDate=" + JsonConvert.SerializeObject(
-                    scheduledDate, new CustomDateTimeConverter("yyyy-MM-dd")));
-            }
-            if (createdDate != null)
-            {
-                filters.Add("createdDate=" + JsonConvert.SerializeObject(createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'")));
-            }
-            if (updatedDate != null)
-            {
-                filters.Add("updatedDate=" + JsonConvert.SerializeObject(updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'")));
-            }
-            if (completedDate != null)
-            {
-                filters.Add("completedDate=" + JsonConvert.SerializeObject(completedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'")));
-            }
-            if (authors != null && authors.Count > 0)
-            {
-                filters.Add("authors=" + JsonConvert.SerializeObject(authors));
-            }
-            if (responsibles != null && responsibles.Count > 0)
-            {
-                filters.Add("responsibles=" + JsonConvert.SerializeObject(responsibles));
-            }
-            if (shareds != null && shareds.Count > 0)
-            {
-                filters.Add("shareds=" + JsonConvert.SerializeObject(shareds));
-            }
-            if (!string.IsNullOrWhiteSpace(permalink))
-            {
-                filters.Add($"permalink={permalink}");
-            }
-            if (type != null)
-            {
-                filters.Add($"type={type}");
-            }
-            if (limit != null && limit > 0)
-            {
-                filters.Add($"limit={limit}");
-            }
-            if (sortField != null)
-            {
-                filters.Add($"sortField={sortField}");
-            }
-            if (sortOrder != null)
-            {
-                filters.Add($"sortOrder={sortOrder}");
-            }
-            if (addSubTasks != null && addSubTasks.Value == true)
-            {
-                filters.Add("subTasks=true");
-            }
-            if (pageSize != null && pageSize > 0)
-            {
-                filters.Add($"pageSize={pageSize}");
-            }
-            if (!string.IsNullOrWhiteSpace(nextPageToken))
-            {
-                filters.Add($"nextPageToken={nextPageToken}");
-            }
-            if (metadata != null)
-            {
-                filters.Add("metadata=" + JsonConvert.SerializeObject(metadata));
-            }
-            if (customField != null)
-            {
-                filters.Add("customField=" + JsonConvert.SerializeObject(customField));
-            }
-            if (customStatuses != null && customStatuses.Count > 0)
-            {
-                filters.Add("customStatuses=" + JsonConvert.SerializeObject(customStatuses));
-            }
-            if (optionalFields != null && optionalFields.Count > 0)
-            {
-                filters.Add("fields=" + JsonConvert.SerializeObject(optionalFields));
-            }
-            #endregion
-
-            if (filters.Count > 0)
-            {
-                requestUri += "?" + string.Join("&", filters);
-            }
+            var filterHelper = new WrikeGetParametersHelper();
+            filterHelper.AddFilterIfNotNull("descendants", addDescendants);
+            filterHelper.AddFilterIfNotNull("title", title);
+            filterHelper.AddFilterIfNotNull("status", status);
+            filterHelper.AddFilterIfNotNull("importance", importance);
+            filterHelper.AddFilterIfNotNull("startDate", startDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"));
+            filterHelper.AddFilterIfNotNull("dueDate", dueDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"));
+            filterHelper.AddFilterIfNotNull("scheduledDate", scheduledDate, new CustomDateTimeConverter("yyyy-MM-dd"));
+            filterHelper.AddFilterIfNotNull("createdDate", 
+                createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+            filterHelper.AddFilterIfNotNull("updatedDate", 
+                updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+            filterHelper.AddFilterIfNotNull("completedDate", 
+                completedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+            filterHelper.AddFilterIfNotNull("authors", authors);
+            filterHelper.AddFilterIfNotNull("responsibles", responsibles);
+            filterHelper.AddFilterIfNotNull("shareds", shareds);
+            filterHelper.AddFilterIfNotNull("permalink", permalink);
+            filterHelper.AddFilterIfNotNull("type", type);
+            filterHelper.AddFilterIfNotNull("limit", limit);
+            filterHelper.AddFilterIfNotNull("sortField", sortField);
+            filterHelper.AddFilterIfNotNull("sortOrder", sortOrder);
+            filterHelper.AddFilterIfNotNull("subTasks", addSubTasks);
+            filterHelper.AddFilterIfNotNull("pageSize", pageSize);
+            filterHelper.AddFilterIfNotNull("nextPageToken", nextPageToken);
+            filterHelper.AddFilterIfNotNull("metadata", metadata);
+            filterHelper.AddFilterIfNotNull("customField", customField);
+            filterHelper.AddFilterIfNotNull("customStatuses", customStatuses);
+            filterHelper.AddFilterIfNotNull("fields", fields);
+            
+            requestUri += filterHelper.GetFilterParametersText();
 
             return await SendRequest<WrikeTask>(requestUri, HttpMethods.Get);
         }

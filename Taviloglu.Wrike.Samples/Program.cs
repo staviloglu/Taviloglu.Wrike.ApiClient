@@ -33,13 +33,13 @@ namespace Taviloglu.Wrike.Samples
             //    type: WrikeCustomFieldType.Money);
 
 
-            //var newCustomField = new WrikeCustomField
-            //{
-            //    AccountId = "IEABX2HE",
-            //    Title = "Sinan Test Custom Duration",
-            //    Type = WrikeCustomFieldType.Duration
-            //};
-            //var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
+            var newCustomField = new WrikeCustomField
+            {
+                AccountId = "IEABX2HE",
+                Title = "Sinan Test Custom Duration",
+                Type = WrikeCustomFieldType.Duration
+            };
+            var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
             #endregion
 
             #region Tasks
