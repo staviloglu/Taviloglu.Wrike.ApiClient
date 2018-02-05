@@ -107,7 +107,7 @@ namespace Taviloglu.Wrike.Core
         /// List of folder metadata entries
         /// </summary>
         [JsonProperty(PropertyName = "metadata")]
-        public List<WrikeKeyValue> Metadata { get; set; }
+        public List<WrikeMetadata> Metadata { get; set; }
         /// <summary>
         /// Custom fields
         /// </summary>

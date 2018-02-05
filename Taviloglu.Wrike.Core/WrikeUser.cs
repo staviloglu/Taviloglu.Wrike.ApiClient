@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Taviloglu.Wrike.Core
 {
@@ -70,7 +69,7 @@ namespace Taviloglu.Wrike.Core
         /// List of contact metadata entries. Requesting user has read/write access to his own metadata, other entries are read-only
         /// </summary>
        [JsonProperty(PropertyName = "metadata")]
-        public List<WrikeKeyValue> Metadata { get; set; }
+        public List<WrikeMetadata> Metadata { get; set; }
 
         /// <summary>
         /// Field is present and set to true for My Team (default) group

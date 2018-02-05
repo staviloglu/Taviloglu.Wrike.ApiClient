@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient;
 using Taviloglu.Wrike.Core;
@@ -9,14 +11,12 @@ namespace Taviloglu.Wrike.Samples
     {
         static void Main(string[] args)
         {
-
-            MainAsync(args).Wait();
-            
+            MainAsync(args).Wait();            
         }
 
         static async Task MainAsync(string[] args)
         {
-            var bearerToken = "WQIheQFM74FvIqZ5caumDvog1nrmNbgz8ehjGiJn9NSz3M7rR8rSir8bnib23M8T-N-WFIUKC";
+            var bearerToken = "";
             var wrikeClient = new WrikeClient(bearerToken);
 
             #region Colors
@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.Samples
 
             #region CustomFields
             //var customFields = await wrikeClient.GetCustomFieldsAsync();
-            //var customFields = await wrikeClient.GetCustomFiledInfoAsync(new List<string> { "IEABX2HEJUAAREOB", "IEABX2HEJUAAREOD" });
+            //var customFields = await wrikeClient.GetCustomFieldsAsync (new List<string> { "IEABX2HEJUAAREOB", "IEABX2HEJUAAREOD" });
 
             //TODO: returns invalid-parameter error if type is not Text
             //var updatedCustomField = await wrikeClient.UpdateCustomFieldAsync(
@@ -44,10 +44,21 @@ namespace Taviloglu.Wrike.Samples
             #endregion
 
             #region Tasks
-            var tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" });
-
-            tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" },
-                new List<string> { WrikeTask.OptionalFields.AttachmentCount, WrikeTask.OptionalFields.Recurrent });
+            //many other optional parameters
+            var tasks = await wrikeClient.GetTasksAsync(
+                createdDate:new WrikeDateFilterRange(
+                    new DateTime(2018,1,1), new DateTime(2018,2,5)),
+                sortOrder: WrikeSortOrder.Asc,
+                sortField: WrikeTaskSortField.CreatedDate,
+                scheduledDate: new WrikeDateFilterRange(
+                    new DateTime(2018, 1, 1), new DateTime(2018, 2, 5)),
+                dueDate: new WrikeDateFilterEqual(new DateTime(2018, 2, 5)),
+                limit: 10);
+            //var tasks = await wrikeClient.GetTasksAsync(accountId: "IEABX2HE");
+            //var tasks = await wrikeClient.GetTasksAsync(folderId: "");
+            //var tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" });
+            //var tasks = await wrikeClient.GetTasksAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" },
+            //new List<string> { WrikeTask.OptionalFields.AttachmentCount, WrikeTask.OptionalFields.Recurrent });
             #endregion
 
             #region Users
@@ -55,7 +66,7 @@ namespace Taviloglu.Wrike.Samples
             #endregion
 
             #region Version
-            //var version = await wrikeClient.GetVersion();
+            //var version = await wrikeClient.GetVersion();            
             #endregion
 
             #region Folders
