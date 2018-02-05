@@ -10,6 +10,9 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Provides methods to access and modify user content in Wrike through the API
+    /// </summary>
     public class WrikeClient
     {
         private readonly HttpClient _httpClient;
@@ -23,11 +26,11 @@ namespace Taviloglu.Wrike.ApiClient
 
         #region Users
         /// <summary>
-        ///  Returns information about single user
+        ///  Returns information about single user. 
+        ///  Scopes: amReadOnlyUser, amReadWriteUser
         /// </summary>
-        /// <remarks>Scopes: amReadOnlyUser, amReadWriteUser</remarks>
         /// <param name="id">userId</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-user"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-user"/>
         public async Task<WrikeResDto<WrikeUser>> GetUserAsync(string id)
         {
             return await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get);
@@ -37,10 +40,10 @@ namespace Taviloglu.Wrike.ApiClient
         #region Tasks
         /// <summary>
         ///  Create task in folder. You can specify rootFolderId to create task in user's account root. 
+        ///  Scopes: Default, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadWrite</remarks>
         /// <param name="folderId">folderId</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/create-task"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/create-task"/>
         public async Task<WrikeResDto<WrikeTask>> CreateTaskAsync(string folderId)
         {
             //TODO: implement            
@@ -50,9 +53,9 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Delete task by Id
-        /// <remarks>Scopes: Default, wsReadWrite</remarks>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/delete-tasks"></see>
+        /// Scopes: Default, wsReadWrite
         /// </summary>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-tasks"/>        
         public async Task<WrikeResDto<WrikeTask>> Delete(string taskId)
         {
             if (string.IsNullOrWhiteSpace(taskId))
@@ -65,8 +68,8 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Search among all tasks in all accounts
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <remarks>Scope: Default, wsReadOnly, wsReadWrite</remarks>
         /// <param name="accountId">Search among all tasks in the account</param>
         /// <param name="folderId">Search among tasks in the folder</param>
         /// <param name="addDescendents">Adds all descendant folders to search scope</param>
@@ -96,7 +99,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="customStatuses">Custom statuses filter</param>
         /// <param name="optionalFields">optional fields to be included in the response model 
         /// Use WrikeTask.OptionalFields values</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         public async Task<WrikeResDto<WrikeTask>> GetTasksAsync(
             string accountId = null,
             string folderId = null,
@@ -144,11 +147,12 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             List<string> filters = new List<string>();
+
             #region filters            
             if (addDescendents != null && addDescendents.Value == true)
             {
                 filters.Add("descendants=true");
-               
+
             }
             if (!string.IsNullOrWhiteSpace(title))
             {
@@ -207,7 +211,7 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 filters.Add($"type={type}");
             }
-            if (limit!=null && limit > 0)
+            if (limit != null && limit > 0)
             {
                 filters.Add($"limit={limit}");
             }
@@ -219,7 +223,7 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 filters.Add($"sortOrder={sortOrder}");
             }
-            if (addSubTasks!= null && addSubTasks.Value == true)
+            if (addSubTasks != null && addSubTasks.Value == true)
             {
                 filters.Add("subTasks=true");
             }
@@ -231,7 +235,7 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 filters.Add($"nextPageToken={nextPageToken}");
             }
-            if (metadata!=null)
+            if (metadata != null)
             {
                 filters.Add("metadata=" + JsonConvert.SerializeObject(metadata));
             }
@@ -239,19 +243,17 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 filters.Add("customField=" + JsonConvert.SerializeObject(customField));
             }
-            if (customStatuses!=null && customStatuses.Count> 0)
+            if (customStatuses != null && customStatuses.Count > 0)
             {
                 filters.Add("customStatuses=" + JsonConvert.SerializeObject(customStatuses));
             }
-            if (optionalFields != null && optionalFields.Count>0)
+            if (optionalFields != null && optionalFields.Count > 0)
             {
                 filters.Add("fields=" + JsonConvert.SerializeObject(optionalFields));
             }
-
-            //TODO: implement others...
             #endregion
 
-            if (filters.Count>0)
+            if (filters.Count > 0)
             {
                 requestUri += "?" + string.Join("&", filters);
             }
@@ -262,11 +264,11 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         ///  Returns complete information about single or multiple tasks. 
+        ///  Scopes: Default, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadWrite</remarks>
         /// <param name="taskIds">MaxCount 100</param>
         /// <param name="optionalFields">Use WrikeTask.OptionalFields values Only Recurrent and AttachmentCount supported</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         public async Task<WrikeResDto<WrikeTask>> GetTasksAsync(List<string> taskIds, List<string> optionalFields = null)
         {
 
@@ -299,11 +301,11 @@ namespace Taviloglu.Wrike.ApiClient
         #region Folders & Projects
         /// <summary>
         /// Returns complete information about specified folders
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// <param name="folderIds">MaxCount 100</param>
         /// <param name="optionalFields">Use WrikeFolder.OptionalFields values</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/get-folder"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder"/>
         public async Task<WrikeResDto<WrikeFolder>> GetFoldersAsync(List<string> folderIds, List<string> optionalFields = null)
         {
             if (folderIds == null || folderIds.Count < 1)
@@ -327,10 +329,10 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Returns a list of tree entries
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         ///<param name="accountId">Returns a list of tree entries for the account</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
         public async Task<WrikeResDto<WrikeFolderTree>> GetFolderTreeAsync(string accountId = null)
         {
             if (accountId == null)
@@ -345,10 +347,10 @@ namespace Taviloglu.Wrike.ApiClient
         #region CustomFields
         /// <summary>
         /// Returns a list of custom fields in all accessible accounts
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// <param name="accountId">If provided; returns a list of custom fields in particular account</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
         public async Task<WrikeResDto<WrikeCustomField>> GetCustomFieldsAsync(string accountId = null)
         {
             var requestUri = $"customfields";
@@ -362,10 +364,10 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Returns complete information about specified custom fields
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
         /// <param name="customFieldIds">string list of customFiledIds</param>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
         public async Task<WrikeResDto<WrikeCustomField>> GetCustomFieldsAsync(List<string> customFieldIds)
         {
             if (customFieldIds == null || customFieldIds.Count < 1)
@@ -383,9 +385,10 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Create custom field in specified account
+        /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadWrite</remarks>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/create-custom-field"/>
+        /// <remarks></remarks>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/create-custom-field"/>
         /// <param name="customField">AccountId, Title and Text values should be set</param>
         public async Task<WrikeResDto<WrikeCustomField>> CreateCustomFieldAsync(WrikeCustomField customField)
         {
@@ -415,9 +418,10 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Updates custom field
+        /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadWrite</remarks>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>        
+        /// <remarks></remarks>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>        
         public async Task<WrikeResDto<WrikeCustomField>> UpdateCustomFieldAsync(
             string id, string title = null, string type = null, List<string> addShareds = null, List<string> removeShareds = null)
         {
@@ -465,15 +469,15 @@ namespace Taviloglu.Wrike.ApiClient
         #region Colors
         /// <summary>
         /// Get color name - code mapping
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <remarks>Scopes: Default, wsReadOnly, wsReadWrite</remarks>
-        /// See <see cref="https://developers.wrike.com/documentation/api/methods/query-colors"/>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-colors"/>
         public async Task<WrikeResDto<WrikeColor>> GetColorsAsync()
         {
             return await SendRequest<WrikeColor>("colors", HttpMethods.Get);
         }
         #endregion
-        
+
         private async Task<WrikeResDto<T>> SendRequest<T>(
             string requestUri,
             string httpMethod,

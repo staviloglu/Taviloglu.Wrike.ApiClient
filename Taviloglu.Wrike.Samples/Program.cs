@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.Samples
         {
             var bearerToken = "";
             var wrikeClient = new WrikeClient(bearerToken);
-
+            
             #region Colors
             //var colors = await wrikeClient.GetColorsAsync();
             #endregion
