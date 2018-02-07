@@ -59,7 +59,7 @@ var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
  <tr><td>[GET] /accounts</td><td>&nbsp;</td><td rowspan="3">Accounts</td></tr>
  <tr><td>[GET] /accounts/{accountId}</td><td>&nbsp;</td></tr>
  <tr><td>[PUT] /accounts/{accountId}</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /accounts/{accountId}/workflows</td><td>&nbsp;</td><td rowspan="2">Workflows</td></tr>
+ <tr><td>[GET] /accounts/{accountId}/workflows</td><td>&nbsp;</td><td rowspan="3">Workflows</td></tr>
  <tr><td>[POST] /accounts/{accountId}/workflows</td><td>&nbsp;</td></tr>
  <tr><td>[PUT] /workflows/{workflowId}</td><td>&nbsp;</td></tr>
  <tr><td>[GET] /customfields</td><td>1</td><td rowspan="5">Custom Fields</td></tr>
