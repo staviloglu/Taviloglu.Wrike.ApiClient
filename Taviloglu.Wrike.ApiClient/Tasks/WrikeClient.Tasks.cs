@@ -18,7 +18,8 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeTasksClient)this;
             }
         }
-        async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.CreateAsync(string folderId)
+        
+        async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.CreateAsync(string folderId, WrikeTask newTask, string priorityBefore, string priorityAfter)
         {
             //TODO: implement            
             //return await SendRequest<WrikeTask>($"api/v3/folders/{folderId}/tasks", HttpMethods.Post, postData);

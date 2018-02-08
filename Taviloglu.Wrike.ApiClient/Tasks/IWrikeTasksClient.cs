@@ -8,12 +8,15 @@ namespace Taviloglu.Wrike.ApiClient
     public interface IWrikeTasksClient
     {
         /// <summary>
-        ///  Create task in folder. You can specify rootFolderId to create task in user's account root. 
+        ///  Create task in folder.  
         ///  Scopes: Default, wsReadWrite
         /// </summary>
-        /// <param name="folderId">folderId</param>
+        /// <param name="folderId">You can specify rootFolderId to create task in user's account root.</param>
+        /// <param name="newTask">use task constructor with parameters</param>
+        /// <param name="priorityBefor">Put newly created task before specified task in task list</param>
+        /// <param name="priorityAfter">Put newly created task after specified task in task list</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-task"/>
-        Task<WrikeResDto<WrikeTask>> CreateAsync(string folderId);
+        Task<WrikeResDto<WrikeTask>> CreateAsync(string folderId, WrikeTask newTask, string priorityBefore = null, string priorityAfter=null);
 
         /// <summary>
         /// Delete task by Id

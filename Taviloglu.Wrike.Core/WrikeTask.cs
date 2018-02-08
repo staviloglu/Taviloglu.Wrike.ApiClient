@@ -8,6 +8,63 @@ namespace Taviloglu.Wrike.Core
 {
     public class WrikeTask : WrikeObject
     {
+        public WrikeTask() { }
+
+        /// <summary>
+        /// Use this constructor for creating new task requests
+        /// </summary>
+        /// <param name="title">Title of task, required</param>
+        /// <param name="description">Description of task, will be left blank, if not set</param>
+        /// <param name="status">Status of task </param>
+        /// <param name="importance">Importance of task </param>
+        /// <param name="dates">Task dates. If not specified, a backlogged task is created</param>
+        /// <param name="shareds">Shares task with specified users. The task is always shared with the author.</param>
+        /// <param name="parents">Parent folders for newly created task. Can not contain recycleBinId</param>
+        /// <param name="responsibles">Makes specified users responsible for the task</param>
+        /// <param name="followers">Add specified users to task followers</param>
+        /// <param name="follow">Follow task</param>        
+        /// <param name="superTasks">Add the task as subtask to specified tasks</param>
+        /// <param name="metadata">Metadata to be added to newly created task</param>
+        /// <param name="customFields">List of custom fields to set in newly created task</param>
+        /// <param name="customStatus">Custom status ID</param>
+        public WrikeTask(
+            string title, 
+            string description = null,
+            WrikeTaskStatus? status = null,
+            WrikeTaskImportance? importance = null,
+            WrikeTaskDate dates = null,
+             List<string> shareds = null,
+              List<string> parents = null,
+              List<string> responsibles = null,
+              List<string> followers = null,
+              bool? follow = null,
+              string priorityBefore = null,
+              string priorityAfter = null,
+              List<string> superTasks = null,
+              List<WrikeMetadata> metadata = null,
+              List<WrikeCustomFieldData> customFields = null,
+              string customStatus = null)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentException("title can not be null or empty!","title");
+            }
+
+            Title = title;
+            Description = description;
+            Status = status ?? WrikeTaskStatus.Active;
+            Importance = importance ?? WrikeTaskImportance.Normal;
+            Dates = dates;
+            SharedIds = shareds;
+            ParentIds = parents;
+            ResponsibleIds = responsibles;
+            FollowerIds = followers;
+            FollowedByMe = follow ?? false;
+            SuperTaskIds = superTasks;
+            Metadata = metadata;
+            CustomFields = customFields;
+            CustomStatusId = customStatus;
+        }
         /// <summary>
         /// Account ID
         /// </summary>

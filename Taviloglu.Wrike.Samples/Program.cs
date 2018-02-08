@@ -58,6 +58,37 @@ namespace Taviloglu.Wrike.Samples
             //var tasks = await wrikeClient.Tasks.GetAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" });
             //var tasks = await wrikeClient.Tasks.GetAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" },
             //new List<string> { WrikeTask.OptionalFields.AttachmentCount, WrikeTask.OptionalFields.Recurrent });
+
+
+            //TODO: priorityAfter and priorityBefore
+            var newTask = new WrikeTask
+            {
+                Title = "new task title",
+                Description = "new task description",
+                Status = WrikeTaskStatus.Active,
+                Importance = WrikeTaskImportance.High,
+                Dates = new WrikeTaskDate
+                {
+                    Due = new DateTime(2018, 2, 20),
+                    Duration = 180000,
+                    Start = DateTime.Now,
+                    Type = WrikeTaskDateType.Planned,
+                    WorkOnWeekends = false
+
+                },
+                SharedIds = null,
+                ParentIds = null,
+                ResponsibleIds = null,
+                FollowerIds = null,
+                FollowedByMe = false,
+                SuperTaskIds = null,
+                Metadata = new List<WrikeMetadata> {
+                    new WrikeMetadata("metadata1","metadata1.value")
+                },
+                CustomStatusId = null                
+            };
+            var taskReturn = await wrikeClient.Tasks.CreateAsync("", newTask);
+
             #endregion
 
             #region Users
