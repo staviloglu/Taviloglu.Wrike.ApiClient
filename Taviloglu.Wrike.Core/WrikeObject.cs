@@ -2,9 +2,9 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public abstract class WrikeObject
+    public abstract class WrikeObjectWithId : IWrikeObject
     {
-       [JsonProperty(PropertyName = "id")]
+       [JsonProperty("id")]
         public string Id { get; set; }
     }
 }

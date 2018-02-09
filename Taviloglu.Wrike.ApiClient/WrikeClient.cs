@@ -59,7 +59,25 @@ namespace Taviloglu.Wrike.ApiClient
             return wrikeResDto;
         }
 
-        
+        private List<T> GetReponseDataList<T>(WrikeResDto<T> response)
+        {
+            if (string.IsNullOrWhiteSpace(response.Error))
+            {
+                throw new WrikeException(response.Error, response.ErrorDescription);
+            }
+
+            return response.Data;
+        }
+
+        private T GetReponseDataItem<T>(WrikeResDto<T> response)
+        {
+            if (string.IsNullOrWhiteSpace(response.Error))
+            {
+                throw new WrikeException(response.Error, response.ErrorDescription);
+            }
+
+            return response.Data[0];
+        }
 
         private class HttpMethods
         {

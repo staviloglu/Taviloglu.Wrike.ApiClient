@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
 using Taviloglu.Wrike.Core;
 
@@ -11,6 +12,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-colors"/>
-        Task<WrikeResDto<WrikeColor>> GetAsync();
+        Task<List<WrikeColor>> GetAsync();
     }
 }

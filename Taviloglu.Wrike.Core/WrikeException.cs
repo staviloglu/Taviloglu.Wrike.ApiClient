@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeGroup : IWrikeObject
+    public class WrikeException : Exception
     {
-        
+        public WrikeException(string error, string errorDescription) : base($"{error}: {errorDescription}") { }
     }
 }

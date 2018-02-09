@@ -54,5 +54,5 @@ namespace Taviloglu.Wrike.Core
     public interface IWrikeDateFilterEqual : IWrikeDateFilter {
         DateTime Equal { get; set; }
     }
-    public interface IWrikeDateFilter { }
+    public interface IWrikeDateFilter : IWrikeObject { }
 }

@@ -4,18 +4,19 @@ using System.Collections.Generic;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeCustomField : WrikeObject
+    public class WrikeCustomField : WrikeObjectWithId
     {
-       [JsonProperty(PropertyName = "accountId")]
+        [JsonProperty("accountId")]
         public string AccountId { get; set; }
 
-       [JsonProperty(PropertyName = "title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-       [JsonProperty(PropertyName = "type", ItemConverterType =typeof(StringEnumConverter))]
+        [JsonProperty("type")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WrikeCustomFieldType Type { get; set; }
 
-       [JsonProperty(PropertyName = "sharedIds")]
-        public List<string> SharedIds { get; set; }        
+        [JsonProperty("sharedIds")]
+        public List<string> SharedIds { get; set; }
     }
 }

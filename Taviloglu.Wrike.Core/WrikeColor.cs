@@ -2,17 +2,17 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeColor
+    public class WrikeColor : IWrikeObject
     {
         /// <summary>
         /// Color name
         /// </summary>
-       [JsonProperty(PropertyName = "name")]
+       [JsonProperty("name")]
         public string Name { get; set; }
         /// <summary>
         /// HEX code
         /// </summary>
-       [JsonProperty(PropertyName = "hex")]
+       [JsonProperty("hex")]
         public string Hex { get; set; }
 
         public enum Value {

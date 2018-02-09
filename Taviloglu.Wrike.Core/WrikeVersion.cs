@@ -2,17 +2,17 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeVersion
+    public class WrikeVersion : IWrikeObject
     {
         /// <summary>
         /// Major version number
         /// </summary>
-        [JsonProperty(PropertyName = "major")]
+        [JsonProperty("major")]
         public string Major { get; set; }
         /// <summary>
         /// Minor version number
         /// </summary>
-        [JsonProperty(PropertyName = "minor")]
+        [JsonProperty("minor")]
         public string Minor { get; set; }
     }
 }

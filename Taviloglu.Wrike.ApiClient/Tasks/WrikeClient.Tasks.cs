@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
 using Taviloglu.Wrike.Core;
@@ -21,9 +22,39 @@ namespace Taviloglu.Wrike.ApiClient
         
         async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.CreateAsync(string folderId, WrikeTask newTask, string priorityBefore, string priorityAfter)
         {
-            //TODO: implement            
-            //return await SendRequest<WrikeTask>($"api/v3/folders/{folderId}/tasks", HttpMethods.Post, postData);
-            return new WrikeResDto<WrikeTask>();
+            if (string.IsNullOrWhiteSpace(folderId))
+            {
+                throw new ArgumentNullException("folderId can not be null or empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(newTask.Title))
+            {
+                throw new ArgumentNullException("newTask.Title can not be null or empty");
+            }
+
+            var requestUri = $"folders/{folderId}/tasks";
+
+            var postDataBuilder = new WrikePostDataBuilder()
+                .AddParameter("title", newTask.Title)
+                .AddParameter("description", newTask.Description)   
+                .AddParameter("status", newTask.Status)
+                .AddParameter("importance", newTask.Importance)
+                .AddParameter("dates", newTask.Dates)
+                .AddParameter("shareds", newTask.SharedIds)
+                .AddParameter("parents", newTask.ParentIds)
+                .AddParameter("responsibles", newTask.ResponsibleIds)
+                .AddParameter("followers", newTask.FollowerIds)
+                .AddParameter("follow", newTask.FollowedByMe)
+                .AddParameter("priorityBefore", priorityBefore)
+                .AddParameter("priorityAfter", priorityAfter)     
+                .AddParameter("superTasks", newTask.SuperTaskIds)
+                .AddParameter("metadata", newTask.Metadata)
+                .AddParameter("customFields", newTask.CustomFields)
+                .AddParameter("customStatus", newTask.CustomStatusId);
+
+            var postContent = postDataBuilder.GetPostData();
+
+            return await SendRequest<WrikeTask>(requestUri, HttpMethods.Post, postContent);            
         }
 
         async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.DeleteAsync(string taskId)
@@ -55,39 +86,34 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"folders/{folderId}/tasks";
             }
 
-            var filterHelper = new WrikeGetParametersHelper();
-            filterHelper.AddFilterIfNotNull("descendants", addDescendants);
-            filterHelper.AddFilterIfNotNull("title", title);
-            filterHelper.AddFilterIfNotNull("status", status);
-            filterHelper.AddFilterIfNotNull("importance", importance);
-            filterHelper.AddFilterIfNotNull("startDate", startDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"));
-            filterHelper.AddFilterIfNotNull("dueDate", dueDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"));
-            filterHelper.AddFilterIfNotNull("scheduledDate", scheduledDate, new CustomDateTimeConverter("yyyy-MM-dd"));
-            filterHelper.AddFilterIfNotNull("createdDate", 
-                createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
-            filterHelper.AddFilterIfNotNull("updatedDate", 
-                updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
-            filterHelper.AddFilterIfNotNull("completedDate", 
-                completedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
-            filterHelper.AddFilterIfNotNull("authors", authors);
-            filterHelper.AddFilterIfNotNull("responsibles", responsibles);
-            filterHelper.AddFilterIfNotNull("shareds", shareds);
-            filterHelper.AddFilterIfNotNull("permalink", permalink);
-            filterHelper.AddFilterIfNotNull("type", type);
-            filterHelper.AddFilterIfNotNull("limit", limit);
-            filterHelper.AddFilterIfNotNull("sortField", sortField);
-            filterHelper.AddFilterIfNotNull("sortOrder", sortOrder);
-            filterHelper.AddFilterIfNotNull("subTasks", addSubTasks);
-            filterHelper.AddFilterIfNotNull("pageSize", pageSize);
-            filterHelper.AddFilterIfNotNull("nextPageToken", nextPageToken);
-            filterHelper.AddFilterIfNotNull("metadata", metadata);
-            filterHelper.AddFilterIfNotNull("customField", customField);
-            filterHelper.AddFilterIfNotNull("customStatuses", customStatuses);
-            filterHelper.AddFilterIfNotNull("fields", fields);
-            
-            requestUri += filterHelper.GetFilterParametersText();
+            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            .AddParameter("descendants", addDescendants)
+            .AddParameter("title", title)
+            .AddParameter("status", status)
+            .AddParameter("importance", importance)
+            .AddParameter("startDate", startDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"))
+            .AddParameter("dueDate", dueDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"))
+            .AddParameter("scheduledDate", scheduledDate, new CustomDateTimeConverter("yyyy-MM-dd"))
+            .AddParameter("createdDate",createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("updatedDate",updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("completedDate",completedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("authors", authors)
+            .AddParameter("responsibles", responsibles)
+            .AddParameter("shareds", shareds)
+            .AddParameter("permalink", permalink)
+            .AddParameter("type", type)
+            .AddParameter("limit", limit)
+            .AddParameter("sortField", sortField)
+            .AddParameter("sortOrder", sortOrder)
+            .AddParameter("subTasks", addSubTasks)
+            .AddParameter("pageSize", pageSize)
+            .AddParameter("nextPageToken", nextPageToken)
+            .AddParameter("metadata", metadata)
+            .AddParameter("customField", customField)
+            .AddParameter("customStatuses", customStatuses)
+            .AddParameter("fields", fields);
 
-            return await SendRequest<WrikeTask>(requestUri, HttpMethods.Get);
+            return await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get);
         }
 
         async Task<WrikeResDto<WrikeTask>> IWrikeTasksClient.GetAsync(List<string> taskIds, List<string> optionalFields)

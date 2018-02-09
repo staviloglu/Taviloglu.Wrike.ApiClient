@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeGroup : IWrikeObject
+    public interface IWrikeObject
     {
         
     }

@@ -8,7 +8,7 @@ namespace Taviloglu.Wrike.Core
     /// Metadata entry key-value pair. 
     /// Metadata entries are isolated on per-client(application) basis
     /// </summary>
-    public class WrikeMetadata
+    public class WrikeMetadata : IWrikeObject
     {
         private string _key;
         private string _value;
@@ -21,7 +21,7 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Key should be less than 50 symbols and match following regular expression ([A-Za-z0-9_-]+)
         /// </summary>
-        [JsonProperty(PropertyName = "key")]
+        [JsonProperty("key")]
         public string Key
         {
             get
@@ -44,7 +44,7 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Value should be less than 1000 symbols, compatible with JSON string. Use JSON 'null' in order to remove metadata entry
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
+        [JsonProperty("value")]
         public string Value
         {
             get

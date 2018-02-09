@@ -6,7 +6,7 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeTask : WrikeObject
+    public class WrikeTask : WrikeObjectWithId
     {
         public WrikeTask() { }
 
@@ -68,127 +68,127 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Account ID
         /// </summary>
-        [JsonProperty(PropertyName = "accountId")]
+        [JsonProperty("accountId")]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Title, cannot be empty
         /// </summary>
-        [JsonProperty(PropertyName = "title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
         /// <summary>
         /// Description
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
 
         /// <summary>
         /// Brief description
         /// </summary>
-        [JsonProperty(PropertyName = "briefDescription")]
+        [JsonProperty("briefDescription")]
         public string BriefDescription { get; set; }
         /// <summary>
         /// List of task parent folder IDs
         /// </summary>
-        [JsonProperty(PropertyName = "parentIds")]
+        [JsonProperty("parentIds")]
         public List<string> ParentIds { get; set; }
         /// <summary>
         /// List of task super parent folder IDs
         /// </summary>
-        [JsonProperty(PropertyName = "superParentIds")]
+        [JsonProperty("superParentIds")]
         public List<string> SuperParentIds { get; set; }
         /// <summary>
         /// List of user IDs, who share the task
         /// </summary>
-        [JsonProperty(PropertyName = "sharedIds")]
+        [JsonProperty("sharedIds")]
         public List<string> SharedIds { get; set; }
 
         /// <summary>
         /// List of responsible user IDs
         /// </summary>
-        [JsonProperty(PropertyName = "responsibleIds")]
+        [JsonProperty("responsibleIds")]
         public List<string> ResponsibleIds { get; set; }
         /// <summary>
         /// Status of task 
         /// </summary>
-        [JsonProperty(PropertyName = "status", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("status")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WrikeTaskStatus Status { get; set; }
         /// <summary>
         /// Importance of task 
         /// </summary>
-        [JsonProperty(PropertyName = "importance", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("importance")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WrikeTaskImportance Importance { get; set; }
 
         /// <summary>
         /// Created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>        
-        [JsonProperty(PropertyName = "createdDate",
-            ItemConverterType = typeof(CustomDateTimeConverter),
-            ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        [JsonProperty("createdDate")]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CreatedDate { get; set; }
         /// <summary>
         /// Updated date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
-        [JsonProperty(PropertyName = "updatedDate",
-             ItemConverterType = typeof(CustomDateTimeConverter),
-             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        [JsonProperty("updatedDate")]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime UpdatedDate { get; set; }
         /// <summary>
         /// Completed date, field is present for tasks with 'Completed' status Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
-        [JsonProperty(PropertyName = "completedDate",
-             ItemConverterType = typeof(CustomDateTimeConverter),
-             ItemConverterParameters = new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        [JsonProperty("completedDate")]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CompletedDate { get; set; }
         /// <summary>
         /// Task dates
         /// </summary>
-        [JsonProperty(PropertyName = "dates")]
+        [JsonProperty("dates")]
         public WrikeTaskDate Dates { get; set; }
-        [JsonProperty(PropertyName = "scope", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WrikeTreeScope Scope { get; set; }
         /// <summary>
         /// List of author IDs (currently contains 1 element)
         /// </summary>
-        [JsonProperty(PropertyName = "authorIds")]
+        [JsonProperty("authorIds")]
         public List<string> AuthorIds { get; set; }
-        [JsonProperty(PropertyName = "customStatusId")]
+        [JsonProperty("customStatusId")]
         public string CustomStatusId { get; set; }
-        [JsonProperty(PropertyName = "hasAttachments")]
+        [JsonProperty("hasAttachments")]
         public bool HasAttachments { get; set; }
-        [JsonProperty(PropertyName = "attachmentCount")]
+        [JsonProperty("attachmentCount")]
         public int AttachmentCount { get; set; }
         /// <summary>
         /// Link to open task in web workspace, if user has appropriate access
         /// </summary>
-        [JsonProperty(PropertyName = "permalink")]
+        [JsonProperty("permalink")]
         public string Permalink { get; set; }
         /// <summary>
         /// Ordering key that defines task order in tasklist
         /// </summary>
-        [JsonProperty(PropertyName = "priority")]
+        [JsonProperty("priority")]
         public string Priority { get; set; }
-        [JsonProperty(PropertyName = "followedByMe")]
+        [JsonProperty("followedByMe")]
         public bool FollowedByMe { get; set; }
-        [JsonProperty(PropertyName = "followerIds")]
+        [JsonProperty("followerIds")]
         public List<string> FollowerIds { get; set; }
 
         /// <summary>
         /// Is a task recurrent
         /// </summary>
-        [JsonProperty(PropertyName = "recurrent")]
+        [JsonProperty("recurrent")]
         public bool Recurrent { get; set; }
 
-        [JsonProperty(PropertyName = "superTaskIds")]
+        [JsonProperty("superTaskIds")]
         public List<string> SuperTaskIds { get; set; }
-        [JsonProperty(PropertyName = "subTaskIds")]
+        [JsonProperty("subTaskIds")]
         public List<string> SubTaskIds { get; set; }
-        [JsonProperty(PropertyName = "dependencyIds")]
+        [JsonProperty("dependencyIds")]
         public List<string> DependencyIds { get; set; }
-        [JsonProperty(PropertyName = "metadata")]
+        [JsonProperty("metadata")]
         public List<WrikeMetadata> Metadata { get; set; }
-        [JsonProperty(PropertyName = "customFields")]
+        [JsonProperty("customFields")]
         public List<WrikeCustomFieldData> CustomFields { get; set; }
 
         /// <summary>

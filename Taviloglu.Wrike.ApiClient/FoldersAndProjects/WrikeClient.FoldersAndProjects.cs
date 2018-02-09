@@ -57,22 +57,20 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"folders/{folderId}/folders";
             }
 
-            var filterHelper = new WrikeGetParametersHelper();
-            filterHelper.AddFilterIfNotNull("permalink", permalink);
-            filterHelper.AddFilterIfNotNull("descendants", addDescendants);
-            filterHelper.AddFilterIfNotNull("metadata", metadata);
-            filterHelper.AddFilterIfNotNull("customField", customField);
-            filterHelper.AddFilterIfNotNull("updatedDate",
-                updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"));
-            filterHelper.AddFilterIfNotNull("project", isProject);
+            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            .AddParameter("permalink", permalink)
+            .AddParameter("descendants", addDescendants)
+            .AddParameter("metadata", metadata)
+            .AddParameter("customField", customField)
+            .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("project", isProject)
+            .AddParameter("fields", fields);
             if (!string.IsNullOrWhiteSpace(folderId))
             {
-                filterHelper.AddFilterIfNotNull("deleted", isDeleted);
+                uriBuilder.AddParameter("deleted", isDeleted);
             }
-            filterHelper.AddFilterIfNotNull("fields", fields);
-            requestUri += filterHelper.GetFilterParametersText();
 
-            return await SendRequest<WrikeFolderTree>(requestUri, HttpMethods.Get);
+            return await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get);
         }
     }
 }

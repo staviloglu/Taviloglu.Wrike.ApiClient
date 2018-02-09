@@ -5,36 +5,38 @@ using System.Collections.Generic;
 namespace Taviloglu.Wrike.Core
 {
 
-    public class WrikeFolderTree : WrikeObject
+    public class WrikeFolderTree : WrikeObjectWithId
     {
         /// <summary>
         /// Title
         /// </summary>
-        [JsonProperty(PropertyName = "title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
         /// <summary>
         /// Color 
         /// </summary>
-        [JsonProperty(PropertyName = "color", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("color")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WrikeColor.Value Color { get; set; }
 
         /// <summary>
         /// Child folder IDs
         /// </summary>
-        [JsonProperty(PropertyName = "childIds")]
+        [JsonProperty("childIds")]
         public List<string> ChildIds { get; set; }
 
         /// <summary>
         /// Folder scope 
         /// </summary>
-        [JsonProperty(PropertyName = "scope", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WrikeTreeScope Scope { get; set; }
 
         /// <summary>
         /// Project details, present only for project folders
         /// </summary>
-        [JsonProperty(PropertyName = "project")]
+        [JsonProperty("project")]
         public WrikeProject Project { get; set; }
 
         /// <summary>

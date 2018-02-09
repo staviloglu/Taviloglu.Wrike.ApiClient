@@ -2,12 +2,12 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeCustomFieldData : WrikeObject
+    public class WrikeCustomFieldData : WrikeObjectWithId
     {
         /// <summary>
         /// Custom field value
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
+        [JsonProperty("value")]
         public string Value { get; set; }
 
     }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
 using Taviloglu.Wrike.Core;
 
@@ -13,9 +14,10 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeColorsClient)this;
             }
         }
-        async Task<WrikeResDto<WrikeColor>> IWrikeColorsClient.GetAsync()
+        async Task<List<WrikeColor>> IWrikeColorsClient.GetAsync()
         {
-            return await SendRequest<WrikeColor>("colors", HttpMethods.Get);
+            var response = await SendRequest<WrikeColor>("colors", HttpMethods.Get);
+            return GetReponseDataList(response);
         }
     }
 }
