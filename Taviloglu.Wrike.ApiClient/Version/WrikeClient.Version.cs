@@ -14,9 +14,10 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<WrikeResDto<WrikeVersion>> IWrikeVersionClient.GetAsync()
+        async Task<WrikeVersion> IWrikeVersionClient.GetAsync()
         {
-            return await SendRequest<WrikeVersion>("version", HttpMethods.Get);
+            var response = await SendRequest<WrikeVersion>("version", HttpMethods.Get);
+            return GetReponseDataFirstItem(response);
         }
     }
 }

@@ -27,6 +27,11 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException("folderId can not be null or empty");
             }
 
+            if (newTask == null)
+            {
+                throw new ArgumentNullException("newTask can not be null");
+            }
+
             if (string.IsNullOrWhiteSpace(newTask.Title))
             {
                 throw new ArgumentNullException("newTask.Title can not be null or empty");
@@ -34,7 +39,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             var requestUri = $"folders/{folderId}/tasks";
 
-            var postDataBuilder = new WrikePostDataBuilder()
+            var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", newTask.Title)
                 .AddParameter("description", newTask.Description)   
                 .AddParameter("status", newTask.Status)
@@ -52,7 +57,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("customFields", newTask.CustomFields)
                 .AddParameter("customStatus", newTask.CustomStatusId);
 
-            var postContent = postDataBuilder.GetPostData();
+            var postContent = postDataBuilder.GetContent();
 
             return await SendRequest<WrikeTask>(requestUri, HttpMethods.Post, postContent);            
         }

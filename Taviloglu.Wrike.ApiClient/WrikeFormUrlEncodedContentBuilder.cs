@@ -3,23 +3,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    public class WrikeGetUriBuilder
+    public class WrikeFormUrlEncodedContentBuilder
     {
-        private List<string> _filters;
-        private string _baseUri;
-        public WrikeGetUriBuilder(string baseUri)
+        List<KeyValuePair<string, string>> _parameters;
+
+        public WrikeFormUrlEncodedContentBuilder()
         {
-            _filters = new List<string>();
-            _baseUri = baseUri;
+            _parameters = new List<KeyValuePair<string, string>>();
         }
 
-        public WrikeGetUriBuilder AddParameter(string name, object value, JsonConverter jsonConverter = null)
+        public WrikeFormUrlEncodedContentBuilder AddParameter(string name, object value, JsonConverter jsonConverter = null)
         {
             if (value == null)
             {
@@ -46,7 +46,11 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (value is IList)
             {
-                AddList(name, (IList)value);
+                if (((IList)value).Count > 0)
+                {
+                    AddList(name, (IList)value);
+                }
+
                 return this;
             }
 
@@ -67,48 +71,43 @@ namespace Taviloglu.Wrike.ApiClient
 
         private void AddEnum(string parameterName, Enum parameterValue)
         {
-            _filters.Add($"{parameterName}={parameterValue}");
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString()));
         }
 
         private void AddBool(string parameterName, bool parameterValue)
         {
-            
-            _filters.Add($"{parameterName}={parameterValue.ToString().ToLower()}");
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString().ToLower()));
         }
         private void AddString(string parameterName, string parameterValue)
         {
-            _filters.Add($"{parameterName}={parameterValue}");
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue));
         }
 
         private void AddInt(string parameterName, int parameterValue)
         {
-            _filters.Add($"{parameterName}={parameterValue}");
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString()));
         }
 
         private void AddList(string parameterName, IList parameterValue)
         {
-            _filters.Add($"{parameterName}={JsonConvert.SerializeObject(parameterValue)}");
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue)));
         }
 
         private void AddWrikeObject(string parameterName, IWrikeObject parameterValue, JsonConverter jsonConverter = null)
         {
             if (jsonConverter != null)
             {
-                _filters.Add($"{parameterName}={JsonConvert.SerializeObject(parameterValue, jsonConverter)}");
+                _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue, jsonConverter)));
             }
             else
             {
-                _filters.Add($"{parameterName}={JsonConvert.SerializeObject(parameterValue)}");
+                _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue)));
             }
         }
-        public string GetUri()
-        {
-            if (_filters.Count > 0)
-            {
-                return $"{_baseUri}?{string.Join("&", _filters)}";
-            }
 
-            return _baseUri;
+        public FormUrlEncodedContent GetContent()
+        {
+            return new FormUrlEncodedContent(_parameters);
         }
     }
 }

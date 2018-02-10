@@ -15,7 +15,7 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
         }
-        async Task<WrikeResDto<WrikeGroup>> IWrikeGroupsClient.DeleteAsync(string groupId, bool isTest)
+        async Task IWrikeGroupsClient.DeleteAsync(string groupId, bool isTest)
         {
             if (string.IsNullOrWhiteSpace(groupId))
             {
@@ -28,7 +28,9 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri += "?test=true";
 
             }
-            return await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete);
+            var response = await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete);
+            //TODO: anything to do with the response?
+            return;
         }
     }
 }

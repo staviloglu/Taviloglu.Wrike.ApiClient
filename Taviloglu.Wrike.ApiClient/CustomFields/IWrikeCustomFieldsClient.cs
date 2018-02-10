@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="accountId">If provided; returns a list of custom fields in particular account</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
-        Task<WrikeResDto<WrikeCustomField>> GetAsync(string accountId = null);
+        Task<List<WrikeCustomField>> GetAsync(string accountId = null);
 
         /// <summary>
         /// Returns complete information about specified custom fields
@@ -21,7 +21,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="customFieldIds">string list of customFiledIds</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
-        Task<WrikeResDto<WrikeCustomField>> GetAsync(List<string> customFieldIds);
+        Task<List<WrikeCustomField>> GetAsync(List<string> customFieldIds);
 
         /// <summary>
         /// Create custom field in specified account
@@ -30,7 +30,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <remarks></remarks>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-custom-field"/>
         /// <param name="customField">AccountId, Title and Text values should be set</param>
-        Task<WrikeResDto<WrikeCustomField>> CreateAsync(WrikeCustomField customField);
+        Task<WrikeCustomField> CreateAsync(WrikeCustomField customField);
 
         /// <summary>
         /// Updates custom field
@@ -38,7 +38,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <remarks></remarks>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>        
-        Task<WrikeResDto<WrikeCustomField>> UpdateAsync(
+        Task<WrikeCustomField> UpdateAsync(
             string id, string title = null, WrikeCustomFieldType? type = null, List<string> addShareds = null, List<string> removeShareds = null);
     }
 }

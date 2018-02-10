@@ -13,6 +13,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="groupId"></param>  
         /// <param name="isTest">Check that group can be removed</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-groups"/>
-        Task<WrikeResDto<WrikeGroup>> DeleteAsync(string groupId, bool isTest = false);
+        Task DeleteAsync(string groupId, bool isTest = false);
     }
 }

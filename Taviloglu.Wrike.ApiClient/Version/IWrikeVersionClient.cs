@@ -9,7 +9,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <summary>
         /// Returns current API version info
         /// </summary>
-        Task<WrikeResDto<WrikeVersion>> GetAsync();
+        Task<WrikeVersion> GetAsync();
     }
 
 }

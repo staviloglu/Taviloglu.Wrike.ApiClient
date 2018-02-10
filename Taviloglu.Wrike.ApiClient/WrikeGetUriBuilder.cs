@@ -3,23 +3,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    public class WrikePostDataBuilder
+    public class WrikeGetUriBuilder
     {
-        List<KeyValuePair<string, string>> _parameters;
-
-        public WrikePostDataBuilder()
+        private List<string> _filters;
+        private string _baseUri;
+        public WrikeGetUriBuilder(string baseUri)
         {
-            _parameters = new List<KeyValuePair<string, string>>();
+            _filters = new List<string>();
+            _baseUri = baseUri;
         }
 
-        public WrikePostDataBuilder AddParameter(string name, object value, JsonConverter jsonConverter = null)
+        public WrikeGetUriBuilder AddParameter(string name, object value, JsonConverter jsonConverter = null)
         {
             if (value == null)
             {
@@ -46,14 +46,17 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (value is IList)
             {
-                AddList(name, (IList)value);
+                if (((IList)value).Count > 0)
+                {
+                    AddList(name, (IList)value);
+                }
                 return this;
             }
 
             if (value is Enum)
             {
                 AddEnum(name, (Enum)value);
-                    return this;
+                return this;
             }
 
             if (value is IWrikeObject)
@@ -67,43 +70,48 @@ namespace Taviloglu.Wrike.ApiClient
 
         private void AddEnum(string parameterName, Enum parameterValue)
         {
-            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString()));
+            _filters.Add($"{parameterName}={parameterValue}");
         }
 
         private void AddBool(string parameterName, bool parameterValue)
         {
-            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString().ToLower()));
+
+            _filters.Add($"{parameterName}={parameterValue.ToString().ToLower()}");
         }
         private void AddString(string parameterName, string parameterValue)
         {
-            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue));
+            _filters.Add($"{parameterName}={parameterValue}");
         }
 
         private void AddInt(string parameterName, int parameterValue)
         {
-            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString()));
+            _filters.Add($"{parameterName}={parameterValue}");
         }
 
         private void AddList(string parameterName, IList parameterValue)
         {
-            _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue)));
+            _filters.Add($"{parameterName}={JsonConvert.SerializeObject(parameterValue)}");
         }
 
         private void AddWrikeObject(string parameterName, IWrikeObject parameterValue, JsonConverter jsonConverter = null)
         {
             if (jsonConverter != null)
             {
-                _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue, jsonConverter)));
+                _filters.Add($"{parameterName}={JsonConvert.SerializeObject(parameterValue, jsonConverter)}");
             }
             else
             {
-                _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue)));
+                _filters.Add($"{parameterName}={JsonConvert.SerializeObject(parameterValue)}");
             }
         }
-
-        public FormUrlEncodedContent GetPostData()
+        public string GetUri()
         {
-            return new FormUrlEncodedContent(_parameters);
+            if (_filters.Count > 0)
+            {
+                return $"{_baseUri}?{string.Join("&", _filters)}";
+            }
+
+            return _baseUri;
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Taviloglu.Wrike.ApiClient
             return response.Data;
         }
 
-        private T GetReponseDataItem<T>(WrikeResDto<T> response)
+        private T GetReponseDataFirstItem<T>(WrikeResDto<T> response)
         {
             if (string.IsNullOrWhiteSpace(response.Error))
             {

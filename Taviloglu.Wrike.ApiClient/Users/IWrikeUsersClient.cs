@@ -12,6 +12,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="id">userId</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-user"/>
-        Task<WrikeResDto<WrikeUser>> GetAsync(string id);
+        Task<WrikeUser> GetAsync(string id);
     }
 }

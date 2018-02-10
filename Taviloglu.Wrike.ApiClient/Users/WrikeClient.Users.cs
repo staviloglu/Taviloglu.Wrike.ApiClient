@@ -13,9 +13,10 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeUsersClient)this;
             }
         }
-        async Task<WrikeResDto<WrikeUser>> IWrikeUsersClient.GetAsync(string id)
+        async Task<WrikeUser> IWrikeUsersClient.GetAsync(string id)
         {
-            return await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get);
+            var response = await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get);
+            return GetReponseDataFirstItem(response);
         }
     }
 }

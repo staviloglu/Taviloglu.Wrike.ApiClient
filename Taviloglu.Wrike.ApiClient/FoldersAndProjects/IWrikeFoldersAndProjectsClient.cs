@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="folderIds">MaxCount 100</param>
         /// <param name="optionalFields">Use WrikeFolder.OptionalFields values</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder"/>
-        Task<WrikeResDto<WrikeFolder>> GetFoldersAsync(List<string> folderIds, List<string> optionalFields = null);
+        Task<List<WrikeFolder>> GetFoldersAsync(List<string> folderIds, List<string> optionalFields = null);
 
         /// <summary>
         /// Returns a list of tree entries
@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         ///<param name="accountId">Returns a list of tree entries for the account</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
-        Task<WrikeResDto<WrikeFolderTree>> GetFolderTreeAsync(
+        Task<List<WrikeFolderTree>> GetFolderTreeAsync(
             string accountId = null, 
             string folderId = null,
             string permalink = null,

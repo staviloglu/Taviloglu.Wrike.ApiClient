@@ -17,7 +17,7 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeFoldersAndProjectsClient)this;
             }
         }
-        async Task<WrikeResDto<WrikeFolder>> IWrikeFoldersAndProjectsClient.GetFoldersAsync(List<string> folderIds, List<string> optionalFields)
+        async Task<List<WrikeFolder>> IWrikeFoldersAndProjectsClient.GetFoldersAsync(List<string> folderIds, List<string> optionalFields)
         {
 
             if (folderIds == null || folderIds.Count < 1)
@@ -36,10 +36,11 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri += "?fields=" + JsonConvert.SerializeObject(optionalFields);
             }
 
-            return await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get);
+            var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get);
+            return GetReponseDataList(response);
         }
 
-        async Task<WrikeResDto<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string accountId, string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> fields)
+        async Task<List<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string accountId, string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> fields)
         {
             if (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId))
             {
@@ -70,7 +71,8 @@ namespace Taviloglu.Wrike.ApiClient
                 uriBuilder.AddParameter("deleted", isDeleted);
             }
 
-            return await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get);
+            var response = await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get);
+            return GetReponseDataList(response);
         }
     }
 }

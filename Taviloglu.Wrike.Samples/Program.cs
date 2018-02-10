@@ -103,11 +103,11 @@ namespace Taviloglu.Wrike.Samples
 
             #region Folders
             //var folders = await wrikeClient.FoldersAndProjects.GetFolderTreeAsync("IEABX2HE");
-            var folders = await wrikeClient.FoldersAndProjects.GetFoldersAsync(
-                new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" },
-                new List<string> { WrikeFolder.OptionalFields.AttachmentCount,
-                    WrikeFolder.OptionalFields.BriefDescription,
-                    WrikeFolder.OptionalFields.CustomColumnIds});
+            //var folders = await wrikeClient.FoldersAndProjects.GetFoldersAsync(
+            //    new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" },
+            //    new List<string> { WrikeFolder.OptionalFields.AttachmentCount,
+            //        WrikeFolder.OptionalFields.BriefDescription,
+            //        WrikeFolder.OptionalFields.CustomColumnIds});
 
             //var folders = await wrikeClient.FoldersAndProjects.GetFoldersAsync(
             //new List<string> { "IEABX2HEI4FR342D", "IEABR5PBI4EW24CW" });
