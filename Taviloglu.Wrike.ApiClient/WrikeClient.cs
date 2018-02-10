@@ -61,7 +61,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         private List<T> GetReponseDataList<T>(WrikeResDto<T> response)
         {
-            if (string.IsNullOrWhiteSpace(response.Error))
+            if (!string.IsNullOrWhiteSpace(response.Error))
             {
                 throw new WrikeException(response.Error, response.ErrorDescription);
             }
@@ -71,7 +71,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         private T GetReponseDataFirstItem<T>(WrikeResDto<T> response)
         {
-            if (string.IsNullOrWhiteSpace(response.Error))
+            if (!string.IsNullOrWhiteSpace(response.Error))
             {
                 throw new WrikeException(response.Error, response.ErrorDescription);
             }
