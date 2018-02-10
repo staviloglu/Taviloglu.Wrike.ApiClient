@@ -23,7 +23,7 @@ var newCustomField = new WrikeCustomField
 var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
 
-## Implemented Methods 22%
+## Implemented Methods 24%
 
 <table class="tableizer-table">
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead><tbody>
@@ -79,7 +79,7 @@ var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
  <tr><td>[GET] /accounts/{accountId}/tasks</td><td>1</td></tr>
  <tr><td>[GET] /folders/{folderId}/tasks</td><td>1</td></tr>
  <tr><td>[GET] /tasks/{taskId},{taskId},... - up to 100 IDs</td><td>1</td></tr>
- <tr><td>[POST] /folders/{folderId}/tasks</td><td>&nbsp;</td></tr>
+ <tr><td>[POST] /folders/{folderId}/tasks</td><td>1</td></tr>
  <tr><td>[PUT] /tasks/{taskId}</td><td>&nbsp;</td></tr>
  <tr><td>[DELETE] /tasks/{taskId}</td><td>1</td></tr>
  <tr><td>[GET] /comments</td><td>&nbsp;</td><td rowspan="9">Comments</td></tr>
