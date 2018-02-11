@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeWebhookEvent
+    public class WrikeWebhookEvent : IWrikeObject
     {
         //TODO: implement other oldvalue included events properties, write json properties, change names
         public string oldStatus { get; set; }
