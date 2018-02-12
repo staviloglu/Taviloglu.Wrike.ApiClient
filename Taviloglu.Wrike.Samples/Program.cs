@@ -17,7 +17,7 @@ namespace Taviloglu.Wrike.Samples
 
         static async Task MainAsync(string[] args)
         {
-            var bearerToken = "your_berarer_token";
+            var bearerToken = "your permanent_token";
             var wrikeClient = new WrikeClient(bearerToken);
 
             #region Colors
@@ -116,6 +116,22 @@ namespace Taviloglu.Wrike.Samples
             #region Groups
             //var g = wrikeClient.Groups.DeleteAsync("", true);
             //var g = wrikeClient.Groups.DeleteAsync("");            
+            #endregion
+
+            #region WebHooks
+            var webhooks = await wrikeClient.Webhooks.GetAsync("accountId");
+
+            webhooks = await wrikeClient.Webhooks.GetAsync(new List<string> { "webhookId", "webhookId" });
+
+            webhooks = await wrikeClient.Webhooks.GetAsync();
+
+            var newWebhook = new WrikeWebhook("accountId", "http://google.com");
+            newWebhook = await wrikeClient.Webhooks.CreateAsync(newWebhook);
+
+            foreach (var webhook in webhooks)
+            {
+                await wrikeClient.Webhooks.DeleteAsync(webhook.Id);
+            }
             #endregion
         }
     }

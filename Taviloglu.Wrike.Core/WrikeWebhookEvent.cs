@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 
 namespace Taviloglu.Wrike.Core
 {
     public class WrikeWebhookEvent : IWrikeObject
-    {
-        //TODO: implement other oldvalue included events properties, write json properties, change names
-        public string oldStatus { get; set; }
-        public string status { get; set; }
-        public string taskId { get; set; }
-        public string webhookId { get; set; }
-        public string eventAuthorId { get; set; }
-        public string eventType { get; set; }
-        public DateTime lastUpdatedDate { get; set; }
+    {   
+        [JsonProperty("taskId")]
+        public string TaskId { get; set; }
+        [JsonProperty("webhookId")]
+        public string WebhookId { get; set; }
+        [JsonProperty("eventAuthorId")]
+        public string EventAuthorId { get; set; }
+        [JsonProperty("eventType")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public WrikeWebhookEventType Type { get; set; }
+        [JsonProperty("lastUpdatedDate")]
+        public DateTime LastUpdatedDate { get; set; }
     }
 
 }

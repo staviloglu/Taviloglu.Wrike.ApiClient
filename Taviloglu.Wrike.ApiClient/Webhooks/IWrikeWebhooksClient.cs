@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
-namespace Taviloglu.Wrike.ApiClient.Webhooks
+namespace Taviloglu.Wrike.ApiClient
 {
     public interface IWrikeWebhooksClient
     {
@@ -21,20 +21,20 @@ namespace Taviloglu.Wrike.ApiClient.Webhooks
         /// </summary>
         /// <param name="accountId">Returns a list of webhooks in a specified account.</param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<List<WrikeWebhook>> GetWebhooksAsync(string accountId = null);
+        Task<List<WrikeWebhook>> GetAsync(string accountId = null);
 
         /// <summary>
         /// Returns information for the specified webhooks.
         /// </summary>
         /// <param name="webhookIds">Max count 100</param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<List<WrikeWebhook>> GetWenhookAsync(List<string> webhookIds);
+        Task<List<WrikeWebhook>> GetAsync(List<string> webhookIds);
 
         /// <summary>
         /// Deletes webhook by ID.
         /// </summary>
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task DeleteWebhookAsync(string webhookId);
+        Task DeleteAsync(string webhookId);
     }
 }
