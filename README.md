@@ -20,8 +20,9 @@ var newCustomField = new WrikeCustomField
     Title = "Sinan's custom field",
     Type = WrikeCustomFieldType.Duration
 };
-var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
+newCustomField = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
+For more details on usage checkout the [Taviloglu.Wrike.Samples](Taviloglu.Wrike.Samples) project
 
 ## Implemented Methods 31%
 
