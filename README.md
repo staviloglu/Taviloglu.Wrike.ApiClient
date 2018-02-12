@@ -23,7 +23,7 @@ var newCustomField = new WrikeCustomField
 var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
 
-## Implemented Methods 29%
+## Implemented Methods 31%
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead><tbody>
