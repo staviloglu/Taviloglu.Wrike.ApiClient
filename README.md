@@ -138,6 +138,6 @@ var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
  <tr><td>[GET] /webhooks</td><td>1</td></tr>
  <tr><td>[GET] /accounts/{accountId}/webhooks</td><td>1</td></tr>
  <tr><td>[GET] /webhooks/{webhookId},{webhookId}</td><td>1</td></tr>
- <tr><td>[PUT] /webhooks/{webhookId}</td><td>&nbsp;</td></tr>
+ <tr><td>[PUT] /webhooks/{webhookId}</td><td>1</td></tr>
  <tr><td>[DELETE] /webhooks/{webhookId}</td><td>1</td></tr>
 </tbody></table>
