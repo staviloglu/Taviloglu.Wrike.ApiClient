@@ -23,7 +23,7 @@ var newCustomField = new WrikeCustomField
 var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
 
-## Implemented Methods 29%
+## Implemented Methods 31%
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead><tbody>
@@ -138,6 +138,6 @@ var field = await wrikeClient.CustomFields.CreateAsync(newCustomField);
  <tr><td>[GET] /webhooks</td><td>1</td></tr>
  <tr><td>[GET] /accounts/{accountId}/webhooks</td><td>1</td></tr>
  <tr><td>[GET] /webhooks/{webhookId},{webhookId}</td><td>1</td></tr>
- <tr><td>[PUT] /webhooks/{webhookId}</td><td>&nbsp;</td></tr>
+ <tr><td>[PUT] /webhooks/{webhookId}</td><td>1</td></tr>
  <tr><td>[DELETE] /webhooks/{webhookId}</td><td>1</td></tr>
 </tbody></table>
