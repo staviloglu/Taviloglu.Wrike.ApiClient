@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public enum WrikeWebhookStatus
+    public enum WrikeWebHookStatus
     {
         Active,
         Suspended

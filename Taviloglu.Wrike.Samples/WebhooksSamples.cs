@@ -18,7 +18,7 @@ namespace Taviloglu.Wrike.Samples
             var newWebhook = new WrikeWebHook("accountId", "http://google.com");
             newWebhook = await client.WebHooks.CreateAsync(newWebhook);
 
-            newWebhook = await client.WebHooks.UpdateAsync(newWebhook.Id, WrikeWebhookStatus.Suspended);
+            newWebhook = await client.WebHooks.UpdateAsync(newWebhook.Id, WrikeWebHookStatus.Suspended);
 
             await client.WebHooks.DeleteAsync(newWebhook.Id);
 

@@ -43,7 +43,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="status"></param>
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebHook> UpdateAsync(string webhookId, WrikeWebhookStatus status);
+        Task<WrikeWebHook> UpdateAsync(string webhookId, WrikeWebHookStatus status);
 
 
     }

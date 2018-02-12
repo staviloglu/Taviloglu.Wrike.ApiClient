@@ -1,6 +1,6 @@
 ﻿namespace Taviloglu.Wrike.Core
 {
-    public enum WrikeWebhookEventType
+    public enum WrikeWebHookEventType
     {
         /// <summary>
         /// Fired when user creates a new task

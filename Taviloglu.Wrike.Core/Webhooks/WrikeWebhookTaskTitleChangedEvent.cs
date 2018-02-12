@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public sealed class WrikeWebhookTaskTitleChangedEvent : WrikeWebhookEvent
+    public sealed class WrikeWebHookTaskTitleChangedEvent : WrikeWebHookEvent
     {
         [JsonProperty("oldValue")]
         public string OldValue { get; set; }

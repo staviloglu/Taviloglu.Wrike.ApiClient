@@ -36,7 +36,7 @@ namespace Taviloglu.Wrike.Core
         public string HookUrl { get; set; }
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeWebhookStatus Status { get; set; }
+        public WrikeWebHookStatus Status { get; set; }
     }
     
 

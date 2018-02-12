@@ -4,7 +4,7 @@ using System;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeWebhookEvent : IWrikeObject
+    public class WrikeWebHookEvent : IWrikeObject
     {   
         [JsonProperty("taskId")]
         public string TaskId { get; set; }
@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.Core
         public string EventAuthorId { get; set; }
         [JsonProperty("eventType")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeWebhookEventType Type { get; set; }
+        public WrikeWebHookEventType Type { get; set; }
         [JsonProperty("lastUpdatedDate")]
         public DateTime LastUpdatedDate { get; set; }
     }

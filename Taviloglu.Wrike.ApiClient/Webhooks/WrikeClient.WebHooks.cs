@@ -75,7 +75,7 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeWebHook> IWrikeWebHooksClient.UpdateAsync(string webHookId, WrikeWebhookStatus status)
+        async Task<WrikeWebHook> IWrikeWebHooksClient.UpdateAsync(string webHookId, WrikeWebHookStatus status)
         {
             if (string.IsNullOrWhiteSpace(webHookId))
             {
