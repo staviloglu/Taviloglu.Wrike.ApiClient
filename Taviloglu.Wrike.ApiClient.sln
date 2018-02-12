@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.Core", "Tav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.Samples", "Taviloglu.Wrike.Samples\Taviloglu.Wrike.Samples.csproj", "{D0067E81-8EFC-4E26-8FC9-79132F397A39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.WebHooks.Receivers", "Taviloglu.Wrike.WebHooks.Receivers\Taviloglu.Wrike.WebHooks.Receivers.csproj", "{593781DC-070F-420D-88C3-A234AB9BD91D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D0067E81-8EFC-4E26-8FC9-79132F397A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0067E81-8EFC-4E26-8FC9-79132F397A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0067E81-8EFC-4E26-8FC9-79132F397A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{593781DC-070F-420D-88C3-A234AB9BD91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{593781DC-070F-420D-88C3-A234AB9BD91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{593781DC-070F-420D-88C3-A234AB9BD91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{593781DC-070F-420D-88C3-A234AB9BD91D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,47 +7,47 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    public partial class WrikeClient : IWrikeWebhooksClient
+    public partial class WrikeClient : IWrikeWebHooksClient
     {
-        public IWrikeWebhooksClient Webhooks
+        public IWrikeWebHooksClient WebHooks
         {
             get
             {
-                return (IWrikeWebhooksClient)this;
+                return (IWrikeWebHooksClient)this;
             }
         }
-        async Task<WrikeWebhook> IWrikeWebhooksClient.CreateAsync(WrikeWebhook newWebhook)
+        async Task<WrikeWebHook> IWrikeWebHooksClient.CreateAsync(WrikeWebHook newWebHook)
         {
-            if (newWebhook == null)
+            if (newWebHook == null)
             {
                 throw new ArgumentNullException("newWebhook can not be null");
             }
-            if (string.IsNullOrWhiteSpace(newWebhook.AccountId))
+            if (string.IsNullOrWhiteSpace(newWebHook.AccountId))
             {
                 throw new ArgumentNullException("newWebhook.AccountId can not be null or empty");
             }
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
-                .AddParameter("hookUrl", newWebhook.HookUrl);
+                .AddParameter("hookUrl", newWebHook.HookUrl);
 
 
-            var response = await SendRequest<WrikeWebhook>($"accounts/{newWebhook.AccountId}/webhooks",
+            var response = await SendRequest<WrikeWebHook>($"accounts/{newWebHook.AccountId}/webhooks",
                 HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);
         }
 
-        async Task IWrikeWebhooksClient.DeleteAsync(string webhookId)
+        async Task IWrikeWebHooksClient.DeleteAsync(string webHookId)
         {
-            if (string.IsNullOrWhiteSpace(webhookId))
+            if (string.IsNullOrWhiteSpace(webHookId))
             {
-                throw new ArgumentNullException("webhookId can not be null or empty");
+                throw new ArgumentNullException("webHookId can not be null or empty");
             }
 
-            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Delete).ConfigureAwait(false);
+            var response = await SendRequest<WrikeWebHook>($"webhooks/{webHookId}", HttpMethods.Delete).ConfigureAwait(false);
         }
         
-        async Task<List<WrikeWebhook>> IWrikeWebhooksClient.GetAsync(string accountId)
+        async Task<List<WrikeWebHook>> IWrikeWebHooksClient.GetAsync(string accountId)
         {
             var requestUri = $"webhooks";
             if (!string.IsNullOrWhiteSpace(accountId))
@@ -55,29 +55,29 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"accounts/{accountId}/webhooks";
             }
 
-            var response = await SendRequest<WrikeWebhook>(requestUri, HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeWebHook>(requestUri, HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeWebhook>> IWrikeWebhooksClient.GetAsync(List<string> webhookIds)
+        async Task<List<WrikeWebHook>> IWrikeWebHooksClient.GetAsync(List<string> webHookIds)
         {
-            if (webhookIds == null || webhookIds.Count < 1)
+            if (webHookIds == null || webHookIds.Count < 1)
             {
                 throw new ArgumentNullException("webhookIds can not be null or empty");
             }
-            if (webhookIds.Count > 100)
+            if (webHookIds.Count > 100)
             {
                 throw new ArgumentException("webhookIds max count is 100");
             }
 
-            var webhookIdsValue = string.Join(",", webhookIds);
-            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookIdsValue}", HttpMethods.Get).ConfigureAwait(false);
+            var webHookIdsValue = string.Join(",", webHookIds);
+            var response = await SendRequest<WrikeWebHook>($"webhooks/{webHookIdsValue}", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeWebhook> IWrikeWebhooksClient.UpdateAsync(string webhookId, WrikeWebhookStatus status)
+        async Task<WrikeWebHook> IWrikeWebHooksClient.UpdateAsync(string webHookId, WrikeWebhookStatus status)
         {
-            if (string.IsNullOrWhiteSpace(webhookId))
+            if (string.IsNullOrWhiteSpace(webHookId))
             {
                 throw new ArgumentException("webhookId can not be null or empty");
             }
@@ -85,7 +85,7 @@ namespace Taviloglu.Wrike.ApiClient
             var putDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("status", status);
 
-            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Put, putDataBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeWebHook>($"webhooks/{webHookId}", HttpMethods.Put, putDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);
         }

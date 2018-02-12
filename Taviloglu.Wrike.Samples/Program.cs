@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.Samples
 
             VersionSamples.Run(wrikeClient).Wait();
 
-            WebhooksSamples.Run(wrikeClient).Wait();
+            WebHooksSamples.Run(wrikeClient).Wait();
 
             //try other samples...
         }

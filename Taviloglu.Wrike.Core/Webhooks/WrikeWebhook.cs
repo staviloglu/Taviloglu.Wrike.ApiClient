@@ -11,11 +11,11 @@ namespace Taviloglu.Wrike.Core
     /// <summary>
     /// Webhooks allow you to subscribe to notifications about changes in Wrike instead of having to rely on periodic polling. 
     /// </summary>
-    public sealed class WrikeWebhook : WrikeObjectWithId
+    public sealed class WrikeWebHook : WrikeObjectWithId
     {
-        public WrikeWebhook() { }
+        public WrikeWebHook() { }
 
-        public WrikeWebhook(string accountId, string hookUrl)
+        public WrikeWebHook(string accountId, string hookUrl)
         {
             if (string.IsNullOrWhiteSpace(accountId))
             {

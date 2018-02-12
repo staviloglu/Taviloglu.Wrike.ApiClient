@@ -7,28 +7,28 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    public interface IWrikeWebhooksClient
+    public interface IWrikeWebHooksClient
     {
         /// <summary>
         ///  Creates a webhook for a particular account.
         /// </summary>
         /// <param name="newWebhook"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebhook> CreateAsync(WrikeWebhook newWebhook);
+        Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebhook);
 
         /// <summary>
         /// Returns a list of all existing webhooks
         /// </summary>
         /// <param name="accountId">Returns a list of webhooks in a specified account.</param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<List<WrikeWebhook>> GetAsync(string accountId = null);
+        Task<List<WrikeWebHook>> GetAsync(string accountId = null);
 
         /// <summary>
         /// Returns information for the specified webhooks.
         /// </summary>
         /// <param name="webhookIds">Max count 100</param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<List<WrikeWebhook>> GetAsync(List<string> webhookIds);
+        Task<List<WrikeWebHook>> GetAsync(List<string> webhookIds);
 
         /// <summary>
         /// Deletes webhook by ID.
@@ -43,7 +43,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="status"></param>
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebhook> UpdateAsync(string webhookId, WrikeWebhookStatus status);
+        Task<WrikeWebHook> UpdateAsync(string webhookId, WrikeWebhookStatus status);
 
 
     }

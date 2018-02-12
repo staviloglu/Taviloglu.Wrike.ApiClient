@@ -55,7 +55,7 @@
     <Compile Include="TasksSamples.cs" />
     <Compile Include="UsersSamples.cs" />
     <Compile Include="VersionSamples.cs" />
-    <Compile Include="WebhooksSamples.cs" />
+    <Compile Include="WebHooksSamples.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

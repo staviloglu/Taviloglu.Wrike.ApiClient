@@ -5,22 +5,22 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.Samples
 {
-    public static class WebhooksSamples
+    public static class WebHooksSamples
     {
         public static async Task Run(WrikeClient client)
         {
-            var webhooks = await client.Webhooks.GetAsync("accountId");
+            var webhooks = await client.WebHooks.GetAsync("accountId");
 
-            webhooks = await client.Webhooks.GetAsync(new List<string> { "webhookId", "webhookId" });
+            webhooks = await client.WebHooks.GetAsync(new List<string> { "webhookId", "webhookId" });
 
-            webhooks = await client.Webhooks.GetAsync();
+            webhooks = await client.WebHooks.GetAsync();
 
-            var newWebhook = new WrikeWebhook("accountId", "http://google.com");
-            newWebhook = await client.Webhooks.CreateAsync(newWebhook);
+            var newWebhook = new WrikeWebHook("accountId", "http://google.com");
+            newWebhook = await client.WebHooks.CreateAsync(newWebhook);
 
-            newWebhook = await client.Webhooks.UpdateAsync(newWebhook.Id, WrikeWebhookStatus.Suspended);
+            newWebhook = await client.WebHooks.UpdateAsync(newWebhook.Id, WrikeWebhookStatus.Suspended);
 
-            await client.Webhooks.DeleteAsync(newWebhook.Id);
+            await client.WebHooks.DeleteAsync(newWebhook.Id);
 
         }
     }

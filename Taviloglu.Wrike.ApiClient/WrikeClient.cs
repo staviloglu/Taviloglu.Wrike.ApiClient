@@ -13,9 +13,11 @@ namespace Taviloglu.Wrike.ApiClient
     /// <summary>
     /// Provides methods to access and modify user content in Wrike through the API
     /// </summary>
-    public partial class WrikeClient
+    public partial class WrikeClient :IDisposable
     {
         private readonly HttpClient _httpClient;
+        private bool _disposed;
+
         public WrikeClient(string bearerToken)
         {
             _httpClient = new HttpClient();
@@ -77,6 +79,31 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             return response.Data[0];
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the unmanaged resources and optionally releases the managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <b>false</b> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                _disposed = true;
+                if (disposing)
+                {
+                    if (_httpClient != null)
+                    {
+                        _httpClient.Dispose();
+                    }
+                }
+            }
         }
 
         private class HttpMethods
