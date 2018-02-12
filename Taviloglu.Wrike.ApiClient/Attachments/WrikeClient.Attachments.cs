@@ -13,7 +13,8 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                return (IWrikeAttachmentsClient)this;
+                //return (IWrikeAttachmentsClient)this;
+                throw new NotImplementedException("Attachments not implemented yet!");
             }
         }
 

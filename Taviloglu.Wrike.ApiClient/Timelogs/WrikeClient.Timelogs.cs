@@ -13,7 +13,8 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                return (IWrikeTimelogsClient)this;
+                //return (IWrikeTimelogsClient)this;
+                throw new NotImplementedException("Timelogs not implemented yet!");
             }
         }
 

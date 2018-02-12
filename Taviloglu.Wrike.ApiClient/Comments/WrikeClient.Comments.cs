@@ -13,7 +13,8 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                return (IWrikeCommentsClient)this;
+                //return (IWrikeCommentsClient)this;
+                throw new NotImplementedException("Comments not implemented yet!");
             }
         }
 

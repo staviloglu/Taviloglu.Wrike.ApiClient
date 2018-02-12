@@ -9,8 +9,7 @@ namespace Taviloglu.Wrike.Samples
         {
             var bearerToken = "your-permanent-token";
             var wrikeClient = new WrikeClient(bearerToken);
-
-
+            
             ColorSamples.Run(wrikeClient).Wait();
 
             VersionSamples.Run(wrikeClient).Wait();

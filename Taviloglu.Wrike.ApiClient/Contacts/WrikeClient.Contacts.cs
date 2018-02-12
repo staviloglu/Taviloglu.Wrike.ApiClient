@@ -13,7 +13,8 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                return (IWrikeContactsClient)this;
+                //return (IWrikeContactsClient)this;
+                throw new NotImplementedException("Contacts not implemented yet!");
             }
         }
 

@@ -13,7 +13,8 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                return (IWrikeAccountsClient)this;
+                //return (IWrikeAccountsClient)this;
+                throw new NotImplementedException("accounts not implemented yet!");
             }
         }
 
