@@ -4,15 +4,15 @@ using System.Runtime.Serialization;
 
 namespace Taviloglu.Wrike.ApiClient.Dto
 {
-    public class WrikeResDto<T>
+    internal class WrikeResDto<T>
     {
-       [JsonProperty(PropertyName = "kind")]
+        [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
-       [JsonProperty(PropertyName = "data")]
+        [JsonProperty(PropertyName = "data")]
         public List<T> Data { get; set; }
-       [JsonProperty(PropertyName = "errorDescription")]
+        [JsonProperty(PropertyName = "errorDescription")]
         public string ErrorDescription { get; set; }
-       [JsonProperty(PropertyName = "error")]
+        [JsonProperty(PropertyName = "error")]
         public string Error { get; set; }
         [IgnoreDataMember()]
         public bool IsSuccess { get; set; }

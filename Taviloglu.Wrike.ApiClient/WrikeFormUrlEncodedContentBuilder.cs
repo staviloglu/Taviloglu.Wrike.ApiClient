@@ -10,7 +10,7 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    public class WrikeFormUrlEncodedContentBuilder
+    internal class WrikeFormUrlEncodedContentBuilder
     {
         List<KeyValuePair<string, string>> _parameters;
 

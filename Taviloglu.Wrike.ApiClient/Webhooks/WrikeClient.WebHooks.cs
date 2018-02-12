@@ -74,5 +74,20 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookIdsValue}", HttpMethods.Get);
             return GetReponseDataList(response);
         }
+
+        async Task<WrikeWebhook> IWrikeWebhooksClient.UpdateAsync(string webhookId, WrikeWebhookStatus status)
+        {
+            if (string.IsNullOrWhiteSpace(webhookId))
+            {
+                throw new ArgumentException("webhookId can not be null or empty");
+            }
+
+            var putDataBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("status", status);
+
+            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Put, putDataBuilder.GetContent());
+
+            return GetReponseDataFirstItem(response);
+        }
     }
 }

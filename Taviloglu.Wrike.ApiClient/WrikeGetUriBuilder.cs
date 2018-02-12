@@ -9,7 +9,7 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    public class WrikeGetUriBuilder
+    internal class WrikeGetUriBuilder
     {
         private List<string> _filters;
         private string _baseUri;

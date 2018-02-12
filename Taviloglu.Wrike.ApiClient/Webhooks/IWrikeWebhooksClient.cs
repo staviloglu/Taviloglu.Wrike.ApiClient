@@ -36,5 +36,15 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
         Task DeleteAsync(string webhookId);
+
+        /// <summary>
+        ///   Modifies the webhooks state to suspend or resume. Suspended webhooks do not send notifications.
+        /// </summary>
+        /// <param name="status"></param>
+        /// <param name="webhookId"></param>
+        /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
+        Task<WrikeWebhook> UpdateAsync(string webhookId, WrikeWebhookStatus status);
+
+
     }
 }
