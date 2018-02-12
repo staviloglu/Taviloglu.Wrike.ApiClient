@@ -6,5 +6,7 @@ namespace Taviloglu.Wrike.Core
     {
        [JsonProperty("id")]
         public string Id { get; set; }
+
+        internal WrikeObjectWithId() { }
     }
 }

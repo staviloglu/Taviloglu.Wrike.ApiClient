@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeCustomField : WrikeObjectWithId
+    public sealed class WrikeCustomField : WrikeObjectWithId
     {
 
         public WrikeCustomField() { }

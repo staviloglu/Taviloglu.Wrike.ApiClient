@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Taviloglu.Wrike.Core
 {
 
-    public class WrikeFolderTree : WrikeObjectWithId
+    public sealed class WrikeFolderTree : WrikeObjectWithId
     {
         /// <summary>
         /// Title

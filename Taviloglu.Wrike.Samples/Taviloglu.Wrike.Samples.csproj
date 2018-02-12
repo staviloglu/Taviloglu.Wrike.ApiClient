@@ -46,8 +46,16 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorSamples.cs" />
+    <Compile Include="CustomFieldsSamples.cs" />
+    <Compile Include="FoldersAndProjectsSamples.cs" />
+    <Compile Include="GroupsSamples.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TasksSamples.cs" />
+    <Compile Include="UsersSamples.cs" />
+    <Compile Include="VersionSamples.cs" />
+    <Compile Include="WebhooksSamples.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

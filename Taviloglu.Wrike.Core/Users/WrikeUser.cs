@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Taviloglu.Wrike.Core
 {
 
-    public class WrikeUser : WrikeObjectWithId
+    public sealed class WrikeUser : WrikeObjectWithId
     {
         /// <summary>
         /// First name
@@ -28,7 +28,7 @@ namespace Taviloglu.Wrike.Core
         /// List of user profiles in accounts accessible for requesting user
         /// </summary>
         [JsonProperty("profiles")]
-        public List<Profile> Profiles { get; set; }
+        public List<WrikeUserProfile> Profiles { get; set; }
 
         /// <summary>
         /// Avatar URL
@@ -103,31 +103,6 @@ namespace Taviloglu.Wrike.Core
         public string Location { get; set; }
 
 
-    }
-
-    public class Profile
-    {
-        /// <summary>
-        /// Account ID
-        /// </summary>
-        [JsonProperty("accountId")]
-        public string AccountId { get; set; }
-        [JsonProperty("email")]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// Role in account 
-        /// </summary>
-        [JsonProperty("role")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeUserRole Role { get; set; }
-
-        [JsonProperty("external")]
-        public bool External { get; set; }
-        [JsonProperty("admin")]
-        public bool Admin { get; set; }
-        [JsonProperty("owner")]
-        public bool Owner { get; set; }
     }
 
 }

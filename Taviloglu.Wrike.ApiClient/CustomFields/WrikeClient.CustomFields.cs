@@ -27,7 +27,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"accounts/{accountId}/customfields";
             }
 
-            var response =  await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Get);
+            var response =  await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -44,7 +44,7 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             var customFieldsValue = string.Join(",", customFieldIds);
-            var response = await SendRequest<WrikeCustomField>($"customfields/{customFieldsValue}", HttpMethods.Get);
+            var response = await SendRequest<WrikeCustomField>($"customfields/{customFieldsValue}", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -67,7 +67,7 @@ namespace Taviloglu.Wrike.ApiClient
             
 
             var response = await SendRequest<WrikeCustomField>($"accounts/{customField.AccountId}/customfields",
-                HttpMethods.Post, postDataBuilder.GetContent());
+                HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);
         }
@@ -93,7 +93,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             
 
-            var response = await SendRequest<WrikeCustomField>($"customfields/{id}", HttpMethods.Put, contentBuilder.GetContent());
+            var response = await SendRequest<WrikeCustomField>($"customfields/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }

@@ -8,7 +8,7 @@ namespace Taviloglu.Wrike.Core
     /// Metadata entry key-value pair. 
     /// Metadata entries are isolated on per-client(application) basis
     /// </summary>
-    public class WrikeMetadata : IWrikeObject
+    public sealed class WrikeMetadata : IWrikeObject
     {
         private string _key;
         private string _value;

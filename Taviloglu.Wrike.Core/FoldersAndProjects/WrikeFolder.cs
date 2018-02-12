@@ -6,7 +6,7 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeFolder : WrikeObjectWithId
+    public sealed class WrikeFolder : WrikeObjectWithId
     {
         /// <summary>
         /// Account ID

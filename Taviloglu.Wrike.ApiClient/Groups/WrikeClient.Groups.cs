@@ -28,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri += "?test=true";
 
             }
-            var response = await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete);
+            var response = await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete).ConfigureAwait(false);
             //TODO: anything to do with the response?
             return;
         }

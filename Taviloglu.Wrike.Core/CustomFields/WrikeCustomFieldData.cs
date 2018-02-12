@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeCustomFieldData : WrikeObjectWithId
+    public sealed class WrikeCustomFieldData : WrikeObjectWithId
     {
         /// <summary>
         /// Custom field value

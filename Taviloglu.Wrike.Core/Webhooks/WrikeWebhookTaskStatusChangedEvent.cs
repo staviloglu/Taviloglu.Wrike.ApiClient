@@ -4,7 +4,7 @@ using System;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeWebhookTaskStatusChangedEvent : WrikeWebhookEvent
+    public sealed class WrikeWebhookTaskStatusChangedEvent : WrikeWebhookEvent
     {
         [JsonProperty("oldStatus")]
         [JsonConverter(typeof(StringEnumConverter))]

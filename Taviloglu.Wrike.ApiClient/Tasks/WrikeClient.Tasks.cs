@@ -58,7 +58,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("customStatus", newTask.CustomStatusId);
 
             var postContent = postDataBuilder.GetContent();
-            var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Post, postContent);
+            var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
@@ -70,7 +70,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException("taskId can not be null or empty");
             }
 
-            var response = await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Delete);
+            var response = await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Delete).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
@@ -119,7 +119,7 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("customStatuses", customStatuses)
             .AddParameter("fields", fields);
 
-            var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get);
+            var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -148,7 +148,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri += "?fields=" + JsonConvert.SerializeObject(optionalFields);
             }
 
-            var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Get);
+            var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Get).ConfigureAwait(false);
             //TODO: can not get recurrent property even it is provided bug?
             return GetReponseDataList(response);
         }
@@ -205,7 +205,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("customStatus", customStatus)
                 .AddParameter("restore", restore);
 
-            var response = await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Put, contentBuilder.GetContent());
+            var response = await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }

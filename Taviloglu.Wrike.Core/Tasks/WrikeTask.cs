@@ -6,7 +6,7 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeTask : WrikeObjectWithId
+    public sealed class WrikeTask : WrikeObjectWithId
     {
         public WrikeTask() { }
 

@@ -32,7 +32,7 @@ namespace Taviloglu.Wrike.ApiClient
 
 
             var response = await SendRequest<WrikeWebhook>($"accounts/{newWebhook.AccountId}/webhooks",
-                HttpMethods.Post, postDataBuilder.GetContent());
+                HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);
         }
@@ -44,7 +44,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException("webhookId can not be null or empty");
             }
 
-            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Delete);
+            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Delete).ConfigureAwait(false);
         }
         
         async Task<List<WrikeWebhook>> IWrikeWebhooksClient.GetAsync(string accountId)
@@ -55,7 +55,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"accounts/{accountId}/webhooks";
             }
 
-            var response = await SendRequest<WrikeWebhook>(requestUri, HttpMethods.Get);
+            var response = await SendRequest<WrikeWebhook>(requestUri, HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -71,7 +71,7 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             var webhookIdsValue = string.Join(",", webhookIds);
-            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookIdsValue}", HttpMethods.Get);
+            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookIdsValue}", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -85,7 +85,7 @@ namespace Taviloglu.Wrike.ApiClient
             var putDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("status", status);
 
-            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Put, putDataBuilder.GetContent());
+            var response = await SendRequest<WrikeWebhook>($"webhooks/{webhookId}", HttpMethods.Put, putDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);
         }

@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeColor : IWrikeObject
+    public sealed class WrikeColor : IWrikeObject
     {
         /// <summary>
         /// Color name

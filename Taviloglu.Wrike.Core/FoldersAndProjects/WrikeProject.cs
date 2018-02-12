@@ -6,7 +6,7 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeProject : IWrikeObject
+    public sealed class WrikeProject : IWrikeObject
     {
         /// <summary>
         /// ID of user who created project

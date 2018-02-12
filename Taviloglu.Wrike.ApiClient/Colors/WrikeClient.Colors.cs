@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.ApiClient
         }
         async Task<List<WrikeColor>> IWrikeColorsClient.GetAsync()
         {
-            var response = await SendRequest<WrikeColor>("colors", HttpMethods.Get);
+            var response = await SendRequest<WrikeColor>("colors", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
     }

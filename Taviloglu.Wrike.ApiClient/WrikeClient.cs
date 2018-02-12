@@ -34,21 +34,21 @@ namespace Taviloglu.Wrike.ApiClient
             switch (httpMethod)
             {
                 case HttpMethods.Get:
-                    responseMessage = await _httpClient.GetAsync(requestUri);
+                    responseMessage = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
                     break;
                 case HttpMethods.Post:
-                    responseMessage = await _httpClient.PostAsync(requestUri, httpContent);
+                    responseMessage = await _httpClient.PostAsync(requestUri, httpContent).ConfigureAwait(false);
                     break;
                 case HttpMethods.Put:
-                    responseMessage = await _httpClient.PutAsync(requestUri, httpContent);
+                    responseMessage = await _httpClient.PutAsync(requestUri, httpContent).ConfigureAwait(false);
                     break;
                 case HttpMethods.Delete:
-                    responseMessage = await _httpClient.DeleteAsync(requestUri);
+                    responseMessage = await _httpClient.DeleteAsync(requestUri).ConfigureAwait(false);
                     break;
                 default:
                     throw new ArgumentException("Unknown HTTP METHOD!");
             }
-            var json = await responseMessage.Content.ReadAsStringAsync();
+            var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
             var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
 
             if (responseMessage.IsSuccessStatusCode)

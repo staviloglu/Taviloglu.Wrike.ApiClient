@@ -5,7 +5,7 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeTaskDate : IWrikeObject
+    public sealed class WrikeTaskDate : IWrikeObject
     {
         /// <summary>
         /// Type 

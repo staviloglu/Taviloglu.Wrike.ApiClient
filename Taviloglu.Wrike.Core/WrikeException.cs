@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeException : Exception
+    public sealed class WrikeException : Exception
     {
         public WrikeException(string error, string errorDescription) : base($"{error}: {errorDescription}") { }
     }

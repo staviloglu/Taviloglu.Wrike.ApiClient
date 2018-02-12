@@ -11,7 +11,7 @@ namespace Taviloglu.Wrike.Core
     /// <summary>
     /// Webhooks allow you to subscribe to notifications about changes in Wrike instead of having to rely on periodic polling. 
     /// </summary>
-    public class WrikeWebhook : WrikeObjectWithId
+    public sealed class WrikeWebhook : WrikeObjectWithId
     {
         public WrikeWebhook() { }
 

@@ -36,7 +36,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri += "?fields=" + JsonConvert.SerializeObject(optionalFields);
             }
 
-            var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get);
+            var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -71,7 +71,7 @@ namespace Taviloglu.Wrike.ApiClient
                 uriBuilder.AddParameter("deleted", isDeleted);
             }
 
-            var response = await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get);
+            var response = await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
     }

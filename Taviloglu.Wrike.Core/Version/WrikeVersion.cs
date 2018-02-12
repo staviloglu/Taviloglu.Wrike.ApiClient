@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeVersion : IWrikeObject
+    public sealed class WrikeVersion : IWrikeObject
     {
         /// <summary>
         /// Major version number
