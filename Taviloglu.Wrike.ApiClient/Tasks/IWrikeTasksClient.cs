@@ -16,14 +16,14 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="priorityBefor">Put newly created task before specified task in task list</param>
         /// <param name="priorityAfter">Put newly created task after specified task in task list</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-task"/>
-        Task<WrikeResDto<WrikeTask>> CreateAsync(string folderId, WrikeTask newTask, string priorityBefore = null, string priorityAfter=null);
+        Task<WrikeTask> CreateAsync(string folderId, WrikeTask newTask, string priorityBefore = null, string priorityAfter = null);
 
         /// <summary>
         /// Delete task by Id
         /// Scopes: Default, wsReadWrite
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-tasks"/>        
-        Task<WrikeResDto<WrikeTask>> DeleteAsync(string taskId);
+        Task<WrikeTask> DeleteAsync(string taskId);
 
         /// <summary>
         /// Search among all tasks in all accounts
@@ -59,7 +59,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="fields">optional fields to be included in the response model 
         /// Use WrikeTask.OptionalFields values</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
-        Task<WrikeResDto<WrikeTask>> GetAsync(
+        Task<List<WrikeTask>> GetAsync(
             string accountId = null,
             string folderId = null,
             bool? addDescendants = null,
@@ -97,6 +97,55 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="taskIds">MaxCount 100</param>
         /// <param name="optionalFields">Use WrikeTask.OptionalFields values Only Recurrent and AttachmentCount supported</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
-        Task<WrikeResDto<WrikeTask>> GetAsync(List<string> taskIds, List<string> optionalFields = null);
+        Task<List<WrikeTask>> GetAsync(List<string> taskIds, List<string> optionalFields = null);
+
+        /// <summary>
+        /// Update task
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="title">Title of task</param>
+        /// <param name="description">Task Description</param>
+        /// <param name="status">Task status </param>
+        /// <param name="importance">Task importance </param>
+        /// <param name="dates">Reschedule task and/or change task type</param>
+        /// <param name="addParents">Put task into specified folders of same account. Cannot contain RecycleBin folder</param>
+        /// <param name="removeParents">Remove task from specified folders. Can not contain RecycleBin folder</param>
+        /// <param name="addShareds">Shared task with specified users</param>
+        /// <param name="removeShareds">Unshare task from specified users</param>
+        /// <param name="addResponsibles">Add specified users to responsible list</param>
+        /// <param name="removeResponsibles">Remove specified users from responsible list</param>
+        /// <param name="addFollowers">Add specified users to follow task</param>        
+        /// <param name="follow">Add specified users to task followers</param>
+        /// <param name="priorityBefore">Put task in task list before specified task</param>
+        /// <param name="priorityAfter">Put task in task list after specified task</param>
+        /// <param name="addSuperTasks">Add the task as subtask to specified tasks</param>
+        /// <param name="removeSuperTasks">Remove the task form specified tasks subtasks</param>
+        /// <param name="metadata">Metadata to be updated (null value removes entry)</param>
+        /// <param name="customFields">Custom fields to be updated or deleted (null value removes field) Use WrikeTask.OptionalFields</param>
+        /// <param name="customStatus">Custom status ID</param>
+        /// <param name="restore">Restore task from Recycled Bin</param>
+        /// <returns></returns>
+        Task<WrikeTask> UpdateAsync(string taskId,
+            string title = null,
+            string description = null,
+            WrikeTaskStatus? status = null,
+            WrikeTaskImportance? importance = null,
+            WrikeTaskDate dates = null,
+            List<string> addParents = null,
+            List<string> removeParents = null,
+             List<string> addShareds = null,
+             List<string> removeShareds = null,
+              List<string> addResponsibles = null,
+              List<string> removeResponsibles = null,
+              List<string> addFollowers = null,
+              bool? follow = null,
+              string priorityBefore = null,
+              string priorityAfter = null,
+              List<string> addSuperTasks = null,
+              List<string> removeSuperTasks = null,
+              List<WrikeMetadata> metadata = null,
+              List<WrikeCustomFieldData> customFields = null,
+              string customStatus = null,
+              bool? restore = null);
     }
 }

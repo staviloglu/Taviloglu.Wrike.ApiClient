@@ -17,7 +17,7 @@ namespace Taviloglu.Wrike.Samples
 
         static async Task MainAsync(string[] args)
         {
-            var bearerToken = "your permanent_token";
+            var bearerToken = "your_permanent_token";
             var wrikeClient = new WrikeClient(bearerToken);
 
             #region Colors
@@ -61,6 +61,7 @@ namespace Taviloglu.Wrike.Samples
             //var tasks4 = await wrikeClient.Tasks.GetAsync(new List<string> { "IEABX2HEKQGIKBTE", "IEABX2HEKQGIKBYK" },
             //new List<string> { WrikeTask.OptionalFields.AttachmentCount, WrikeTask.OptionalFields.Recurrent });
 
+            //var tasks = await wrikeClient.Tasks.GetAsync();
 
             //var newTask = new WrikeTask
             //{
@@ -88,9 +89,18 @@ namespace Taviloglu.Wrike.Samples
             //    },
             //    CustomStatusId = null
             //};
-            //var taskReturn = await wrikeClient.Tasks.CreateAsync("IEABX2HEI4FR342D", newTask);
+            //newTask = await wrikeClient.Tasks.CreateAsync("IEABX2HEI4FR342D", newTask);
 
-            //var deletedTask = await wrikeClient.Tasks.DeleteAsync(taskReturn.Data.First().Id);
+            //tasks = await wrikeClient.Tasks.GetAsync();
+
+            //newTask = await wrikeClient.Tasks.UpdateAsync(
+            //    newTask.Id, 
+            //    title: "new task title updated",
+            //    description:"new task description updated");
+
+            //var deletedTask = await wrikeClient.Tasks.DeleteAsync(newTask.Id);
+
+            //tasks = await wrikeClient.Tasks.GetAsync();
             #endregion
 
             #region Users
@@ -119,19 +129,19 @@ namespace Taviloglu.Wrike.Samples
             #endregion
 
             #region WebHooks
-            var webhooks = await wrikeClient.Webhooks.GetAsync("accountId");
+            //var webhooks = await wrikeClient.Webhooks.GetAsync("accountId");
 
-            webhooks = await wrikeClient.Webhooks.GetAsync(new List<string> { "webhookId", "webhookId" });
+            //webhooks = await wrikeClient.Webhooks.GetAsync(new List<string> { "webhookId", "webhookId" });
 
-            webhooks = await wrikeClient.Webhooks.GetAsync();
+            //webhooks = await wrikeClient.Webhooks.GetAsync();
 
-            var newWebhook = new WrikeWebhook("accountId", "http://google.com");
-            newWebhook = await wrikeClient.Webhooks.CreateAsync(newWebhook);
+            //var newWebhook = new WrikeWebhook("accountId", "http://google.com");
+            //newWebhook = await wrikeClient.Webhooks.CreateAsync(newWebhook);
 
-            foreach (var webhook in webhooks)
-            {
-                await wrikeClient.Webhooks.DeleteAsync(webhook.Id);
-            }
+            //foreach (var webhook in webhooks)
+            //{
+            //    await wrikeClient.Webhooks.DeleteAsync(webhook.Id);
+            //}
             #endregion
         }
     }
