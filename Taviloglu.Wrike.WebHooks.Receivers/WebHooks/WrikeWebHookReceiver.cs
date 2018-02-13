@@ -46,15 +46,16 @@ namespace Taviloglu.Wrike.WebHooks
                 return CreateBadMethodResponse(request);
             }
 
+            EnsureSecureConnection(request);
 
-            //TODO: verify request
+            //wrike webhook does not support any kind of verification
 
             // Read the request entity body
             var data = await ReadAsJsonAsync(request);
 
             // Call registered handlers
             //TODO: try harder to finish! 
-            return await ExecuteWebHookAsync(id, context, request, new string[] { "write-actions-here" }, data);
+            return await ExecuteWebHookAsync(id, context, request, null, data);
         }
     }
 }

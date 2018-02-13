@@ -7,8 +7,8 @@
     <ProjectGuid>{593781DC-070F-420D-88C3-A234AB9BD91D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Taviloglu.Wrike.WebHooks.Receivers</RootNamespace>
-    <AssemblyName>Taviloglu.Wrike.WebHooks.Receivers</AssemblyName>
+    <RootNamespace>Taviloglu.Wrike.WebHooks</RootNamespace>
+    <AssemblyName>Taviloglu.Wrike.WebHooks</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,13 +57,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\HttpConfigurationExtensions.cs" />
+    <Compile Include="Handlers\WrikeWebHookHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebHooks\WrikeWebHookReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj">
+      <Project>{68b231b1-f196-42bf-91e8-8ef5749ee7cb}</Project>
+      <Name>Taviloglu.Wrike.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

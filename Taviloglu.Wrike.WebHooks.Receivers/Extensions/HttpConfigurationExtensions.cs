@@ -15,7 +15,7 @@ namespace System.Web.Http
         /// For details about Wrike WebHooks, see <c>https://developers.wrike.com/documentation/webhooks</c>.
         /// </summary>
         /// <param name="config">The current <see cref="HttpConfiguration"/>config.</param>
-        public static void InitializeReceiveTrelloWebHooks(this HttpConfiguration config)
+        public static void InitializeReceiveWrikeWebHooks(this HttpConfiguration config)
         {
             WebHooksConfig.Initialize(config);
         }
