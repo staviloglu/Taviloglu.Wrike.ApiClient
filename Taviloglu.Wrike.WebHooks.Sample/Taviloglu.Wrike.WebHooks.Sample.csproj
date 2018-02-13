@@ -112,7 +112,7 @@
       <Project>{68b231b1-f196-42bf-91e8-8ef5749ee7cb}</Project>
       <Name>Taviloglu.Wrike.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taviloglu.Wrike.WebHooks.Receivers\Taviloglu.Wrike.WebHooks.csproj">
+    <ProjectReference Include="..\Taviloglu.Wrike.WebHooks\Taviloglu.Wrike.WebHooks.csproj">
       <Project>{593781dc-070f-420d-88c3-a234ab9bd91d}</Project>
       <Name>Taviloglu.Wrike.WebHooks</Name>
     </ProjectReference>
