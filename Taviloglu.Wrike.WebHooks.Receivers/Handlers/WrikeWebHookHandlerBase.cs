@@ -8,15 +8,20 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.WebHooks
 {
-    public abstract class WrikeWebHookHandler : WebHookHandler
+    public abstract class WrikeWebHookHandlerBase : WebHookHandler
     {
-        public WrikeWebHookHandler()
+        protected WrikeWebHookHandlerBase()
         {
             Receiver = WrikeWebHookReceiver.ReceiverName;
         }
 
         public override Task ExecuteAsync(string receiver, WebHookHandlerContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var webHookEvent = context.GetDataOrDefault<WrikeWebHookEvent>();
 
             switch (webHookEvent.Type)

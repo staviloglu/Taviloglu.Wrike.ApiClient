@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Globalization;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using Microsoft.AspNet.WebHooks;
+using Newtonsoft.Json.Linq;
 
 namespace Taviloglu.Wrike.WebHooks
 {
@@ -11,6 +14,7 @@ namespace Taviloglu.Wrike.WebHooks
     {
         internal const string RecName = "wrike";
 
+        internal const string TypePropertyName = "eventType";
         /// <summary>
         /// Gets the receiver name for this receiver.
         /// </summary>
@@ -53,9 +57,17 @@ namespace Taviloglu.Wrike.WebHooks
             // Read the request entity body
             var data = await ReadAsJsonAsync(request);
 
-            // Call registered handlers
-            //TODO: try harder to finish! 
-            return await ExecuteWebHookAsync(id, context, request, null, data);
+            // Read the action from data
+            string actionAsString;
+            if (!data.TryGetValue(TypePropertyName, out var action))
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "unknown payload");                
+            }
+
+            actionAsString = action.Value<string>();            
+
+            //might use actions for different events
+            return await ExecuteWebHookAsync(id, context, request, new[] { actionAsString }, data);
         }
     }
 }

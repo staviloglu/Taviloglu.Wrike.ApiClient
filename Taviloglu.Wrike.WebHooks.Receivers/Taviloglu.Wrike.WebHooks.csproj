@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\HttpConfigurationExtensions.cs" />
-    <Compile Include="Handlers\WrikeWebHookHandler.cs" />
+    <Compile Include="Handlers\WrikeWebHookHandlerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebHooks\WrikeWebHookReceiver.cs" />
   </ItemGroup>
