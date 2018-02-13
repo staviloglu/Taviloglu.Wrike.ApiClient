@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Taviloglu.Wrike.ApiClient;
 
-namespace Taviloglu.Wrike.Samples
+namespace Taviloglu.Wrike.ApiClient.Samples
 {
     public static class VersionSamples
     {

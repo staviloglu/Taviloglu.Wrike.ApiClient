@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.ApiClient;
 using Taviloglu.Wrike.Core;
 
-namespace Taviloglu.Wrike.Samples
+namespace Taviloglu.Wrike.ApiClient.Samples
 {
     public static class TasksSamples
     {

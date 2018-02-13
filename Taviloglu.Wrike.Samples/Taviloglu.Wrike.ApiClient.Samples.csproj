@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D0067E81-8EFC-4E26-8FC9-79132F397A39}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Taviloglu.Wrike.Samples</RootNamespace>
-    <AssemblyName>Taviloglu.Wrike.Samples</AssemblyName>
+    <RootNamespace>Taviloglu.Wrike.ApiClient.Samples</RootNamespace>
+    <AssemblyName>Taviloglu.Wrike.ApiClient.Samples</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

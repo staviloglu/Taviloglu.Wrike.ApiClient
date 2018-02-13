@@ -1,6 +1,4 @@
-﻿using Taviloglu.Wrike.ApiClient;
-
-namespace Taviloglu.Wrike.Samples
+﻿namespace Taviloglu.Wrike.ApiClient.Samples
 {
 
     class Program
@@ -9,7 +7,7 @@ namespace Taviloglu.Wrike.Samples
         {
             var bearerToken = "your-permanent-token";
             var wrikeClient = new WrikeClient(bearerToken);
-            
+
             ColorSamples.Run(wrikeClient).Wait();
 
             VersionSamples.Run(wrikeClient).Wait();

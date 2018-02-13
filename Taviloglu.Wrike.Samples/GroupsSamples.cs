@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taviloglu.Wrike.ApiClient;
+﻿using System.Threading.Tasks;
 
-namespace Taviloglu.Wrike.Samples
+namespace Taviloglu.Wrike.ApiClient.Samples
 {
     public static class GroupsSamples
     {
