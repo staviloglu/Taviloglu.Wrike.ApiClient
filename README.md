@@ -22,7 +22,7 @@ var newCustomField = new WrikeCustomField
 };
 newCustomField = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
-For more details on usage checkout the [Taviloglu.Wrike.Samples](Taviloglu.Wrike.Samples) project
+For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
 
 ## Implemented Methods 31%
 
