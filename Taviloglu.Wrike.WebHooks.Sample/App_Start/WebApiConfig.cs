@@ -7,7 +7,11 @@ namespace Taviloglu.Wrike.WebHooks
     {
         public static void Register(HttpConfiguration config)
         {
+            //TODO: check if still required
+            //required line to load assembly
+            
             var type = typeof(WebHookReceiversController);
+            type = typeof(WrikeWebHookReceiver);
             
 
             // Web API routes
@@ -21,10 +25,10 @@ namespace Taviloglu.Wrike.WebHooks
 
             // Initialize MyGet WebHook receiver
             // Web API configuration and services
-            //config.InitializeReceiveWrikeWebHooks();
-            config.InitializeReceiveDropboxWebHooks();
+            config.InitializeReceiveWrikeWebHooks();
+            
 
-            config.EnsureInitialized();
+            //config.EnsureInitialized();
         }
     }
 }
