@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -28,10 +29,10 @@ namespace Taviloglu.Wrike.WebHooks
         {
             get { return RecName; }
         }
-
+        
+        /// <inheritdoc />
         public override async Task<HttpResponseMessage> ReceiveAsync(string id, HttpRequestContext context, HttpRequestMessage request)
         {
-
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
@@ -50,16 +51,26 @@ namespace Taviloglu.Wrike.WebHooks
                 return CreateBadMethodResponse(request);
             }
 
-            EnsureSecureConnection(request);
-
             //wrike webhook does not support any kind of verification
+            //EnsureSecureConnection(request);           
 
             // Read the request entity body
-            var data = await ReadAsJsonAsync(request);
+            var data = await ReadAsJsonArrayAsync(request);
+            
+            if (!data.HasValues)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "could not find value");
+            }
 
+            var myDataObject = data.Children<JObject>().FirstOrDefault();
+            if (myDataObject == null)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "could not find value");
+            }
+            
             // Read the action from data
             string actionAsString;
-            if (!data.TryGetValue(TypePropertyName, out var action))
+            if (!myDataObject.TryGetValue(TypePropertyName, out var action))
             {
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, "unknown payload");                
             }
@@ -67,7 +78,7 @@ namespace Taviloglu.Wrike.WebHooks
             actionAsString = action.Value<string>();            
 
             //might use actions for different events
-            return await ExecuteWebHookAsync(id, context, request, new[] { actionAsString }, data);
+            return await ExecuteWebHookAsync(id, context, request, new[] { actionAsString }, myDataObject);
         }
     }
 }

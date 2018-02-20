@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Microsoft.AspNet.WebHooks.Controllers;
+using System.Web.Http;
 
 namespace Taviloglu.Wrike.WebHooks
 {
@@ -6,7 +7,8 @@ namespace Taviloglu.Wrike.WebHooks
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            var type = typeof(WebHookReceiversController);
+            
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -18,7 +20,11 @@ namespace Taviloglu.Wrike.WebHooks
             );
 
             // Initialize MyGet WebHook receiver
-            config.InitializeReceiveWrikeWebHooks();
+            // Web API configuration and services
+            //config.InitializeReceiveWrikeWebHooks();
+            config.InitializeReceiveDropboxWebHooks();
+
+            config.EnsureInitialized();
         }
     }
 }
