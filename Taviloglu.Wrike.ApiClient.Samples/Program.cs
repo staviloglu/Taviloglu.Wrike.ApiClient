@@ -5,7 +5,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "your-permanent-token";
+            var bearerToken = "your-token";
             var wrikeClient = new WrikeClient(bearerToken);
 
             ColorSamples.Run(wrikeClient).Wait();
