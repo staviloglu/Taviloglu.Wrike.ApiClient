@@ -1,43 +1,32 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.WebHook.Extensions;
 
 namespace Taviloglu.Wrike.WebHook
 {
-    public abstract class WrikeWebHookControllerBase : ApiController
+    public abstract class WrikeWebHookControllerBase : ControllerBase
     {
         [HttpPost]
-        public IHttpActionResult Post()
+        public  async Task<IActionResult> Post([FromBody] JArray array)
         {
-            CheckContextAndContent();
 
-            EnsureSecureConnection();
-
-            List<WrikeWebHookEvent> webHookEvents = null;
-            try
+            if (!Request.IsLocal() && !Request.IsHttps)
             {
-                webHookEvents = Request.Content.ReadAsAsync<List<WrikeWebHookEvent>>().Result;
-            }
-            catch (Exception ex)
-            {
-                var message = string.Format("The WebHook request contained invalid JSON: '{0}'.", ex.Message);
-                var invalidBody = Request.CreateErrorResponse(HttpStatusCode.BadRequest, message, ex);
-                throw new HttpResponseException(invalidBody);
+                return new BadRequestResult();
             }
 
-            if (webHookEvents.Count < 1)
+            if (array.Count < 1)
             {
-                var invalidBody = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "could not find value");
-                throw new HttpResponseException(invalidBody);
+                return new BadRequestResult();
             }
 
             try
             {
-                var webHookEvent = webHookEvents[0];
+                var webHookEvent = array.First.ToObject<WrikeWebHookEvent>();
 
                 switch (webHookEvent.Type)
                 {
@@ -48,15 +37,15 @@ namespace Taviloglu.Wrike.WebHook
                         OnTaskDeleted(webHookEvent);
                         break;
                     case WrikeWebHookEventType.TaskTitleChanged:
-                        var titleChangedEvents = Request.Content.ReadAsAsync<List<WrikeWebHookTaskTitleChangedEvent>>().Result;
-                        OnTaskTitleChanged(titleChangedEvents[0]);
+                        var titleChangedEvent = array.First.ToObject<WrikeWebHookTaskTitleChangedEvent>();
+                        OnTaskTitleChanged(titleChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskImportanceChanged:
                         OnTaskImportanceChanged(webHookEvent);
                         break;
                     case WrikeWebHookEventType.TaskStatusChanged:
-                        var statusChangedEvents = Request.Content.ReadAsAsync<List<WrikeWebHookTaskStatusChangedEvent>>().Result;
-                        OnTaskStatusChanged(statusChangedEvents[0]);
+                        var statusChangedEvent = array.First.ToObject<WrikeWebHookTaskStatusChangedEvent>();
+                        OnTaskStatusChanged(statusChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskDatesChanged:
                         OnTaskDatesChanged(webHookEvent);
@@ -98,58 +87,16 @@ namespace Taviloglu.Wrike.WebHook
                         OnTimelogChanged(webHookEvent);
                         break;
                     default:
-                        var message = string.Format("Unknown event type: {0}", webHookEvent.Type);
-                        var invalidBody = Request.CreateErrorResponse(HttpStatusCode.BadRequest, message);
-                        throw new HttpResponseException(invalidBody);
+                        return new BadRequestResult();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                var message = string.Format("The WebHook request contained invalid JSON: '{0}'.", ex.Message);
-                var invalidBody = Request.CreateErrorResponse(HttpStatusCode.BadRequest, message, ex);
-                throw new HttpResponseException(invalidBody);
+                return new BadRequestResult();
             }
 
             return Ok();
         }
-
-        private void EnsureSecureConnection()
-        {
-            // Require HTTP unless request is local
-            if (!Request.IsLocal() && !Request.RequestUri.IsHttps())
-            {
-                var message = string.Format("The WebHook receiver '{0}' requires HTTPS in order to be secure. Please register a WebHook URI of type '{1}'.", GetType().Name, Uri.UriSchemeHttps);
-                var noHttps = Request.CreateErrorResponse(HttpStatusCode.BadRequest, message);
-                throw new HttpResponseException(noHttps);
-            }
-        }
-
-        private void CheckContextAndContent()
-        {
-            if (RequestContext == null)
-            {
-                throw new ArgumentNullException(nameof(RequestContext));
-            }
-            if (Request == null)
-            {
-                throw new ArgumentNullException(nameof(Request));
-            }
-
-            // Check that there is a request body
-            if (Request.Content == null)
-            {
-                var noBody = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The WebHook request entity body cannot be empty.");
-                throw new HttpResponseException(noBody);
-            }
-
-            // Check that the request body is JSON
-            if (!Request.Content.IsJson())
-            {
-                var noJson = Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "The WebHook request must contain an entity body formatted as JSON.");
-                throw new HttpResponseException(noJson);
-            }
-        }
-
 
         protected abstract void OnTaskCreated(WrikeWebHookEvent wrikeWebHookEvent);
         protected abstract void OnTaskDeleted(WrikeWebHookEvent wrikeWebHookEvent);
