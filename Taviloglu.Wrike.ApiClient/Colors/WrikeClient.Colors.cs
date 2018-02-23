@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.ApiClient.Dto;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
