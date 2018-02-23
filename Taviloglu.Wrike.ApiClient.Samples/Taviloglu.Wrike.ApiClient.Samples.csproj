@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorSamples.cs" />
+    <Compile Include="ContactsSamples.cs" />
     <Compile Include="CustomFieldsSamples.cs" />
     <Compile Include="FoldersAndProjectsSamples.cs" />
     <Compile Include="GroupsSamples.cs" />

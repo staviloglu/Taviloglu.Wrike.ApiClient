@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.ApiClient
         }
         async Task<List<WrikeCustomField>> IWrikeCustomFieldsClient.GetAsync(string accountId)
         {
-            var requestUri = $"customfields";
+            var requestUri = "customfields";
             if (!string.IsNullOrWhiteSpace(accountId))
             {
                 requestUri = $"accounts/{accountId}/customfields";

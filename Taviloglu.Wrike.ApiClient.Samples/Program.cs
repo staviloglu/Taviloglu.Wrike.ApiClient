@@ -8,11 +8,13 @@
             var bearerToken = "your-token";
             var wrikeClient = new WrikeClient(bearerToken);
 
-            ColorSamples.Run(wrikeClient).Wait();
+            //ColorSamples.Run(wrikeClient).Wait();
 
-            VersionSamples.Run(wrikeClient).Wait();
+            //VersionSamples.Run(wrikeClient).Wait();
 
-            WebHooksSamples.Run(wrikeClient).Wait();
+            //WebHooksSamples.Run(wrikeClient).Wait();
+
+            ContactsSamples.Run(wrikeClient).Wait();
 
             //try other samples...
         }
