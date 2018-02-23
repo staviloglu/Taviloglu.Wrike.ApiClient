@@ -27,7 +27,12 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="contactIds">string list of contactIds</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
         Task<List<WrikeUser>> GetAsync(List<string> contactIds, WrikeMetadata metadata = null, bool? retrieveMetadata = null);
+
+        /// <summary>
+        /// Update contacts by Id.
+        /// Scopes: Default, wsReadWrite
+        /// </summary>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-contact"/>        
+        Task<WrikeUser> UpdateAsync(string id, List<WrikeMetadata> metadata = null);
     }
-
-
 }

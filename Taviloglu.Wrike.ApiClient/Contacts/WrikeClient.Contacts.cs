@@ -63,5 +63,19 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeUser>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
+
+        async Task<WrikeUser> IWrikeContactsClient.UpdateAsync(string id, List<WrikeMetadata> metadata)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException("id can not be null");
+            }
+
+            var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("metadata", metadata);
+
+            var response = await SendRequest<WrikeUser>($"contacts/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
     }
 }

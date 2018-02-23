@@ -10,29 +10,29 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         public static async Task Run(WrikeClient client)
         {
             //many other optional parameters
-            var tasks = await client.Tasks.GetAsync(
-                createdDate: new WrikeDateFilterRange(new DateTime(2018, 1, 1), new DateTime(2018, 2, 5)),
-                sortOrder: WrikeSortOrder.Asc,
-                sortField: WrikeTaskSortField.CreatedDate,
-                scheduledDate: new WrikeDateFilterRange(new DateTime(2018, 1, 1), new DateTime(2018, 2, 5)),
-                dueDate: new WrikeDateFilterEqual(new DateTime(2018, 2, 5)),
-                limit: 10
-                );
+            //var tasks = await client.Tasks.GetAsync(
+            //    createdDate: new WrikeDateFilterRange(new DateTime(2018, 1, 1), new DateTime(2018, 2, 5)),
+            //    sortOrder: WrikeSortOrder.Asc,
+            //    sortField: WrikeTaskSortField.CreatedDate,
+            //    scheduledDate: new WrikeDateFilterRange(new DateTime(2018, 1, 1), new DateTime(2018, 2, 5)),
+            //    dueDate: new WrikeDateFilterEqual(new DateTime(2018, 2, 5)),
+            //    limit: 10
+            //    );
 
-            tasks = await client.Tasks.GetAsync(accountId: "accountId");
+            //tasks = await client.Tasks.GetAsync(accountId: "accountId");
 
-            tasks = await client.Tasks.GetAsync(folderId: "folderId");
+            //tasks = await client.Tasks.GetAsync(folderId: "folderId");
 
-            tasks = await client.Tasks.GetAsync(new List<string> { "taskId", "taskId" });
+            //tasks = await client.Tasks.GetAsync(new List<string> { "taskId", "taskId" });
 
-            tasks = await client.Tasks.GetAsync(
-                new List<string> { "taskId", "taskId" },
-                new List<string> {
-                    WrikeTask.OptionalFields.AttachmentCount,
-                    WrikeTask.OptionalFields.Recurrent }
-                );
+            //tasks = await client.Tasks.GetAsync(
+            //    new List<string> { "taskId", "taskId" },
+            //    new List<string> {
+            //        WrikeTask.OptionalFields.AttachmentCount,
+            //        WrikeTask.OptionalFields.Recurrent }
+            //    );
 
-            tasks = await client.Tasks.GetAsync();
+            //tasks = await client.Tasks.GetAsync();
 
             var newTask = new WrikeTask
             {
@@ -42,7 +42,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 Importance = WrikeTaskImportance.High,
                 Dates = new WrikeTaskDate
                 {
-                    Due = new DateTime(2018, 2, 20),
+                    Due = DateTime.Now.AddDays(5),
                     Duration = 180000,
                     Start = DateTime.Now,
                     Type = WrikeTaskDateType.Planned,
@@ -60,18 +60,18 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 },
                 CustomStatusId = null
             };
-            newTask = await client.Tasks.CreateAsync("folderId", newTask);
+            newTask = await client.Tasks.CreateAsync("IEABX2HEI4FR342D", newTask);
 
-            tasks = await client.Tasks.GetAsync();
+            //tasks = await client.Tasks.GetAsync();
 
-            newTask = await client.Tasks.UpdateAsync(
-                newTask.Id,
-                title: "updated task title",
-                description: "updated description");
+            //newTask = await client.Tasks.UpdateAsync(
+            //    newTask.Id,
+            //    title: "updated task title",
+            //    description: "updated description");
 
-            var deletedTask = await client.Tasks.DeleteAsync(newTask.Id);
+            //var deletedTask = await client.Tasks.DeleteAsync(newTask.Id);
 
-            tasks = await client.Tasks.GetAsync();
+            //tasks = await client.Tasks.GetAsync();
         }
     }
 }

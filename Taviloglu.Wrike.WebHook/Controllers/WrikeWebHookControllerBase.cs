@@ -11,8 +11,9 @@ namespace Taviloglu.Wrike.WebHook
     public abstract class WrikeWebHookControllerBase : ControllerBase
     {
         [HttpPost]
-        public  async Task<IActionResult> Post([FromBody] JArray array)
+        public async Task<IActionResult> Post([FromBody] JArray array)
         {
+            //TODO: add security check to ensure the post is coming fomr Wrike
 
             if (!Request.IsLocal() && !Request.IsHttps)
             {

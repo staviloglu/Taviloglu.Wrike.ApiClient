@@ -14,10 +14,16 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             contacts = await client.Contacts.GetAsync(me: true);
 
-            contacts = await client.Contacts.GetAsync(me:true,
+            contacts = await client.Contacts.GetAsync(me: true,
                 retrieveMetadata: true);
 
-            contacts = await client.Contacts.GetAsync(accountId: "IEABX2HE");
+            contacts = await client.Contacts.GetAsync(accountId: "accountId");
+
+            var updatedContact = await client.Contacts.UpdateAsync(
+                "contactId", 
+                new List<Core.WrikeMetadata>{new Core.WrikeMetadata("testMetaKey","testMetaValue")
+            });
+
            
 
         }
