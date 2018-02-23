@@ -24,22 +24,22 @@ newCustomField = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
 For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
 
-## Implemented Methods 31%
+## Implemented Methods 34%
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead><tbody>
 <tr>
                 <td>[GET] /contacts</td>
-                <td>&nbsp;</td>
+                <td>1</td>
                 <td rowspan="4">Contacts</td>
             </tr>
             <tr>
                 <td>[GET] /accounts/{accountId}/contacts</td>
-                <td>&nbsp;</td>
+                <td>1</td>
             </tr>
             <tr>
                 <td>[GET] /contacts/{contactId},{contactId},... - up to 100 IDs</td>
-                <td>&nbsp;</td>
+                <td>1</td>
             </tr>
             <tr>
                 <td>[PUT] /contacts/{contactId}</td>
