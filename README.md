@@ -24,27 +24,15 @@ newCustomField = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
 For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
 
-## Implemented Methods 34%
+## Implemented Methods 35%
 
 <table>
-<thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead><tbody>
-<tr>
-                <td>[GET] /contacts</td>
-                <td>1</td>
-                <td rowspan="4">Contacts</td>
-            </tr>
-            <tr>
-                <td>[GET] /accounts/{accountId}/contacts</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>[GET] /contacts/{contactId},{contactId},... - up to 100 IDs</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>[PUT] /contacts/{contactId}</td>
-                <td>&nbsp;</td>
-            </tr>
+<thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
+<tbody>
+<tr><td>[GET] /contacts</td><td>1</td><td rowspan="4">Contacts</td></tr>
+<tr><td>[GET] /accounts/{accountId}/contacts</td><td>1</td></tr>
+<tr><td>[GET] /contacts/{contactId},{contactId},... - up to 100 IDs</td><td>1</td></tr>
+<tr><td>[PUT] /contacts/{contactId}</td><td>1</td></tr>
  
  <tr><td>[GET] /users/{userId}</td><td>1</td><td rowspan="2">Users</td></tr>
  <tr><td>[PUT] /users/{userId}</td><td>&nbsp;</td></tr>
@@ -141,4 +129,5 @@ For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Tavil
  <tr><td>[GET] /webhooks/{webhookId},{webhookId}</td><td>1</td></tr>
  <tr><td>[PUT] /webhooks/{webhookId}</td><td>1</td></tr>
  <tr><td>[DELETE] /webhooks/{webhookId}</td><td>1</td></tr>
-</tbody></table>
+</tbody>
+</table>
