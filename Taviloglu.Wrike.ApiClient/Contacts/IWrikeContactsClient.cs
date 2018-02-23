@@ -20,6 +20,11 @@ namespace Taviloglu.Wrike.ApiClient
             WrikeMetadata metadata = null, 
             bool? retrieveMetadata = null);
 
+        Task<List<WrikeUser>> GetAsync(WrikeUserType type, string accountId = null,
+            bool? me = null,
+            WrikeMetadata metadata = null,
+            bool? retrieveMetadata = null);
+
         /// <summary>
         /// List contacts of specified users and user groups.
         /// Scopes: Default, wsReadOnly, wsReadWrite

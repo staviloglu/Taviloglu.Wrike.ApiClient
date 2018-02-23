@@ -20,9 +20,11 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             contacts = await client.Contacts.GetAsync(accountId: "accountId");
 
             var updatedContact = await client.Contacts.UpdateAsync(
-                "contactId", 
+                "contactId",
                 new List<Core.WrikeMetadata>{new Core.WrikeMetadata("testMetaKey","testMetaValue")
             });
+
+            var personTypeContacts = await client.Contacts.GetAsync(Core.WrikeUserType.Person);
 
            
 
