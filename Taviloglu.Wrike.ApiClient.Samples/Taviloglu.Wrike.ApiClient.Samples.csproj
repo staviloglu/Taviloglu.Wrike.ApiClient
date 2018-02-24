@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Taviloglu.Wrike.ApiClient.Extensions\Taviloglu.Wrike.ApiClient.Extensions.csproj">
+      <Project>{46113e60-057d-4d16-97a5-69bfc55514d9}</Project>
+      <Name>Taviloglu.Wrike.ApiClient.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj">
       <Project>{d2c097e1-eea7-4b0c-ad1e-9243349ad620}</Project>
       <Name>Taviloglu.Wrike.ApiClient</Name>

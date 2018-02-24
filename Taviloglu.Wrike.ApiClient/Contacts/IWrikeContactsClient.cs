@@ -15,15 +15,11 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="accountId">List contacts of all users and user groups in account.</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
-        Task<List<WrikeUser>> GetAsync(string accountId = null, 
-            bool? me = null, 
-            WrikeMetadata metadata = null, 
-            bool? retrieveMetadata = null);
-
-        Task<List<WrikeUser>> GetAsync(WrikeUserType type, string accountId = null,
+        Task<List<WrikeUser>> GetAsync(string accountId = null,
             bool? me = null,
             WrikeMetadata metadata = null,
             bool? retrieveMetadata = null);
+
 
         /// <summary>
         /// List contacts of specified users and user groups.

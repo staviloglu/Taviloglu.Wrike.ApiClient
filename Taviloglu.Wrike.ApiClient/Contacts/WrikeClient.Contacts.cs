@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
@@ -63,12 +62,6 @@ namespace Taviloglu.Wrike.ApiClient
 
             var response = await SendRequest<WrikeUser>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
-        }
-
-        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(WrikeUserType type, string accountId, bool? me, WrikeMetadata metadata, bool? retrieveMetadata)
-        {
-            var contacts =  await Contacts.GetAsync(accountId, me, metadata, retrieveMetadata);
-            return contacts.Where(c => c.Type == type).ToList();
         }
 
         async Task<WrikeUser> IWrikeContactsClient.UpdateAsync(string id, List<WrikeMetadata> metadata)

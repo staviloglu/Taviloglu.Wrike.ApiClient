@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj" />
+    <ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.Core", "Tav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.ApiClient.Samples", "Taviloglu.Wrike.ApiClient.Samples\Taviloglu.Wrike.ApiClient.Samples.csproj", "{D0067E81-8EFC-4E26-8FC9-79132F397A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.WebHook", "Taviloglu.Wrike.WebHook\Taviloglu.Wrike.WebHook.csproj", "{79949BA1-4613-4835-A009-354B23E549BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.WebHook", "Taviloglu.Wrike.WebHook\Taviloglu.Wrike.WebHook.csproj", "{79949BA1-4613-4835-A009-354B23E549BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.WebHook.Samples", "Taviloglu.Wrike.WebHook.Samples\Taviloglu.Wrike.WebHook.Samples.csproj", "{A83FDEBD-C073-4D76-8A39-9F95B061880D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.WebHook.Samples", "Taviloglu.Wrike.WebHook.Samples\Taviloglu.Wrike.WebHook.Samples.csproj", "{A83FDEBD-C073-4D76-8A39-9F95B061880D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.ApiClient.Extensions", "Taviloglu.Wrike.ApiClient.Extensions\Taviloglu.Wrike.ApiClient.Extensions.csproj", "{46113E60-057D-4D16-97A5-69BFC55514D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A83FDEBD-C073-4D76-8A39-9F95B061880D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A83FDEBD-C073-4D76-8A39-9F95B061880D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A83FDEBD-C073-4D76-8A39-9F95B061880D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46113E60-057D-4D16-97A5-69BFC55514D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46113E60-057D-4D16-97A5-69BFC55514D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46113E60-057D-4D16-97A5-69BFC55514D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46113E60-057D-4D16-97A5-69BFC55514D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
