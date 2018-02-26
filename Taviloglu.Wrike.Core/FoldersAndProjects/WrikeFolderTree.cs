@@ -18,7 +18,7 @@ namespace Taviloglu.Wrike.Core
         /// </summary>
         [JsonProperty("color")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeColor.Value Color { get; set; }
+        public WrikeColor.FolderColor Color { get; set; }
 
         /// <summary>
         /// Child folder IDs
