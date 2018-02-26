@@ -23,7 +23,29 @@ namespace Taviloglu.Wrike.ApiClient
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {bearerToken}");
         }
+        private async Task<System.IO.Stream> SendRequestAndGetStream<T>(
+            string requestUri,
+            string httpMethod,
+            HttpContent httpContent = null)
+        {
+            HttpResponseMessage responseMessage = null;
 
+            switch (httpMethod)
+            {
+                case HttpMethods.Get:
+                    responseMessage = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
+                    break;
+                case HttpMethods.Post:
+                    responseMessage = await _httpClient.PostAsync(requestUri, httpContent).ConfigureAwait(false);
+                    break;
+                default:
+                    throw new ArgumentException("Unknown HTTP METHOD!");
+            }
+            var stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            
+
+            return stream;
+        }
         private async Task<WrikeResDto<T>> SendRequest<T>(
             string requestUri,
             string httpMethod,
