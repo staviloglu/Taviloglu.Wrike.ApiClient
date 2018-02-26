@@ -30,14 +30,14 @@ namespace Taviloglu.Wrike.Core
         /// Project start date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("startDate")]
-        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd" })]
         public DateTime StartDate { get; set; }
 
         /// <summary>
         /// Project end date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("endDate")]
-        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd" })]
         public DateTime EndDate { get; set; }
 
         /// <summary>
