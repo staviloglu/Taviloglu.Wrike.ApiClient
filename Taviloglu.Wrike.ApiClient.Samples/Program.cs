@@ -5,7 +5,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "your-token";
+            var bearerToken = "4D0FVeU6TQa1JUnFewQFD3KOE6VlSyMlcEEtlypzhwMW1qZ2bPcEbbV9GXA6g2Tt-N-WFIUKC";
             var wrikeClient = new WrikeClient(bearerToken);
 
             //ColorSamples.Run(wrikeClient).Wait();
@@ -14,9 +14,11 @@
 
             //WebHooksSamples.Run(wrikeClient).Wait();
 
-            ContactsSamples.Run(wrikeClient).Wait();
+            //ContactsSamples.Run(wrikeClient).Wait();
 
             //TasksSamples.Run(wrikeClient).Wait();
+
+            BookAndAdWorkflow.Run(wrikeClient).Wait();
 
             //try other samples...
         }
