@@ -1,8 +1,8 @@
 # Taviloglu.Wrike.ApiClient
 C# Wrapper for Wrike v3 Rest API
 
-## Usage
-Create your Wrike Client wtih your permanent token and just call the function you need.
+## Client Usage
+Create your Wrike Client with your permanent token and just call the function you need.
 ```csharp
 //create client
 var bearerToken = "your_permanent_token";
@@ -24,7 +24,36 @@ newCustomField = await wrikeClient.CustomFields.CreateAsync(newCustomField);
 ```
 For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
 
-## Implemented Methods 35%
+## Webhooks Usage
+Create your WrikeWebHookController by subclassing and implementing [WrikeWebhookControllerBase](Taviloglu.Wrike.WebHook/Controllers/WrikeWebHookControllerBase.cs) abstract class provided in [Taviloglu.Wrike.WebHook](Taviloglu.Wrike.WebHook) library. Don't forget to set a route to your new controller. 
+
+```csharp
+    [Route("api/[controller]")]
+    public class WrikeWebHookController : WrikeWebHookControllerBase
+    {
+        protected override void OnAttachmentAdded(WrikeWebHookEvent wrikeWebHookEvent)
+        {
+            throw new NotImplementedException();
+        }
+        
+        /*
+            implement other events...
+        */
+     }
+```
+When your WrikeWebHookController is ready for responding to post requests, create a webhook using the Wrike Client
+```csharp
+//create client
+var bearerToken = "your_permanent_token";
+var wrikeClient = new WrikeClient(bearerToken);
+//create new webhook
+//https://developers.wrike.com/documentation/webhooks
+var newWebhook = new WrikeWebHook("accountId", "http://<your-host>/api/wrikewebhook");
+newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
+```
+Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
+
+## 39% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
@@ -51,9 +80,9 @@ For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Tavil
  <tr><td>[GET] /accounts/{accountId}</td><td>&nbsp;</td></tr>
  <tr><td>[PUT] /accounts/{accountId}</td><td>&nbsp;</td></tr>
  
- <tr><td>[GET] /accounts/{accountId}/workflows</td><td>&nbsp;</td><td rowspan="3">Workflows</td></tr>
- <tr><td>[POST] /accounts/{accountId}/workflows</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /workflows/{workflowId}</td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /accounts/{accountId}/workflows</td><td>1</td><td rowspan="3">Workflows</td></tr>
+ <tr><td>[POST] /accounts/{accountId}/workflows</td><td>1</td></tr>
+ <tr><td>[PUT] /workflows/{workflowId}</td><td>1</td></tr>
  
  <tr><td>[GET] /customfields</td><td>1</td><td rowspan="5">Custom Fields</td></tr>
  <tr><td>[GET] /accounts/{accountId}/customfields</td><td>1</td></tr>
