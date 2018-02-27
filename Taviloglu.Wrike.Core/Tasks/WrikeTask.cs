@@ -243,15 +243,15 @@ namespace Taviloglu.Wrike.Core
             /// <summary>
             /// List of subtask IDs
             /// </summary>
-            public const string subTaskIds = "subTaskIds";
+            public const string SubTaskIds = "subTaskIds";
             /// <summary>
             /// Dependency IDs
             /// </summary>
-            public const string dependencyIds = "dependencyIds";
+            public const string DependencyIds = "dependencyIds";
             /// <summary>
             /// Task metadata entries
             /// </summary>
-            public const string metadata = "metadata";
+            public const string Metadata = "metadata";
             /// <summary>
             /// Custom fields
             /// </summary>

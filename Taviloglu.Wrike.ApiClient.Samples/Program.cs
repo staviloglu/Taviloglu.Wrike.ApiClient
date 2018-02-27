@@ -8,7 +8,7 @@
             var bearerToken = "your-token";
             var wrikeClient = new WrikeClient(bearerToken);
 
-            //ColorSamples.Run(wrikeClient).Wait();
+            ColorSamples.Run(wrikeClient).Wait();
 
             //VersionSamples.Run(wrikeClient).Wait();
 
@@ -18,7 +18,9 @@
 
             //TasksSamples.Run(wrikeClient).Wait();
 
-            WorkflowSamples.Run(wrikeClient).Wait();
+            //WorkflowSamples.Run(wrikeClient).Wait();
+            
+            //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
             //try other samples...
         }
