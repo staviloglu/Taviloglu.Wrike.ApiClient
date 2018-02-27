@@ -6,6 +6,7 @@
         static void Main(string[] args)
         {
             var bearerToken = "your-token";
+          
             var wrikeClient = new WrikeClient(bearerToken);
 
             ColorSamples.Run(wrikeClient).Wait();
@@ -18,11 +19,9 @@
 
             //TasksSamples.Run(wrikeClient).Wait();
 
-            //WorkflowSamples.Run(wrikeClient).Wait();
-            
-            //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
-
             //try other samples...
+
+            AttachmentsSamples.Run(wrikeClient).Wait();
         }
     }
 }
