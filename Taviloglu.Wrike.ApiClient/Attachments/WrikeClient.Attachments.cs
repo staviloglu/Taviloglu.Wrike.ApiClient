@@ -20,11 +20,17 @@ namespace Taviloglu.Wrike.ApiClient
 
         public async Task<List<WrikeAttachment>> GetAsync(string accountId, string folderId,string taskId, bool? versions = null, WrikeDateFilterRange createdDate = null, bool? withUrls = null)
         {
-            if (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId) && !string.IsNullOrWhiteSpace(taskId))
+            if ((!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId)) 
+                || (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(taskId)) 
+                || (!string.IsNullOrWhiteSpace(folderId) && !string.IsNullOrWhiteSpace(taskId))
+                )
             {
                 throw new ArgumentException("only folderId or accountId or taskId can be used, not all of them!");
             }
-
+            if (string.IsNullOrWhiteSpace(accountId) && string.IsNullOrWhiteSpace(folderId) && string.IsNullOrWhiteSpace(taskId))
+            {
+                throw new ArgumentException("one of folderId, accountId or taskId should be used");
+            }
             var requestUri = "attachments";
 
             if (!string.IsNullOrWhiteSpace(accountId))
