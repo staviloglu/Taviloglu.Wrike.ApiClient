@@ -53,7 +53,7 @@ newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
-## 39% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
+## 47% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
@@ -76,7 +76,7 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[PUT] /invitations/{invitationId}</td><td>&nbsp;</td></tr>
  <tr><td>[DELETE] /invitations/{invitationId}</td><td>&nbsp;</td></tr>
  
- <tr><td>[GET] /accounts</td><td>&nbsp;</td><td rowspan="3">Accounts</td></tr>
+ <tr><td>[GET] /accounts</td><td>1</td><td rowspan="3">Accounts</td></tr>
  <tr><td>[GET] /accounts/{accountId}</td><td>&nbsp;</td></tr>
  <tr><td>[PUT] /accounts/{accountId}</td><td>&nbsp;</td></tr>
  
@@ -133,12 +133,12 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[PUT] /timelogs/{timelogId}</td><td>&nbsp;</td></tr>
  <tr><td>[DELETE] /timelogs/{timelogId}</td><td>&nbsp;</td></tr>
  
- <tr><td>[GET] /accounts/{accountId}/attachments</td><td>&nbsp;</td><td rowspan="11">Attachments</td></tr>
- <tr><td>[GET] /folders/{folderId}/attachments </td><td>&nbsp;</td></tr>
- <tr><td>[GET] /tasks/{taskId}/attachments</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /attachments/{attachmentId}</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /attachments/{attachmentId}/download</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /attachments/{attachmentId}/preview </td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /accounts/{accountId}/attachments</td><td>1</td><td rowspan="11">Attachments</td></tr>
+ <tr><td>[GET] /folders/{folderId}/attachments </td><td>1</td></tr>
+ <tr><td>[GET] /tasks/{taskId}/attachments</td><td>1</td></tr>
+ <tr><td>[GET] /attachments/{attachmentId}</td><td>1</td></tr>
+ <tr><td>[GET] /attachments/{attachmentId}/download</td><td>1</td></tr>
+ <tr><td>[GET] /attachments/{attachmentId}/preview </td><td>1</td></tr>
  <tr><td>[GET] /attachments/{attachmentId}/url</td><td>&nbsp;</td></tr>
  <tr><td>[POST] /folders/{folderId}/attachments</td><td>&nbsp;</td></tr>
  <tr><td>[POST] /tasks/{taskId}/attachments</td><td>&nbsp;</td></tr>
