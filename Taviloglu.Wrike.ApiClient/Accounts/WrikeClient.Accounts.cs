@@ -12,11 +12,10 @@ namespace Taviloglu.Wrike.ApiClient
             get
             {
                 return (IWrikeAccountsClient)this;
-                //throw new NotImplementedException("accounts not implemented yet!");
             }
         }
 
-        public async Task<List<WrikeAccount>> GetAsync(WrikeMetadata metadata = null, List<string> fields = null)
+        async Task<List<WrikeAccount>> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> fields)
         {
             var requestUri = "accounts";
 
@@ -28,6 +27,6 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        //todo: implement methods
+        //TODO: implement other methods
     }
 }

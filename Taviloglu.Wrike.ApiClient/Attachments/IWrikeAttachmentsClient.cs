@@ -40,7 +40,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="attachmentId">Search among all attachments in the task.</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/download-wrike-attachment"/>
-        Task<System.IO.Stream> GetAsync(string attachmentId);
+        Task<System.IO.Stream> DownloadAsync(string attachmentId);
 
         /// <summary>
         /// Returns Preview for the attachment. The preview can be accessed via /attachments/id/preview/name.ext URL. In this case, 'name.ext' will be returned as the file name.
@@ -49,6 +49,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="attachmentId">Search among all attachments in the task.</param>
         /// <param name="size">Preview dimensions</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/download-attachment-preview"/>
-        Task<System.IO.Stream> GetAsync(string attachmentId, WrikePreviewDimension? size);
+        Task<System.IO.Stream> DownloadPreviewAsync(string attachmentId, WrikePreviewDimension? size);
     }
 }

@@ -79,8 +79,28 @@ namespace Taviloglu.Wrike.Core
         [JsonProperty("joinedDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime JoinedDate { get; set; }
-    }
 
+        /// <summary>
+        /// Json string array of optional fields to be included in the response model 
+        /// </summary>
+        public class OptionalFields
+        {
+            /// <summary>
+            /// Account subscription
+            /// </summary>
+            public const string Subscription = "subscription";
+
+            /// <summary>
+            /// Account metadata
+            /// </summary>
+            public const string Metadata = "metadata";
+
+            /// <summary>
+            /// Account custom fields
+            /// </summary>
+            public const string CustomFields = "customFields";
+        }
+    }
    
 
 

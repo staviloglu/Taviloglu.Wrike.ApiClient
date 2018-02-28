@@ -20,10 +20,9 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 foreach(var task in tasksWithAttachments)
                 {
                     var attachments = await client.Attachments.GetAsync(taskId: task.Id,withUrls:true);
-
                     foreach (var attachment in attachments)
                     {
-                        var stream=await client.Attachments.GetAsync(attachment.Id);
+                        var stream=await client.Attachments.DownloadAsync(attachment.Id);
                     }
                 }
             }
