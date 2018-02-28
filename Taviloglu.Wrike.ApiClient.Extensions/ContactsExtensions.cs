@@ -8,7 +8,7 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
 {
     public static class ContactsExtensions
     {
-        public static async Task<List<WrikeUser>> GetByTypeAsync(this IWrikeContactsClient wrikeContactsClient, WrikeUserType type, string accountId = null, bool? me = null, WrikeMetadata metadata = null, bool? retrieveMetadata = null)
+        public static async Task<List<WrikeUser>> GetContactsByTypeAsync(this IWrikeContactsClient wrikeContactsClient, WrikeUserType type, string accountId = null, bool? me = null, WrikeMetadata metadata = null, bool? retrieveMetadata = null)
         {
             var contacts = await wrikeContactsClient.GetAsync(accountId, me, metadata, retrieveMetadata);
             return contacts.Where(c => c.Type == type).ToList();
@@ -18,7 +18,7 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
         /// Retrieves the first contact record having type person and provided email 
         /// </summary>
         /// <param name="email"></param>
-        public static async Task<WrikeUser> GetByEmailAsync(this IWrikeContactsClient wrikeContactsClient,string email)
+        public static async Task<WrikeUser> GetContactByEmailAsync(this IWrikeContactsClient wrikeContactsClient,string email)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
