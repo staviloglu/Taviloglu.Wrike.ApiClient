@@ -5,10 +5,11 @@
         Text,
         DropDown,
         Numeric,
-        Money,
         Percentage,
+        Currency,
         Date,
         Duration,
-        Checkbox
+        Checkbox,
+        Users
     }
 }
