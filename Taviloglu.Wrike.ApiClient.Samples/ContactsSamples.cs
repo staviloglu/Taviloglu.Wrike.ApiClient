@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 new List<Core.WrikeMetadata>{new Core.WrikeMetadata("testMetaKey","testMetaValue")
             });
 
-            var personTypeContacts = await client.Contacts.GetByTypeAsync(Core.WrikeUserType.Person);
+            var personTypeContacts = await client.Contacts.GetContactsByTypeAsync(Core.WrikeUserType.Person);
 
            
 
