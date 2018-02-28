@@ -16,9 +16,10 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //TODO: bunu da daha önceden kaydetmiş olabiliriz, ya da bir şekilde folder listeleyip alacağız, ya da sabit bir adı olan folderId yi arayıp bulacağız.
             string folderId = "IEABX2HEI4GMN53E";
+            string rootFolderId = "IEABX2HEI7777777";
 
             //TODO: bizde bir campaign oluştuğunda wriketa trashcan rolune task ataması yaparken çalıştırılacak
-            await CreateCampaignTask(client, folderId, trashCanUserId);
+            await CreateCampaignTask(client, rootFolderId, folderId, trashCanUserId);
 
             //TODO: trashcan gerekli operasyonları yapıp, taskın statusu güncellediğinde bize taskId gelecek ve bu çalıştırılacak
             await AssignMostAwailableUserToTask(client, folderId, trashCanUserId, "taskId");
@@ -71,7 +72,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             };
         }
 
-        public async static Task CreateCampaignTask(WrikeClient client, string folderId, string trashCanUserId)
+        public async static Task CreateCampaignTask(WrikeClient client, string rootFolderId, string folderId, string trashCanUserId)
         {
             var superTask = GetSuperTask(trashCanUserId,
                 "Associate #1", "associate@associate.com",
@@ -83,6 +84,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 "Contacts...",
                 "Special notes about offer");
 
+            //mainTaskı yaratırken içinde bulunacağı folderı veriyoruz
             superTask = await client.Tasks.CreateAsync(folderId, superTask);
 
             //her productiondan bir subTask yarat
@@ -95,7 +97,8 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             foreach (var subTask in subTasks)
             {
-                var createdTask = await client.Tasks.CreateAsync(folderId, subTask);
+                //maintaskın subtasklarını yaratırken rootFolderId Veriyoruz
+                var createdTask = await client.Tasks.CreateAsync(rootFolderId, subTask);
             }
         }
 
@@ -132,24 +135,29 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //iş yükü oluşturacak statuste olan taskların tamamını getir, filtrelemeler yapılacak
             var taskList = await client.Tasks.GetAsync(folderId: folderId, fields: new List<string> { WrikeTask.OptionalFields.ResponsibleIds, WrikeTask.OptionalFields.SubTaskIds, WrikeTask.OptionalFields.SuperTaskIds });
 
-            //TODO:
-            //task ataması yapılabilecek UserId listesi önceden girilmiş olabilir
-            //wriketaki userlar çekilip trashcan olmayanların tamamı diye kabul edilebilir
+            if (taskList.Count>0)
+            {
+                taskId = taskList[0].Id;
+                //TODO:
+                //task ataması yapılabilecek UserId listesi önceden girilmiş olabilir
+                //wriketaki userlar çekilip trashcan olmayanların tamamı diye kabul edilebilir
 
-            var userIds = taskList
-                .Where(t => t.ResponsibleIds.Count > 0)
-                .SelectMany(t => t.ResponsibleIds).Distinct().ToList();
+                //TODO: accounta bağlı ne kadar person tipinde user varsa al, bu kişiler özel bir account ile de ayrılabilir.
+                //ya da id leri önceden biliniyor olabilir.
+                var userList = await client.Contacts.GetByTypeAsync(WrikeUserType.Person);
+                var userIds = userList.Select(u => u.Id).ToList();
 
-            var userId = GetUserIdWithMinimumTaskCount(taskList, userIds); //mot available user to assign the task
+                var userId = GetUserIdWithMinimumTaskCount(taskList, userIds); //mot available user to assign the task
 
-            var customStatusId = "IEABR5PBJMAAAAAB"; //customStatusId to move the task
+                var customStatusId = "IEABX2HEJMAIOJKE"; //customStatusId to move the task (Assigned List)
 
-            //ilgili taskı trashCan rolunden al bulduğun usera assign et ve ilgili customStatuse çek
-            var updatedTask = await client.Tasks.UpdateAsync(
-                taskId,
-                removeResponsibles: new List<string> { trashCanUserId },
-                addResponsibles: new List<string> { userId },
-                customStatus: customStatusId);
+                //ilgili taskı trashCan rolunden al bulduğun usera assign et ve ilgili customStatuse çek
+                var updatedTask = await client.Tasks.UpdateAsync(
+                    taskId,
+                    removeResponsibles: new List<string> { trashCanUserId },
+                    addResponsibles: new List<string> { userId },
+                    customStatus: customStatusId); 
+            }
         }
     }
 }

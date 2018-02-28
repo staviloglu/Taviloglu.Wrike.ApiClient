@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
                 throw new ArgumentNullException(nameof(email));
             }
 
-            var contacts = await wrikeContactsClient.GetAsync(null, null, null, null);
+            var contacts = await wrikeContactsClient.GetAsync();
             return contacts.Where(c =>
             c.Type == WrikeUserType.Person &&
             c.Profiles.Any(p=> p.Email == email)).FirstOrDefault();
