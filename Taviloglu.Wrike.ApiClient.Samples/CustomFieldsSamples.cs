@@ -24,7 +24,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             var updatedCustomField = await client.CustomFields.UpdateAsync(
                 newCustomField.Id,
                 title: "Updated New Custom Field",
-                type: WrikeCustomFieldType.Money);
+                type: WrikeCustomFieldType.Currency);
             
         }
     }
