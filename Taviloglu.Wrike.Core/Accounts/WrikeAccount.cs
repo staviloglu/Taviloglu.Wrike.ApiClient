@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core

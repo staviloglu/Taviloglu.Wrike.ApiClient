@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
