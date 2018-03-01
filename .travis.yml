@@ -1,2 +1,3 @@
 language: csharp
 solution: Taviloglu.Wrike.ApiClient.sln
+before_script: nuget restore Taviloglu.Wrike.ApiClient.sln
