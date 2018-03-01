@@ -5,7 +5,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "YYa4WIIQlhgKs5zwUBvHKcCrO8UM0uRahdgRlDPSTSBLTuOSPDQJVnA99OxiDpyZ-N-WFIUKC";
+            var bearerToken = "your-token";
           
             var wrikeClient = new WrikeClient(bearerToken);
 
