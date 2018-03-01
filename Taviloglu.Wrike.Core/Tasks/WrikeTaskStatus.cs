@@ -5,7 +5,6 @@
         Active,
         Completed,
         Deferred,
-        Cancelled,
-        Approved
+        Cancelled
     }
 }
