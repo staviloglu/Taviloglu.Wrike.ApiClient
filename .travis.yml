@@ -1,4 +1,0 @@
-language: csharp
-solution: Taviloglu.Wrike.ApiClient.sln
-script:
-  - msbuild /p:Configuration=Release Taviloglu.Wrike.ApiClient.sln
