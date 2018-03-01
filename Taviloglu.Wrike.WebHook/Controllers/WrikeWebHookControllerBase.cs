@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
@@ -42,14 +43,16 @@ namespace Taviloglu.Wrike.WebHook
                         OnTaskTitleChanged(titleChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskImportanceChanged:
-                        OnTaskImportanceChanged(webHookEvent);
+                        var importanceChangedEvent = array.First.ToObject<WrikeWebHookTaskImportanceChangedEvent>();
+                        OnTaskImportanceChanged(importanceChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskStatusChanged:
                         var statusChangedEvent = array.First.ToObject<WrikeWebHookTaskStatusChangedEvent>();
                         OnTaskStatusChanged(statusChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskDatesChanged:
-                        OnTaskDatesChanged(webHookEvent);
+                        var datesChangedEvent = array.First.ToObject<WrikeWebHookTaskDatesChangedEvent>();
+                        OnTaskDatesChanged(datesChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskParentsAdded:
                         OnTaskParentsAdded(webHookEvent);
@@ -58,13 +61,15 @@ namespace Taviloglu.Wrike.WebHook
                         OnTaskParentsAdded(webHookEvent);
                         break;
                     case WrikeWebHookEventType.TaskResponsiblesAdded:
-                        OnTaskResponsiblesAdded(webHookEvent);
+                        var responsiblesAddedEvent = array.First.ToObject<WrikeWebHookTaskResponsiblesAddedEvent>();
+                        OnTaskResponsiblesAdded(responsiblesAddedEvent);
                         break;
                     case WrikeWebHookEventType.TaskResponsiblesRemoved:
                         OnTaskResponsiblesRemoved(webHookEvent);
                         break;
                     case WrikeWebHookEventType.TaskSharedsAdded:
-                        OnTaskSharedsAdded(webHookEvent);
+                        var sharedsAddedEvent = array.First.ToObject<WrikeWebHookTaskSahredsAddedEvent>();
+                        OnTaskSharedsAdded(sharedsAddedEvent);
                         break;
                     case WrikeWebHookEventType.TaskSharedsRemoved:
                         OnTaskSharedsRemoved(webHookEvent);
@@ -73,49 +78,53 @@ namespace Taviloglu.Wrike.WebHook
                         OnTaskDescriptionChanged(webHookEvent);
                         break;
                     case WrikeWebHookEventType.AttachmentAdded:
-                        OnAttachmentAdded(webHookEvent);
+                        var attachmentAddedEvent = array.First.ToObject<WrikeWebHookAttachmentEvent>();
+                        OnAttachmentAdded(attachmentAddedEvent);
                         break;
                     case WrikeWebHookEventType.AttachmentDeleted:
-                        OnAttachmentDeleted(webHookEvent);
+                        var attachmentDeletedEvent = array.First.ToObject<WrikeWebHookAttachmentEvent>();
+                        OnAttachmentDeleted(attachmentDeletedEvent);
                         break;
                     case WrikeWebHookEventType.CommentAdded:
-                        OnCommentAdded(webHookEvent);
+                        var commentAddedEvent = array.First.ToObject<WrikeWebHookCommentEvent>();
+                        OnCommentAdded(commentAddedEvent);
                         break;
                     case WrikeWebHookEventType.CommentDeleted:
-                        OnCommentDeleted(webHookEvent);
+                        var commentDeletedEvent = array.First.ToObject<WrikeWebHookCommentEvent>();
+                        OnCommentDeleted(commentDeletedEvent);
                         break;
                     case WrikeWebHookEventType.TimelogChanged:
                         OnTimelogChanged(webHookEvent);
                         break;
-                    default:
-                        return new BadRequestResult();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return new BadRequestResult();
+                OnError(ex);
             }
 
             return Ok();
         }
 
-        protected abstract void OnTaskCreated(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskDeleted(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskTitleChanged(WrikeWebHookTaskTitleChangedEvent wrikeWebHookEvent);
-        protected abstract void OnTaskImportanceChanged(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskStatusChanged(WrikeWebHookTaskStatusChangedEvent wrikeWebHookEvent);
-        protected abstract void OnTaskDatesChanged(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskParentsAdded(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskParentsRemoved(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskResponsiblesAdded(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskResponsiblesRemoved(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskSharedsAdded(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskSharedsRemoved(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTaskDescriptionChanged(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnAttachmentAdded(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnAttachmentDeleted(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnCommentAdded(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnCommentDeleted(WrikeWebHookEvent wrikeWebHookEvent);
-        protected abstract void OnTimelogChanged(WrikeWebHookEvent wrikeWebHookEvent);
+        protected virtual void OnError(Exception ex) { }
+
+        protected virtual void OnTaskCreated(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskDeleted(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskTitleChanged(WrikeWebHookTaskTitleChangedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskImportanceChanged(WrikeWebHookTaskImportanceChangedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskStatusChanged(WrikeWebHookTaskStatusChangedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskDatesChanged(WrikeWebHookTaskDatesChangedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskParentsAdded(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskParentsRemoved(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskResponsiblesAdded(WrikeWebHookTaskResponsiblesAddedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskResponsiblesRemoved(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskSharedsAdded(WrikeWebHookTaskSahredsAddedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskSharedsRemoved(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskDescriptionChanged(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { }
+        protected virtual void OnAttachmentDeleted(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { }
+        protected virtual void OnCommentAdded(WrikeWebHookCommentEvent wrikeWebHookEvent) { }
+        protected virtual void OnCommentDeleted(WrikeWebHookCommentEvent wrikeWebHookEvent) { }
+        protected virtual void OnTimelogChanged(WrikeWebHookEvent wrikeWebHookEvent) { }
     }
 }

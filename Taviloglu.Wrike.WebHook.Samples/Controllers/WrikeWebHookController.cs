@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.WebHook.Samples.Controllers
@@ -6,22 +7,27 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
     [Route("api/[controller]")]
     public class WrikeWebHookController : WrikeWebHookControllerBase
     {
-        protected override void OnAttachmentAdded(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnError(Exception ex)
+        {
+            //TODO: might wanna log exception here
+        }
+
+        protected override void OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
 
-        protected override void OnAttachmentDeleted(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnAttachmentDeleted(WrikeWebHookAttachmentEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
 
-        protected override void OnCommentAdded(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnCommentAdded(WrikeWebHookCommentEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
 
-        protected override void OnCommentDeleted(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnCommentDeleted(WrikeWebHookCommentEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
@@ -31,7 +37,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskDatesChanged(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskDatesChanged(WrikeWebHookTaskDatesChangedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
@@ -46,7 +52,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskImportanceChanged(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskImportanceChanged(WrikeWebHookTaskImportanceChangedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
@@ -61,7 +67,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskResponsiblesAdded(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskResponsiblesAdded(WrikeWebHookTaskResponsiblesAddedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
@@ -71,7 +77,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskSharedsAdded(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskSharedsAdded(WrikeWebHookTaskSahredsAddedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }

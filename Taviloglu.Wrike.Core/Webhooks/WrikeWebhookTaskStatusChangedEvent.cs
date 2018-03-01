@@ -6,10 +6,13 @@ namespace Taviloglu.Wrike.Core
     public sealed class WrikeWebHookTaskStatusChangedEvent : WrikeWebHookEvent
     {
         [JsonProperty("oldStatus")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeTaskStatus OldStatus { get; set; }
+        public string OldStatus { get; set; }
         [JsonProperty("status")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeTaskStatus Status { get; set; }
+        public string Status { get; set; }
+
+        [JsonProperty("oldCustomStatusId")]
+        public string OldCustomStatusId { get; set; }
+        [JsonProperty("customStatusId")]
+        public string CustomStatusId { get; set; }
     }
 }
