@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.7.0-alpha</Version>
+    <Version>1.0.0</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Extension methods to use with wrike client which are not provided in Taviloglu.Wrike.ApiClient</Description>
@@ -11,10 +11,12 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api extensions</PackageTags>
-    <PackageReleaseNotes>Extension methods for Contacts provided</PackageReleaseNotes>
+    <PackageReleaseNotes>- Extension methods for Attachments added
+- Extension methods for Tasks added
+</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
-    <AssemblyVersion>0.7.0.0</AssemblyVersion>
-    <FileVersion>0.7.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
