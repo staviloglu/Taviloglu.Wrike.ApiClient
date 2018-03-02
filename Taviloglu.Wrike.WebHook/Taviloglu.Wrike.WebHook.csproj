@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0-alpha2</Version>
+    <Version>1.0.0</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>- Provides a ControllerBase class to respond to webhook post requests coming from Wrike. 
@@ -14,7 +14,8 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-webhooks webhook http-post controllerBase</PackageTags>
     <PackageReleaseNotes>- Updated WrikeWebHookControllerBase to add support for error handling
-- WrikeWebHookControllerBase abstract methods made virtual</PackageReleaseNotes>
+- WrikeWebHookControllerBase abstract methods made virtual
+- All events are supported with corresponding wrikeObject</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

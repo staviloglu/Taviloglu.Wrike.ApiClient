@@ -9,7 +9,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
     {
         protected override void OnError(Exception ex)
         {
-            //TODO: might wanna log exception here
+            Console.WriteLine(ex.ToString());
         }
 
         protected override void OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent)
@@ -57,12 +57,12 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskParentsAdded(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskParentsAdded(WrikeWebHookTaskParentsAddedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
 
-        protected override void OnTaskParentsRemoved(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskParentsRemoved(WrikeWebHookTaskParentsRemovedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
@@ -72,7 +72,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskResponsiblesRemoved(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskResponsiblesRemoved(WrikeWebHookTaskResponsiblesRemovedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
@@ -82,7 +82,7 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskSharedsRemoved(WrikeWebHookEvent wrikeWebHookEvent)
+        protected override void OnTaskSharedsRemoved(WrikeWebHookTaskSahredsRemovedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }

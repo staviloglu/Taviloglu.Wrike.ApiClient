@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.WebHook
         [HttpPost]
         public IActionResult Post([FromBody] JArray array)
         {
-            //TODO: add security check to ensure the post is coming fomr Wrike
+            //TODO: add security check to ensure the post is coming from Wrike
 
             if (!Request.IsLocal() && !Request.IsHttps)
             {
@@ -29,6 +29,11 @@ namespace Taviloglu.Wrike.WebHook
             try
             {
                 var webHookEvent = array.First.ToObject<WrikeWebHookEvent>();
+
+                if (string.IsNullOrWhiteSpace(webHookEvent.TaskId))
+                {
+                    return new BadRequestResult();
+                }
 
                 switch (webHookEvent.Type)
                 {
@@ -55,24 +60,28 @@ namespace Taviloglu.Wrike.WebHook
                         OnTaskDatesChanged(datesChangedEvent);
                         break;
                     case WrikeWebHookEventType.TaskParentsAdded:
-                        OnTaskParentsAdded(webHookEvent);
+                        var parentsAddedEvent = array.First.ToObject<WrikeWebHookTaskParentsAddedEvent>();
+                        OnTaskParentsAdded(parentsAddedEvent);
                         break;
                     case WrikeWebHookEventType.TaskParentsRemoved:
-                        OnTaskParentsAdded(webHookEvent);
+                        var parentsRemovedEvent = array.First.ToObject<WrikeWebHookTaskParentsRemovedEvent>();
+                        OnTaskParentsRemoved(parentsRemovedEvent);
                         break;
                     case WrikeWebHookEventType.TaskResponsiblesAdded:
                         var responsiblesAddedEvent = array.First.ToObject<WrikeWebHookTaskResponsiblesAddedEvent>();
                         OnTaskResponsiblesAdded(responsiblesAddedEvent);
                         break;
                     case WrikeWebHookEventType.TaskResponsiblesRemoved:
-                        OnTaskResponsiblesRemoved(webHookEvent);
+                        var responsiblesRemovedEvent = array.First.ToObject<WrikeWebHookTaskResponsiblesRemovedEvent>();
+                        OnTaskResponsiblesRemoved(responsiblesRemovedEvent);
                         break;
                     case WrikeWebHookEventType.TaskSharedsAdded:
                         var sharedsAddedEvent = array.First.ToObject<WrikeWebHookTaskSahredsAddedEvent>();
                         OnTaskSharedsAdded(sharedsAddedEvent);
                         break;
                     case WrikeWebHookEventType.TaskSharedsRemoved:
-                        OnTaskSharedsRemoved(webHookEvent);
+                        var sharedsRemovedEvent = array.First.ToObject<WrikeWebHookTaskSahredsRemovedEvent>();
+                        OnTaskSharedsRemoved(sharedsRemovedEvent);
                         break;
                     case WrikeWebHookEventType.TaskDescriptionChanged:
                         OnTaskDescriptionChanged(webHookEvent);
@@ -107,19 +116,18 @@ namespace Taviloglu.Wrike.WebHook
         }
 
         protected virtual void OnError(Exception ex) { }
-
         protected virtual void OnTaskCreated(WrikeWebHookEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskDeleted(WrikeWebHookEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskTitleChanged(WrikeWebHookTaskTitleChangedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskImportanceChanged(WrikeWebHookTaskImportanceChangedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskStatusChanged(WrikeWebHookTaskStatusChangedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskDatesChanged(WrikeWebHookTaskDatesChangedEvent wrikeWebHookEvent) { }
-        protected virtual void OnTaskParentsAdded(WrikeWebHookEvent wrikeWebHookEvent) { }
-        protected virtual void OnTaskParentsRemoved(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskParentsAdded(WrikeWebHookTaskParentsAddedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskParentsRemoved(WrikeWebHookTaskParentsRemovedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskResponsiblesAdded(WrikeWebHookTaskResponsiblesAddedEvent wrikeWebHookEvent) { }
-        protected virtual void OnTaskResponsiblesRemoved(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskResponsiblesRemoved(WrikeWebHookTaskResponsiblesRemovedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskSharedsAdded(WrikeWebHookTaskSahredsAddedEvent wrikeWebHookEvent) { }
-        protected virtual void OnTaskSharedsRemoved(WrikeWebHookEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskSharedsRemoved(WrikeWebHookTaskSahredsRemovedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskDescriptionChanged(WrikeWebHookEvent wrikeWebHookEvent) { }
         protected virtual void OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { }
         protected virtual void OnAttachmentDeleted(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { }

@@ -12,8 +12,7 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Updated WrikeWebHookTaskStatusChangedEvent
-- Added new objects to support many other special event types</PackageReleaseNotes>
+    <PackageReleaseNotes>- Support for all wrike web hook task events</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
