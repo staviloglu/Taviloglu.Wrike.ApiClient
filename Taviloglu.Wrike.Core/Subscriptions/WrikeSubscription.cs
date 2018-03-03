@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeSubscription
+    public class WrikeSubscription : IWrikeObject
     {
         /// <summary>
         /// Subscription type 

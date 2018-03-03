@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
@@ -8,11 +11,33 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                //return (IWrikeCommentsClient)this;
-                throw new NotImplementedException("Comments not implemented yet!");
+                return (IWrikeCommentsClient)this;
             }
         }
 
-        //todo: implement methods
+        Task<WrikeWebHook> IWrikeCommentsClient.CreateAsync(WrikeComment newComment, bool? plainText)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<WrikeTask> IWrikeCommentsClient.DeleteAsync(string commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(string accountId, string folderId, string taskId, bool? plainText, int? limit, WrikeDateFilterRange updatedDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(List<string> commentIds, bool? plainText)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<WrikeWebHook> IWrikeCommentsClient.UpdateAsync(string text, bool? plainText)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
