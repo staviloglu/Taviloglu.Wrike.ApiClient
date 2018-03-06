@@ -53,7 +53,7 @@ newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
-## 47% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
+## 58% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
@@ -107,15 +107,15 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[PUT] /tasks/{taskId}</td><td>1</td></tr>
  <tr><td>[DELETE] /tasks/{taskId}</td><td>1</td></tr>
  
- <tr><td>[GET] /comments</td><td>&nbsp;</td><td rowspan="9">Comments</td></tr>
- <tr><td>[GET] /accounts/{accountId}/comments</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /folders/{folderId}/comments</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /tasks/{taskId}/comments</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /comments/{commentId},{commentId},... - up to 100 Ids</td><td>&nbsp;</td></tr>
- <tr><td>[POST] /folders/{folderId}/comments</td><td>&nbsp;</td></tr>
- <tr><td>[POST] /tasks/{taskId}/comments</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /comments/{commentId}</td><td>&nbsp;</td></tr>
- <tr><td>[DELETE] /comments/{commentId}</td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /comments</td><td>1</td><td rowspan="9">Comments</td></tr>
+ <tr><td>[GET] /accounts/{accountId}/comments</td><td>1</td></tr>
+ <tr><td>[GET] /folders/{folderId}/comments</td><td>1</td></tr>
+ <tr><td>[GET] /tasks/{taskId}/comments</td><td>1</td></tr>
+ <tr><td>[GET] /comments/{commentId},{commentId},... - up to 100 Ids</td><td>1</td></tr>
+ <tr><td>[POST] /folders/{folderId}/comments</td><td>1</td></tr>
+ <tr><td>[POST] /tasks/{taskId}/comments</td><td>1</td></tr>
+ <tr><td>[PUT] /comments/{commentId}</td><td>1</td></tr>
+ <tr><td>[DELETE] /comments/{commentId}</td><td>1</td></tr>
  
  <tr><td>[GET] /tasks/{taskId}/dependencies</td><td>&nbsp;</td><td rowspan="5">Dependencies</td></tr>
  <tr><td>[GET] /dependencies/{dependencyId},{dependencyId},... - up to 100 IDs</td><td>&nbsp;</td></tr>
