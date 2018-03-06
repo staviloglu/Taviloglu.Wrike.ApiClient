@@ -48,7 +48,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="plainText">Treat comment text as plain text, HTML otherwise</param>
-        /// <param name="newComment">Use ctor</param>
+        /// <param name="newComment">Use ctor <see cref="WrikeComment.WrikeComment(string, string, string)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-comment"/>
         Task<WrikeComment> CreateAsync(WrikeComment newComment, bool? plainText=null);
 

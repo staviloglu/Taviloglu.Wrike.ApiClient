@@ -28,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <remarks></remarks>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-custom-field"/>
-        /// <param name="customField">AccountId, Title and Text values should be set</param>
+        /// <param name="customField">Use ctor <see cref="WrikeCustomField.WrikeCustomField(string, WrikeCustomFieldType, List{string})"/></param>
         Task<WrikeCustomField> CreateAsync(WrikeCustomField customField);
 
         /// <summary>

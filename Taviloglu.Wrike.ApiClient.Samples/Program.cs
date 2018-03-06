@@ -15,8 +15,9 @@
 
             //WebHooksSamples.Run(wrikeClient).Wait();
 
-            CommentsSamples.Run(wrikeClient).Wait();
-                
+            //CommentsSamples.Run(wrikeClient).Wait();
+
+            FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 

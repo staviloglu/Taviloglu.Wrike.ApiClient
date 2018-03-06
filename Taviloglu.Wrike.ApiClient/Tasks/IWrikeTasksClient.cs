@@ -11,7 +11,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="folderId">You can specify rootFolderId to create task in user's account root.</param>
-        /// <param name="newTask">use task constructor with parameters</param>
+        /// <param name="newTask">Use ctor <see cref="WrikeTask.WrikeTask(string, string, WrikeTaskStatus?, WrikeTaskImportance?, WrikeTaskDate, List{string}, List{string}, List{string}, List{string}, bool?, string, string, List{string}, List{WrikeMetadata}, List{WrikeCustomFieldData}, string)"/></param>
         /// <param name="priorityBefor">Put newly created task before specified task in task list</param>
         /// <param name="priorityAfter">Put newly created task after specified task in task list</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-task"/>
@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="customField">Custom field filter</param>
         /// <param name="customStatuses">Custom statuses filter</param>
         /// <param name="fields">optional fields to be included in the response model 
-        /// Use WrikeTask.OptionalFields values</param>
+        /// Use <see cref="WrikeTask.OptionalFields"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         Task<List<WrikeTask>> GetAsync(
             string accountId = null,
@@ -94,7 +94,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="taskIds">MaxCount 100</param>
-        /// <param name="optionalFields">Use WrikeTask.OptionalFields values Only Recurrent and AttachmentCount supported</param>
+        /// <param name="optionalFields">Use <see cref="WrikeTask.OptionalFields"/> values Only Recurrent and AttachmentCount supported</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         Task<List<WrikeTask>> GetAsync(List<string> taskIds, List<string> optionalFields = null);
 
@@ -120,7 +120,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="addSuperTasks">Add the task as subtask to specified tasks</param>
         /// <param name="removeSuperTasks">Remove the task form specified tasks subtasks</param>
         /// <param name="metadata">Metadata to be updated (null value removes entry)</param>
-        /// <param name="customFields">Custom fields to be updated or deleted (null value removes field) Use WrikeTask.OptionalFields</param>
+        /// <param name="customFields">Custom fields to be updated or deleted (null value removes field) Use <see cref="WrikeTask.OptionalFields"/></param>
         /// <param name="customStatus">Custom status ID</param>
         /// <param name="restore">Restore task from Recycled Bin</param>
         /// <returns></returns>

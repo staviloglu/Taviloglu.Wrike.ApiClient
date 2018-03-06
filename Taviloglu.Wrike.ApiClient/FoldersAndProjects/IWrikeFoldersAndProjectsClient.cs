@@ -11,7 +11,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
         /// <param name="folderIds">MaxCount 100</param>
-        /// <param name="optionalFields">Use WrikeFolder.OptionalFields values</param>
+        /// <param name="optionalFields">Use <see cref="WrikeFolder.OptionalFields"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder"/>
         Task<List<WrikeFolder>> GetFoldersAsync(List<string> folderIds, List<string> optionalFields = null);
 
@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///<param name="accountId">Returns a list of tree entries for the account</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
         Task<List<WrikeFolderTree>> GetFolderTreeAsync(
-            string accountId = null, 
+            string accountId = null,
             string folderId = null,
             string permalink = null,
             bool? addDescendants = null,
@@ -32,5 +32,18 @@ namespace Taviloglu.Wrike.ApiClient
             bool? isProject = null,
             bool? isDeleted = null,
             List<string> fields = null);
+
+
+        /// <summary>
+        ///  Create a folder within a folder. Specify virtual rootFolderId in order to create a folder in the account root
+        ///  Scopes: Default, wsReadWrite
+        /// </summary>
+        /// <param name="newFolder">Use ctor <see cref="WrikeFolder.WrikeFolder(string, string, List{string}, List{WrikeMetadata}, List{WrikeCustomFieldData}, List{string}, WrikeProject)"/></param>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/create-folder"/>
+        Task<WrikeFolder> CreateAsync(string folderId, WrikeFolder newFolder);
     }
+
+
+
+
 }

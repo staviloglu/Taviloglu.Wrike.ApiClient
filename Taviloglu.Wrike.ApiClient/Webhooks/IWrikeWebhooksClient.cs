@@ -9,7 +9,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <summary>
         ///  Creates a webhook for a particular account.
         /// </summary>
-        /// <param name="newWebhook"></param>
+        /// <param name="newWebhook">Use ctor <see cref="WrikeWebHook.WrikeWebHook(string, string)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
         Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebhook);
 

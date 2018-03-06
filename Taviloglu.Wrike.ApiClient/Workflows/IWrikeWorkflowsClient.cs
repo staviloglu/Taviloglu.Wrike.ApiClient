@@ -19,7 +19,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Scopes: amReadWriteWorkflow
         /// </summary>
         /// <param name="accountId">AccountId</param>
-        /// <param name="newWorkflow">New workflow object with only name set, use constructor</param>
+        /// <param name="newWorkflow">Use ctor <see cref="WrikeWorkflow.WrikeWorkflow(string)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-workflow"/>
         Task<WrikeWorkflow> CreateAsync(string accountId, WrikeWorkflow newWorkflow);
 

@@ -8,6 +8,28 @@ namespace Taviloglu.Wrike.Core
 {
     public sealed class WrikeFolder : WrikeObjectWithId
     {
+        public WrikeFolder()
+        {
+
+        }
+
+        public WrikeFolder(string title, string description = null, List<string> shareds = null, List<WrikeMetadata> metadatas = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentNullException(nameof(title), "title can not be null or empty");
+            }
+
+            Title = title;
+            Description = description;
+            SharedIds = shareds;
+            Metadata = metadatas;
+            CustomFields = customFields;
+            CustomColumnIds = customColumns;
+            Project = project;
+
+        }
+
         /// <summary>
         /// Account ID
         /// </summary>
@@ -113,7 +135,7 @@ namespace Taviloglu.Wrike.Core
         /// Custom fields
         /// </summary>
         [JsonProperty("customFields")]
-        public List<WrikeCustomField> CustomFields { get; set; }
+        public List<WrikeCustomFieldData> CustomFields { get; set; }
         /// <summary>
         /// Custom column IDs
         /// </summary>
@@ -124,7 +146,7 @@ namespace Taviloglu.Wrike.Core
         /// Project details, present only for project folders
         /// </summary>
         [JsonProperty("project")]
-        public List<WrikeProject> Project { get; set; }
+        public WrikeProject Project { get; set; }
 
         /// <summary>
         /// Json string array of optional fields to be included in the response model

@@ -73,5 +73,33 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
+
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CreateAsync(string folderId, WrikeFolder newFolder)
+        {
+            if (string.IsNullOrWhiteSpace(folderId))
+            {
+                throw new ArgumentNullException(nameof(folderId), "folderId can not be null or empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(newFolder.Title))
+            {
+                throw new ArgumentNullException(nameof(newFolder.Title), "newFolder.Title can not be null or empty");
+            }
+
+            var requestUri = $"folders/{folderId}/folders";
+
+            var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("title", newFolder.Title)
+                .AddParameter("description", newFolder.Description)
+                .AddParameter("shareds", newFolder.SharedIds)
+                .AddParameter("metadata", newFolder.Metadata)
+                .AddParameter("customFields", newFolder.CustomFields)
+                .AddParameter("customColumns", newFolder.CustomColumnIds)
+            .AddParameter("project", newFolder.Project);
+
+            var postContent = postDataBuilder.GetContent();
+            var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
     }
 }
