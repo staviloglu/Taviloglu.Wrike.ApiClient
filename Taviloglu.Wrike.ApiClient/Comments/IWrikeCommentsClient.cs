@@ -32,7 +32,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Scopes: Default, wsReadWrite
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-comment"/>        
-        Task<WrikeTask> DeleteAsync(string commentId);
+        Task DeleteAsync(string commentId);
 
         /// <summary>
         ///  Update Comment by ID. A comment is available for updates only during the 5 minutes after creation.
@@ -41,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
         /// <param name="text">Comment text, can not be empty</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/update-comment"/>
-        Task<WrikeWebHook> UpdateAsync(string text, bool? plainText = null);
+        Task<WrikeComment> UpdateAsync(string commentId, string text, bool? plainText = null);
 
         /// <summary>
         ///  Create a comment in the folder/task. The virtual Root and Recycle Bin folders cannot have comments.
@@ -50,7 +50,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="plainText">Treat comment text as plain text, HTML otherwise</param>
         /// <param name="newComment">Use ctor</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-comment"/>
-        Task<WrikeWebHook> CreateAsync(WrikeComment newComment, bool? plainText=null);
+        Task<WrikeComment> CreateAsync(WrikeComment newComment, bool? plainText=null);
 
     }
 }

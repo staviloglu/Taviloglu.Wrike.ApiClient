@@ -13,7 +13,10 @@
 
             //VersionSamples.Run(wrikeClient).Wait();
 
-            WebHooksSamples.Run(wrikeClient).Wait();
+            //WebHooksSamples.Run(wrikeClient).Wait();
+
+            CommentsSamples.Run(wrikeClient).Wait();
+                
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
