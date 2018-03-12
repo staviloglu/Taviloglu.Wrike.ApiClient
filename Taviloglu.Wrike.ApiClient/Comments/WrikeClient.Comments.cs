@@ -69,15 +69,15 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (!string.IsNullOrWhiteSpace(accountId))
             {
-                requestUri = @"accounts/{accountId}/comments";
+                requestUri = $"accounts/{accountId}/comments";
             }
             else if (!string.IsNullOrWhiteSpace(folderId))
             {
-                requestUri = @"folders/{folderId}/comments";
+                requestUri = $"folders/{folderId}/comments";
             }
             else if (!string.IsNullOrWhiteSpace(taskId))
             {
-                requestUri = @"tasks/{taskId}/comments";
+                requestUri = $"tasks/{taskId}/comments";
             }
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
