@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.60.0-alpha</Version>
+    <Version>0.70.0-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike v3 Rest API</Description>
@@ -12,7 +12,8 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Support for all wrike web hook task events</PackageReleaseNotes>
+    <PackageReleaseNotes>- WrikeComment added
+- Many object constructors added for create methods of the client</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
