@@ -21,6 +21,10 @@
     <DocumentationFile>bin\Debug\netstandard2.0\Taviloglu.Wrike.ApiClient.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.ApiClient.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.4-preview1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1-beta3" />

@@ -23,6 +23,10 @@
     <DocumentationFile>bin\Debug\netstandard2.0\Taviloglu.Wrike.ApiClient.Extensions.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.ApiClient.Extensions.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj" />
     <ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" />
