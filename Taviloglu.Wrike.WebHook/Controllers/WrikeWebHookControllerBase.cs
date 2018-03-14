@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.WebHook.Extensions;
 
