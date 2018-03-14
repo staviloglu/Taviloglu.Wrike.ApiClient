@@ -41,6 +41,12 @@ namespace Taviloglu.Wrike.ApiClient
                 return this;
             }
 
+            if (value is decimal)
+            {
+                AddDecimal(name, (decimal)value);
+                return this;
+            }            
+
             if (value is IList)
             {
                 if (((IList)value).Count > 0)
@@ -84,10 +90,19 @@ namespace Taviloglu.Wrike.ApiClient
         {
             _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString()));
         }
+        private void AddDecimal(string parameterName, decimal parameterValue)
+        {
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString()));
+        }
 
         private void AddList(string parameterName, IList parameterValue)
         {
             _parameters.Add(new KeyValuePair<string, string>(parameterName, JsonConvert.SerializeObject(parameterValue)));
+        }
+
+        private void AddDateTime(string parameterName, DateTime parameterValue, string format)
+        {
+            _parameters.Add(new KeyValuePair<string, string>(parameterName, parameterValue.ToString(format)));
         }
 
         private void AddWrikeObject(string parameterName, IWrikeObject parameterValue, JsonConverter jsonConverter = null)

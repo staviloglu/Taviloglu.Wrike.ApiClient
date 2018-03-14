@@ -5,7 +5,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "your-token";
+            var bearerToken = "CUEr3ihGqPktpO7MuWF1q5hYSUIFZSeIPdXgV86WBj50EJv6IIl1YF5kpZ6UOLVj-N-WFIUKC";
           
             var wrikeClient = new WrikeClient(bearerToken);
 
@@ -17,7 +17,9 @@
 
             //CommentsSamples.Run(wrikeClient).Wait();
 
-            FoldersAndProjectsSamples.Run(wrikeClient).Wait();
+            //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
+
+            TimelogSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 

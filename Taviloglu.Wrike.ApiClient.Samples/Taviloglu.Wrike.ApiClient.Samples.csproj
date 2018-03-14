@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BookAndAdWorkflow.cs" />
     <Compile Include="CommentsSamples.cs" />
+    <Compile Include="TimelogSamples.cs" />
     <Compile Include="WorkflowSamples.cs" />
     <Compile Include="ColorSamples.cs" />
     <Compile Include="AttachmentsSamples.cs" />
