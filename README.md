@@ -1,5 +1,5 @@
 # Taviloglu.Wrike.ApiClient
-C# Wrapper for Wrike v3 Rest API
+.NET Client for Wrike API 3.0
 
 ## Client Usage [![NuGet Downloads](https://img.shields.io/nuget/dt/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)
 Create your Wrike Client with your permanent token and just call the function you need.
