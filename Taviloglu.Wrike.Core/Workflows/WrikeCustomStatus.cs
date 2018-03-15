@@ -20,7 +20,7 @@ namespace Taviloglu.Wrike.Core
         /// </summary>
         [JsonProperty("group")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeTaskStatus Group { get; set; }
+        public WrikeTaskStatus? Group { get; set; }
         /// <summary>
         /// Custom status is hidden
         /// </summary>

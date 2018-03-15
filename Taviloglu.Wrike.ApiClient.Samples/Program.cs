@@ -19,11 +19,13 @@
 
             //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
-            TimelogSamples.Run(wrikeClient).Wait();
+            //TimelogSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
             //TasksSamples.Run(wrikeClient).Wait();
+
+            WorkflowSamples.Run(wrikeClient).Wait();
 
             //try other samples...
 
