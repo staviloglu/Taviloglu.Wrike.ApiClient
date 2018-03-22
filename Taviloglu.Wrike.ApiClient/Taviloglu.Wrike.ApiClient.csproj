@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.75.0-alpha</Version>
+    <Version>0.76.0-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>C# Client for Wrike v3 Rest API</Description>
@@ -12,13 +12,19 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- 75% of the Wrike v3 REST API is implemented
-- Timelogs client implemented
-- Ids client implemented
-- Invitations client implemented
+    <PackageReleaseNotes>- 76% of the Wrike v3 REST API is implemented
+- Optional FolderId support added for creating Webhook
 </PackageReleaseNotes>
-    <AssemblyVersion>0.75.0.0</AssemblyVersion>
-    <FileVersion>0.75.0.0</FileVersion>
+    <AssemblyVersion>0.76.0.0</AssemblyVersion>
+    <FileVersion>0.76.0.0</FileVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	
+	<files>
+    <file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.dll" />
+    <file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.xml" />
+	<file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.pdb" />
+  </files>
+  
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

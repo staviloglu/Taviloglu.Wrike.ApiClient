@@ -11,7 +11,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="newWebhook">Use ctor <see cref="WrikeWebHook.WrikeWebHook(string, string)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebhook);
+        Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebhook, string folderId = null);
 
         /// <summary>
         /// Returns a list of all existing webhooks
