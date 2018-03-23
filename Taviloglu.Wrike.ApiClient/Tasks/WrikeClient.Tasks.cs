@@ -40,7 +40,6 @@ namespace Taviloglu.Wrike.ApiClient
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", newTask.Title)
                 .AddParameter("description", newTask.Description)
-                .AddParameter("status", newTask.Status)
                 .AddParameter("importance", newTask.Importance)
                 .AddParameter("dates", newTask.Dates)
                 .AddParameter("shareds", newTask.SharedIds)
@@ -52,8 +51,16 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("priorityAfter", priorityAfter)
                 .AddParameter("superTasks", newTask.SuperTaskIds)
                 .AddParameter("metadata", newTask.Metadata)
-                .AddParameter("customFields", newTask.CustomFields)
-                .AddParameter("customStatus", newTask.CustomStatusId);
+                .AddParameter("customFields", newTask.CustomFields);
+
+            if (string.IsNullOrWhiteSpace(newTask.CustomStatusId))
+            {
+                postDataBuilder.AddParameter("status", newTask.Status);
+            }
+            else
+            {
+                postDataBuilder.AddParameter("customStatus", newTask.CustomStatusId);
+            }
 
             var postContent = postDataBuilder.GetContent();
             var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);

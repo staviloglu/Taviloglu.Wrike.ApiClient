@@ -10,6 +10,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Create task in folder.  
         ///  Scopes: Default, wsReadWrite
         /// </summary>
+        /// <remarks>If newTask.CustomStatus is set, newTask.Status is ommited</remarks>
         /// <param name="folderId">You can specify rootFolderId to create task in user's account root.</param>
         /// <param name="newTask">Use ctor <see cref="WrikeTask.WrikeTask(string, string, WrikeTaskStatus?, WrikeTaskImportance?, WrikeTaskDate, List{string}, List{string}, List{string}, List{string}, bool?, string, string, List{string}, List{WrikeMetadata}, List{WrikeCustomFieldData}, string)"/></param>
         /// <param name="priorityBefor">Put newly created task before specified task in task list</param>
