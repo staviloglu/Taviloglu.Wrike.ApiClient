@@ -149,7 +149,7 @@ namespace Taviloglu.Wrike.Core
         public WrikeProject Project { get; set; }
 
         /// <summary>
-        /// Json string array of optional fields to be included in the response model
+        /// Optional fields to be included in the response model
         /// </summary>
         public class OptionalFields
         {
