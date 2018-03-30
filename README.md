@@ -53,7 +53,7 @@ newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
-## 76% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
+## 81% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
@@ -65,10 +65,11 @@ Then Wrike will send post requests to the url you provided. For more details che
  
  <tr><td>[GET] /users/{userId}</td><td>1</td><td rowspan="2">Users</td></tr>
  <tr><td>[PUT] /users/{userId}</td><td>&nbsp;</td></tr>
- <tr><td>[GET] /groups/{groupId}</td><td>&nbsp;</td><td rowspan="5">Groups</td></tr>
- <tr><td>[GET] /accounts/{accountId}/groups</td><td>&nbsp;</td></tr>
- <tr><td>[POST] /accounts/{accountId}/groups</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /groups/{groupId}</td><td>&nbsp;</td></tr>
+ 
+ <tr><td>[GET] /groups/{groupId}</td><td>1</td><td rowspan="5">Groups</td></tr>
+ <tr><td>[GET] /accounts/{accountId}/groups</td><td>1</td></tr>
+ <tr><td>[POST] /accounts/{accountId}/groups</td><td>1</td></tr>
+ <tr><td>[PUT] /groups/{groupId}</td><td>1</td></tr>
  <tr><td>[DELETE] /groups/{groupId}</td><td>1</td></tr>
  
  <tr><td>[GET] /accounts/{accountId}/invitations</td><td>1</td><td rowspan="4">Invitations</td></tr>
