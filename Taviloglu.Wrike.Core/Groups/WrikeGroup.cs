@@ -5,6 +5,16 @@ namespace Taviloglu.Wrike.Core
 {
     public sealed class WrikeGroup : WrikeObjectWithId
     {
+        public WrikeGroup(string accountId, string title, List<string> memberIds = null, List<WrikeMetadata> metadata = null)
+        {
+            AccountId = accountId;
+            Title = title;
+            MemberIds = memberIds;
+            Metadata = metadata;
+        }
+
+        public WrikeGroup() { }
+
         /// <summary>
         /// Account ID
         /// </summary>

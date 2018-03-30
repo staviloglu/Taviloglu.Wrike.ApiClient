@@ -90,6 +90,7 @@ namespace Taviloglu.Wrike.ApiClient
             var requestUri = $"accounts/{newGroup.AccountId}/groups";
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("title",newGroup.Title)
                 .AddParameter("members", newGroup.MemberIds)
                 .AddParameter("parent", parentId)
                 .AddParameter("avatar", avatar)

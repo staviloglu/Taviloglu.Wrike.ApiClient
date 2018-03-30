@@ -8,6 +8,9 @@ namespace Taviloglu.Wrike.Core
     /// </summary>
     public sealed class WrikeGroupAvatar : IWrikeObject
     {
+        /// <summary></summary>
+        /// <param name="color"> Hex color code</param>
+        /// <param name="letters">Group letters (2 symbols max)</param>
         public WrikeGroupAvatar(string color, string letters)
         {
             if (letters.Length < 2)

@@ -26,7 +26,9 @@
 
             //WorkflowSamples.Run(wrikeClient).Wait();
 
-            InvitationsSamples.Run(wrikeClient).Wait();
+            GroupsSamples.Run(wrikeClient).Wait();
+
+            //InvitationsSamples.Run(wrikeClient).Wait();
 
             //try other samples...
 

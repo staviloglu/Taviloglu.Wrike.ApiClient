@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.76.20-alpha</Version>
+    <Version>0.81.00-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>.NET Client for Wrike v3 Rest API</Description>
@@ -12,11 +12,10 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Optional FolderId support added for creating Webhook
-- WrikeTaskClient.CreateAsync method updated, to prevent the use of Status and CustomStatus together.
+    <PackageReleaseNotes>- Groups client implemented
 </PackageReleaseNotes>
-    <AssemblyVersion>0.76.20.0</AssemblyVersion>
-    <FileVersion>0.76.20.0</FileVersion>
+    <AssemblyVersion>0.81.00.0</AssemblyVersion>
+    <FileVersion>0.81.00.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	
 	<files>

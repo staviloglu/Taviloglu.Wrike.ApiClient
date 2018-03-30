@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {
@@ -6,9 +7,24 @@ namespace Taviloglu.Wrike.ApiClient.Samples
     {
         public static async Task Run(WrikeClient client)
         {
-            await client.Groups.DeleteAsync("groupId", true);
 
-            await client.Groups.DeleteAsync("groupId");
+            var allGroups = await client.Groups.GetAsync(accountId: "IEABX2HE");
+
+            var newGroup = new WrikeGroup("IEABX2HE", "Sinan's Test Group");
+            newGroup = await client.Groups.CreateAsync(newGroup);
+
+
+
+            var updatedGroup = await client.Groups.UpdateAsync(
+                newGroup.Id, 
+                title: "Sinan's Group [Updated]", 
+                avatar: new WrikeGroupAvatar("#795548", "SG"));
+
+
+
+            await client.Groups.DeleteAsync(newGroup.Id, true);
+
+            await client.Groups.DeleteAsync(newGroup.Id);
         }
     }
 }
