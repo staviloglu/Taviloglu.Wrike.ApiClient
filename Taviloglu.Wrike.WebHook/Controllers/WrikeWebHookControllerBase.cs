@@ -73,11 +73,11 @@ namespace Taviloglu.Wrike.WebHook
                         OnTaskResponsiblesRemoved(responsiblesRemovedEvent);
                         break;
                     case WrikeWebHookEventType.TaskSharedsAdded:
-                        var sharedsAddedEvent = array.First.ToObject<WrikeWebHookTaskSahredsAddedEvent>();
+                        var sharedsAddedEvent = array.First.ToObject<WrikeWebHookTaskSharedsAddedEvent>();
                         OnTaskSharedsAdded(sharedsAddedEvent);
                         break;
                     case WrikeWebHookEventType.TaskSharedsRemoved:
-                        var sharedsRemovedEvent = array.First.ToObject<WrikeWebHookTaskSahredsRemovedEvent>();
+                        var sharedsRemovedEvent = array.First.ToObject<WrikeWebHookTaskSharedsRemovedEvent>();
                         OnTaskSharedsRemoved(sharedsRemovedEvent);
                         break;
                     case WrikeWebHookEventType.TaskDescriptionChanged:
@@ -123,8 +123,8 @@ namespace Taviloglu.Wrike.WebHook
         protected virtual void OnTaskParentsRemoved(WrikeWebHookTaskParentsRemovedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskResponsiblesAdded(WrikeWebHookTaskResponsiblesAddedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskResponsiblesRemoved(WrikeWebHookTaskResponsiblesRemovedEvent wrikeWebHookEvent) { }
-        protected virtual void OnTaskSharedsAdded(WrikeWebHookTaskSahredsAddedEvent wrikeWebHookEvent) { }
-        protected virtual void OnTaskSharedsRemoved(WrikeWebHookTaskSahredsRemovedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskSharedsAdded(WrikeWebHookTaskSharedsAddedEvent wrikeWebHookEvent) { }
+        protected virtual void OnTaskSharedsRemoved(WrikeWebHookTaskSharedsRemovedEvent wrikeWebHookEvent) { }
         protected virtual void OnTaskDescriptionChanged(WrikeWebHookEvent wrikeWebHookEvent) { }
         protected virtual void OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { }
         protected virtual void OnAttachmentDeleted(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { }

@@ -77,12 +77,12 @@ namespace Taviloglu.Wrike.WebHook.Samples.Controllers
             //TODO: write some code
         }
 
-        protected override void OnTaskSharedsAdded(WrikeWebHookTaskSahredsAddedEvent wrikeWebHookEvent)
+        protected override void OnTaskSharedsAdded(WrikeWebHookTaskSharedsAddedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
 
-        protected override void OnTaskSharedsRemoved(WrikeWebHookTaskSahredsRemovedEvent wrikeWebHookEvent)
+        protected override void OnTaskSharedsRemoved(WrikeWebHookTaskSharedsRemovedEvent wrikeWebHookEvent)
         {
             //TODO: write some code
         }
