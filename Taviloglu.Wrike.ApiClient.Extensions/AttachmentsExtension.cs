@@ -9,7 +9,7 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
         {
             using (var downloadedStream = await wrikeAttachmentsClient.DownloadAsync(attachmentId))
             {
-                using (FileStream fs = new FileStream(savingPath, FileMode.CreateNew, FileAccess.Write))
+                using (FileStream fs = new FileStream(savingPath, FileMode.Create, FileAccess.Write))
                 {
                     byte[] buffer = new byte[8 * 1024];
                     int len;
