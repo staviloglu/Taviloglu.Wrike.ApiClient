@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.5</Version>
+    <Version>1.0.10</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Extension methods to use with wrike client which are not provided in Taviloglu.Wrike.ApiClient</Description>
@@ -11,11 +11,13 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api extensions</PackageTags>
-    <PackageReleaseNotes>- Extension method for Workflows added
+    <PackageReleaseNotes>- TaskExtensions.GetSubTasksBySuperTaskIdAsync method is updated to prevent exception thrown by tasks that have no subtasks.
+- AttachmentExtensions.DownloadAndSaveAttachment method is updated, now using FileMode.Create rather than FileMode.CreateNew
 </PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
-    <AssemblyVersion>1.0.5.0</AssemblyVersion>
-    <FileVersion>1.0.5.0</FileVersion>
+    <AssemblyVersion>1.0.10.0</AssemblyVersion>
+    <FileVersion>1.0.10.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
