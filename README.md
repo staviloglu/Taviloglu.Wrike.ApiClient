@@ -53,7 +53,7 @@ newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
-## 81% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
+## 84% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
@@ -97,8 +97,8 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[GET] /folders/{folderId},{folderId},... - up to 100 IDs</td><td>1</td></tr>
  <tr><td>[POST] /folders/{folderId}/folders</td><td>1</td></tr>
  <tr><td>[POST] /copy_folder/{folderId}</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /folders/{folderId}</td><td>&nbsp;</td></tr>
- <tr><td>[DELETE] /folders/{folderId}</td><td>&nbsp;</td></tr>
+ <tr><td>[PUT] /folders/{folderId}</td><td>1</td></tr>
+ <tr><td>[DELETE] /folders/{folderId}</td><td>1</td></tr>
  
  <tr><td>[GET] /tasks</td><td>1</td><td rowspan="7">Tasks</td></tr>
  <tr><td>[GET] /accounts/{accountId}/tasks</td><td>1</td></tr>
