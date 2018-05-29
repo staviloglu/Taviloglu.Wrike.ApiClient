@@ -12,7 +12,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Create timelog record for task
         /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// <param name="newTimeLog">Use ctor <see cref="WrikeTimelog.WrikeTimelog(string, string, int, System.DateTime, string)"/></param>
+        /// <param name="newTimeLog">Use ctor <see cref="WrikeTimelog.WrikeTimelog(string, string, int, DateTime, string)"/></param>
         /// <param name="plaintext">Get comment text as plain text, HTML otherwise</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-timelog"/>
         Task<WrikeTimelog> CreateAsync(WrikeTimelog newTimeLog, bool? plainText = null);

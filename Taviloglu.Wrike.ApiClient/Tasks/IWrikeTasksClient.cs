@@ -7,6 +7,16 @@ namespace Taviloglu.Wrike.ApiClient
     public interface IWrikeTasksClient
     {
         /// <summary>
+        /// This parameter is set by your last GetAsync method call if you use pageSize parameter to have paged response
+        /// Use this property as nextPageToken parameter of GetAsync method to get the next page of the paged response
+        /// </summary>
+        string LastNextPageToken { get;}
+        /// <summary>
+        /// This parameter is set by your last GetAsync method call if you use pageSize parameter to have paged response
+        /// </summary>
+        int LastResponseSize { get;}
+
+        /// <summary>
         ///  Create task in folder.  
         ///  Scopes: Default, wsReadWrite
         /// </summary>

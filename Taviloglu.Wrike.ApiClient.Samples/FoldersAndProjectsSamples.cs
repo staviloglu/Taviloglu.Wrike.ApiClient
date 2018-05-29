@@ -23,8 +23,17 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //new List<string> { "folderId", "folderId" }
             //);
             
-            var newFolder = new WrikeFolder("MyNewFolder", description: "My New Folder Desc.",shareds: new List<string> { "ContactIdToShare" });
-            newFolder = await client.FoldersAndProjects.CreateAsync("folderId",newFolder);
+
+            var rootFolderId = "root-folderId";
+
+            var newFolder = new WrikeFolder("Sinan Test Folder2", 
+                description: "Test Folder for development of wrike integration");
+
+            newFolder = await client.FoldersAndProjects.CreateAsync(rootFolderId,newFolder);
+            newFolder = await client.FoldersAndProjects.UpdateAsync(newFolder.Id, "Sinan Test Folder #2", addShareds: new List<string> { "newIdToAdd" });
+            await client.FoldersAndProjects.DeleteAsync(newFolder.Id);
+
+
             
         }
     }

@@ -32,35 +32,56 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //        WrikeTask.OptionalFields.Recurrent }
             //    );
 
-            //tasks = await client.Tasks.GetAsync();
+            //var tasks = await client.Tasks.GetAsync();
 
-            var newTask = new WrikeTask
+
+            //paged example       
+            var pagedTaskList = await client.Tasks.GetAsync(pageSize: 20);
+            //you can read this property only after first paged request, otherwise it is 0
+            var responseSize = client.Tasks.LastResponseSize; 
+            //if you keep requesting with LastNextPageToken it will be empty when you get your last tasks of paged response
+            var nextPageToken = client.LastNextPageToken; 
+            while (!string.IsNullOrWhiteSpace(nextPageToken))
             {
-                Title = "new task title",
-                Description = "new task description",
-                Status = WrikeTaskStatus.Active,
-                Importance = WrikeTaskImportance.High,
-                Dates = new WrikeTaskDate
-                {
-                    Due = DateTime.Now.AddDays(5),
-                    Duration = 180000,
-                    Start = DateTime.Now,
-                    Type = WrikeTaskDateType.Planned,
-                    WorkOnWeekends = false
+                pagedTaskList = await client.Tasks.GetAsync(nextPageToken: nextPageToken);
+                nextPageToken = client.LastNextPageToken;
+                //client.Tasks.LastResponseSize is zero here
+            }
 
-                },
-                SharedIds = null,
-                ParentIds = null,
-                ResponsibleIds = null,
-                FollowerIds = null,
-                FollowedByMe = false,
-                SuperTaskIds = null,
-                Metadata = new List<WrikeMetadata> {
-                    new WrikeMetadata("metadata1","metadata1.value")
-                },
-                CustomStatusId = null
-            };
-            newTask = await client.Tasks.CreateAsync("IEABX2HEI4FR342D", newTask);
+            //another paged example
+            do
+            {
+              var pagedList2 = await client.Tasks.GetAsync(nextPageToken:client.Tasks.LastNextPageToken, pageSize:20);
+            } while (!string.IsNullOrWhiteSpace(client.Tasks.LastNextPageToken));
+
+
+            //var newTask = new WrikeTask
+            //{
+            //    Title = "new task title",
+            //    Description = "new task description",
+            //    Status = WrikeTaskStatus.Active,
+            //    Importance = WrikeTaskImportance.High,
+            //    Dates = new WrikeTaskDate
+            //    {
+            //        Due = DateTime.Now.AddDays(5),
+            //        Duration = 180000,
+            //        Start = DateTime.Now,
+            //        Type = WrikeTaskDateType.Planned,
+            //        WorkOnWeekends = false
+
+            //    },
+            //    SharedIds = null,
+            //    ParentIds = null,
+            //    ResponsibleIds = null,
+            //    FollowerIds = null,
+            //    FollowedByMe = false,
+            //    SuperTaskIds = null,
+            //    Metadata = new List<WrikeMetadata> {
+            //        new WrikeMetadata("metadata1","metadata1.value")
+            //    },
+            //    CustomStatusId = null
+            //};
+            //newTask = await client.Tasks.CreateAsync("folderId", newTask);
 
             //tasks = await client.Tasks.GetAsync();
 

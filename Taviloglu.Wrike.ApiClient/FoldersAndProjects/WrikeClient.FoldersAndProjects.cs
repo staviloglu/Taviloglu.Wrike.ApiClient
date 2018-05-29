@@ -101,5 +101,46 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
+
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.DeleteAsync(string folderId)
+        {
+            if (string.IsNullOrWhiteSpace(folderId))
+            {
+                throw new ArgumentNullException("folderId can not be null or empty");
+            }
+
+            var response = await SendRequest<WrikeFolder>($"folders/{folderId} ", HttpMethods.Delete).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
+
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.UpdateAsync(string folderId, string title, string description, List<string> addParents, List<string> removeParents, List<string> addShareds, List<string> removeShareds, List<WrikeMetadata> metadata, bool? restore, List<WrikeCustomFieldData> customFields, List<string> customColumns, WrikeProject project) {
+
+
+            if (string.IsNullOrWhiteSpace(folderId))
+            {
+                throw new ArgumentNullException(nameof(folderId), "folderId can not be null or empty.");
+            }
+
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentNullException(nameof(title), "title can not be null or empty.");
+            }
+
+            var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("title", title)
+                .AddParameter("description", description)
+                .AddParameter("addParents", addParents)
+                .AddParameter("removeParents", removeParents)
+                .AddParameter("addShareds", addShareds)
+                .AddParameter("removeShareds", removeShareds)
+                .AddParameter("metadata", metadata)
+                .AddParameter("restore", restore)
+                .AddParameter("customFields", customFields)
+                .AddParameter("customColumns", customColumns)
+                .AddParameter("project", project);
+
+            var response = await SendRequest<WrikeFolder>($"folders/{folderId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
     }
 }

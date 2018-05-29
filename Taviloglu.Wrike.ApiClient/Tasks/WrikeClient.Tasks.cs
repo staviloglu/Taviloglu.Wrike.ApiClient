@@ -10,6 +10,10 @@ namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeTasksClient
     {
+        public string LastNextPageToken { get; private set; }
+
+        public int LastResponseSize { get; private set; }
+
         public IWrikeTasksClient Tasks
         {
             get
@@ -125,6 +129,11 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("fields", fields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            
+            LastResponseSize = response.ResponseSize;
+            LastNextPageToken = response.NextPageToken;
+            
+
             return GetReponseDataList(response);
         }
 

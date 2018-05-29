@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.81.00-alpha</Version>
+    <Version>0.84.00-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>.NET Client for Wrike v3 Rest API</Description>
@@ -12,10 +12,11 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Groups client implemented
+    <PackageReleaseNotes>- Added Paged Result support for TasksClient (LastNextPageToken, LastResponseSize Properties)
+- Added Delete and Update support to Folders&amp;ProjectsClient
 </PackageReleaseNotes>
-    <AssemblyVersion>0.81.00.0</AssemblyVersion>
-    <FileVersion>0.81.00.0</FileVersion>
+    <AssemblyVersion>0.84.00.0</AssemblyVersion>
+    <FileVersion>0.84.00.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	
 	<files>

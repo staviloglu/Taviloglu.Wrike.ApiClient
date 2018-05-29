@@ -8,6 +8,12 @@ namespace Taviloglu.Wrike.ApiClient.Dto
     {
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
+        [JsonProperty(PropertyName = "nextPageToken")]
+        public string NextPageToken { get; set; }
+
+        [JsonProperty(PropertyName = "responseSize")]
+        public int ResponseSize { get; set; }
+
         [JsonProperty(PropertyName = "data")]
         public List<T> Data { get; set; }
         [JsonProperty(PropertyName = "errorDescription")]
