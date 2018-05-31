@@ -40,11 +40,11 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //you can read this property only after first paged request, otherwise it is 0
             var responseSize = client.Tasks.LastResponseSize; 
             //if you keep requesting with LastNextPageToken it will be empty when you get your last tasks of paged response
-            var nextPageToken = client.LastNextPageToken; 
+            var nextPageToken = client.Tasks.LastNextPageToken; 
             while (!string.IsNullOrWhiteSpace(nextPageToken))
             {
                 pagedTaskList = await client.Tasks.GetAsync(nextPageToken: nextPageToken);
-                nextPageToken = client.LastNextPageToken;
+                nextPageToken = client.Tasks.LastNextPageToken;
                 //client.Tasks.LastResponseSize is zero here
             }
 
