@@ -65,7 +65,7 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("project", isProject)
             .AddParameter("fields", fields);
-            if (!string.IsNullOrWhiteSpace(folderId))
+            if (string.IsNullOrWhiteSpace(folderId))
             {
                 uriBuilder.AddParameter("deleted", isDeleted);
             }
