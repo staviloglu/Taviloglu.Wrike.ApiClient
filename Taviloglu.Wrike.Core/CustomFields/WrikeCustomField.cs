@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 
+
 namespace Taviloglu.Wrike.Core
 {
     public sealed class WrikeCustomField : WrikeObjectWithId
@@ -36,7 +37,6 @@ namespace Taviloglu.Wrike.Core
             AccountId = accountId;
         }
 
-
         [JsonProperty("accountId")]
         public string AccountId { get; set; }
 
@@ -47,7 +47,10 @@ namespace Taviloglu.Wrike.Core
         [JsonConverter(typeof(StringEnumConverter))]
         public WrikeCustomFieldType Type { get; set; }
 
-        [JsonProperty("sharedIds")]
+        [JsonProperty("sharedIds")] 
         public List<string> SharedIds { get; set; }
+
+        [JsonProperty("settings")]        
+        public WrikeCustomFieldSettings Settings { get; set; }
     }
 }

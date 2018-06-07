@@ -37,6 +37,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>        
         Task<WrikeCustomField> UpdateAsync(
-            string id, string title = null, WrikeCustomFieldType? type = null, List<string> addShareds = null, List<string> removeShareds = null);
+            string id, string title = null, WrikeCustomFieldType? type = null, List<string> addShareds = null, List<string> removeShareds = null, WrikeCustomFieldSettings settings = null);
     }
 }

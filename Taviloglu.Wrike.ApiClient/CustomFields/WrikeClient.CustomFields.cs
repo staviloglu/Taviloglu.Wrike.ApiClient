@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
+
 namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeCustomFieldsClient
@@ -58,7 +59,8 @@ namespace Taviloglu.Wrike.ApiClient
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", customField.Title)
                 .AddParameter("type", customField.Type)
-                .AddParameter("shareds", customField.SharedIds);
+                .AddParameter("shareds", customField.SharedIds)
+                .AddParameter("settings", customField.Settings);
             
 
             var response = await SendRequest<WrikeCustomField>($"accounts/{customField.AccountId}/customfields",
@@ -72,7 +74,8 @@ namespace Taviloglu.Wrike.ApiClient
             string title,
             WrikeCustomFieldType? type,
             List<string> addShareds,
-            List<string> removeShareds)
+            List<string> removeShareds,
+            WrikeCustomFieldSettings settings)
         {
 
             if (string.IsNullOrWhiteSpace(id))
@@ -84,7 +87,8 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("title", title)
                 .AddParameter("type", type)
                 .AddParameter("addShareds", addShareds)
-                .AddParameter("removeShareds", removeShareds);
+                .AddParameter("removeShareds", removeShareds)
+                .AddParameter("settings", settings);
 
             
 

@@ -28,7 +28,9 @@ namespace Taviloglu.Wrike.Core
 
         [JsonProperty("accountId")]
         public string AccountId { get; set; }
-        [JsonProperty("hookUrl")]
+        [JsonProperty("accountId")]
+        public string FolderId { get; set; }
+        [JsonProperty("folderId")]
         public string HookUrl { get; set; }
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]

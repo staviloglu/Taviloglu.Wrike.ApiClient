@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.81.10-alpha</Version>
+    <Version>0.85.50-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike v3 Rest API</Description>
@@ -12,10 +12,11 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- fixed naming error WrikeWebHookTaskSahredsRemovedEvent &gt;&gt; WrikeWebHookTaskSharedsRemovedEvent 
-- fixed naming error WrikeWebHookTaskSahredsAddedEvent &gt;&gt; WrikeWebHookTaskSharedsAddedEvent</PackageReleaseNotes>
-    <AssemblyVersion>0.81.10.0</AssemblyVersion>
-    <FileVersion>0.81.10.0</FileVersion>
+    <PackageReleaseNotes>- FolderId property added to WrikeWebHook object
+- customFieldSettings object added 
+- Settings property added to CustomField object</PackageReleaseNotes>
+    <AssemblyVersion>0.85.50.0</AssemblyVersion>
+    <FileVersion>0.85.50.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
