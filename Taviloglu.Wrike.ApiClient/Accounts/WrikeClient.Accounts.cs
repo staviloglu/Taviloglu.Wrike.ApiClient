@@ -17,9 +17,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<List<WrikeAccount>> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> fields)
         {
-            var requestUri = "accounts";
-
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeGetUriBuilder("accounts")
                 .AddParameter("metadata", metadata).
                 AddParameter("fields", fields);
 
@@ -27,6 +25,34 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        //TODO: implement other methods
+
+        async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(string id, List<string> fields)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException("id can not be null or empty");
+            }
+
+            var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}")
+                .AddParameter("fields", fields);
+
+            var response = await SendRequest<WrikeAccount>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
+
+        async Task<WrikeAccount> IWrikeAccountsClient.UpdateAsync(string id, List<WrikeMetadata> metadataList)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException("id can not be null or empty");
+            }
+
+            var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("metadata", metadataList);
+
+            var response = await SendRequest<WrikeAccount>($"accounts/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+
+        }
     }
 }

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.86.00-alpha</Version>
+    <Version>0.86.10-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>.NET Client for Wrike v3 Rest API</Description>
@@ -13,9 +13,10 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>- Settings property support added to WrikeCustomField object
-- Update method implemented in Users client</PackageReleaseNotes>
-    <AssemblyVersion>0.85.50.0</AssemblyVersion>
-    <FileVersion>0.85.50.0</FileVersion>
+- Update method implemented in Users client
+- Implemented all Accounts client methods</PackageReleaseNotes>
+    <AssemblyVersion>0.86.10.0</AssemblyVersion>
+    <FileVersion>0.86.10.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	
 	<files>

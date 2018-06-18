@@ -110,11 +110,11 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeComment> IWrikeCommentsClient.UpdateAsync(string commentId, string text, bool? plainText)
+        async Task<WrikeComment> IWrikeCommentsClient.UpdateAsync(string id, string text, bool? plainText)
         {
-            if (string.IsNullOrWhiteSpace(commentId))
+            if (string.IsNullOrWhiteSpace(id))
             {
-                throw new ArgumentNullException(nameof(commentId), "commentId can not be null or empty");
+                throw new ArgumentNullException(nameof(id), "commentId can not be null or empty");
             }
 
             if (string.IsNullOrWhiteSpace(text))
@@ -126,7 +126,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("text", text)
                 .AddParameter("plainText", plainText);
 
-            var response = await SendRequest<WrikeComment>($"comments/{commentId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeComment>($"comments/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }

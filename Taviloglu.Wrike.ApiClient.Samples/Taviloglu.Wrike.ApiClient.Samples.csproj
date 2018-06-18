@@ -46,6 +46,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountsSamples.cs" />
     <Compile Include="InvitationsSamples.cs" />
     <Compile Include="CommentsSamples.cs" />
     <Compile Include="TimelogSamples.cs" />

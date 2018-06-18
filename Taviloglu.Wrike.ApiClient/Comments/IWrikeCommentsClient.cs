@@ -41,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
         /// <param name="text">Comment text, can not be empty</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/update-comment"/>
-        Task<WrikeComment> UpdateAsync(string commentId, string text, bool? plainText = null);
+        Task<WrikeComment> UpdateAsync(string id, string text, bool? plainText = null);
 
         /// <summary>
         ///  Create a comment in the folder/task. The virtual Root and Recycle Bin folders cannot have comments.
@@ -50,7 +50,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="plainText">Treat comment text as plain text, HTML otherwise</param>
         /// <param name="newComment">Use ctor <see cref="WrikeComment.WrikeComment(string, string, string)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-comment"/>
-        Task<WrikeComment> CreateAsync(WrikeComment newComment, bool? plainText=null);
+        Task<WrikeComment> CreateAsync(WrikeComment newComment, bool? plainText = null);
 
     }
 }
