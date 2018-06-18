@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.85.50-alpha</Version>
+    <Version>0.86.00-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike v3 Rest API</Description>
@@ -14,7 +14,8 @@
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>- FolderId property added to WrikeWebHook object
 - customFieldSettings object added 
-- Settings property added to CustomField object</PackageReleaseNotes>
+- Settings property added to CustomField object
+- Missing IWrikeObject implementation fixed in WrikeUserProfile</PackageReleaseNotes>
     <AssemblyVersion>0.85.50.0</AssemblyVersion>
     <FileVersion>0.85.50.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

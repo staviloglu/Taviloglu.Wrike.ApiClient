@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "your-api";
+            var bearerToken = "your-api-token";
 
             var wrikeClient = new WrikeClient(bearerToken);
 
@@ -22,13 +22,17 @@
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
-            TasksSamples.Run(wrikeClient).Wait();
+            //TasksSamples.Run(wrikeClient).Wait();
 
             //WorkflowSamples.Run(wrikeClient).Wait();
 
             //GroupsSamples.Run(wrikeClient).Wait();
 
             //InvitationsSamples.Run(wrikeClient).Wait();
+
+            //CustomFieldsSamples.Run(wrikeClient).Wait();
+
+            UsersSamples.Run(wrikeClient).Wait();
 
             //try other samples...
 

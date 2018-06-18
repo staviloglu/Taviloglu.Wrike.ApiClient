@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Taviloglu.Wrike.Core
 {
-    public sealed class WrikeUserProfile
+    public sealed class WrikeUserProfile : IWrikeObject
     {
         /// <summary>
         /// Account ID
