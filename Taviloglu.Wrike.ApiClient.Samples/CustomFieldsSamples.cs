@@ -10,21 +10,27 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         {
             var customFields = await client.CustomFields.GetAsync();
 
-            customFields = await client.CustomFields.GetAsync(new List<string> { "customFieldId", "customFieldId" });
 
-            var newCustomField = new WrikeCustomField
-            {
-                AccountId = "accountId",
-                Title = "New Custom Field",
-                Type = WrikeCustomFieldType.Duration
-            };
-            newCustomField = await client.CustomFields.CreateAsync(newCustomField);
+
+
+
+            //customFields = await client.CustomFields.GetAsync(new List<string> { "customFieldId", "customFieldId" });
+
+            //var newCustomField = new WrikeCustomField
+            //{
+            //    AccountId = "accountId",
+            //    Title = "New Custom Field",
+            //    Type = WrikeCustomFieldType.Duration
+            //};
+            //newCustomField = await client.CustomFields.CreateAsync(newCustomField);
 
             //TODO: returns invalid-parameter error if type is not Text
+            customFields[18].Settings.DecimalPlaces = 0;
+            customFields[18].Settings.Aggregation  = WrikeCustomFieldAggregationType.None;
+
             var updatedCustomField = await client.CustomFields.UpdateAsync(
-                newCustomField.Id,
-                title: "Updated New Custom Field",
-                type: WrikeCustomFieldType.Currency);
+                customFields[18].Id,
+                settings: customFields[18].Settings);
             
         }
     }
