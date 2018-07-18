@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Timelogs;
 
 namespace Taviloglu.Wrike.ApiClient
 {
@@ -33,5 +34,13 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="metadataList">Metadata to be updated</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-account"/>
         Task<WrikeAccount> UpdateAsync(string id, List<WrikeMetadata> metadataList);
+
+        /// <summary>
+        /// Get timelog categories in account.
+        /// SScopes: Default, wsReadOnly, wsReadWrite, amReadOnlyTimelogCategory, amReadWriteTimelogCategory
+        /// </summary>
+        /// <param name="id">AccountId</param>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelog-categories"/>
+        Task<List<WrikeTimelogCategorie>> GetTimelogCategories(string id);
     }
 }
