@@ -28,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Update account by Id.
-        /// SScopes: Default, wsReadWrite
+        /// Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="id">AccountId</param>
         /// <param name="metadataList">Metadata to be updated</param>
@@ -37,10 +37,10 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Get timelog categories in account.
-        /// SScopes: Default, wsReadOnly, wsReadWrite, amReadOnlyTimelogCategory, amReadWriteTimelogCategory
+        /// Scopes: Default, wsReadOnly, wsReadWrite, amReadOnlyTimelogCategory, amReadWriteTimelogCategory
         /// </summary>
         /// <param name="id">AccountId</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelog-categories"/>
-        Task<List<WrikeTimelogCategorie>> GetTimelogCategories(string id);
+        Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id);
     }
 }
