@@ -53,7 +53,7 @@ newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
-## 84% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
+## 88% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
@@ -133,6 +133,9 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[POST] /tasks/{taskId}/timelogs</td><td>1</td></tr>
  <tr><td>[PUT] /timelogs/{timelogId}</td><td>1</td></tr>
  <tr><td>[DELETE] /timelogs/{timelogId}</td><td>1</td></tr>
+ 
+ <tr><td>[GET] /accounts/{accountId}/timelog_categories</td><td>1</td><td>Timelog Categories</td></tr>
+ 
  
  <tr><td>[GET] /accounts/{accountId}/attachments</td><td>1</td><td rowspan="11">Attachments</td></tr>
  <tr><td>[GET] /folders/{folderId}/attachments </td><td>1</td></tr>
