@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Taviloglu.Wrike.ApiClient.FoldersAndProjects;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
@@ -73,6 +75,27 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="project">Project settings (update project or convert folder to project). Use null value to convert project to folder</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-folder"/> 
         Task<WrikeFolder> UpdateAsync(string folderId, string title, string description = null, List<string> addParents = null, List<string> removeParents = null, List<string> addShareds = null, List<string> removeShareds = null, List<WrikeMetadata> metadata = null, bool? restore = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null);
+
+        /// <summary>
+        /// Copy folder subtree, returns parent folder subtree.
+        /// Scopes: Default, wsReadWrite
+        /// </summary>
+        /// <param name="parentFolderId">ID of parent folder</param>
+        /// <param name="title">Title</param>
+        /// <param name="titlePrefix">Title prefix for all copied tasks</param>
+        /// <param name="copyDescriptions">Copy descriptions or leave empty</param>
+        /// <param name="copyResponsibles">Copy responsibles</param>
+        /// <param name="addResponsibles">Add specified users to task responsible list</param>
+        /// <param name="removeResponsibles">Remove specified users from task responsible list</param>
+        /// <param name="copyCustomFields">Copy custom fields</param>
+        /// <param name="copyCustomStatuses">Copy custom statuses or set according to workflow otherwise</param>
+        /// <param name="copyStatuses">Copy task statuses or set to Active otherwise</param>
+        /// <param name="copyParents">Preserve parent folders</param>
+        /// <param name="rescheduleDate">Date to use in task rescheduling. Note that only active tasks can be rescheduled. To activate and reschedule all tasks, use 'rescheduleDate' in combination with copyStatuses = false</param>
+        /// <param name="rescheduleMode">Mode to be used for rescheduling (based on first or last date), has effect only if reschedule date is specified. </param>
+        /// <param name="entryLimit">Limit maximum allowed number for tasks/folders in tree for copy, operation will fail if limit is exceeded, should be 1..250</param>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/copy-folder"/> 
+        Task<WrikeFolder> CopyAsync(string parentFolderId, string title, string titlePrefix = null, bool? copyDescriptions = null, bool? copyResponsibles = null, List<string> addResponsibles = null, List<string> removeResponsibles = null, bool copyCustomFields = true, bool copyCustomStatuses = true, bool copyStatuses = true, bool copyParents = false, DateTime? rescheduleDate = null, FolderRescheduleMode? rescheduleMode = null, int entryLimit = 250);
     }
 
 
