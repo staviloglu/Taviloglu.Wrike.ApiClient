@@ -4,16 +4,8 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core.Timelogs
 {
-    public class WrikeTimelogCategorie : WrikeObjectWithId
+    public class WrikeTimelogCategory : WrikeObjectWithId
     {
-        public WrikeTimelogCategorie() { }
-
-        /// <summary>
-        /// Timelog category ID
-        /// </summary>
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
         /// <summary>
         /// Name of the timelog record
         /// </summary>
@@ -31,6 +23,5 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// </summary>
         [JsonProperty("hidden")]
         public bool Hidden { get; set; }
-
     }
 }
