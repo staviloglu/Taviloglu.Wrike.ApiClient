@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         }
 
-        public async Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id)
+        async Task<List<WrikeTimelogCategory>> IWrikeAccountsClient.GetTimelogCategories(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {

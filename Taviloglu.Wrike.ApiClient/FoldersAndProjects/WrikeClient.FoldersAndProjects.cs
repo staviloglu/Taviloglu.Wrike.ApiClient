@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Taviloglu.Wrike.ApiClient.FoldersAndProjects;
 using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Json;
 
@@ -141,6 +142,11 @@ namespace Taviloglu.Wrike.ApiClient
 
             var response = await SendRequest<WrikeFolder>($"folders/{folderId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
+        }
+
+        Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CopyAsync(string parentFolderId, string title, string titlePrefix, bool? copyDescriptions, bool? copyResponsibles, List<string> addResponsibles, List<string> removeResponsibles, bool copyCustomFields, bool copyCustomStatuses, bool copyStatuses, bool copyParents, DateTime? rescheduleDate, FolderRescheduleMode? rescheduleMode, int entryLimit)
+        {
+            throw new NotImplementedException();
         }
     }
 }

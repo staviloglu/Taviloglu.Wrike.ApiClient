@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core.Timelogs
 {
