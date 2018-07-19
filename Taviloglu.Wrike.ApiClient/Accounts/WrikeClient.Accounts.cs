@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Timelogs;
 
 namespace Taviloglu.Wrike.ApiClient
 {
@@ -53,6 +54,19 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeAccount>($"accounts/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
 
+        }
+
+        public async Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException("id can not be null or empty");
+            }
+
+            var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}/timelog_categories");
+
+            var response = await SendRequest<WrikeTimelogCategory>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataList(response);
         }
     }
 }

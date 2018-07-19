@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //Get all timelog records for a task.
             //var timelogs = await client.Timelogs.GetAsync(taskId: "IEABX2HEKQGPEIPC");
-            
+
             //Get all timelog records in the account.
             //var timelogs = await client.Timelogs.GetAsync(accountId: "IEABX2HE");
 
@@ -33,6 +33,9 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             await client.Timelogs.DeleteAsync(newTimelog.Id);
             */
+            
+            //Get all timelog categorie in the account.
+            //var timelogCategories = await client.Accounts.GetTimelogCategories("IEABX2HE");
 
         }
     }

@@ -15,6 +15,9 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             account = await client.Accounts.UpdateAsync(accounts[0].Id, account.Metadata);
 
+            //Get all timelog categorie in the account.
+            //var timelogCategories = await client.Accounts.GetTimelogCategories("IEABX2HE");
+
         }
     }
 }
