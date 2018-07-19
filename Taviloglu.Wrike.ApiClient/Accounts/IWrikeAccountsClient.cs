@@ -41,6 +41,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="id">AccountId</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelog-categories"/>
-        Task<List<WrikeTimelogCategory>> GetTimelogCategories(string accountId);
+        Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id);
     }
 }
