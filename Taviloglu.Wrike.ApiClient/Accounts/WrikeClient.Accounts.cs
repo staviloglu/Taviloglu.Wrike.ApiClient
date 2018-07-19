@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
-using Taviloglu.Wrike.Core.Timelogs;
+using Taviloglu.Wrike.Core.TimelogCategories;
 
 namespace Taviloglu.Wrike.ApiClient
 {

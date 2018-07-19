@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Taviloglu.Wrike.Core.Timelogs
+namespace Taviloglu.Wrike.Core.TimelogCategories
 {
     public class WrikeTimelogCategory : WrikeObjectWithId
     {

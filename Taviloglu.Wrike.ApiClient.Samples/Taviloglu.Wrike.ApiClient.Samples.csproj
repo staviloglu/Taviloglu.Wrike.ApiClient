@@ -49,6 +49,7 @@
     <Compile Include="AccountsSamples.cs" />
     <Compile Include="InvitationsSamples.cs" />
     <Compile Include="CommentsSamples.cs" />
+    <Compile Include="TimelogCategoriesSamples.cs" />
     <Compile Include="TimelogSamples.cs" />
     <Compile Include="WorkflowSamples.cs" />
     <Compile Include="ColorSamples.cs" />

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
-using Taviloglu.Wrike.Core.Timelogs;
+﻿using System.Threading.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {
@@ -33,10 +30,6 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             await client.Timelogs.DeleteAsync(newTimelog.Id);
             */
-            
-            //Get all timelog categorie in the account.
-            //var timelogCategories = await client.Accounts.GetTimelogCategories("IEABX2HE");
-
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "your-api-token";
+            var bearerToken = "38wRbcLlHndOpZnimkAholTZ5wfqHuMfbvERgs7qbqKn3E6XtZ8aOZUYE0eMPFr8-N-WFIUKC";
 
             var wrikeClient = new WrikeClient(bearerToken);
 
@@ -19,6 +19,7 @@
             //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
             //TimelogSamples.Run(wrikeClient).Wait();
+            TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
@@ -32,7 +33,7 @@
 
             //CustomFieldsSamples.Run(wrikeClient).Wait();
 
-            UsersSamples.Run(wrikeClient).Wait();
+            //UsersSamples.Run(wrikeClient).Wait();
 
             //try other samples...
 
