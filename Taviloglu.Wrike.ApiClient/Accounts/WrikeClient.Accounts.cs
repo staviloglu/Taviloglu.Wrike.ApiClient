@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         }
 
-        public async Task<List<WrikeTimelogCategorie>> GetTimelogCategories(string id)
+        public async Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -65,7 +65,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}/timelog_categories");
 
-            var response = await SendRequest<WrikeTimelogCategorie>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeTimelogCategory>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
     }
