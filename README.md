@@ -78,8 +78,8 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[DELETE] /invitations/{invitationId}</td><td>1</td></tr>
  
  <tr><td>[GET] /accounts</td><td>1</td><td rowspan="3">Accounts</td></tr>
- <tr><td>[GET] /accounts/{accountId}</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /accounts/{accountId}</td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /accounts/{accountId}</td><td>1</td></tr>
+ <tr><td>[PUT] /accounts/{accountId}</td><td>1</td></tr>
  
  <tr><td>[GET] /accounts/{accountId}/workflows</td><td>1</td><td rowspan="3">Workflows</td></tr>
  <tr><td>[POST] /accounts/{accountId}/workflows</td><td>1</td></tr>
