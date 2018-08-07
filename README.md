@@ -64,7 +64,7 @@ Then Wrike will send post requests to the url you provided. For more details che
 <tr><td>[PUT] /contacts/{contactId}</td><td>1</td></tr>
  
  <tr><td>[GET] /users/{userId}</td><td>1</td><td rowspan="2">Users</td></tr>
- <tr><td>[PUT] /users/{userId}</td><td>&nbsp;</td></tr>
+ <tr><td>[PUT] /users/{userId}</td><td>1</td></tr>
  
  <tr><td>[GET] /groups/{groupId}</td><td>1</td><td rowspan="5">Groups</td></tr>
  <tr><td>[GET] /accounts/{accountId}/groups</td><td>1</td></tr>
@@ -78,8 +78,8 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[DELETE] /invitations/{invitationId}</td><td>1</td></tr>
  
  <tr><td>[GET] /accounts</td><td>1</td><td rowspan="3">Accounts</td></tr>
- <tr><td>[GET] /accounts/{accountId}</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /accounts/{accountId}</td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /accounts/{accountId}</td><td>1</td></tr>
+ <tr><td>[PUT] /accounts/{accountId}</td><td>1</td></tr>
  
  <tr><td>[GET] /accounts/{accountId}/workflows</td><td>1</td><td rowspan="3">Workflows</td></tr>
  <tr><td>[POST] /accounts/{accountId}/workflows</td><td>1</td></tr>
