@@ -11,7 +11,11 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             var customFields = await client.CustomFields.GetAsync();
 
 
+            foreach (var customField in customFields)
+            {
+                await client.CustomFields.UpdateAsync(customField.Id, type:customField.Type);
 
+            }
 
 
             //customFields = await client.CustomFields.GetAsync(new List<string> { "customFieldId", "customFieldId" });

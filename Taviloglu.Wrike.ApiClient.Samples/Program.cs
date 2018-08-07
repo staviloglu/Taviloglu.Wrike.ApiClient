@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "38wRbcLlHndOpZnimkAholTZ5wfqHuMfbvERgs7qbqKn3E6XtZ8aOZUYE0eMPFr8-N-WFIUKC";
+            var bearerToken = "czFn7ibTwLS7B1Cu48mnNubb1z9icSFA66esks7KphAIJh7GbvCpEeALFDTtPPNo-N-WFIUKC";
 
             var wrikeClient = new WrikeClient(bearerToken);
 
@@ -19,7 +19,7 @@
             //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
             //TimelogSamples.Run(wrikeClient).Wait();
-            TimelogCategoriesSamples.Run(wrikeClient).Wait();
+            //TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
@@ -31,7 +31,7 @@
 
             //InvitationsSamples.Run(wrikeClient).Wait();
 
-            //CustomFieldsSamples.Run(wrikeClient).Wait();
+            CustomFieldsSamples.Run(wrikeClient).Wait();
 
             //UsersSamples.Run(wrikeClient).Wait();
 
