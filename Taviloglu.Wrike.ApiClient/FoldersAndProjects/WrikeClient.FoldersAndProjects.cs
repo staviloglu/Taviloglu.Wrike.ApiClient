@@ -40,20 +40,11 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string accountId, string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> fields)
+        async Task<List<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> fields)
         {
-            if (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId))
-            {
-                throw new ArgumentException("only folderId or accountId can be used, not both!");
-            }
-
             var requestUri = "folders";
 
-            if (!string.IsNullOrWhiteSpace(accountId))
-            {
-                requestUri = $"accounts/{accountId}/folders";
-            }
-            else if (!string.IsNullOrWhiteSpace(folderId))
+            if (!string.IsNullOrWhiteSpace(folderId))
             {
                 requestUri = $"folders/{folderId}/folders";
             }

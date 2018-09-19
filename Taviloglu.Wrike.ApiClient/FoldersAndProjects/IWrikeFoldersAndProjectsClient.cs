@@ -6,6 +6,9 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Folders & Projects
+    /// </summary>
     public interface IWrikeFoldersAndProjectsClient
     {
         /// <summary>
@@ -21,10 +24,16 @@ namespace Taviloglu.Wrike.ApiClient
         /// Returns a list of tree entries
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        ///<param name="accountId">Returns a list of tree entries for the account</param>
+        /// <param name="permalink">Folder permalink, exact match</param>
+        /// <param name="addDescendants">Adds all descendant folders to search scope</param>
+        /// <param name="metadata">Folders metadata filter</param> 
+        /// <param name="customField">Custom field filter</param>
+        /// <param name="updatedDate">Updated date filter, range</param>
+        /// <param name="isProject">Get only projects (true) / only folders (false)</param>
+        /// <param name="isDeleted">Get folders from Root (false) / Recycle Bin (true)</param>
+        /// <param name="fields">optional fields to be included in the response model. Use <see cref="WrikeFolder.OptionalFields"/></param> 
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
         Task<List<WrikeFolderTree>> GetFolderTreeAsync(
-            string accountId = null,
             string folderId = null,
             string permalink = null,
             bool? addDescendants = null,
