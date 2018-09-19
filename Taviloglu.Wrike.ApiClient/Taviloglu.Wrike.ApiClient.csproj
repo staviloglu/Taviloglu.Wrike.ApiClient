@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.89.00-alpha</Version>
+    <Version>0.90.00-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>.NET Client for Wrike Rest API</Description>
@@ -12,9 +12,10 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Wrong request address bugfix for ContactsClient.GetAsync for multiple contacIds</PackageReleaseNotes>
-    <AssemblyVersion>0.89.00.0</AssemblyVersion>
-    <FileVersion>0.89.00.0</FileVersion>
+    <PackageReleaseNotes>- Wrong request address bugfix for ContactsClient.GetAsync for multiple contacIds
+- ContactsExtensions updated to support Wrike API v4</PackageReleaseNotes>
+    <AssemblyVersion>0.90.00.0</AssemblyVersion>
+    <FileVersion>0.90.00.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	
 	<files>
