@@ -51,7 +51,7 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             var contactIdsValue = string.Join(",", contactIds);
-            var requestUri = $"customfields/{contactIdsValue}";
+            var requestUri = $"contacts/{contactIdsValue}";
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
                 .AddParameter("metadata", metadata);
             if (retrieveMetadata.HasValue && retrieveMetadata == true)
