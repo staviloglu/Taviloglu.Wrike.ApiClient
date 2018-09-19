@@ -20,14 +20,12 @@ namespace Taviloglu.Wrike.ApiClient
         /// Query Groups
         /// Scopes: amReadOnlyGroup, amReadWriteGroup
         /// </summary>
-        /// <remarks>Use one and only one of groupId or accountId</remarks>
-        /// <param name="groupId">Returns complete information about single group.</param>
-        /// <param name="accountId">Returns all groups in the account.</param>
+        /// <param name="groupId">If null, returns all groups in the account. If set returns complete information about single group.</param>
         /// <param name="optionalFields">Optional fields to be included in the response model 
         /// Use <see cref="WrikeGroup.OptionalFields"/></param>
         /// <param name="metaDataFilter">Metadata filter, exact match for metadata key or key-value pair</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-groups"/>
-        Task<List<WrikeGroup>> GetAsync(string groupId = null, string accountId = null, List<string> optionalFields = null, WrikeMetadata metaDataFilter = null);
+        Task<List<WrikeGroup>> GetAsync(string groupId=null, List<string> optionalFields = null, WrikeMetadata metaDataFilter = null);
 
         /// <summary>
         /// Create group in account.

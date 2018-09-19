@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var bearerToken = "czFn7ibTwLS7B1Cu48mnNubb1z9icSFA66esks7KphAIJh7GbvCpEeALFDTtPPNo-N-WFIUKC";
+            var bearerToken = "eyJ0dCI6InAiLCJhbGciOiJIUzI1NiIsInR2IjoiMSJ9.eyJkIjoie1wiYVwiOjIzMTc2ODQsXCJpXCI6NTM3NDAyNCxcImNcIjo0NTk1MDE0LFwidlwiOm51bGwsXCJ1XCI6NDc2NzU4MSxcInJcIjpcIlVTXCIsXCJzXCI6W1wiV1wiLFwiRlwiLFwiSVwiLFwiVVwiLFwiS1wiLFwiQ1wiXSxcInpcIjpbXSxcInRcIjowfSIsImlhdCI6MTUzNzMyMTkyOH0.r8MaouEsyTiWJ0qPqUt2McslSPP2NTinL9YrnQ9Lcow";
 
             var wrikeClient = new WrikeClient(bearerToken);
 
@@ -21,7 +21,7 @@
             //TimelogSamples.Run(wrikeClient).Wait();
             //TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
-            //ContactsSamples.Run(wrikeClient).Wait();
+            ContactsSamples.Run(wrikeClient).Wait();
 
             //TasksSamples.Run(wrikeClient).Wait();
 
@@ -31,7 +31,7 @@
 
             //InvitationsSamples.Run(wrikeClient).Wait();
 
-            CustomFieldsSamples.Run(wrikeClient).Wait();
+            //CustomFieldsSamples.Run(wrikeClient).Wait();
 
             //UsersSamples.Run(wrikeClient).Wait();
 

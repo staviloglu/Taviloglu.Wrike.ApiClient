@@ -33,24 +33,12 @@ namespace Taviloglu.Wrike.ApiClient
             return;
         }
 
-        async Task<List<WrikeGroup>> IWrikeGroupsClient.GetAsync(string groupId, string accountId, List<string> optionalFields, WrikeMetadata metaDataFilter) {
-
-
-            if (string.IsNullOrWhiteSpace(groupId) && string.IsNullOrWhiteSpace(accountId))
-            {
-                throw new ArgumentNullException("One and only one of groupId or accountId should be used");
-            }
-
-            if (!string.IsNullOrWhiteSpace(groupId) && !string.IsNullOrWhiteSpace(accountId))
-            {
-                throw new ArgumentNullException("One and only one of groupId or accountId should be used");
-            }
-
+        async Task<List<WrikeGroup>> IWrikeGroupsClient.GetAsync(string groupId, List<string> optionalFields, WrikeMetadata metaDataFilter) {
+            
             string requestUri = string.Empty;
             WrikeGetUriBuilder uriBuilder;
 
-
-            if (string.IsNullOrWhiteSpace(accountId))
+            if (!string.IsNullOrWhiteSpace(groupId))
             {
                 //user has provided groupId
                 requestUri = $"groups/{groupId}";
@@ -59,8 +47,7 @@ namespace Taviloglu.Wrike.ApiClient
             }
             else
             {
-                //user has provided accountId
-                requestUri = $"accounts/{accountId}/groups";
+                requestUri = $"groups";
                 uriBuilder = new WrikeGetUriBuilder(requestUri)
                 .AddParameter("metadata", metaDataFilter)
                 .AddParameter("fields", optionalFields);
@@ -77,17 +64,12 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException(nameof(newGroup), "newGroup can not be null");
             }
 
-            if (string.IsNullOrWhiteSpace(newGroup.AccountId))
-            {
-                throw new ArgumentNullException(nameof(newGroup.AccountId), "newGroup.AccountId can not be null or empty.");
-            }
-
             if (string.IsNullOrWhiteSpace(newGroup.Title))
             {
                 throw new ArgumentNullException(nameof(newGroup.Title),"newGroup.Title can not be null or empty.");
             }
 
-            var requestUri = $"accounts/{newGroup.AccountId}/groups";
+            var requestUri = $"groups";
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title",newGroup.Title)

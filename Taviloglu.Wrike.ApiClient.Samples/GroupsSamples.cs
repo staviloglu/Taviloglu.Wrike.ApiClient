@@ -8,7 +8,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         public static async Task Run(WrikeClient client)
         {
 
-            var allGroups = await client.Groups.GetAsync(accountId: "IEABX2HE");
+            var allGroups = await client.Groups.GetAsync();
 
             var newGroup = new WrikeGroup("IEABX2HE", "Sinan's Test Group");
             newGroup = await client.Groups.CreateAsync(newGroup);
