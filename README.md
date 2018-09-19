@@ -1,5 +1,9 @@
 # Taviloglu.Wrike.ApiClient
-.NET Client for Wrike API 3.0
+.NET Client for Wrike API 4.0
+
+:boom: Latest working client (v0.89.0-alpha) works with Wrike API v3 and is not uploaded to NuGet. You can download the binaries and the source code from [Releases](https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/releases/tag/v0.89.0-alpha) on github.
+
+:boom: master branch is now in development for supporting Wrike API v4
 
 ## Client Usage [![NuGet](https://img.shields.io/nuget/v/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)[![NuGet Downloads](https://img.shields.io/nuget/dt/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)
 Create your Wrike Client with your permanent token and just call the function you need.
@@ -53,7 +57,7 @@ newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
-## 88% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation/api/overview) is implemented in client
+## 88% of the methods in [Wrike API 3.0 Documentation](https://developers.wrike.com/documentation-v3/api/overview) is implemented in client v0.89.0-alpha
 
 <table>
 <thead><tr class="tableizer-firstrow"><th>Mehod</th><th>IsImplemented</th><th>Group</th></tr></thead>
