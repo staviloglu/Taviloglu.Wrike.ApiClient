@@ -5,7 +5,7 @@
     <Version>0.93.00-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
-    <Description>.NET Client for Wrike Rest API</Description>
+    <Description>.NET Client for Wrike API</Description>
     <Copyright>Copyright (c) 2018 SINAN TAVILOGLU</Copyright>
     <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
