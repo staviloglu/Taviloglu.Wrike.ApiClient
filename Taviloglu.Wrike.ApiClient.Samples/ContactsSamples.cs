@@ -13,6 +13,8 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         {
             var contacts = await client.Contacts.GetAsync();
 
+            contacts = await client.Contacts.GetAsync(new List<string> { contacts.First().Id });
+
             contacts = await client.Contacts.GetAsync(me: true);
 
             contacts = await client.Contacts.GetAsync(me: true,
