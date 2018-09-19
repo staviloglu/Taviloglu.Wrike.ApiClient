@@ -7,7 +7,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         public static async Task Run(WrikeClient client)
         {
             //Get all timelog categorie in the account.
-            var timelogCategories = await client.Accounts.GetTimelogCategories("IEABX2HE");            
+            var timelogCategories = await client.TimeLogCategories.GetAsync();
         }
     }
 }

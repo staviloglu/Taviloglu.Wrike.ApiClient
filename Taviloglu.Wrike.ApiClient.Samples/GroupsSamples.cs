@@ -10,7 +10,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             var allGroups = await client.Groups.GetAsync();
 
-            var newGroup = new WrikeGroup("IEABX2HE", "Sinan's Test Group");
+            var newGroup = new WrikeGroup("Sinan's Test Group");
             newGroup = await client.Groups.CreateAsync(newGroup);
 
 

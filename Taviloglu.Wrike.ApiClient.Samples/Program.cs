@@ -21,13 +21,13 @@
             //TimelogSamples.Run(wrikeClient).Wait();
             //TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
-            ContactsSamples.Run(wrikeClient).Wait();
+            //ContactsSamples.Run(wrikeClient).Wait();
 
             //TasksSamples.Run(wrikeClient).Wait();
 
             //WorkflowSamples.Run(wrikeClient).Wait();
 
-            //GroupsSamples.Run(wrikeClient).Wait();
+            GroupsSamples.Run(wrikeClient).Wait();
 
             //InvitationsSamples.Run(wrikeClient).Wait();
 
