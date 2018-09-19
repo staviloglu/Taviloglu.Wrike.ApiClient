@@ -15,15 +15,9 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(string accountId, bool? me, WrikeMetadata metadata, bool? retrieveMetadata)
+        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(bool? me, WrikeMetadata metadata, bool? isDeleted, bool? retrieveMetadata)
         {
             var requestUri = "contacts";
-            if (!string.IsNullOrWhiteSpace(accountId))
-            {
-                requestUri = $"accounts/{accountId}/contacts";
-            }
-
-
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
                 .AddParameter("me", me)

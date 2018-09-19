@@ -19,7 +19,7 @@ namespace Taviloglu.Wrike.ApiClient
         public WrikeClient(string bearerToken)
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(@"https://www.wrike.com/api/v3/");
+            _httpClient.BaseAddress = new Uri(@"https://www.wrike.com/api/v4/");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {bearerToken}");
         }

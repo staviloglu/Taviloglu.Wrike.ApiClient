@@ -8,17 +8,26 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
 {
     public static class ContactsExtensions
     {
-        public static async Task<List<WrikeUser>> GetContactsByTypeAsync(this IWrikeContactsClient wrikeContactsClient, WrikeUserType type, string accountId = null, bool? me = null, WrikeMetadata metadata = null, bool? retrieveMetadata = null)
+        /// <summary>
+        /// Retrieves the contacts having given type.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<List<WrikeUser>> GetContactsByTypeAsync(this IWrikeContactsClient wrikeContactsClient,
+            WrikeUserType type,
+            bool? me = null,
+            WrikeMetadata metadata = null,
+            bool? isDeleted = null,
+            bool? retrieveMetadata = null)
         {
-            var contacts = await wrikeContactsClient.GetAsync(accountId, me, metadata, retrieveMetadata);
+            var contacts = await wrikeContactsClient.GetAsync(me, metadata, isDeleted, retrieveMetadata);
             return contacts.Where(c => c.Type == type).ToList();
         }
 
         /// <summary>
-        /// Retrieves the first contact record having type person and provided email 
+        /// Retrieves the first contact record having type person and provided email.
         /// </summary>
-        /// <param name="email"></param>
-        public static async Task<WrikeUser> GetContactByEmailAsync(this IWrikeContactsClient wrikeContactsClient,string email)
+        public static async Task<WrikeUser> GetContactByEmailAsync(this IWrikeContactsClient wrikeContactsClient,
+            string email)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -28,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
             var contacts = await wrikeContactsClient.GetAsync();
             return contacts.Where(c =>
             c.Type == WrikeUserType.Person &&
-            c.Profiles.Any(p=> p.Email == email)).FirstOrDefault();
+            c.Profiles.Any(p => p.Email == email)).FirstOrDefault();
         }
     }
 }
