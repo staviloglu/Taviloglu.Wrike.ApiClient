@@ -8,10 +8,9 @@ namespace Taviloglu.Wrike.ApiClient.TimeLogCategories
     {
         /// <summary>
         /// Get timelog categories in account.
-        /// Scopes: Default, wsReadOnly, wsReadWrite, amReadOnlyTimelogCategory, amReadWriteTimelogCategory
+        /// Scopes: Default, amReadOnlyTimelogCategory, amReadWriteTimelogCategory, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="id">AccountId</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelog-categories"/>
-        Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id);
+        Task<List<WrikeTimelogCategory>> GetAsync();
     }
 }

@@ -31,7 +31,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Create group in account.
         /// Scopes: amReadWriteGroup
         /// </summary>
-        /// <param name="newGroup">Use <see cref="WrikeGroup.WrikeGroup(string, string, List{string}, List{WrikeMetadata})"/></param>
+        /// <param name="newGroup"></param>
         /// <param name="parentId">Parent group ID</param>
         /// <param name="avatar">Info for group avatar creation</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-groups"/>
