@@ -14,4 +14,24 @@
     <ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Accounts\" />
+    <Folder Include="Attachments\" />
+    <Folder Include="Colors\" />
+    <Folder Include="Comments\" />
+    <Folder Include="CustomFields\" />
+    <Folder Include="Dependencies\" />
+    <Folder Include="FoldersAndProjects\" />
+    <Folder Include="Groups\" />
+    <Folder Include="Ids\" />
+    <Folder Include="Invitations\" />
+    <Folder Include="Workflows\" />
+    <Folder Include="Webhooks\" />
+    <Folder Include="Version\" />
+    <Folder Include="Users\" />
+    <Folder Include="Timelogs\" />
+    <Folder Include="TimelogCategories\" />
+    <Folder Include="Tasks\" />
+  </ItemGroup>
+
 </Project>
