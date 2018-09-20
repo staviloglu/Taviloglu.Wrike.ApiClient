@@ -15,6 +15,12 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Contacts
         }
 
         [Test]
+        public void ContactsProperty_ShouldReturnContactsClient()
+        {
+            Assert.IsInstanceOf(typeof(IWrikeContactsClient), _wrikeClient.Contacts);
+        }
+
+        [Test]
         public void GetAsync_ContactIdsMoreThanHundred_ThrowArgumentException()
         {
             var contactIds = new List<string>();
