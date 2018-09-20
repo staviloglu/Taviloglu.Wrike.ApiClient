@@ -43,8 +43,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <summary>
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="contactId">Get all timelog records that were created by the user.</param>
-        /// <param name="accountId">Get all timelog records in the account.</param>
+        /// <param name="contactId">Get all timelog records that were created by the user.</param>        
         /// <param name="folderId">Get all timelog records for a folder.</param>
         /// <param name="taskId">Get all timelog records for a task.</param>
         /// <param name="categoryId"> Get all timelog records with specific timelog category.</param>
@@ -58,7 +57,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelogs"/>        
         Task<List<WrikeTimelog>> GetAsync(
             string contactId = null,
-            string accountId = null,
             string folderId = null,
             string taskId = null,
             string categoryId = null,

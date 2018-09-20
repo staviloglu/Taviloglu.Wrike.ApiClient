@@ -73,7 +73,7 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeTimelog>($"timelogs/{timelogId}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
-        async Task<List<WrikeTimelog>> IWrikeTimelogsClient.GetAsync(string contactId, string accountId, string folderId, string taskId, string categoryId, WrikeDateFilterRange createdDate, IWrikeDateFilter trackedDate, bool? me, bool? descendants, bool? subTasks, bool? plainText, List<string> categoryIds)
+        async Task<List<WrikeTimelog>> IWrikeTimelogsClient.GetAsync(string contactId, string folderId, string taskId, string categoryId, WrikeDateFilterRange createdDate, IWrikeDateFilter trackedDate, bool? me, bool? descendants, bool? subTasks, bool? plainText, List<string> categoryIds)
         {
 
             int notNullCount = 0;
@@ -83,11 +83,6 @@ namespace Taviloglu.Wrike.ApiClient
             if (!string.IsNullOrWhiteSpace(contactId))
             {
                 requestUri = $"contacts/{contactId}/timelogs";
-                notNullCount++;
-            }
-            else if (!string.IsNullOrWhiteSpace(accountId))
-            {
-                requestUri = $"accounts/{accountId}/timelogs";
                 notNullCount++;
             }
             else if (!string.IsNullOrWhiteSpace(folderId))
@@ -106,7 +101,7 @@ namespace Taviloglu.Wrike.ApiClient
                 notNullCount++;
             }
 
-            if (notNullCount > 1) throw new ArgumentException("only one of timelogId, contactId, accountId, folderId, taskId or categoryId can be used");
+            if (notNullCount > 1) throw new ArgumentException("only one of timelogId, contactId, folderId, taskId or categoryId can be used");
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
             .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))

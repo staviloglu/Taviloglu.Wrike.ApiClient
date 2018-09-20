@@ -64,11 +64,6 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException(nameof(newGroup), "newGroup can not be null");
             }
 
-            if (string.IsNullOrWhiteSpace(newGroup.Title))
-            {
-                throw new ArgumentNullException(nameof(newGroup.Title),"newGroup.Title can not be null or empty.");
-            }
-
             var requestUri = $"groups";
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
