@@ -29,9 +29,14 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(string id, List<string> fields)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id),"id can not be empty");
             }
 
             var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}")
@@ -43,9 +48,14 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeAccount> IWrikeAccountsClient.UpdateAsync(string id, List<WrikeMetadata> metadataList)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -58,9 +68,14 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<List<WrikeTimelogCategory>> IWrikeAccountsClient.GetTimelogCategories(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}/timelog_categories");

@@ -19,7 +19,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             if (newComment == null)
             {
-                throw new ArgumentNullException(nameof(newComment), "newComment can not be null, do not use empty ctor");
+                throw new ArgumentNullException(nameof(newComment));
             }
 
             var requestUri = string.Empty;
