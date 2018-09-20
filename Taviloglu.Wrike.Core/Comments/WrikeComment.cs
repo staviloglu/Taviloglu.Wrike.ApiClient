@@ -6,11 +6,6 @@ namespace Taviloglu.Wrike.Core
 {
     public class WrikeComment : WrikeObjectWithId
     {
-        public WrikeComment()
-        {
-
-        }
-
         /// <summary>
         /// </summary>
         /// <param name="text">Comment text, can not be empty</param>
@@ -27,9 +22,15 @@ namespace Taviloglu.Wrike.Core
             if (!string.IsNullOrWhiteSpace(folderId))
             {
                 idCount++;
-                FolderId = FolderId;
+                FolderId = folderId;
             }
-            if (idCount!=1)
+
+            if (idCount == 0)
+            {
+                throw new Exception("taskId or folderId should be set");
+            }
+
+            if (idCount>1)
             {
                 throw new Exception("only taskId or folderId can be used");
             }
@@ -50,7 +51,7 @@ namespace Taviloglu.Wrike.Core
         /// Comment text
         /// </summary>
         [JsonProperty("text")]
-        public string Text { get; set; }
+        public string Text { get; private set; }
         /// <summary>
         /// Created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>        
@@ -61,11 +62,11 @@ namespace Taviloglu.Wrike.Core
         /// ID of related task. Only one of taskId/folderId fields is present
         /// </summary>
         [JsonProperty("taskId")]
-        public string TaskId { get; set; }
+        public string TaskId { get; private set; }
         /// <summary>
         /// ID of related folder. Only one of taskId/folderId fields is present
         /// </summary>
         [JsonProperty("folderId")]
-        public string FolderId { get; set; }
+        public string FolderId { get; private set; }
     }
 }

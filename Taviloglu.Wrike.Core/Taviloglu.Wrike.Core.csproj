@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.90.15-alpha</Version>
+    <Version>0.90.20-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike API</Description>
@@ -12,13 +12,11 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- WrikeGroup's default constructor removed
-- WrikeGroup's Title property set function hidden
-- AccountId is removed from WrikeGroup to support Wrike API v4
-
-</PackageReleaseNotes>
-    <AssemblyVersion>0.90.15.0</AssemblyVersion>
-    <FileVersion>0.90.15.0</FileVersion>
+    <PackageReleaseNotes>- WrikeGroup updated
+- WrikeComment updated
+- WrikeTimelog updated</PackageReleaseNotes>
+    <AssemblyVersion>0.90.20.0</AssemblyVersion>
+    <FileVersion>0.90.20.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

@@ -6,7 +6,6 @@ namespace Taviloglu.Wrike.Core.Timelogs
 {
     public class WrikeTimelog : WrikeObjectWithId
     {
-        public WrikeTimelog() { }
         /// <summary>
         /// Use this constructor for creating new Timelog requests
         /// </summary>
@@ -44,7 +43,7 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// Task to which timelog record is tracked
         /// </summary>
         [JsonProperty("taskId")]
-        public string TaskId { get; set; }
+        public string TaskId { get; private set; }
 
         /// <summary>
         /// User who tracked the timelog record
@@ -62,7 +61,7 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// Hours tracked in timelog record, must be in [0..24] hours range
         /// </summary>
         [JsonProperty("hours")]
-        public decimal Hours { get; set; }
+        public decimal Hours { get; private set; }
 
         /// <summary>
         /// Date of timelog was created in user's timezone Format: yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -76,12 +75,12 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// </summary>
         [JsonProperty("trackedDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd" })]
-        public DateTime TrackedDate { get; set; }
+        public DateTime TrackedDate { get; private set; }
 
         /// <summary>
         /// Timelog record comment
         /// </summary>
         [JsonProperty("comment")]
-        public string Comment { get; set; }
+        public string Comment { get; private set; }
     }
 }
