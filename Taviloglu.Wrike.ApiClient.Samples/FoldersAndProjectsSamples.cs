@@ -9,7 +9,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         public static async Task Run(WrikeClient client)
         {
             //try other options...
-            //var folderTrees = await client.FoldersAndProjects.GetFolderTreeAsync("IEABX2HE");
+            var folderTrees = await client.FoldersAndProjects.GetFolderTreeAsync();
 
             //var folders = await client.FoldersAndProjects.GetFoldersAsync(
             //    new List<string> { "folderId", "folderId" },

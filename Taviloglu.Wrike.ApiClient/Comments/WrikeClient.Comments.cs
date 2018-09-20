@@ -22,11 +22,6 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException(nameof(newComment), "newComment can not be null, do not use empty ctor");
             }
 
-            if (string.IsNullOrWhiteSpace(newComment.Text))
-            {
-                throw new ArgumentNullException(nameof(newComment.Text), "newComment.Text can not be null or empty");
-            }
-
             var requestUri = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(newComment.TaskId))
@@ -63,15 +58,11 @@ namespace Taviloglu.Wrike.ApiClient
             await SendRequest<WrikeTask>($"comments/{commentId}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
-        async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(string accountId, string folderId, string taskId, bool? plainText, int? limit, WrikeDateFilterRange updatedDate)
+        async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(string folderId, string taskId, bool? plainText, int? limit, WrikeDateFilterRange updatedDate)
         {
             var requestUri = "comments";
 
-            if (!string.IsNullOrWhiteSpace(accountId))
-            {
-                requestUri = $"accounts/{accountId}/comments";
-            }
-            else if (!string.IsNullOrWhiteSpace(folderId))
+            if (!string.IsNullOrWhiteSpace(folderId))
             {
                 requestUri = $"folders/{folderId}/comments";
             }

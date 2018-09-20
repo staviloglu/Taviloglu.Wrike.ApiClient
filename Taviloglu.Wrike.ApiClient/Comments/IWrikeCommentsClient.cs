@@ -10,14 +10,13 @@ namespace Taviloglu.Wrike.ApiClient
         /// Get all comments in all accounts. 
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="accountId"> Get all comments in the account</param>
         /// <param name="folderId"> Get folder comments.</param>
+        /// /// <param name="taskId"> Get task comments.</param>
         /// <param name="limit">Maximum number of returned comments, Default:1000</param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
-        /// <param name="taskId"> Get task comments.</param>
         /// <param name="updatedDate">Updated date filter, get all comments created or updated in the range specified by dates. Time range between dates must be less than 7 days</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
-        Task<List<WrikeComment>> GetAsync(string accountId = null, string folderId = null, string taskId = null, bool? plainText = null, int? limit = null, WrikeDateFilterRange updatedDate = null);
+        Task<List<WrikeComment>> GetAsync(string folderId = null, string taskId = null, bool? plainText = null, int? limit = null, WrikeDateFilterRange updatedDate = null);
 
         /// <summary>
         /// Get single or multiple comments by their IDs.

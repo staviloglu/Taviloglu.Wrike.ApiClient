@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
@@ -9,6 +8,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
     public class GroupsTests
     {
         WrikeClient _wrikeClient;
+        const string DefaultGroupId = "KX74WSKU";
         [OneTimeSetUp]
         public void Setup()
         {
@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
 
             foreach (var group in groups)
             {
-                if (group.Id != "KX74WSKU")
+                if (group.Id != DefaultGroupId)
                 {
                     _wrikeClient.Groups.DeleteAsync(group.Id).Wait();
                 }
@@ -30,14 +30,14 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         }
 
         [Test]
-        public void GetAsync_ShouldReturnMyTeamGroup()
+        public void GetAsync_ShouldReturnDefaultGroup()
         {
             RestoreGroupsToDefault();
 
             var groups = _wrikeClient.Groups.GetAsync().Result;
             Assert.IsNotNull(groups);
             Assert.AreEqual(1, groups.Count);
-            Assert.AreEqual("KX74WSKU", groups.First().Id);
+            Assert.AreEqual(DefaultGroupId, groups.First().Id);
         }
 
 
@@ -78,7 +78,5 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
 
             Assert.IsTrue(isGroupDeleted);
         }
-
-
     }
 }
