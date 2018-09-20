@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.94.00-alpha</Version>
+    <Version>0.94.20-alpha</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>.NET Client for Wrike API</Description>
@@ -15,10 +15,11 @@
     <PackageReleaseNotes>- Wrong request address bugfix for ContactsClient.GetAsync for multiple contacIds
 - ContactsClient updated to support Wrike API v4
 - FoldersAndProjectsClient updated to support Wrike API v4
+- TimelogsClient updated to support Wrike API v4
 - GroupsClient updated to support Wrike API v4
 - TimelogCategoriesClient updated to support API v4</PackageReleaseNotes>
-    <AssemblyVersion>0.94.00.0</AssemblyVersion>
-    <FileVersion>0.94.00.0</FileVersion>
+    <AssemblyVersion>0.94.20.0</AssemblyVersion>
+    <FileVersion>0.94.20.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	
 	<files>
