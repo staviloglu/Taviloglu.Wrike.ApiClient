@@ -1,13 +1,19 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Taviloglu.Wrike.Core
 {
     public sealed class WrikeGroup : WrikeObjectWithId
     {
-        //[JsonConstructor]
         public WrikeGroup(string title, List<string> memberIds = null, List<WrikeMetadata> metadata = null)
         {
+
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentNullException(nameof(title), "title can not be null or empty.");
+            }
+
             Title = title;
             MemberIds = memberIds;
             Metadata = metadata;
@@ -23,7 +29,7 @@ namespace Taviloglu.Wrike.Core
         /// Group title
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// List of group members user IDs
