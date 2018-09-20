@@ -100,7 +100,7 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[GET] /folders/{folderId}/folders</td><td>1</td></tr>
  <tr><td>[GET] /folders/{folderId},{folderId},... - up to 100 IDs</td><td>1</td></tr>
  <tr><td>[POST] /folders/{folderId}/folders</td><td>1</td></tr>
- <tr><td>[POST] /copy_folder/{folderId}</td><td>&nbsp;</td></tr>
+ <tr><td>[POST] /copy_folder/{folderId}</td><td>0</td></tr>
  <tr><td>[PUT] /folders/{folderId}</td><td>1</td></tr>
  <tr><td>[DELETE] /folders/{folderId}</td><td>1</td></tr>
  
@@ -122,11 +122,11 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[PUT] /comments/{commentId}</td><td>1</td></tr>
  <tr><td>[DELETE] /comments/{commentId}</td><td>1</td></tr>
  
- <tr><td>[GET] /tasks/{taskId}/dependencies</td><td>&nbsp;</td><td rowspan="5">Dependencies</td></tr>
- <tr><td>[GET] /dependencies/{dependencyId},{dependencyId},... - up to 100 IDs</td><td>&nbsp;</td></tr>
- <tr><td>[POST] /tasks/{taskId}/dependencies</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /dependencies/{dependencyId}</td><td>&nbsp;</td></tr>
- <tr><td>[DELETE] /dependencies/{dependencyId}</td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /tasks/{taskId}/dependencies</td><td>0</td><td rowspan="5">Dependencies</td></tr>
+ <tr><td>[GET] /dependencies/{dependencyId},{dependencyId},... - up to 100 IDs</td><td>0</td></tr>
+ <tr><td>[POST] /tasks/{taskId}/dependencies</td><td>0</td></tr>
+ <tr><td>[PUT] /dependencies/{dependencyId}</td><td>0</td></tr>
+ <tr><td>[DELETE] /dependencies/{dependencyId}</td><td>0</td></tr>
  
  <tr><td>[GET] /timelogs</td><td>1</td><td rowspan="9">Timelogs</td></tr>
  <tr><td>[GET] /contacts/{contactId}/timelogs</td><td>1</td></tr>
@@ -147,11 +147,11 @@ Then Wrike will send post requests to the url you provided. For more details che
  <tr><td>[GET] /attachments/{attachmentId}</td><td>1</td></tr>
  <tr><td>[GET] /attachments/{attachmentId}/download</td><td>1</td></tr>
  <tr><td>[GET] /attachments/{attachmentId}/preview </td><td>1</td></tr>
- <tr><td>[GET] /attachments/{attachmentId}/url</td><td>&nbsp;</td></tr>
- <tr><td>[POST] /folders/{folderId}/attachments</td><td>&nbsp;</td></tr>
- <tr><td>[POST] /tasks/{taskId}/attachments</td><td>&nbsp;</td></tr>
- <tr><td>[PUT] /attachments/{attachmentId}</td><td>&nbsp;</td></tr>
- <tr><td>[DELETE] /attachments/{attachmentId}</td><td>&nbsp;</td></tr>
+ <tr><td>[GET] /attachments/{attachmentId}/url</td><td>0</td></tr>
+ <tr><td>[POST] /folders/{folderId}/attachments</td><td>0</td></tr>
+ <tr><td>[POST] /tasks/{taskId}/attachments</td><td>0</td></tr>
+ <tr><td>[PUT] /attachments/{attachmentId}</td><td>0</td></tr>
+ <tr><td>[DELETE] /attachments/{attachmentId}</td><td>0</td></tr>
  
  <tr><td>[GET] /version</td><td>1</td><td>Version</td></tr>
  
