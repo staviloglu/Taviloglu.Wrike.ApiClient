@@ -2,21 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.20</Version>
+    <Version>2.0.0</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
-    <Description>Extension methods to use with wrike client which are not provided in Taviloglu.Wrike.ApiClient</Description>
+    <Description>Extension methods to use with WrikeClient which are not provided in Taviloglu.Wrike.ApiClient</Description>
     <Copyright>Copyright (c) 2018 SINAN TAVILOGLU</Copyright>
     <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api extensions</PackageTags>
-    <PackageReleaseNotes>- ContactsExtensions updated to support Wrike API v4
-</PackageReleaseNotes>
+    <PackageReleaseNotes>- Support for Wrike API v4</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
-    <AssemblyVersion>1.0.20.0</AssemblyVersion>
-    <FileVersion>1.0.20.0</FileVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -13,11 +13,10 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
         /// Creates new workflow with given customStatuses, by calling create and update methods
         /// </summary>
         /// <param name="wrikeWorkflowsClient">workflow client</param>
-        /// <param name="accountId">accountId</param>
         /// <param name="newWorkflow">new workflow to be created with customStatuses set</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-workflow"/>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-workflow"/>
-        public static async Task<WrikeWorkflow> CreateWorkflowWithCustomStatusesAsync(this IWrikeWorkflowsClient wrikeWorkflowsClient, string accountId, WrikeWorkflow newWorkflow) {
+        public static async Task<WrikeWorkflow> CreateWorkflowWithCustomStatusesAsync(this IWrikeWorkflowsClient wrikeWorkflowsClient, WrikeWorkflow newWorkflow) {
 
             if (newWorkflow == null || newWorkflow.CustomStatuses == null || newWorkflow.CustomStatuses.Count <  1)
             {
@@ -29,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
                 throw new ArgumentException("newWorkflow.CustomStatuses can not have Id property set", nameof(newWorkflow.CustomStatuses));
             }
 
-            var createdWorkflow = await wrikeWorkflowsClient.CreateAsync(accountId, newWorkflow);
+            var createdWorkflow = await wrikeWorkflowsClient.CreateAsync(newWorkflow);
             
             //created workflow will have default active and completed statuses, if newWorkflow.CustomStatuses
             //have same items update the default ones
