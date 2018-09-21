@@ -17,29 +17,28 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<List<WrikeAttachment>> IWrikeAttachmentsClient.GetAsync(string accountId, string folderId,string taskId, bool? versions, WrikeDateFilterRange createdDate, bool? withUrls)
+        async Task<List<WrikeAttachment>> IWrikeAttachmentsClient.GetAsync(string folderId,string taskId, bool? versions, WrikeDateFilterRange createdDate, bool? withUrls)
         {
-            int notNullCount = 0;
-            var requestUri = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(accountId))
+            if (!string.IsNullOrWhiteSpace(taskId) && !string.IsNullOrWhiteSpace(folderId))
             {
-                notNullCount++;
-                requestUri = $"accounts/{accountId}/attachments";
+                throw new ArgumentException("taskId or folderId can be used, not both!");
             }
+
+            if (string.IsNullOrWhiteSpace(taskId) && string.IsNullOrWhiteSpace(folderId))
+            {
+                throw new ArgumentException("taskId or folderId should be used!");
+            }
+
+            var requestUri = string.Empty;            
 
             if (!string.IsNullOrWhiteSpace(folderId))
             {
-                notNullCount++;
                 requestUri = $"folders/{folderId}/attachments";
             }
-            if (!string.IsNullOrWhiteSpace(taskId))
+            else if (!string.IsNullOrWhiteSpace(taskId))
             {
-                notNullCount++;
                 requestUri = $"tasks/{taskId}/attachments";
             }
-
-            if (notNullCount!=1) throw new ArgumentException("one and only one of folderId, accountId or taskId should be used");
             
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
             .AddParameter("versions", versions)
@@ -51,14 +50,19 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeAttachment> IWrikeAttachmentsClient.GetAsync(string attachmentId, bool? versions)
+        async Task<WrikeAttachment> IWrikeAttachmentsClient.GetAsync(string id, bool? versions)
         {
-            if (string.IsNullOrWhiteSpace(attachmentId))
+            if (id == null)
             {
-                throw new ArgumentException(nameof(attachmentId));
+                throw new ArgumentNullException(nameof(id));
             }
 
-            var requestUri = $"attachments/{attachmentId}/";
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException("id can not be empty", nameof(id));
+            }
+
+            var requestUri = $"attachments/{id}/";
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
            .AddParameter("versions", versions);
@@ -68,25 +72,36 @@ namespace Taviloglu.Wrike.ApiClient
 
         }
 
-        async Task<Stream> IWrikeAttachmentsClient.DownloadAsync(string attachmentId)
+        async Task<Stream> IWrikeAttachmentsClient.DownloadAsync(string id)
         {
-            if (string.IsNullOrWhiteSpace(attachmentId))
+            if (id == null)
             {
-                throw new ArgumentException(nameof(attachmentId));
+                throw new ArgumentNullException(nameof(id));
             }
-            var response = await SendRequestAndGetStream<Stream>($"attachments/{attachmentId}/download", HttpMethods.Get).ConfigureAwait(false);
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException("id can not be empty", nameof(id));
+            }
+
+            var response = await SendRequestAndGetStream<Stream>($"attachments/{id}/download", HttpMethods.Get).ConfigureAwait(false);
 
             return response;
         }
 
-        async Task<Stream> IWrikeAttachmentsClient.DownloadPreviewAsync(string attachmentId, WrikePreviewDimension? size)
+        async Task<Stream> IWrikeAttachmentsClient.DownloadPreviewAsync(string id, WrikePreviewDimension? size)
         {
-            if (string.IsNullOrWhiteSpace(attachmentId))
+            if (id == null)
             {
-                throw new ArgumentException(nameof(attachmentId));
+                throw new ArgumentNullException(nameof(id));
             }
 
-            var response = await SendRequestAndGetStream<Stream>($"attachments/{attachmentId}/preview", HttpMethods.Get).ConfigureAwait(false);
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException("id can not be empty", nameof(id));
+            }
+
+            var response = await SendRequestAndGetStream<Stream>($"attachments/{id}/preview", HttpMethods.Get).ConfigureAwait(false);
 
             return response;
         }        

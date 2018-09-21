@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (commentId.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(commentId), "commentId can not be empty");
+                throw new ArgumentException("commentId can not be empty", nameof(commentId));
             }
 
             await SendRequest<WrikeComment>($"comments/{commentId}", HttpMethods.Delete).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(id), "id can not be empty");
+                throw new ArgumentException("id can not be empty", nameof(id));
             }
 
             if (text == null)
@@ -130,7 +130,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (text.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(text), "text can not be empty");
+                throw new ArgumentException("text can not be empty", nameof(text));
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()

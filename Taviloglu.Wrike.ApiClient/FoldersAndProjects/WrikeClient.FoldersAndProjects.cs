@@ -83,7 +83,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (folderId.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
+                throw new ArgumentException("folderId can not be empty", nameof(folderId));
             }
 
             if (newFolder == null)
@@ -116,7 +116,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (folderId.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
+                throw new ArgumentException("folderId can not be empty", nameof(folderId));
             }
 
             var response = await SendRequest<WrikeFolder>($"folders/{folderId} ", HttpMethods.Delete).ConfigureAwait(false);
@@ -132,7 +132,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (folderId.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
+                throw new ArgumentException("folderId can not be empty", nameof(folderId));
             }
 
             if (title == null)
@@ -142,7 +142,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(title), "title can not be empty");
+                throw new ArgumentException("title can not be empty",nameof(title));
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()

@@ -36,7 +36,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(id),"id can not be empty");
+                throw new ArgumentException("id can not be empty", nameof(id));
             }
 
             var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}")
@@ -55,7 +55,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(id), "id can not be empty");
+                throw new ArgumentException("id can not be empty", nameof(id));
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -75,7 +75,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(id), "id can not be empty");
+                throw new ArgumentException("id can not be empty", nameof(id));
             }
 
             var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}/timelog_categories");

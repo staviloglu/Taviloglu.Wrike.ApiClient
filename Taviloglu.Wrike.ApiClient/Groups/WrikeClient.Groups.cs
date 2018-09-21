@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(id), "groupId can not be empty");
+                throw new ArgumentException("groupId can not be empty", nameof(id));
             }
 
             var requestUri = $"groups/{id}";
@@ -92,7 +92,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(id), "groupId can not be empty");
+                throw new ArgumentException("groupId can not be empty", nameof(id));
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
