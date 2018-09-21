@@ -3,6 +3,9 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// User operations
+    /// </summary>
     public interface IWrikeUsersClient
     {
         /// <summary>

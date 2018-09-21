@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Taviloglu.Wrike.ApiClient
+﻿namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeDependenciesClient
     {
@@ -8,11 +6,11 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                //return (IWrikeDependenciesClient)this;
-                throw new NotImplementedException("Dependencies not implemented yet!");
+                return (IWrikeDependenciesClient)this;
             }
         }
 
-        //todo: implement methods
+        //TODO: implement dependencies methods 
+        //https://developers.wrike.com/documentation/api/methods/query-dependencies
     }
 }

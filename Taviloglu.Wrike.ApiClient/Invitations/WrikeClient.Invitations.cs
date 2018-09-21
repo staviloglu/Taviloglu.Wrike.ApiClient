@@ -20,24 +20,10 @@ namespace Taviloglu.Wrike.ApiClient
         {
             if (newInvitation == null)
             {
-                throw new ArgumentNullException(nameof(newInvitation),
-                    "newInvitation can not be null, do not use empty ctor");
-            }
+                throw new ArgumentNullException(nameof(newInvitation), "newInvitation can not be null");
+            }            
 
-            if (string.IsNullOrWhiteSpace(newInvitation.Email))
-            {
-                throw new ArgumentNullException(nameof(newInvitation.Email),
-                    "newInvitation.Email can not be null or empty");
-            }
-
-            if (string.IsNullOrWhiteSpace(newInvitation.AccountId))
-            {
-                throw new ArgumentNullException(nameof(newInvitation.AccountId),
-                    "newInvitation.AccountId can not be null or empty");
-            }
-            
-
-            var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
+            var contenBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("email", newInvitation.Email)
                 .AddParameter("firstName", newInvitation.FirstName)
                 .AddParameter("lastName", newInvitation.LastName)
@@ -46,37 +32,41 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("subject", subject)
                 .AddParameter("message", message);
 
-            var postContent = postDataBuilder.GetContent();
-            var response = await SendRequest<WrikeInvitation>($"accounts/{newInvitation.AccountId}/invitations", HttpMethods.Post, postContent).ConfigureAwait(false);
+            var response = await SendRequest<WrikeInvitation>("invitations", HttpMethods.Post, contenBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
-        async Task IWrikeInvitationsClient.DeleteAsync(string invitationId)
+        async Task IWrikeInvitationsClient.DeleteAsync(string id)
         {
-            if (string.IsNullOrWhiteSpace(invitationId))
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(invitationId), "invitationId can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
             }
 
-            await SendRequest<WrikeInvitation>($"invitations/{invitationId}", HttpMethods.Delete).ConfigureAwait(false);
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
+            }
+
+            await SendRequest<WrikeInvitation>($"invitations/{id}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
-        async Task<List<WrikeInvitation>> IWrikeInvitationsClient.GetAsync(string accountId)
+        async Task<List<WrikeInvitation>> IWrikeInvitationsClient.GetAsync()
         {
-            if (string.IsNullOrWhiteSpace(accountId))
-            {
-                throw new ArgumentNullException(nameof(accountId), "accountId can not be null or empty");
-            }
-
-            var response = await SendRequest<WrikeInvitation>($"accounts/{accountId}/invitations", HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeInvitation>("invitations", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeInvitation> IWrikeInvitationsClient.UpdateAsync(string invitationId, bool? resend, WrikeUserRole? role, bool? external)
+        async Task<WrikeInvitation> IWrikeInvitationsClient.UpdateAsync(string id, bool? resend, WrikeUserRole? role, bool? external)
         {
-            if (string.IsNullOrWhiteSpace(invitationId))
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(invitationId), "invitationId can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -84,7 +74,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("role", role)
                 .AddParameter("external", external);
 
-            var response = await SendRequest<WrikeInvitation>($"invitations/{invitationId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeInvitation>($"invitations/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }

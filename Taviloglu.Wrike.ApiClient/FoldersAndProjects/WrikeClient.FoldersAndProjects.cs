@@ -19,14 +19,19 @@ namespace Taviloglu.Wrike.ApiClient
         }
         async Task<List<WrikeFolder>> IWrikeFoldersAndProjectsClient.GetFoldersAsync(List<string> folderIds, List<string> optionalFields)
         {
-
-            if (folderIds == null || folderIds.Count < 1)
+            if (folderIds == null)
             {
-                throw new ArgumentNullException("folderIds can not be null or empty");
+                throw new ArgumentNullException(nameof(folderIds));
             }
+
+            if (folderIds.Count == 0)
+            {
+                throw new ArgumentException("folderIds can not be empty", nameof(folderIds));
+            }
+
             if (folderIds.Count > 100)
             {
-                throw new ArgumentException("folderIds max count is 100");
+                throw new ArgumentException("Max. 100 folderIds can be used", nameof(folderIds));
             }
 
             var requestUri = "folders/" + string.Join(",", folderIds);
@@ -44,7 +49,9 @@ namespace Taviloglu.Wrike.ApiClient
         {
             var requestUri = "folders";
 
-            if (!string.IsNullOrWhiteSpace(folderId))
+            bool useFolderId = !string.IsNullOrWhiteSpace(folderId);
+
+            if (useFolderId)
             {
                 requestUri = $"folders/{folderId}/folders";
             }
@@ -57,7 +64,8 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("project", isProject)
             .AddParameter("fields", fields);
-            if (string.IsNullOrWhiteSpace(folderId))
+
+            if (!useFolderId)
             {
                 uriBuilder.AddParameter("deleted", isDeleted);
             }
@@ -68,14 +76,19 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CreateAsync(string folderId, WrikeFolder newFolder)
         {
-            if (string.IsNullOrWhiteSpace(folderId))
+            if (folderId == null)
             {
-                throw new ArgumentNullException(nameof(folderId), "folderId can not be null or empty");
+                throw new ArgumentNullException(nameof(folderId));
             }
 
-            if (string.IsNullOrWhiteSpace(newFolder.Title))
+            if (folderId.Trim() == string.Empty)
             {
-                throw new ArgumentNullException(nameof(newFolder.Title), "newFolder.Title can not be null or empty");
+                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
+            }
+
+            if (newFolder == null)
+            {
+                throw new ArgumentNullException(nameof(newFolder));
             }
 
             var requestUri = $"folders/{folderId}/folders";
@@ -87,7 +100,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("metadata", newFolder.Metadata)
                 .AddParameter("customFields", newFolder.CustomFields)
                 .AddParameter("customColumns", newFolder.CustomColumnIds)
-            .AddParameter("project", newFolder.Project);
+                .AddParameter("project", newFolder.Project);
 
             var postContent = postDataBuilder.GetContent();
             var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
@@ -96,26 +109,40 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.DeleteAsync(string folderId)
         {
-            if (string.IsNullOrWhiteSpace(folderId))
+            if (folderId == null)
             {
-                throw new ArgumentNullException("folderId can not be null or empty");
+                throw new ArgumentNullException(nameof(folderId));
+            }
+
+            if (folderId.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
             }
 
             var response = await SendRequest<WrikeFolder>($"folders/{folderId} ", HttpMethods.Delete).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.UpdateAsync(string folderId, string title, string description, List<string> addParents, List<string> removeParents, List<string> addShareds, List<string> removeShareds, List<WrikeMetadata> metadata, bool? restore, List<WrikeCustomFieldData> customFields, List<string> customColumns, WrikeProject project) {
-
-
-            if (string.IsNullOrWhiteSpace(folderId))
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.UpdateAsync(string folderId, string title, string description, List<string> addParents, List<string> removeParents, List<string> addShareds, List<string> removeShareds, List<WrikeMetadata> metadata, bool? restore, List<WrikeCustomFieldData> customFields, List<string> customColumns, WrikeProject project)
+        {
+            if (folderId == null)
             {
-                throw new ArgumentNullException(nameof(folderId), "folderId can not be null or empty.");
+                throw new ArgumentNullException(nameof(folderId));
             }
 
-            if (string.IsNullOrWhiteSpace(title))
+            if (folderId.Trim() == string.Empty)
             {
-                throw new ArgumentNullException(nameof(title), "title can not be null or empty.");
+                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
+            }
+
+            if (title == null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (title.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(title), "title can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()

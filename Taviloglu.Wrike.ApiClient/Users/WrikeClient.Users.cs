@@ -15,9 +15,14 @@ namespace Taviloglu.Wrike.ApiClient
         }
         async Task<WrikeUser> IWrikeUsersClient.GetAsync(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var response = await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get).ConfigureAwait(false);
@@ -26,9 +31,14 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeUser> IWrikeUsersClient.UpdateAsync(string id, WrikeUserProfile profile)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()

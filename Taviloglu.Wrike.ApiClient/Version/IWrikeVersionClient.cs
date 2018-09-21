@@ -3,6 +3,9 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Version operations
+    /// </summary>
     public interface IWrikeVersionClient
     {
         /// <summary>

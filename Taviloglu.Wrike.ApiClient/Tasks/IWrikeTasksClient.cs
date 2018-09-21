@@ -4,17 +4,20 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Task operations
+    /// </summary>
     public interface IWrikeTasksClient
     {
         /// <summary>
         /// This parameter is set by your last GetAsync method call if you use pageSize parameter to have paged response
         /// Use this property as nextPageToken parameter of GetAsync method to get the next page of the paged response
         /// </summary>
-        string LastNextPageToken { get;}
+        string LastNextPageToken { get; }
         /// <summary>
         /// This parameter is set by your last GetAsync method call if you use pageSize parameter to have paged response
         /// </summary>
-        int LastResponseSize { get;}
+        int LastResponseSize { get; }
 
         /// <summary>
         ///  Create task in folder.  
@@ -22,8 +25,8 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <remarks>If newTask.CustomStatus is set, newTask.Status is ommited</remarks>
         /// <param name="folderId">You can specify rootFolderId to create task in user's account root.</param>
-        /// <param name="newTask">Use ctor <see cref="WrikeTask.WrikeTask(string, string, WrikeTaskStatus?, WrikeTaskImportance?, WrikeTaskDate, List{string}, List{string}, List{string}, List{string}, bool?, string, string, List{string}, List{WrikeMetadata}, List{WrikeCustomFieldData}, string)"/></param>
-        /// <param name="priorityBefor">Put newly created task before specified task in task list</param>
+        /// <param name="newTask"></param>
+        /// <param name="priorityBefore">Put newly created task before specified task in task list</param>
         /// <param name="priorityAfter">Put newly created task after specified task in task list</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-task"/>
         Task<WrikeTask> CreateAsync(string folderId, WrikeTask newTask, string priorityBefore = null, string priorityAfter = null);
@@ -36,10 +39,9 @@ namespace Taviloglu.Wrike.ApiClient
         Task<WrikeTask> DeleteAsync(string taskId);
 
         /// <summary>
-        /// Search among all tasks in all accounts
+        /// Search among all tasks in the account.
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="accountId">Search among all tasks in the account</param>
         /// <param name="folderId">Search among tasks in the folder</param>
         /// <param name="addDescendants">Adds all descendant folders to search scope</param>
         /// <param name="title">Title filter, exact match</param>
@@ -70,7 +72,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// Use <see cref="WrikeTask.OptionalFields"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         Task<List<WrikeTask>> GetAsync(
-            string accountId = null,
             string folderId = null,
             bool? addDescendants = null,
             string title = null,
@@ -96,8 +97,7 @@ namespace Taviloglu.Wrike.ApiClient
             WrikeMetadata metadata = null,
             WrikeCustomFieldData customField = null,
             List<string> customStatuses = null,
-            List<string> fields = null
-            );
+            List<string> fields = null);
 
 
         /// <summary>
@@ -143,19 +143,19 @@ namespace Taviloglu.Wrike.ApiClient
             WrikeTaskDate dates = null,
             List<string> addParents = null,
             List<string> removeParents = null,
-             List<string> addShareds = null,
-             List<string> removeShareds = null,
-              List<string> addResponsibles = null,
-              List<string> removeResponsibles = null,
-              List<string> addFollowers = null,
-              bool? follow = null,
-              string priorityBefore = null,
-              string priorityAfter = null,
-              List<string> addSuperTasks = null,
-              List<string> removeSuperTasks = null,
-              List<WrikeMetadata> metadata = null,
-              List<WrikeCustomFieldData> customFields = null,
-              string customStatus = null,
-              bool? restore = null);
+            List<string> addShareds = null,
+            List<string> removeShareds = null,
+            List<string> addResponsibles = null,
+            List<string> removeResponsibles = null,
+            List<string> addFollowers = null,
+            bool? follow = null,
+            string priorityBefore = null,
+            string priorityAfter = null,
+            List<string> addSuperTasks = null,
+            List<string> removeSuperTasks = null,
+            List<WrikeMetadata> metadata = null,
+            List<WrikeCustomFieldData> customFields = null,
+            string customStatus = null,
+            bool? restore = null);
     }
 }

@@ -5,14 +5,17 @@ using Taviloglu.Wrike.Core.Invitations;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Invitation operations
+    /// </summary>
     public interface IWrikeInvitationsClient
     {
         /// <summary>
-        /// Get all invitations for current account.
+        /// Get all invitations for current account. 
         /// Scopes: amReadOnlyInvitation, amReadWriteInvitation
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-invitations"/>
-        Task<List<WrikeInvitation>> GetAsync(string accountId);
+        Task<List<WrikeInvitation>> GetAsync();
 
         /// <summary>
         /// Delete invitation by ID.
@@ -37,7 +40,6 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Create an invitation into the current account.
         ///  Scopes: amReadWriteInvitation
         /// </summary>
-        /// <param name="accountId">Account ID</param>
         /// <param name="subject">Custom message subject</param>
         /// <param name="message">Custom message body</param>
         /// <param name="newInvitation">Use <see cref="WrikeInvitation.WrikeInvitation(string, string, string, WrikeUserRole, bool)"/></param>

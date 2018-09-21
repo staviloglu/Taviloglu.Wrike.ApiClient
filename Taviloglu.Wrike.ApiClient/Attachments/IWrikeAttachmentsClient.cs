@@ -4,9 +4,11 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Attachment operations
+    /// </summary>
     public interface IWrikeAttachmentsClient
     {
-
         /// <summary>
         /// Returns all Attachments of a account,task or folder.  
         /// Scopes: Default, wsReadOnly, wsReadWrite

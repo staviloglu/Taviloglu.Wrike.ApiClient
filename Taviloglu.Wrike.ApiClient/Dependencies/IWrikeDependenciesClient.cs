@@ -1,8 +1,16 @@
 ﻿namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Dependency operations
+    /// </summary>
     public interface IWrikeDependenciesClient
     {
-        //TODO: write some code!
+
+
+        //TODO: implement dependencies methods 
+        //https://developers.wrike.com/documentation/api/methods/query-dependencies
+
+
 
     }
 }

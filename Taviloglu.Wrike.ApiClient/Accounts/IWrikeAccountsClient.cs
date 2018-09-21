@@ -5,6 +5,9 @@ using Taviloglu.Wrike.Core.TimelogCategories;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Account operations
+    /// </summary>
     public interface IWrikeAccountsClient
     {
         /// <summary>

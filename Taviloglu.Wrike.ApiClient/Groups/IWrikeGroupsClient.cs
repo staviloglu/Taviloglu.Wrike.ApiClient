@@ -4,6 +4,9 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Group operations
+    /// </summary>
     public interface IWrikeGroupsClient
     {
         /// <summary>
@@ -39,7 +42,8 @@ namespace Taviloglu.Wrike.ApiClient
 
         /// <summary>
         /// Modify Groups
-        /// Scopes: amReadWriteGroup        
+        /// Scopes: amReadWriteGroup  
+        /// <param name="id">GroupId</param>
         /// <param name="title">Title of group</param>
         /// <param name="membersToAdd">Add specified users to group</param>
         /// <param name="membersToRemove">Remove specified users from group</param>
@@ -48,6 +52,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="metaData">Metadata to be updated</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-groups"/>
         /// </summary>
-        Task<WrikeGroup> UpdateAsync(string groupId, string title = null, List<string> membersToAdd = null, List<string> membersToRemove = null, string parentId = null, WrikeGroupAvatar avatar = null, List<WrikeMetadata> metaData = null);
+        Task<WrikeGroup> UpdateAsync(string id, string title = null, List<string> membersToAdd = null, List<string> membersToRemove = null, string parentId = null, WrikeGroupAvatar avatar = null, List<WrikeMetadata> metaData = null);
     }
 }

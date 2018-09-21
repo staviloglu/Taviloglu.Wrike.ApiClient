@@ -4,6 +4,9 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Comment operations
+    /// </summary>
     public interface IWrikeCommentsClient
     {
         /// <summary>
@@ -37,6 +40,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Update Comment by ID. A comment is available for updates only during the 5 minutes after creation.
         ///  Scopes: Default, wsReadWrite
         /// </summary>
+        /// <param name="id">CommentId</param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
         /// <param name="text">Comment text, can not be empty</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/update-comment"/>

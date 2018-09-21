@@ -26,19 +26,14 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeTask> IWrikeTasksClient.CreateAsync(string folderId, WrikeTask newTask, string priorityBefore, string priorityAfter)
         {
-            if (string.IsNullOrWhiteSpace(folderId))
+            if (folderId == null)
             {
-                throw new ArgumentNullException("folderId can not be null or empty");
+                throw new ArgumentNullException(nameof(folderId));
             }
 
-            if (newTask == null)
+            if (folderId.Trim() == string.Empty)
             {
-                throw new ArgumentNullException("newTask can not be null");
-            }
-
-            if (string.IsNullOrWhiteSpace(newTask.Title))
-            {
-                throw new ArgumentNullException("newTask.Title can not be null or empty");
+                throw new ArgumentException(nameof(folderId), "folderId can not be empty");
             }
 
             var requestUri = $"folders/{folderId}/tasks";
@@ -73,32 +68,27 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<WrikeTask> IWrikeTasksClient.DeleteAsync(string taskId)
+        async Task<WrikeTask> IWrikeTasksClient.DeleteAsync(string id)
         {
-
-            if (string.IsNullOrWhiteSpace(taskId))
+            if (id == null)
             {
-                throw new ArgumentNullException("taskId can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
             }
 
-            var response = await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Delete).ConfigureAwait(false);
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
+            }
+
+            var response = await SendRequest<WrikeTask>($"tasks/{id}", HttpMethods.Delete).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(string accountId, string folderId, bool? addDescendants, string title, WrikeTaskStatus? status, WrikeTaskImportance? importance, IWrikeDateFilter startDate, IWrikeDateFilter dueDate, IWrikeDateFilter scheduledDate, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, WrikeDateFilterRange completedDate, List<string> authors, List<string> responsibles, List<string> shareds, string permalink, WrikeTaskDateType? type, int? limit, WrikeTaskSortField? sortField, WrikeSortOrder? sortOrder, bool? addSubTasks, int? pageSize, string nextPageToken, WrikeMetadata metadata, WrikeCustomFieldData customField, List<string> customStatuses, List<string> fields)
+        async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(string folderId, bool? addDescendants, string title, WrikeTaskStatus? status, WrikeTaskImportance? importance, IWrikeDateFilter startDate, IWrikeDateFilter dueDate, IWrikeDateFilter scheduledDate, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, WrikeDateFilterRange completedDate, List<string> authors, List<string> responsibles, List<string> shareds, string permalink, WrikeTaskDateType? type, int? limit, WrikeTaskSortField? sortField, WrikeSortOrder? sortOrder, bool? addSubTasks, int? pageSize, string nextPageToken, WrikeMetadata metadata, WrikeCustomFieldData customField, List<string> customStatuses, List<string> fields)
         {
-            if (!string.IsNullOrWhiteSpace(accountId) && !string.IsNullOrWhiteSpace(folderId))
-            {
-                throw new ArgumentException("only folderId or accountId can be used, not both!");
-            }
-
             var requestUri = "tasks";
 
-            if (!string.IsNullOrWhiteSpace(accountId))
-            {
-                requestUri = $"accounts/{accountId}/tasks";
-            }
-            else if (!string.IsNullOrWhiteSpace(folderId))
+            if (!string.IsNullOrWhiteSpace(folderId))
             {
                 requestUri = $"folders/{folderId}/tasks";
             }
@@ -141,22 +131,30 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(List<string> taskIds, List<string> optionalFields)
         {
-
-
-            if (taskIds == null || taskIds.Count < 1)
+            if (taskIds == null)
             {
-                throw new ArgumentNullException("taskIds can not be null or empty");
+                throw new ArgumentNullException(nameof(taskIds));
             }
+
+            if (taskIds.Count == 0)
+            {
+                throw new ArgumentException("taskIds can not be empty", nameof(taskIds));
+            }
+
             if (taskIds.Count > 100)
             {
-                throw new ArgumentException("taskIds max count is 100");
+                throw new ArgumentException("Max. 100 taskIds can be used", nameof(taskIds));
             }
+
+            var supportedOptionalFields = new List<string> { WrikeTask.OptionalFields.Recurrent, WrikeTask.OptionalFields.AttachmentCount };
+
             if (optionalFields != null &&
                 (optionalFields.Count > 2 ||
-                optionalFields.Any(o => o != WrikeTask.OptionalFields.Recurrent && o != WrikeTask.OptionalFields.AttachmentCount)))
+                optionalFields.Any(o => !supportedOptionalFields.Contains(o))))
             {
                 throw new ArgumentException("Only Recurrent and AttachmentCount is supported.");
             }
+
             var requestUri = "tasks/" + string.Join(",", taskIds);
 
             if (optionalFields != null && optionalFields.Count > 0)
@@ -165,12 +163,14 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Get).ConfigureAwait(false);
+            
             //TODO: can not get recurrent property even it is provided bug?
+
             return GetReponseDataList(response);
         }
 
         async Task<WrikeTask> IWrikeTasksClient.UpdateAsync(
-            string taskId,
+            string id,
             string title,
             string description,
             WrikeTaskStatus? status,
@@ -193,9 +193,14 @@ namespace Taviloglu.Wrike.ApiClient
             string customStatus,
             bool? restore)
         {
-            if (string.IsNullOrWhiteSpace(taskId))
+            if (id == null)
             {
-                throw new ArgumentNullException("taskId can not be null");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -221,7 +226,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("customStatus", customStatus)
                 .AddParameter("restore", restore);
 
-            var response = await SendRequest<WrikeTask>($"tasks/{taskId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeTask>($"tasks/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }

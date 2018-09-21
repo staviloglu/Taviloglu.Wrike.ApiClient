@@ -19,15 +19,9 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeTimelog> IWrikeTimelogsClient.CreateAsync(WrikeTimelog newTimeLog, bool? plainText)
         {
-
-            if (string.IsNullOrWhiteSpace(newTimeLog.TaskId))
+            if (newTimeLog == null)
             {
-                throw new ArgumentNullException(nameof(newTimeLog.TaskId), "newTimeLog.TaskId can not be null or empty");
-            }
-
-            if (string.IsNullOrWhiteSpace(newTimeLog.Comment))
-            {
-                throw new ArgumentNullException(nameof(newTimeLog.Comment), "newTimeLog.Comment can not be null or empty");
+                throw new ArgumentException(nameof(newTimeLog));
             }
 
             var requestUri = $"tasks/{newTimeLog.TaskId}/timelogs";
@@ -44,11 +38,16 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<WrikeTimelog> IWrikeTimelogsClient.UpdateAsync(string timelogId, string comment, int? hours, DateTime? trackedDate, bool? plainText, string categoryId)
+        async Task<WrikeTimelog> IWrikeTimelogsClient.UpdateAsync(string id, string comment, int? hours, DateTime? trackedDate, bool? plainText, string categoryId)
         {
-            if (string.IsNullOrWhiteSpace(timelogId))
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(timelogId), "timelogId can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -58,19 +57,23 @@ namespace Taviloglu.Wrike.ApiClient
                .AddParameter("plainText", plainText)
                .AddParameter("categoryId", categoryId);
 
-            var response = await SendRequest<WrikeTimelog>($"timelogs/{timelogId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeTimelog>($"timelogs/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
-        async Task IWrikeTimelogsClient.DeleteAsync(string timelogId)
+        async Task IWrikeTimelogsClient.DeleteAsync(string id)
         {
-
-            if (string.IsNullOrWhiteSpace(timelogId))
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(timelogId), "timelogId can not be null or empty");
+                throw new ArgumentNullException(nameof(id));
             }
 
-            var response = await SendRequest<WrikeTimelog>($"timelogs/{timelogId}", HttpMethods.Delete).ConfigureAwait(false);
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
+            }
+
+            var response = await SendRequest<WrikeTimelog>($"timelogs/{id}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
         async Task<List<WrikeTimelog>> IWrikeTimelogsClient.GetAsync(string contactId, string folderId, string taskId, string categoryId, WrikeDateFilterRange createdDate, IWrikeDateFilter trackedDate, bool? me, bool? descendants, bool? subTasks, bool? plainText, List<string> categoryIds)
@@ -79,7 +82,7 @@ namespace Taviloglu.Wrike.ApiClient
             int notNullCount = 0;
 
             string requestUri = "timelogs";
-            
+
             if (!string.IsNullOrWhiteSpace(contactId))
             {
                 requestUri = $"contacts/{contactId}/timelogs";
@@ -101,7 +104,7 @@ namespace Taviloglu.Wrike.ApiClient
                 notNullCount++;
             }
 
-            if (notNullCount > 1) throw new ArgumentException("only one of timelogId, contactId, folderId, taskId or categoryId can be used");
+            if (notNullCount > 1) throw new ArgumentException("only one of contactId, folderId, taskId or categoryId can be used");
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
             .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
@@ -116,9 +119,19 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeTimelog> IWrikeTimelogsClient.GetAsync(string timelogId, bool? plainText)
+        async Task<WrikeTimelog> IWrikeTimelogsClient.GetAsync(string id, bool? plainText)
         {
-            var uriBuilder = new WrikeGetUriBuilder($"timelogs/{timelogId}")
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
+            }
+
+            var uriBuilder = new WrikeGetUriBuilder($"timelogs/{id}")
             .AddParameter("plainText", plainText);
 
             var response = await SendRequest<WrikeTimelog>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);

@@ -15,47 +15,36 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<WrikeWorkflow> IWrikeWorkflowsClient.CreateAsync(string accountId, WrikeWorkflow newWorkflow)
+        async Task<WrikeWorkflow> IWrikeWorkflowsClient.CreateAsync(WrikeWorkflow newWorkflow)
         {
-            if (string.IsNullOrWhiteSpace(accountId))
+            if (newWorkflow == null)
             {
-                throw new ArgumentNullException(nameof(accountId));
+                throw new ArgumentNullException(nameof(newWorkflow));
             }
-
-
-            if (string.IsNullOrWhiteSpace(newWorkflow.Name))
-            {
-                throw new ArgumentNullException(nameof(newWorkflow.Name));
-
-            }
-
-            var requestUri = $"accounts/{accountId}/workflows";
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("name", newWorkflow.Name);
 
-            var postContent = postDataBuilder.GetContent();
-            var response = await SendRequest<WrikeWorkflow>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
+            var response = await SendRequest<WrikeWorkflow>("workflows", HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
-
         }
 
-        async Task<List<WrikeWorkflow>> IWrikeWorkflowsClient.GetAsync(string accountId)
+        async Task<List<WrikeWorkflow>> IWrikeWorkflowsClient.GetAsync()
         {
-            if (string.IsNullOrWhiteSpace(accountId))
-            {
-                throw new ArgumentNullException(nameof(accountId));
-            }
-
-            var response = await SendRequest<WrikeWorkflow>($"accounts/{accountId}/workflows", HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeWorkflow>("workflows", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeWorkflow> IWrikeWorkflowsClient.UpdateAsync(string workflowId, string name, bool? isHidden, WrikeCustomStatus customStatus)
+        async Task<WrikeWorkflow> IWrikeWorkflowsClient.UpdateAsync(string id, string name, bool? isHidden, WrikeCustomStatus customStatus)
         {
-            if (string.IsNullOrWhiteSpace(workflowId))
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(workflowId));
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -63,7 +52,7 @@ namespace Taviloglu.Wrike.ApiClient
                .AddParameter("hidden", isHidden)
                .AddParameter("customStatus", customStatus);
 
-            var response = await SendRequest<WrikeWorkflow>($"workflows/{workflowId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeWorkflow>($"workflows/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }

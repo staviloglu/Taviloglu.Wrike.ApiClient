@@ -5,7 +5,7 @@ using Taviloglu.Wrike.Core;
 namespace Taviloglu.Wrike.ApiClient
 {
     /// <summary>
-    /// Contacts
+    /// Contact operations
     /// </summary>
     public interface IWrikeContactsClient
     {
@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="me">If present - only contact info of requesting user is returned</param>
         /// <param name="metadata">Metadata filter, exact match for metadata key or key-value pair</param>
         /// <param name="isDeleted">Deleted flag filter</param>
-        /// <param name="retrieveMetadata">Array of optional fields to be included in the response model </param>
+        /// <param name="retrieveMetadata"></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
         Task<List<WrikeUser>> GetAsync(
             bool? me = null,
@@ -30,6 +30,8 @@ namespace Taviloglu.Wrike.ApiClient
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
         /// <param name="contactIds">string list of contactIds</param>
+        /// <param name="metadata">Metadata filter, exact match for metadata key or key-value pair</param>
+        /// <param name="retrieveMetadata"></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
         Task<List<WrikeUser>> GetAsync(List<string> contactIds, WrikeMetadata metadata = null, bool? retrieveMetadata = null);
 

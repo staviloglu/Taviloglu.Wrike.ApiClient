@@ -4,6 +4,9 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Color operations
+    /// </summary>
     public interface IWrikeColorsClient
     {
         /// <summary>

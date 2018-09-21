@@ -15,11 +15,17 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
         }
+
         async Task IWrikeGroupsClient.DeleteAsync(string groupId, bool isTest)
         {
-            if (string.IsNullOrWhiteSpace(groupId))
+            if (groupId == null)
             {
-                throw new ArgumentNullException(nameof(groupId),"groupId can not be null or empty");
+                throw new ArgumentNullException(nameof(groupId));
+            }
+
+            if (groupId.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(groupId), "groupId can not be empty");
             }
 
             var requestUri = $"groups/{groupId}";
@@ -28,9 +34,8 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri += "?test=true";
 
             }
-            var response = await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete).ConfigureAwait(false);
-            //TODO: anything to do with the response?
-            return;
+
+            await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete).ConfigureAwait(false);
         }
 
         async Task<List<WrikeGroup>> IWrikeGroupsClient.GetAsync(string groupId, List<string> optionalFields, WrikeMetadata metaDataFilter) {
@@ -80,6 +85,16 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeGroup> IWrikeGroupsClient.UpdateAsync(string groupId, string title, List<string> membersToAdd, List<string> membersToRemove, string parentId, WrikeGroupAvatar avatar, List<WrikeMetadata> metaData)
         {
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+
+            if (groupId.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(groupId), "groupId can not be empty");
+            }
+
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", title)
                 .AddParameter("addMembers", membersToAdd)

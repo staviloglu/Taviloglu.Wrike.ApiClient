@@ -7,7 +7,7 @@ using Taviloglu.Wrike.Core;
 namespace Taviloglu.Wrike.ApiClient
 {
     /// <summary>
-    /// Folders & Projects
+    /// Folder & Project operations
     /// </summary>
     public interface IWrikeFoldersAndProjectsClient
     {
@@ -24,6 +24,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Returns a list of tree entries
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
+        /// <param name="folderId">Returns a list of tree entries for subtree of this folder. For root and recycle bin folders, returns folder subtrees of root and recycle bin respectively.</param>
         /// <param name="permalink">Folder permalink, exact match</param>
         /// <param name="addDescendants">Adds all descendant folders to search scope</param>
         /// <param name="metadata">Folders metadata filter</param> 
@@ -44,15 +45,14 @@ namespace Taviloglu.Wrike.ApiClient
             bool? isDeleted = null,
             List<string> fields = null);
 
-
         /// <summary>
         ///  Create a folder within a folder. Specify virtual rootFolderId in order to create a folder in the account root
         ///  Scopes: Default, wsReadWrite
         /// </summary>
+        /// <param name="folderId"></param>
         /// <param name="newFolder">Use ctor <see cref="WrikeFolder.WrikeFolder(string, string, List{string}, List{WrikeMetadata}, List{WrikeCustomFieldData}, List{string}, WrikeProject)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-folder"/>
         Task<WrikeFolder> CreateAsync(string folderId, WrikeFolder newFolder);
-
 
         /// <summary>
         /// Move folder and all descendant folders and tasks to Recycle Bin unless they have parents outside of deletion scope
@@ -60,11 +60,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-folder"/>        
         Task<WrikeFolder> DeleteAsync(string folderId);
-
-
-
-
-
 
         /// <summary>
         /// Update folder.

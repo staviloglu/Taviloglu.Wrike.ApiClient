@@ -35,13 +35,19 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(List<string> contactIds, WrikeMetadata metadata, bool? retrieveMetadata)
         {
-            if (contactIds == null || contactIds.Count < 1)
+            if (contactIds == null)
             {
-                throw new ArgumentNullException("contactIds can not be null or empty");
+                throw new ArgumentNullException(nameof(contactIds));
             }
+
+            if (contactIds.Count == 0)
+            {
+                throw new ArgumentException("contactIds can not be empty", nameof(contactIds));
+            }
+
             if (contactIds.Count > 100)
             {
-                throw new ArgumentException("contactIds max count is 100");
+                throw new ArgumentException("Max. 100 contactIds can be used", nameof(contactIds));
             }
 
             var contactIdsValue = string.Join(",", contactIds);
@@ -60,9 +66,14 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeUser> IWrikeContactsClient.UpdateAsync(string id, List<WrikeMetadata> metadata)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()

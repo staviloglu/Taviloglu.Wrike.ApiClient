@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core.Ids;
 
@@ -16,9 +17,17 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<List<WrikeId>> IWrikeIdsClient.GetAsync(WrikeEntityType entityType, List<string> ids)
         {
-            var requestUri = "ids";
+            if (ids == null)
+            {
+                throw new ArgumentNullException(nameof(ids));
+            }
 
-           var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            if (ids.Count == 0)
+            {
+                throw new ArgumentException("ids can not be empty", nameof(ids));
+            }
+
+            var uriBuilder = new WrikeGetUriBuilder("ids")
                 .AddParameter("type", entityType)
                 .AddParameter("ids", ids);
 

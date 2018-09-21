@@ -6,19 +6,19 @@ using Taviloglu.Wrike.Core.Timelogs;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Timelog operations
+    /// </summary>
     public interface IWrikeTimelogsClient
     {
         /// <summary>
         /// Create timelog record for task
         /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// <param name="newTimeLog">Use ctor <see cref="WrikeTimelog.WrikeTimelog(string, string, int, DateTime, string)"/></param>
-        /// <param name="plaintext">Get comment text as plain text, HTML otherwise</param>
+        /// <param name="newTimeLog"></param>
+        /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-timelog"/>
         Task<WrikeTimelog> CreateAsync(WrikeTimelog newTimeLog, bool? plainText = null);
-
-
-
 
         /// <summary>
         /// Update timelog by Id
@@ -28,7 +28,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="comment">Timelog comment</param>
         /// <param name="hours">New timelog tracked hours</param>
         /// <param name="trackedDate">New timelog date </param>
-        /// <param name="plaintext">Get comment text as plain text, HTML otherwise</param>
+        /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// <param name="categoryId">Timelog category</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-timelog"/>
         Task<WrikeTimelog> UpdateAsync(string timelogId, string comment = null, int? hours = null, DateTime? trackedDate = null, bool? plainText = null, string categoryId = null);
@@ -72,8 +72,9 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Get timelog record by ID. 
         ///  Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
+        /// <param name="id">TimelogId</param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelogs"/>
-        Task<WrikeTimelog> GetAsync(string timelogId, bool? plainText = null);
+        Task<WrikeTimelog> GetAsync(string id, bool? plainText = null);
     }
 }

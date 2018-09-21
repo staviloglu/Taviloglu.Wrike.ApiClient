@@ -4,12 +4,16 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
+    /// <summary>
+    /// Webhook operations
+    /// </summary>
     public interface IWrikeWebHooksClient
     {
         /// <summary>
         ///  Creates a webhook for a particular account.
-        /// </summary>
+        /// </summary>        /// 
         /// <param name="newWebhook">Use ctor <see cref="WrikeWebHook.WrikeWebHook(string, string)"/></param>
+        /// <param name="folderId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
         Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebhook, string folderId = null);
 
@@ -41,7 +45,5 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
         Task<WrikeWebHook> UpdateAsync(string webhookId, WrikeWebHookStatus status);
-
-
     }
 }

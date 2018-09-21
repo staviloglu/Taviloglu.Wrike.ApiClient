@@ -4,6 +4,9 @@ using Taviloglu.Wrike.Core.TimelogCategories;
 
 namespace Taviloglu.Wrike.ApiClient.TimeLogCategories
 {
+    /// <summary>
+    /// Timelog Category operations
+    /// </summary>
     public interface IWrikeTimelogCategoriesClient
     {
         /// <summary>

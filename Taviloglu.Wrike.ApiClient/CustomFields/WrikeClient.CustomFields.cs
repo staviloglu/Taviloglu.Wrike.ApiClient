@@ -15,28 +15,27 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeCustomFieldsClient)this;
             }
         }
-        async Task<List<WrikeCustomField>> IWrikeCustomFieldsClient.GetAsync(string accountId)
+        async Task<List<WrikeCustomField>> IWrikeCustomFieldsClient.GetAsync()
         {
-            var requestUri = "customfields";
-            if (!string.IsNullOrWhiteSpace(accountId))
-            {
-                requestUri = $"accounts/{accountId}/customfields";
-            }
-
-            var response =  await SendRequest<WrikeCustomField>(requestUri, HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeCustomField>("customfields", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
         async Task<List<WrikeCustomField>> IWrikeCustomFieldsClient.GetAsync(List<string> customFieldIds)
         {
-
-            if (customFieldIds == null || customFieldIds.Count < 1)
+            if (customFieldIds == null)
             {
-                throw new ArgumentNullException("customFieldIds can not be null or empty");
+                throw new ArgumentNullException(nameof(customFieldIds));
             }
+
+            if (customFieldIds.Count == 0)
+            {
+                throw new ArgumentException("customFieldIds can not be empty", nameof(customFieldIds));
+            }
+
             if (customFieldIds.Count > 100)
             {
-                throw new ArgumentException("customFieldIds max count is 100");
+                throw new ArgumentException("Max. 100 customFieldIds can be used", nameof(customFieldIds));
             }
 
             var customFieldsValue = string.Join(",", customFieldIds);
@@ -44,26 +43,21 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeCustomField> IWrikeCustomFieldsClient.CreateAsync(WrikeCustomField customField)
+        async Task<WrikeCustomField> IWrikeCustomFieldsClient.CreateAsync(WrikeCustomField newCustomField)
         {
-
-            if (customField == null)
+            if (newCustomField == null)
             {
-                throw new ArgumentNullException("CustomField can not be null");
-            }
-            if (string.IsNullOrWhiteSpace(customField.AccountId))
-            {
-                throw new ArgumentNullException("customField.AccountId can not be null or empty");
+                throw new ArgumentNullException(nameof(newCustomField));
             }
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
-                .AddParameter("title", customField.Title)
-                .AddParameter("type", customField.Type)
-                .AddParameter("shareds", customField.SharedIds)
-                .AddParameter("settings", customField.Settings);
-            
+                .AddParameter("title", newCustomField.Title)
+                .AddParameter("type", newCustomField.Type)
+                .AddParameter("shareds", newCustomField.SharedIds)
+                .AddParameter("settings", newCustomField.Settings);
 
-            var response = await SendRequest<WrikeCustomField>($"accounts/{customField.AccountId}/customfields",
+
+            var response = await SendRequest<WrikeCustomField>("customfields",
                 HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);
@@ -77,10 +71,14 @@ namespace Taviloglu.Wrike.ApiClient
             List<string> removeShareds,
             WrikeCustomFieldSettings settings)
         {
-
-            if (string.IsNullOrWhiteSpace(id))
+            if (id == null)
             {
-                throw new ArgumentNullException("id can not be null");
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (id.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(id), "id can not be empty");
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -89,8 +87,6 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("addShareds", addShareds)
                 .AddParameter("removeShareds", removeShareds)
                 .AddParameter("settings", settings);
-
-            
 
             var response = await SendRequest<WrikeCustomField>($"customfields/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
