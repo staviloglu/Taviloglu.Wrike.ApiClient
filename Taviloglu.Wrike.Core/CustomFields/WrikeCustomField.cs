@@ -8,22 +8,16 @@ namespace Taviloglu.Wrike.Core
 {
     public sealed class WrikeCustomField : WrikeObjectWithId
     {
-
-        public WrikeCustomField() { }
-
-        /// <summary>
-        /// Use this constructor for creating new custom field requests
-        /// </summary>
-        /// <param name="accountId">AccountId</param>
-        /// <param name="title">Title</param>
-        /// <param name="type">Type</param>
-        /// <param name="sharedIds">Shared people</param>
-        public WrikeCustomField(string accountId, string title, WrikeCustomFieldType type, List<string> sharedIds = null)
+        public WrikeCustomField(string title, WrikeCustomFieldType type, List<string> sharedIds = null, WrikeCustomFieldSettings settings = null)
         {
-
-            if (string.IsNullOrWhiteSpace(accountId))
+            if (title == null)
             {
-                throw new ArgumentException("accountId can not be null or empty!", "accountId");
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (title.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(title), "title can not be empty");
             }
 
             if (string.IsNullOrWhiteSpace(title))
@@ -34,18 +28,18 @@ namespace Taviloglu.Wrike.Core
             Title = title;
             Type = type;
             SharedIds = sharedIds;
-            AccountId = accountId;
+            Settings = settings;
         }
 
         [JsonProperty("accountId")]
         public string AccountId { get; set; }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; private set; }
 
         [JsonProperty("type")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WrikeCustomFieldType Type { get; set; }
+        public WrikeCustomFieldType Type { get; private set; }
 
         [JsonProperty("sharedIds")] 
         public List<string> SharedIds { get; set; }

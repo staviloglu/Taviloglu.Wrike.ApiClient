@@ -8,10 +8,14 @@ namespace Taviloglu.Wrike.Core
     {
         public WrikeGroup(string title, List<string> memberIds = null, List<WrikeMetadata> metadata = null)
         {
-
-            if (string.IsNullOrWhiteSpace(title))
+            if (title == null)
             {
-                throw new ArgumentNullException(nameof(title), "title can not be null or empty.");
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (title.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(title), "title can not be empty");
             }
 
             Title = title;

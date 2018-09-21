@@ -9,7 +9,6 @@ namespace Taviloglu.Wrike.ApiClient.Samples
     {
         public static async Task Run(WrikeClient client)
         {
-            string accountId = "IEABX2HE";
             //var workflows = await client.Workflows.GetAsync(accountId);
 
             //var newWorkFlow = new WrikeWorkflow("MyNewWorkflow");
@@ -35,10 +34,8 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
         public static async Task ExtensionSamples(WrikeClient client)
         {
-            var newWorkflow = new WrikeWorkflow
+            var newWorkflow = new WrikeWorkflow("Sinan's Extension Workflow")
             {
-
-                Name = "Sinan's Extension Workflow",
                 CustomStatuses = new List<WrikeCustomStatus>
                 {
                     new WrikeCustomStatus
@@ -94,8 +91,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 }
             };
 
-            newWorkflow = await client.
-                Workflows.CreateWorkflowWithCustomStatusesAsync("IEABX2HE", newWorkflow);
+            newWorkflow = await client.Workflows.CreateWorkflowWithCustomStatusesAsync(newWorkflow);
         }
     }
 }

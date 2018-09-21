@@ -10,24 +10,21 @@ namespace Taviloglu.Wrike.Core.Invitations
     /// </summary>
     public class WrikeInvitation : WrikeObjectWithId
     {
-
-        public WrikeInvitation() {}
-
-        public WrikeInvitation(string accountId, string email, 
+        public WrikeInvitation(string email, 
             string firstName = null, 
             string lastName = null, 
             WrikeUserRole role = WrikeUserRole.User, bool external = false)
         {
-            if (string.IsNullOrWhiteSpace(accountId))
+            if (email == null)
             {
-                throw new ArgumentNullException(nameof(accountId), "accountId can not be null or empty");
+                throw new ArgumentNullException(nameof(email));
             }
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (email.Trim() == string.Empty)
             {
-                throw new ArgumentNullException(nameof(email), "email can not be null or empty");
+                throw new ArgumentException(nameof(email), "email can not be empty");
             }
-            AccountId = accountId;
+
             Email = email;
             FirstName = firstName;
             LastName = lastName;
@@ -55,7 +52,7 @@ namespace Taviloglu.Wrike.Core.Invitations
         /// Email
         /// </summary>
         [JsonProperty("email")]
-        public string Email { get; set; }
+        public string Email { get; private set; }
         /// <summary>
         /// Status 
         /// </summary>

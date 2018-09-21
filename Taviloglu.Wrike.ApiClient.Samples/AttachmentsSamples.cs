@@ -15,7 +15,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             var accounts = await client.Accounts.GetAsync();
             foreach (var account in accounts)
             {
-                var tasks = await client.Tasks.GetAsync(accountId: account.Id, fields: new List<string>() { WrikeTask.OptionalFields.HasAttachments,WrikeTask.OptionalFields.Description });
+                var tasks = await client.Tasks.GetAsync(fields: new List<string>() { WrikeTask.OptionalFields.HasAttachments,WrikeTask.OptionalFields.Description });
                 var tasksWithAttachments = tasks.Where(o=>o.HasAttachments).ToList();
                 foreach(var task in tasksWithAttachments)
                 {

@@ -6,7 +6,6 @@ namespace Taviloglu.Wrike.Core
 {
     public class WrikeWorkflow : WrikeObjectWithId
     {
-        public WrikeWorkflow() { }
 
         /// <summary>
         /// Use this constructor for creating new workflows
@@ -14,9 +13,14 @@ namespace Taviloglu.Wrike.Core
         /// <param name="name"></param>
         public WrikeWorkflow(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(name ));
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (name.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(name), "id can not be empty");
             }
 
             Name = name;

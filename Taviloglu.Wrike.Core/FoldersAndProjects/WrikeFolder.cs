@@ -6,18 +6,22 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
+    /// <summary>
+    /// Folder
+    /// </summary>
     public sealed class WrikeFolder : WrikeObjectWithId
     {
-        public WrikeFolder()
-        {
-
-        }
-
         public WrikeFolder(string title, string description = null, List<string> shareds = null, List<WrikeMetadata> metadatas = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null)
         {
-            if (string.IsNullOrWhiteSpace(title))
+
+            if (title == null)
             {
-                throw new ArgumentNullException(nameof(title), "title can not be null or empty");
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (title.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(title), "title can not be empty");
             }
 
             Title = title;
@@ -40,7 +44,7 @@ namespace Taviloglu.Wrike.Core
         /// Title
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// Created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'

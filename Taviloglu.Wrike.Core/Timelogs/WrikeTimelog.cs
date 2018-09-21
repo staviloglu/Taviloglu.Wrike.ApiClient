@@ -16,19 +16,29 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// <param name="categoryId">Timelog category</param>
         public WrikeTimelog(string taskId, string comment, decimal hours, DateTime trackedDate, string categoryId = null)
         {
-            if (string.IsNullOrWhiteSpace(taskId))
+            if (taskId == null)
             {
-                throw new ArgumentNullException(nameof(taskId), "taskId can not be null or empty");
+                throw new ArgumentNullException(nameof(taskId));
             }
 
-            if (string.IsNullOrWhiteSpace(comment))
+            if (taskId.Trim() == string.Empty)
             {
-                throw new ArgumentNullException(nameof(comment), "comment can not be null or empty");
+                throw new ArgumentException(nameof(taskId), "taskId can not be empty");
+            }
+
+            if (comment == null)
+            {
+                throw new ArgumentNullException(nameof(comment));
+            }
+
+            if (comment.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(comment), "comment can not be empty");
             }
 
             if (hours < 0 || hours > 24)
             {
-                throw new ArgumentException("must be in [0..24] hours range", nameof(hours));
+                throw new ArgumentException("hours must be in [0,24] range", nameof(hours));
             }
 
             //TODO: check trackedDate

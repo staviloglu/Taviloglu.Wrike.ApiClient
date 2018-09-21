@@ -6,12 +6,13 @@ using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
+    /// <summary>
+    /// Task
+    /// </summary>
     public sealed class WrikeTask : WrikeObjectWithId
     {
-        public WrikeTask() { }
-
         /// <summary>
-        /// Use this constructor for creating new task requests
+        /// Use this constructor for creating new tasks
         /// </summary>
         /// <param name="title">Title of task, required</param>
         /// <param name="description">Description of task, will be left blank, if not set</param>
@@ -22,49 +23,53 @@ namespace Taviloglu.Wrike.Core
         /// <param name="parents">Parent folders for newly created task. Can not contain recycleBinId</param>
         /// <param name="responsibles">Makes specified users responsible for the task</param>
         /// <param name="followers">Add specified users to task followers</param>
-        /// <param name="follow">Follow task</param>        
+        /// <param name="follow">Follow task</param>   
         /// <param name="superTasks">Add the task as subtask to specified tasks</param>
         /// <param name="metadata">Metadata to be added to newly created task</param>
         /// <param name="customFields">List of custom fields to set in newly created task</param>
         /// <param name="customStatus">Custom status ID</param>
         public WrikeTask(
-            string title, 
+            string title,
             string description = null,
-            WrikeTaskStatus? status = null,
-            WrikeTaskImportance? importance = null,
+            WrikeTaskStatus status = WrikeTaskStatus.Active,
+            WrikeTaskImportance importance = WrikeTaskImportance.Normal,
             WrikeTaskDate dates = null,
-             List<string> shareds = null,
-              List<string> parents = null,
-              List<string> responsibles = null,
-              List<string> followers = null,
-              bool? follow = null,
-              string priorityBefore = null,
-              string priorityAfter = null,
-              List<string> superTasks = null,
-              List<WrikeMetadata> metadata = null,
-              List<WrikeCustomFieldData> customFields = null,
-              string customStatus = null)
+            List<string> shareds = null,
+            List<string> parents = null,
+            List<string> responsibles = null,
+            List<string> followers = null,
+            bool follow = false,
+            List<string> superTasks = null,
+            List<WrikeMetadata> metadata = null,
+            List<WrikeCustomFieldData> customFields = null,
+            string customStatus = null)
         {
-            if (string.IsNullOrWhiteSpace(title))
+            if (title == null)
             {
-                throw new ArgumentException("title can not be null or empty!","title");
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (title.Trim() == string.Empty)
+            {
+                throw new ArgumentException(nameof(title), "title can not be empty");
             }
 
             Title = title;
             Description = description;
-            Status = status ?? WrikeTaskStatus.Active;
-            Importance = importance ?? WrikeTaskImportance.Normal;
+            Status = status;
+            Importance = importance;
             Dates = dates;
             SharedIds = shareds;
             ParentIds = parents;
             ResponsibleIds = responsibles;
             FollowerIds = followers;
-            FollowedByMe = follow ?? false;
+            FollowedByMe = follow;
             SuperTaskIds = superTasks;
             Metadata = metadata;
             CustomFields = customFields;
             CustomStatusId = customStatus;
         }
+
         /// <summary>
         /// Account ID
         /// </summary>
@@ -75,7 +80,7 @@ namespace Taviloglu.Wrike.Core
         /// Title, cannot be empty
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; private set; }
         /// <summary>
         /// Description
         /// </summary>
@@ -88,16 +93,19 @@ namespace Taviloglu.Wrike.Core
         /// </summary>
         [JsonProperty("briefDescription")]
         public string BriefDescription { get; set; }
+
         /// <summary>
         /// List of task parent folder IDs
         /// </summary>
         [JsonProperty("parentIds")]
         public List<string> ParentIds { get; set; }
+
         /// <summary>
         /// List of task super parent folder IDs
         /// </summary>
         [JsonProperty("superParentIds")]
         public List<string> SuperParentIds { get; set; }
+
         /// <summary>
         /// List of user IDs, who share the task
         /// </summary>
@@ -115,6 +123,7 @@ namespace Taviloglu.Wrike.Core
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
         public WrikeTaskStatus Status { get; set; }
+
         /// <summary>
         /// Importance of task 
         /// </summary>
@@ -128,23 +137,30 @@ namespace Taviloglu.Wrike.Core
         [JsonProperty("createdDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CreatedDate { get; set; }
+
         /// <summary>
         /// Updated date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("updatedDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime UpdatedDate { get; set; }
+
         /// <summary>
         /// Completed date, field is present for tasks with 'Completed' status Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("completedDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CompletedDate { get; set; }
+
         /// <summary>
         /// Task dates
         /// </summary>
         [JsonProperty("dates")]
         public WrikeTaskDate Dates { get; set; }
+
+        /// <summary>
+        /// Task scope 
+        /// </summary>
         [JsonProperty("scope")]
         [JsonConverter(typeof(StringEnumConverter))]
         public WrikeTreeScope Scope { get; set; }
@@ -153,24 +169,46 @@ namespace Taviloglu.Wrike.Core
         /// </summary>
         [JsonProperty("authorIds")]
         public List<string> AuthorIds { get; set; }
+        
+        /// <summary>
+        /// Custom status ID
+        /// </summary>
         [JsonProperty("customStatusId")]
         public string CustomStatusId { get; set; }
+
+        /// <summary>
+        /// Has attachments
+        /// </summary>
         [JsonProperty("hasAttachments")]
         public bool HasAttachments { get; set; }
+
+        /// <summary>
+        /// Total count of task attachments
+        /// </summary>
         [JsonProperty("attachmentCount")]
         public int AttachmentCount { get; set; }
+
         /// <summary>
         /// Link to open task in web workspace, if user has appropriate access
         /// </summary>
         [JsonProperty("permalink")]
         public string Permalink { get; set; }
+
         /// <summary>
         /// Ordering key that defines task order in tasklist
         /// </summary>
         [JsonProperty("priority")]
         public string Priority { get; set; }
+
+        /// <summary>
+        /// Is a task followed by me
+        /// </summary>
         [JsonProperty("followedByMe")]
         public bool FollowedByMe { get; set; }
+
+        /// <summary>
+        /// List of user IDs, who follows task
+        /// </summary>
         [JsonProperty("followerIds")]
         public List<string> FollowerIds { get; set; }
 
@@ -180,14 +218,33 @@ namespace Taviloglu.Wrike.Core
         [JsonProperty("recurrent")]
         public bool Recurrent { get; set; }
 
+        /// <summary>
+        /// List of super task IDs
+        /// </summary>
         [JsonProperty("superTaskIds")]
         public List<string> SuperTaskIds { get; set; }
+
+        /// <summary>
+        /// List of subtask IDs
+        /// </summary>
         [JsonProperty("subTaskIds")]
         public List<string> SubTaskIds { get; set; }
+
+        /// <summary>
+        /// List of dependency IDs
+        /// </summary>
         [JsonProperty("dependencyIds")]
         public List<string> DependencyIds { get; set; }
+
+        /// <summary>
+        /// List of task metadata entries
+        /// </summary>
         [JsonProperty("metadata")]
         public List<WrikeMetadata> Metadata { get; set; }
+
+        /// <summary>
+        /// Custom fields
+        /// </summary>
         [JsonProperty("customFields")]
         public List<WrikeCustomFieldData> CustomFields { get; set; }
 
@@ -258,6 +315,5 @@ namespace Taviloglu.Wrike.Core
             public const string CustomFields = "customFields";
         }
     }
-
 }
 
