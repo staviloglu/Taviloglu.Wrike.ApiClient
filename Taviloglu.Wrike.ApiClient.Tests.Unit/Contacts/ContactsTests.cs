@@ -62,7 +62,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Contacts
         {
             string id = string.Empty;
 
-            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Contacts.UpdateAsync(id));
+            Assert.ThrowsAsync<ArgumentException>(() => _wrikeClient.Contacts.UpdateAsync(id));
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using System;
+using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Groups
 {
@@ -17,6 +19,46 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Groups
         public void GroupsProperty_ShouldReturnGroupsClient()
         {
             Assert.IsInstanceOf(typeof(IWrikeGroupsClient), _wrikeClient.Groups);
+        }
+
+        [Test]
+        public void DeleteAsync_IdNull_ThrowArgumentNullException()
+        {
+            string id = null;
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Groups.DeleteAsync(id));
+        }
+
+        [Test]
+        public void DeleteAsync_IdEmpty_ThrowArgumentException()
+        {
+            string id = string.Empty;
+
+            Assert.ThrowsAsync<ArgumentException>(() => _wrikeClient.Groups.DeleteAsync(id));
+        }
+
+        [Test]
+        public void UpdateAsync_IdNull_ThrowArgumentNullException()
+        {
+            string id = null;
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Groups.UpdateAsync(id));
+        }
+
+        [Test]
+        public void UpdateAsync_IdEmpty_ThrowArgumentException()
+        {
+            string id = string.Empty;
+
+            Assert.ThrowsAsync<ArgumentException>(() => _wrikeClient.Groups.UpdateAsync(id));
+        }
+
+        [Test]
+        public void CreateAsync_NewGroupNull_ThrowArgumentNullException()
+        {
+            WrikeGroup newGroup = null;
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Groups.CreateAsync(newGroup));
         }
     }
 }

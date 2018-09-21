@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using Taviloglu.Wrike.Core.Ids;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Ids
 {
@@ -17,6 +20,22 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Ids
         public void IdsProperty_ShouldReturnIdsClient()
         {
             Assert.IsInstanceOf(typeof(IWrikeIdsClient), _wrikeClient.Ids);
+        }
+
+        [Test]
+        public void GetAsync_ContactdsNull_ThrowArgumentNullException()
+        {
+            List<string> ids = null;
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Ids.GetAsync(WrikeEntityType.ApiV2Account, ids));
+        }
+
+        [Test]
+        public void GetAsync_IdsEmpty_ThrowArgumentException()
+        {
+            var ids = new List<string>();
+
+            Assert.ThrowsAsync<ArgumentException>(() => _wrikeClient.Ids.GetAsync(WrikeEntityType.ApiV2Account, ids));
         }
     }
 }

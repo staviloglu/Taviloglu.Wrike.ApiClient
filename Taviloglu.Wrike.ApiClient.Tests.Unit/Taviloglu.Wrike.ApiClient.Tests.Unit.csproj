@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dependencies\" />
-  </ItemGroup>
-
 </Project>
