@@ -13,22 +13,22 @@ namespace Taviloglu.Wrike.ApiClient
         /// Delete group by Id
         /// Scopes: amReadWriteGroup
         /// </summary>
-        /// <param name="groupId"></param>  
+        /// <param name="groupId">GroupId</param>  
         /// <param name="isTest">Check that group can be removed</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-groups"/>
-        Task DeleteAsync(string groupId, bool isTest = false);
+        Task DeleteAsync(string id, bool isTest = false);
 
 
         /// <summary>
         /// Query Groups
         /// Scopes: amReadOnlyGroup, amReadWriteGroup
         /// </summary>
-        /// <param name="groupId">If null, returns all groups in the account. If set returns complete information about single group.</param>
+        /// <param name="id">If null, returns all groups in the account. If set returns complete information about single group.</param>
         /// <param name="optionalFields">Optional fields to be included in the response model 
         /// Use <see cref="WrikeGroup.OptionalFields"/></param>
         /// <param name="metaDataFilter">Metadata filter, exact match for metadata key or key-value pair</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-groups"/>
-        Task<List<WrikeGroup>> GetAsync(string groupId=null, List<string> optionalFields = null, WrikeMetadata metaDataFilter = null);
+        Task<List<WrikeGroup>> GetAsync(string id=null, List<string> optionalFields = null, WrikeMetadata metaDataFilter = null);
 
         /// <summary>
         /// Create group in account.
