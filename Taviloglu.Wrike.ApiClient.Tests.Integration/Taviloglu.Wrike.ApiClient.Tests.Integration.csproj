@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Accounts\" />
     <Folder Include="Attachments\" />
     <Folder Include="Contacts\" />
     <Folder Include="CustomFields\" />

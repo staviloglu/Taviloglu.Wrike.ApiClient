@@ -16,14 +16,14 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<List<WrikeAccount>> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> fields)
+        async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> fields)
         {
-            var uriBuilder = new WrikeGetUriBuilder("accounts")
+            var uriBuilder = new WrikeGetUriBuilder("account")
                 .AddParameter("metadata", metadata).
                 AddParameter("fields", fields);
 
             var response = await SendRequest<WrikeAccount>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            return GetReponseDataList(response);
+            return GetReponseDataFirstItem(response);
         }
 
 
