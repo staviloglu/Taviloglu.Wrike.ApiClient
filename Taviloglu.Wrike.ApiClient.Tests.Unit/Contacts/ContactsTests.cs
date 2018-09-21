@@ -34,27 +34,35 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Contacts
         }
 
         [Test]
-        public void GetAsync_ContactIdsEmpty_ThrowArgumentNullException()
+        public void GetAsync_ContactIdsNull_ThrowArgumentNullException()
         {
-            var contactIds = new List<string>();
+            List<string> contactIds = null;
 
             Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Contacts.GetAsync(contactIds));
         }
 
         [Test]
-        public void GetAsync_ContactIdsNull_ThrowArgumentNullException()
+        public void GetAsync_ContactIdsEmpty_ThrowArgumentException()
         {
             var contactIds = new List<string>();
 
-            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Contacts.GetAsync(contactIds));
+            Assert.ThrowsAsync<ArgumentException>(() => _wrikeClient.Contacts.GetAsync(contactIds));
         }
 
         [Test]
         public void UpdateAsync_IdNull_ThrowArgumentNullException()
         {
-            var contactIds = new List<string>();
+            string id = null;
 
-            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Contacts.UpdateAsync(null));
+            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Contacts.UpdateAsync(id));
+        }
+
+        [Test]
+        public void UpdateAsync_IdEmpty_ThrowArgumentException()
+        {
+            string id = string.Empty;
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => _wrikeClient.Contacts.UpdateAsync(id));
         }
     }
 }

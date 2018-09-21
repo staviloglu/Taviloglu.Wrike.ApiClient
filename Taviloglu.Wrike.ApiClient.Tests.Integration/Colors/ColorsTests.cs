@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Colors
         }
 
         [Test]
-        public void GetAsync_ShoulRetun_Major1Minor0()
+        public void GetAsync_ShouldRetun64Colors()
         {
             var expectedColorCount = 64;
 

@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Version
         }
 
         [Test]
-        public void GetAsync_ShoulRetun_Major1Minor0()
+        public void GetAsync_ShouldRetunMajor1Minor0()
         {
             var expectedWrikeVersion = new WrikeVersion {
                 Major = "1",
