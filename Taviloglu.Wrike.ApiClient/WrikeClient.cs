@@ -11,15 +11,30 @@ namespace Taviloglu.Wrike.ApiClient
     /// <summary>
     /// Provides methods to access and modify user content in Wrike through the API
     /// </summary>
-    public partial class WrikeClient :IDisposable
+    public partial class WrikeClient : IDisposable
     {
         private readonly HttpClient _httpClient;
         private bool _disposed;
 
-        public WrikeClient(string bearerToken)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeClient"/> class.
+        /// </summary>
+        /// <param name="bearerToken"></param>
+        /// <param name="host"></param>
+        public WrikeClient(string bearerToken, string host = "www.wrike.com")
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            if (host.Trim() == string.Empty)
+            {
+                throw new ArgumentException($"{nameof(host)} can not be empty",nameof(host));
+            }
+
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(@"https://www.wrike.com/api/v4/");
+            _httpClient.BaseAddress = new Uri($@"https://{host}/api/v4/");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {bearerToken}");
         }
@@ -42,7 +57,7 @@ namespace Taviloglu.Wrike.ApiClient
                     throw new ArgumentException("Unknown HTTP METHOD!");
             }
             var stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            
+
 
             return stream;
         }
