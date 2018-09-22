@@ -35,13 +35,5 @@ namespace Taviloglu.Wrike.ApiClient
                 .ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
-
-        async Task<List<WrikeTimelogCategory>> IWrikeAccountsClient.GetTimelogCategories()
-        {
-            var uriBuilder = new WrikeGetUriBuilder($"timelog_categories");
-
-            var response = await SendRequest<WrikeTimelogCategory>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            return GetReponseDataList(response);
-        }
     }
 }
