@@ -21,7 +21,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 retrieveMetadata: true);
 
             var updatedContact = await client.Contacts.UpdateAsync(
-                "contactId",
+                "KUAERP25",
                 new List<Core.WrikeMetadata>{new Core.WrikeMetadata("testMetaKey","testMetaValue")
             });
 

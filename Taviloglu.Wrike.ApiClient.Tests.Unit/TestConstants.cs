@@ -24,6 +24,12 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit
             new object[] { ArgumentException, ListOfStringWithMoreThanHundredItems() },
         };
 
+        public static object[] StringListParameterCanNotBeNullOrEmpty =
+       {
+            new object[] { ArgumentException, new List<string>() },
+            new object[] { ArgumentNullException, null }
+        };
+
         public static List<string> ListOfStringWithMoreThanHundredItems()
         {
             var retVal = new List<string>();

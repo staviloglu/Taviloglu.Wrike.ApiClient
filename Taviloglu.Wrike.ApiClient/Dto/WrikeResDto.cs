@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Taviloglu.Wrike.ApiClient.Dto
 {
     /// <summary>
-    /// Every endpoint returns this type as response
+    /// Every endpoint in Wrike Resource Server returns this type as response
     /// </summary>
     /// <typeparam name="T"></typeparam>
     internal class WrikeResDto<T>
