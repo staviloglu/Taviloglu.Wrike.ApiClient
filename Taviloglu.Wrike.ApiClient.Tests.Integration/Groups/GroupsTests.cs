@@ -7,24 +7,18 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
     [TestFixture]
     public class GroupsTests
     {
-        WrikeClient _wrikeClient;
-        const string DefaultGroupId = "KX74WSKU";
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            _wrikeClient = new WrikeClient("eyJ0dCI6InAiLCJhbGciOiJIUzI1NiIsInR2IjoiMSJ9.eyJkIjoie1wiYVwiOjIzMTc2ODQsXCJpXCI6NTM3NDAyNCxcImNcIjo0NTk1MDE0LFwidlwiOm51bGwsXCJ1XCI6NDc2NzU4MSxcInJcIjpcIlVTXCIsXCJzXCI6W1wiV1wiLFwiRlwiLFwiSVwiLFwiVVwiLFwiS1wiLFwiQ1wiXSxcInpcIjpbXSxcInRcIjowfSIsImlhdCI6MTUzNzMyMTkyOH0.r8MaouEsyTiWJ0qPqUt2McslSPP2NTinL9YrnQ9Lcow");
-        }
+        const string DefaultGroupId = "KX74WSKU";        
 
         [OneTimeTearDown]
-        public void RestoreGroupsToDefault()
+        public void SetToDefaults()
         {
-            var groups = _wrikeClient.Groups.GetAsync().Result;
+            var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
 
             foreach (var group in groups)
             {
                 if (group.Id != DefaultGroupId)
                 {
-                    _wrikeClient.Groups.DeleteAsync(group.Id).Wait();
+                    WrikeClientFactory.GetWrikeClient().Groups.DeleteAsync(group.Id).Wait();
                 }
             }
         }
@@ -32,9 +26,9 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         [Test]
         public void GetAsync_ShouldReturnDefaultGroup()
         {
-            RestoreGroupsToDefault();
+            SetToDefaults();
 
-            var groups = _wrikeClient.Groups.GetAsync().Result;
+            var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
             Assert.IsNotNull(groups);
             Assert.AreEqual(1, groups.Count);
             Assert.AreEqual(DefaultGroupId, groups.First().Id);
@@ -46,7 +40,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");
 
-            var createdGroup = _wrikeClient.Groups.CreateAsync(newGroup).Result;
+            var createdGroup = WrikeClientFactory.GetWrikeClient().Groups.CreateAsync(newGroup).Result;
 
             Assert.IsNotNull(createdGroup);
             Assert.AreEqual(newGroup.Title, createdGroup.Title);
@@ -56,10 +50,10 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         public void UpdateAsync_ShouldUpdateGroupTitle()
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");
-            newGroup = _wrikeClient.Groups.CreateAsync(newGroup).Result;
+            newGroup = WrikeClientFactory.GetWrikeClient().Groups.CreateAsync(newGroup).Result;
 
             var expectedGroupTitle = "Sinan's Test Group [Updated]";
-            var updatedGroup = _wrikeClient.Groups.UpdateAsync(newGroup.Id, expectedGroupTitle).Result;
+            var updatedGroup = WrikeClientFactory.GetWrikeClient().Groups.UpdateAsync(newGroup.Id, expectedGroupTitle).Result;
 
             Assert.IsNotNull(updatedGroup);
             Assert.AreEqual(expectedGroupTitle, updatedGroup.Title);
@@ -69,11 +63,11 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         public void DeleteAsync_ShouldDeleteNewGroup()
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");
-            newGroup = _wrikeClient.Groups.CreateAsync(newGroup).Result;
+            newGroup = WrikeClientFactory.GetWrikeClient().Groups.CreateAsync(newGroup).Result;
 
-             _wrikeClient.Groups.DeleteAsync(newGroup.Id);
+            WrikeClientFactory.GetWrikeClient().Groups.DeleteAsync(newGroup.Id);
 
-            var groups = _wrikeClient.Groups.GetAsync().Result;
+            var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
             var isGroupDeleted = !groups.Any(g => g.Id == newGroup.Id);
 
             Assert.IsTrue(isGroupDeleted);
