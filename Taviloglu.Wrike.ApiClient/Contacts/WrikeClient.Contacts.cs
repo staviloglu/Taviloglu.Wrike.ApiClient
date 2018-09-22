@@ -21,7 +21,8 @@ namespace Taviloglu.Wrike.ApiClient
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
                 .AddParameter("me", me)
-                .AddParameter("metadata", metadata);
+                .AddParameter("metadata", metadata)
+                .AddParameter("deleted", isDeleted);
 
             if (retrieveMetadata.HasValue && retrieveMetadata == true)
             {
