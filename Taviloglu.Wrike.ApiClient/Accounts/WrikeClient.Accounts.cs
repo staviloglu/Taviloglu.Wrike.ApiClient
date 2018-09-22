@@ -26,59 +26,19 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-
-        async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(string id, List<string> fields)
+        async Task<WrikeAccount> IWrikeAccountsClient.UpdateAsync(List<WrikeMetadata> metadataList)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
-            var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}")
-                .AddParameter("fields", fields);
-
-            var response = await SendRequest<WrikeAccount>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            return GetReponseDataFirstItem(response);
-        }
-
-        async Task<WrikeAccount> IWrikeAccountsClient.UpdateAsync(string id, List<WrikeMetadata> metadataList)
-        {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("metadata", metadataList);
 
-            var response = await SendRequest<WrikeAccount>($"accounts/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+            var response = await SendRequest<WrikeAccount>($"account", HttpMethods.Put, contentBuilder.GetContent())
+                .ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
-
         }
 
-        async Task<List<WrikeTimelogCategory>> IWrikeAccountsClient.GetTimelogCategories(string id)
+        async Task<List<WrikeTimelogCategory>> IWrikeAccountsClient.GetTimelogCategories()
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
-            var uriBuilder = new WrikeGetUriBuilder($"accounts/{id}/timelog_categories");
+            var uriBuilder = new WrikeGetUriBuilder($"timelog_categories");
 
             var response = await SendRequest<WrikeTimelogCategory>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);

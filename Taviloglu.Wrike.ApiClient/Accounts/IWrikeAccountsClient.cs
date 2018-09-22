@@ -19,31 +19,19 @@ namespace Taviloglu.Wrike.ApiClient
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-accounts"/>
         Task<WrikeAccount> GetAsync(WrikeMetadata metadata = null, List<string> fields = null);
 
-
         /// <summary>
-        /// Returns specified account.
-        /// Scopes: Default, wsReadOnly, wsReadWrite
-        /// </summary>
-        /// <param name="id">AccountId</param>
-        /// <param name="fields">Optional fields to be included in the response model Use <see cref="WrikeAccount.OptionalFields"/></param>
-        /// See <see href="https://developers.wrike.com/documentation/api/methods/query-accounts"/>
-        Task<WrikeAccount> GetAsync(string id, List<string> fields = null);
-
-        /// <summary>
-        /// Update account by Id.
+        /// Update current account.
         /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// <param name="id">AccountId</param>
         /// <param name="metadataList">Metadata to be updated</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-account"/>
-        Task<WrikeAccount> UpdateAsync(string id, List<WrikeMetadata> metadataList);
+        Task<WrikeAccount> UpdateAsync(List<WrikeMetadata> metadataList);
 
         /// <summary>
         /// Get timelog categories in account.
         /// Scopes: Default, wsReadOnly, wsReadWrite, amReadOnlyTimelogCategory, amReadWriteTimelogCategory
         /// </summary>
-        /// <param name="id">AccountId</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelog-categories"/>
-        Task<List<WrikeTimelogCategory>> GetTimelogCategories(string id);
+        Task<List<WrikeTimelogCategory>> GetTimelogCategories();
     }
 }
