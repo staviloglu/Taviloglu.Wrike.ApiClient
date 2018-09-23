@@ -30,7 +30,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
         }
 
         [Test]
-        public void GetAsync_WhenMe_ShouldReturnDefaulContact()
+        public void GetAsync_WhenMe_ShouldReturnDefaultContact()
         {
             var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync(me: true).Result;
 
