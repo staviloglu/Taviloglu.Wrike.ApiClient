@@ -1,22 +1,56 @@
 ﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Tasks
 {
     [TestFixture]
     public class TasksTests
     {
-        WrikeClient _wrikeClient;
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            _wrikeClient = new WrikeClient("eyJ0dCI6InAiLCJhbGciOiJIUzI1NiIsInR2IjoiMSJ9.eyJkIjoie1wiYVwiOjIzMTc2ODQsXCJpXCI6NTM3NDAyNCxcImNcIjo0NTk1MDE0LFwidlwiOm51bGwsXCJ1XCI6NDc2NzU4MSxcInJcIjpcIlVTXCIsXCJzXCI6W1wiV1wiLFwiRlwiLFwiSVwiLFwiVVwiLFwiS1wiLFwiQ1wiXSxcInpcIjpbXSxcInRcIjowfSIsImlhdCI6MTUzNzMyMTkyOH0.r8MaouEsyTiWJ0qPqUt2McslSPP2NTinL9YrnQ9Lcow");
-        }
-
         [Test]
         public void TasksProperty_ShouldReturnTasksClient()
         {
-            Assert.IsInstanceOf(typeof(IWrikeTasksClient), _wrikeClient.Tasks);
+            Assert.IsInstanceOf(typeof(IWrikeTasksClient), TestConstants.WrikeClient.Tasks);
+        }
+
+        [Test]
+        [TestCaseSource(typeof(TestConstants), "SrtingParameterCanNotBeNullOrEmpty")]
+        public void DeleteAsync_Throws<T>(T argumentException, string id) where T : ArgumentException
+        {
+            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Tasks.DeleteAsync(id));
+        }
+
+        [Test]
+        [TestCaseSource(typeof(TestConstants), "SrtingParameterCanNotBeNullOrEmpty")]
+        public void CreateAsync_Throws<T>(T argumentException, string folderId) where T : ArgumentException
+        {
+            var newTask = new WrikeTask("Test Task");
+
+            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Tasks.CreateAsync(folderId, newTask));
+        }
+
+        [Test]
+        public void CreateAsync_NewTaskNull_ThrowArgumentNullException()
+        {
+            WrikeTask newTask = null;
+            string folderId = "folderId";
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => TestConstants.WrikeClient.Tasks.CreateAsync(folderId, newTask));
+        }
+
+        [Test]
+        [TestCaseSource(typeof(TestConstants), "StringListParameterCanNotBeNullOrEmptyAndCanNotHaveMoreThanHundredItems")]
+        public void GetAsyncWithIds_Throws<T>(T argumentException, List<string> taskIds) where T : ArgumentException
+        {
+            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Tasks.GetAsync(taskIds));
+        }
+
+        [Test]
+        [TestCaseSource(typeof(TestConstants), "SrtingParameterCanNotBeNullOrEmpty")]
+        public void UpdateAsync_Throws<T>(T argumentException, string id) where T : ArgumentException
+        {
+            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Tasks.UpdateAsync(id));
         }
     }
 }
