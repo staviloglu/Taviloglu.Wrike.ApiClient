@@ -36,6 +36,11 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentException("folderId can not be empty", nameof(folderId));
             }
 
+            if (newTask == null)
+            {
+                throw new ArgumentNullException(nameof(newTask));
+            }
+
             var requestUri = $"folders/{folderId}/tasks";
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
