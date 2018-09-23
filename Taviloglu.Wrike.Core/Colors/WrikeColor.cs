@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Taviloglu.Wrike.Core
 {
@@ -8,16 +9,48 @@ namespace Taviloglu.Wrike.Core
     public sealed class WrikeColor : IWrikeObject
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeColor"/> class.
+        /// </summary>
+        /// <param name="name">Color name</param>
+        /// <param name="hex">HEX code</param>
+        public WrikeColor(string name, string hex)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (name.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be emtpy", nameof(name));
+            }
+
+            if (hex == null)
+            {
+                throw new ArgumentNullException(nameof(hex));
+                
+            }
+
+            if (hex.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be empty", nameof(hex));
+            }
+
+            Name = name;
+            Hex = hex;
+        }
+
+        /// <summary>
         /// Color name
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// HEX code
         /// </summary>
         [JsonProperty("hex")]
-        public string Hex { get; set; }
+        public string Hex { get; private set; }
 
         /// <summary>
         /// Color of a folder

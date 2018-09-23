@@ -10,23 +10,41 @@ namespace Taviloglu.Wrike.ApiClient
     public interface IWrikeCommentsClient
     {
         /// <summary>
-        /// Get all comments in all accounts. 
+        /// Get all comments in current account. 
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="folderId"> Get folder comments.</param>
-        /// /// <param name="taskId"> Get task comments.</param>
         /// <param name="limit">Maximum number of returned comments, Default:1000</param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
         /// <param name="updatedDate">Updated date filter, get all comments created or updated in the range specified by dates. Time range between dates must be less than 7 days</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
-        Task<List<WrikeComment>> GetAsync(string folderId = null, string taskId = null, bool? plainText = null, int? limit = null, WrikeDateFilterRange updatedDate = null);
+        Task<List<WrikeComment>> GetAsync(bool? plainText = null, int? limit = null, WrikeDateFilterRange updatedDate = null);
+
+        /// <summary>
+        ///  Get task comments.
+        ///  Scopes: Default, wsReadOnly, wsReadWrite
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
+        Task<List<WrikeTaskComment>> GetInTaskAsync(string taskId, bool? plainText=null);
+
+
+        /// <summary>
+        /// Get folder comments.
+        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// </summary>
+        /// <param name="folderId"></param>
+        /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
+        Task<List<WrikeFolderComment>> GetInFolderAsync(string folderId, bool? plainText=null);
 
         /// <summary>
         /// Get single or multiple comments by their IDs.
+        /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
         /// <param name="commentIds"></param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
-        /// <returns></returns>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
         Task<List<WrikeComment>> GetAsync(List<string> commentIds, bool? plainText = null);
 
         /// <summary>
@@ -53,7 +71,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="plainText">Treat comment text as plain text, HTML otherwise</param>
         /// <param name="newComment">Use ctor <see cref="WrikeComment.WrikeComment(string, string, string)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-comment"/>
-        Task<WrikeComment> CreateAsync(WrikeComment newComment, bool? plainText = null);
+        Task<T> CreateAsync<T>(T newComment, bool? plainText = null) where T : WrikeComment;
 
     }
 }

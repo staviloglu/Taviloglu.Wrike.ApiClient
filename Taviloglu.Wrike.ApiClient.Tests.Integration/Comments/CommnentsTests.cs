@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
@@ -29,11 +27,43 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         }
 
         [Test]
-        public void GetAsync_ShouldReturnDefaultComment()
+        public void GetAsync_ShouldReturnComments()
         {
-            SetToDefaults();
-
             var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync().Result;
+            Assert.IsNotNull(comments);
+            Assert.Greater(comments.Count, 0);            
+        }
+
+        [Test]
+        public void GetInTaskAsync_ShouldReturnComments()
+        {
+            var newComment = new WrikeTaskComment("My new test comment", DefaultTaskId);
+            var createdComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
+
+            var comments = WrikeClientFactory.GetWrikeClient().Comments.GetInTaskAsync(DefaultTaskId).Result;
+
+            Assert.IsNotNull(comments);
+            Assert.Greater(comments.Count, 0);
+            Assert.IsTrue(comments.Any(c => c.Id == createdComment.Id));
+        }
+
+        [Test]
+        public void GetInFolderAsync_ShouldReturnComments()
+        {
+            var newComment = new WrikeFolderComment("My new test comment", DefaultFolderId);
+            var createdComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
+
+            var comments = WrikeClientFactory.GetWrikeClient().Comments.GetInFolderAsync(DefaultFolderId).Result;
+
+            Assert.IsNotNull(comments);
+            Assert.Greater(comments.Count, 0);
+            Assert.IsTrue(comments.Any(c => c.Id == createdComment.Id));
+        }
+
+        [Test]
+        public void GetAsyncWithIds_ShouldReturnDefaultComment()
+        {
+            var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync(new List<string> { DefaultCommentId }).Result;
             Assert.IsNotNull(comments);
             Assert.AreEqual(1, comments.Count);
             Assert.AreEqual(DefaultCommentId, comments.First().Id);
@@ -42,41 +72,34 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         [Test]
         public void CreateAsync_ShouldAddNewNewCommentToDefaultTask()
         {            
-            var newComment = new WrikeComment("My new test comment", taskId: DefaultTaskId);
+            var newComment = new WrikeTaskComment("My new test comment", DefaultTaskId);
 
             var createdComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
 
-            var commentsOfTask = WrikeClientFactory.GetWrikeClient().Comments.GetAsync(taskId: DefaultTaskId).Result;
-
-
-            Assert.IsNotNull(newComment);
+            Assert.IsNotNull(createdComment);
             Assert.AreEqual(newComment.Text, createdComment.Text);
-            Assert.IsNotNull(commentsOfTask);
-            Assert.IsNotEmpty(commentsOfTask);
-            Assert.AreEqual(createdComment.Text, commentsOfTask.First().Text);
+            Assert.AreEqual(newComment.TaskId, createdComment.TaskId);
         }
 
         [Test]
         public void CreateAsync_ShouldAddNewNewCommentToDefaultFolder()
         {
-            var newComment = new WrikeComment("My new test comment", folderId: DefaultFolderId);
+            var newComment = new WrikeFolderComment("My new test comment", DefaultFolderId);
 
             var createdComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
 
-            var commentsOfFolder = WrikeClientFactory.GetWrikeClient().Comments.GetAsync(folderId: DefaultFolderId).Result;
-
-            Assert.IsNotNull(newComment);
+            Assert.IsNotNull(createdComment);
             Assert.AreEqual(newComment.Text, createdComment.Text);
-            Assert.IsNotNull(commentsOfFolder);
-            Assert.IsNotEmpty(commentsOfFolder);
-            Assert.AreEqual(createdComment.Text, commentsOfFolder.First().Text);
+            Assert.AreEqual(newComment.FolderId, createdComment.FolderId);
         }
 
         [Test]
         public void UpdateAsync_ShouldUpdateCommentText()
         {
-            var newComment = new WrikeComment("My new test comment", taskId: DefaultTaskId);
+            var newComment = new WrikeTaskComment("My new test comment", DefaultTaskId);
+
             newComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
+
             var expectedCommentText = "My new test comment [Updated]";
             var updatedComment = WrikeClientFactory.GetWrikeClient().Comments.UpdateAsync(newComment.Id, expectedCommentText, plainText: true).Result;
 
@@ -87,10 +110,10 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         [Test]
         public void DeleteAsync_ShouldDeleteComment()
         {
-            var newComment = new WrikeComment("My new test comment", taskId: DefaultTaskId);
+            var newComment = new WrikeTaskComment("My new test comment", DefaultTaskId);
             newComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
 
-            WrikeClientFactory.GetWrikeClient().Comments.DeleteAsync(newComment.Id);
+            WrikeClientFactory.GetWrikeClient().Comments.DeleteAsync(newComment.Id).Wait();
 
             var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync().Result;
             var isCommentDeleted = !comments.Any(c => c.Id == newComment.Id);

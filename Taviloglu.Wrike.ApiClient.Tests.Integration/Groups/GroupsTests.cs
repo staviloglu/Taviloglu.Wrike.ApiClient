@@ -65,7 +65,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             var newGroup = new WrikeGroup("Sinan's Test Group");
             newGroup = WrikeClientFactory.GetWrikeClient().Groups.CreateAsync(newGroup).Result;
 
-            WrikeClientFactory.GetWrikeClient().Groups.DeleteAsync(newGroup.Id);
+            WrikeClientFactory.GetWrikeClient().Groups.DeleteAsync(newGroup.Id).Wait();
 
             var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
             var isGroupDeleted = !groups.Any(g => g.Id == newGroup.Id);

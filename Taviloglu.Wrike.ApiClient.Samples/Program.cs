@@ -21,7 +21,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //WebHooksSamples.Run(wrikeClient).Wait();
 
-            //CommentsSamples.Run(wrikeClient).Wait();
+            CommentsSamples.Run(wrikeClient).Wait();
 
             //AccountsSamples.Run(wrikeClient).Wait();
 
@@ -30,7 +30,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //TimelogSamples.Run(wrikeClient).Wait();
             //TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
-            ContactsSamples.Run(wrikeClient).Wait();
+            //ContactsSamples.Run(wrikeClient).Wait();
 
             //TasksSamples.Run(wrikeClient).Wait();
 

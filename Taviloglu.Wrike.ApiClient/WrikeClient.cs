@@ -64,7 +64,8 @@ namespace Taviloglu.Wrike.ApiClient
         private async Task<WrikeResDto<T>> SendRequest<T>(
             string requestUri,
             string httpMethod,
-            HttpContent httpContent = null)
+            HttpContent httpContent = null,
+            JsonConverter jsonConverter = null)
         {
             HttpResponseMessage responseMessage = null;
 
@@ -86,7 +87,18 @@ namespace Taviloglu.Wrike.ApiClient
                     throw new ArgumentException("Unknown HTTP METHOD!");
             }
             var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
+
+            WrikeResDto<T> wrikeResDto;
+
+            if (jsonConverter != null)
+            {
+                wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json, jsonConverter);
+            }
+            else
+            {
+                wrikeResDto =JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
+            }
+            
 
             if (responseMessage.IsSuccessStatusCode)
             {

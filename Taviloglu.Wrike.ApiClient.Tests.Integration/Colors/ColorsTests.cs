@@ -5,14 +5,14 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Colors
     [TestFixture]
     public class ColorsTests
     {
+        const int ColorCount = 64;
+
         [Test]
         public void GetAsync_ShouldRetun64Colors()
         {
-            var expectedColorCount = 64;
-
             var actualColorCount = WrikeClientFactory.GetWrikeClient().Colors.GetAsync().Result.Count;
 
-            Assert.AreEqual(expectedColorCount, actualColorCount);
+            Assert.AreEqual(ColorCount, actualColorCount);
         }
     }
 }
