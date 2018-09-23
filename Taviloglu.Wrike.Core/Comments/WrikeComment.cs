@@ -1,72 +1,61 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core
 {
-    public class WrikeComment : WrikeObjectWithId
+    public abstract class WrikeComment : WrikeObjectWithId
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeComment"/> class.
         /// </summary>
         /// <param name="text">Comment text, can not be empty</param>
-        /// <param name="taskId">Create comment in task.</param>
-        /// <param name="folderId">Create a comment in the folder. The virtual Root and Recycle Bin folders cannot have comments.</param>
-        public WrikeComment(string text, string taskId = null, string folderId=null)
+        public WrikeComment(string text)
         {
-            int idCount = 0;
-            if (!string.IsNullOrWhiteSpace(taskId))
-            {
-                idCount++;
-                TaskId = taskId;
-            }
-            if (!string.IsNullOrWhiteSpace(folderId))
-            {
-                idCount++;
-                FolderId = folderId;
-            }
-
-            if (idCount == 0)
-            {
-                throw new Exception("taskId or folderId should be set");
-            }
-
-            if (idCount>1)
-            {
-                throw new Exception("only taskId or folderId can be used");
-            }
-
-            if (string.IsNullOrWhiteSpace(text))
+            if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));
             }
 
+            if (text.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be empty", nameof(text));
+            }
+
             Text = text;
         }
+
         /// <summary>
         /// Author ID
         /// </summary>
         [JsonProperty("authorId")]
         public string AuthorId { get; set; }
+
         /// <summary>
         /// Comment text
         /// </summary>
         [JsonProperty("text")]
         public string Text { get; private set; }
+
         /// <summary>
         /// Created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>        
         [JsonProperty("createdDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime CreatedDate { get; set; }
+
         /// <summary>
-        /// ID of related task. Only one of taskId/folderId fields is present
-        /// </summary>
-        [JsonProperty("taskId")]
-        public string TaskId { get; private set; }
+        /// Updated date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+        /// </summary>        
+        [JsonProperty("updatedDate")]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        public DateTime UpdatedDate { get; set; }
+
         /// <summary>
-        /// ID of related folder. Only one of taskId/folderId fields is present
+        /// List of attachment IDs
         /// </summary>
-        [JsonProperty("folderId")]
-        public string FolderId { get; private set; }
+        [JsonProperty("attachmentIds")]
+        public List<string> AttachmentIds { get; set; }
     }
 }
