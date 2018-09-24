@@ -23,7 +23,6 @@
     <Folder Include="Invitations\" />
     <Folder Include="Tasks\" />
     <Folder Include="Timelogs\" />
-    <Folder Include="TimelogCategories\" />
     <Folder Include="Webhooks\" />
     <Folder Include="Workflows\" />
   </ItemGroup>

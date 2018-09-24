@@ -28,7 +28,8 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
             //TimelogSamples.Run(wrikeClient).Wait();
-            //TimelogCategoriesSamples.Run(wrikeClient).Wait();
+
+            TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
@@ -42,7 +43,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //CustomFieldsSamples.Run(wrikeClient).Wait();
 
-            UsersSamples.Run(wrikeClient).Wait();
+            //UsersSamples.Run(wrikeClient).Wait();
 
             //try other samples...
 
