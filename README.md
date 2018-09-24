@@ -1,4 +1,4 @@
-# Taviloglu.Wrike.ApiClient
+# Taviloglu.Wrike.ApiClient [![Build Status](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient.svg?branch=master)](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient/)
 .NET Client for Wrike API 
 
 :boom: Latest working client (v0.89.0-alpha) works with Wrike API v3 and is not uploaded to NuGet. You can download the binaries and the source code from [Releases](https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/releases/tag/v0.89.0-alpha) on github.
