@@ -81,8 +81,10 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
-        public class OptionalFields
+        public static class OptionalFields
         {
+            public static List<string> List = new List<string>{ Subscription, Metadata, CustomFields };
+
             /// <summary>
             /// Account subscription
             /// </summary>
