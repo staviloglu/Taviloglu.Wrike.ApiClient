@@ -9,29 +9,47 @@ namespace Taviloglu.Wrike.Core
     /// </summary>
     public sealed class WrikeWebHook : WrikeObjectWithId
     {
-        public WrikeWebHook() { }
-
-        public WrikeWebHook(string accountId, string hookUrl)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeWebHook"></see> class with the
+        ///  url of the server which will receive the payload.
+        /// </summary>
+        /// <param name="hookUrl">URL of the server which will receive the payload.</param>
+        public WrikeWebHook(string hookUrl)
         {
-            if (string.IsNullOrWhiteSpace(accountId))
+            if (hookUrl == null)
             {
-                throw new ArgumentException("accountId can not be null or empty");
-            }
-            if (string.IsNullOrWhiteSpace(hookUrl))
-            {
-                throw new ArgumentException("hookUrl can not be null or empty");                
+                throw new ArgumentNullException(nameof(hookUrl));
             }
 
-            AccountId = accountId;
+            if (hookUrl==string.Empty)
+            {
+                throw new ArgumentException($"{nameof(hookUrl)} can not be empty string", nameof(hookUrl));
+            }
+
             HookUrl = hookUrl;
         }
 
+        /// <summary>
+        /// Account Id
+        /// </summary>
         [JsonProperty("accountId")]
-        public string AccountId { get; set; }
-        [JsonProperty("accountId")]
-        public string FolderId { get; set; }
+        public string AccountId { get; private set; }
+
+        /// <summary>
+        /// Folder Id
+        /// </summary>
         [JsonProperty("folderId")]
-        public string HookUrl { get; set; }
+        public string FolderId { get; set; }
+
+        /// <summary>
+        /// URL of the server which will receive the payload.
+        /// </summary>
+        [JsonProperty("hookUrl")]
+        public string HookUrl { get; private set; }
+
+        /// <summary>
+        /// State of thw webhook
+        /// </summary>
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
         public WrikeWebHookStatus Status { get; set; }
