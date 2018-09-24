@@ -8,14 +8,37 @@ namespace Taviloglu.Wrike.Core
     /// </summary>
     public sealed class WrikeGroupAvatar : IWrikeObject
     {
-        /// <summary></summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeGroupAvatar"></see> class with the
+        ///  color and letters parameters
+        /// </summary>
         /// <param name="color"> Hex color code</param>
         /// <param name="letters">Group letters (2 symbols max)</param>
         public WrikeGroupAvatar(string color, string letters)
         {
-            if (letters.Length < 2)
+            if (letters == null)
             {
-                throw new ArgumentException("letters length can be 2 symbols max.", nameof(letters));
+                throw new ArgumentNullException(nameof(letters));
+            }
+
+            if (letters.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be emtpy", nameof(letters));
+            }
+
+            if (letters.Length > 2)
+            {
+                throw new ArgumentException("letters can be 2 characters max.", nameof(letters));
+            }
+
+            if (color == null)
+            {
+                throw new ArgumentNullException(nameof(color));
+            }
+
+            if (color.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be emtpy", nameof(color));
             }
 
             Color = color;

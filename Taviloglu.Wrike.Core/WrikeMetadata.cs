@@ -24,17 +24,17 @@ namespace Taviloglu.Wrike.Core
 
             if (key.Trim() == string.Empty)
             {
-                throw new ArgumentException("key should be less than 50 characters", nameof(key));
+                throw new ArgumentException("value can not be empty", nameof(key));
             }
 
             if (key.Length > 49)
             {
-                throw new ArgumentException("key should be less than 50 characters",nameof(key));
+                throw new ArgumentException("value must be less than 50 characters",nameof(key));
             }
 
             if (!Regex.IsMatch(key, "([A-Za-z0-9_-]+)"))
             {
-                throw new ArgumentException("key should match ([A-Za-z0-9_-]+)", nameof(key));
+                throw new ArgumentException("key must match ([A-Za-z0-9_-]+)", nameof(key));
             }
 
             if (value == null)
@@ -42,9 +42,14 @@ namespace Taviloglu.Wrike.Core
                 throw new ArgumentNullException(nameof(value));
             }
 
+            if (value.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be empty", nameof(value));
+            }
+
             if (value.Length > 999)
             {
-                throw new ArgumentException("value should be less than 1000 characters", nameof(value));
+                throw new ArgumentException("value must be less than 1000 characters", nameof(value));
             }
 
             Key = key;

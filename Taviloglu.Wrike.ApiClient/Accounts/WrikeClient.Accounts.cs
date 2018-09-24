@@ -17,16 +17,16 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> fields)
+        async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> optionalFields)
         {
-            if (fields!= null && fields.Count> 0 && fields.Except(WrikeAccount.OptionalFields.List).Any())
+            if (optionalFields!= null && optionalFields.Count> 0 && optionalFields.Except(WrikeAccount.OptionalFields.List).Any())
             {
-                throw new ArgumentOutOfRangeException(nameof(fields), "Use only values in WrikeAccount.OptionalFields");
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeAccount.OptionalFields");
             }
 
             var uriBuilder = new WrikeGetUriBuilder("account")
                 .AddParameter("metadata", metadata).
-                AddParameter("fields", fields);
+                AddParameter("fields", optionalFields);
 
             var response = await SendRequest<WrikeAccount>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);

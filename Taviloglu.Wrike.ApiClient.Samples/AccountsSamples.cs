@@ -16,7 +16,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
                 WrikeAccount.OptionalFields.CustomFields,
                 WrikeAccount.OptionalFields.Subscription
             };
-            currentAccount = await client.Accounts.GetAsync(fields: optionalFields);
+            currentAccount = await client.Accounts.GetAsync(optionalFields: optionalFields);
 
 
             var metadataList = new List<WrikeMetadata> { new WrikeMetadata("testMetadata", "testMetadata") };

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 
@@ -7,56 +8,44 @@ namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeGroupsClient
     {
-        public IWrikeGroupsClient Groups
+        public IWrikeGroupsClient Groups { get { return (IWrikeGroupsClient)this; } }
+
+        async Task IWrikeGroupsClient.DeleteAsync(WrikeClientIdParameter id, bool isTest)
         {
-            get
-            {
-                return (IWrikeGroupsClient)this;
-            }
-
-        }
-
-        async Task IWrikeGroupsClient.DeleteAsync(string id, bool isTest)
-        {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("groupId can not be empty", nameof(id));
-            }
-
             var requestUri = $"groups/{id}";
+
             if (isTest)
             {
                 requestUri += "?test=true";
-
             }
 
             await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete).ConfigureAwait(false);
         }
 
-        async Task<List<WrikeGroup>> IWrikeGroupsClient.GetAsync(string id, List<string> optionalFields, WrikeMetadata metaDataFilter) {
-            
-            string requestUri = string.Empty;
-            WrikeGetUriBuilder uriBuilder;
+        async Task<WrikeGroup> IWrikeGroupsClient.GetAsync(WrikeClientIdParameter id, List<string> optionalFields)
+        {
+            if (optionalFields != null && optionalFields.Count > 0 && optionalFields.Except(WrikeGroup.OptionalFields.List).Any())
+            {
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeGroup.OptionalFields");
+            }
 
-            if (!string.IsNullOrWhiteSpace(id))
+            var uriBuilder = new WrikeGetUriBuilder($"groups/{id}")
+           .AddParameter("fields", optionalFields);
+
+            var response = await SendRequest<WrikeGroup>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
+
+        async Task<List<WrikeGroup>> IWrikeGroupsClient.GetAsync(List<string> optionalFields, WrikeMetadata metaDataFilter)
+        {
+            if (optionalFields != null && optionalFields.Count > 0 && optionalFields.Except(WrikeGroup.OptionalFields.List).Any())
             {
-                //user has provided groupId
-                requestUri = $"groups/{id}";
-                uriBuilder = new WrikeGetUriBuilder(requestUri)
-               .AddParameter("fields", optionalFields);
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeGroup.OptionalFields");
             }
-            else
-            {
-                requestUri = $"groups";
-                uriBuilder = new WrikeGetUriBuilder(requestUri)
-                .AddParameter("metadata", metaDataFilter)
-                .AddParameter("fields", optionalFields);
-            }
+
+            var uriBuilder = new WrikeGetUriBuilder("groups")
+            .AddParameter("metadata", metaDataFilter)
+            .AddParameter("fields", optionalFields);
 
             var response = await SendRequest<WrikeGroup>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
@@ -72,7 +61,7 @@ namespace Taviloglu.Wrike.ApiClient
             var requestUri = $"groups";
 
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
-                .AddParameter("title",newGroup.Title)
+                .AddParameter("title", newGroup.Title)
                 .AddParameter("members", newGroup.MemberIds)
                 .AddParameter("parent", parentId)
                 .AddParameter("avatar", avatar)
@@ -83,18 +72,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<WrikeGroup> IWrikeGroupsClient.UpdateAsync(string id, string title, List<string> membersToAdd, List<string> membersToRemove, string parentId, WrikeGroupAvatar avatar, List<WrikeMetadata> metaData)
+        async Task<WrikeGroup> IWrikeGroupsClient.UpdateAsync(WrikeClientIdParameter id, string title, List<string> membersToAdd, List<string> membersToRemove, string parentId, WrikeGroupAvatar avatar, List<WrikeMetadata> metaData)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("groupId can not be empty", nameof(id));
-            }
-
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", title)
                 .AddParameter("addMembers", membersToAdd)
@@ -106,7 +85,5 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeGroup>($"groups/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
-
-
     }
 }

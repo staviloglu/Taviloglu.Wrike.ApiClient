@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.Core
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(title), "title can not be empty");
+                throw new ArgumentException("value can not be emtpy", nameof(title));
             }
 
             Title = title;
@@ -84,7 +84,10 @@ namespace Taviloglu.Wrike.Core
         /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
-        public class OptionalFields {
+        public class OptionalFields
+        {
+
+            public static List<string> List = new List<string> { Metadata };
 
             /// <summary>
             /// Group metadata
