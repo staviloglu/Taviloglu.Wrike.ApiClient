@@ -21,9 +21,9 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //WebHooksSamples.Run(wrikeClient).Wait();
 
-            CommentsSamples.Run(wrikeClient).Wait();
+            //CommentsSamples.Run(wrikeClient).Wait();
 
-            //AccountsSamples.Run(wrikeClient).Wait();
+            AccountsSamples.Run(wrikeClient).Wait();
 
             //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 

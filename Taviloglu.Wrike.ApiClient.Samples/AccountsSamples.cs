@@ -9,7 +9,17 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         public static async Task Run(WrikeClient client)
         {
 
-            var currentAccount = await client.Accounts.GetAsync();
+            //var currentAccount = await client.Accounts.GetAsync();
+
+            //var optionalFields = new List<string> {
+            //    WrikeAccount.OptionalFields.Metadata,
+            //    WrikeAccount.OptionalFields.CustomFields,
+            //    WrikeAccount.OptionalFields.Subscription
+            //};
+
+            var optionalFields = new List<string> { "wrongOptionalField", WrikeAccount.OptionalFields.Subscription };
+
+            var actualAccount = await client.Accounts.GetAsync(fields: optionalFields);
 
             //var account = await client.Accounts.GetAsync(accounts[0].Id, new List<string> { WrikeAccount.OptionalFields.Subscription, WrikeAccount.OptionalFields.Metadata });
 
