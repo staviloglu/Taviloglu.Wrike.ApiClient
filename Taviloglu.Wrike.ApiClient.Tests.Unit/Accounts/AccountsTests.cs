@@ -19,8 +19,8 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Accounts
         {
             var optionalFields = new List<string> { "wrongOptionalField", WrikeAccount.OptionalFields.Subscription };
 
-            var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => TestConstants.WrikeClient.Accounts.GetAsync(fields: optionalFields));
-            Assert.AreEqual("fields", ex.ParamName);
+            var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => TestConstants.WrikeClient.Accounts.GetAsync(optionalFields: optionalFields));
+            Assert.AreEqual("optionalFields", ex.ParamName);
             Assert.IsTrue(ex.Message.Contains("Use only values in WrikeAccount.OptionalFields"));
             
         }
