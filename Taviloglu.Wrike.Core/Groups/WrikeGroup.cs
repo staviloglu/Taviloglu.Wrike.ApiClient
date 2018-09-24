@@ -4,8 +4,18 @@ using System.Collections.Generic;
 
 namespace Taviloglu.Wrike.Core
 {
+    /// <summary>
+    /// User Groups are customizable groups made up of selected users.
+    /// </summary>
     public sealed class WrikeGroup : WrikeObjectWithId
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeGroup"></see> class with the
+        ///  title, memberIds and metadata for the new group.
+        /// </summary>
+        /// <param name="title">Title of group</param>
+        /// <param name="memberIds">Group users</param>
+        /// <param name="metadata">Metadata to be added to newly created group</param>
         public WrikeGroup(string title, List<string> memberIds = null, List<WrikeMetadata> metadata = null)
         {
             if (title == null)
