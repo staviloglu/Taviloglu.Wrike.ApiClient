@@ -10,7 +10,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         const string DefaultGroupId = "KX74WSKU";        
 
         [OneTimeTearDown]
-        public void SetToDefaults()
+        public void ReturnToDefaults()
         {
             var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
 
@@ -26,7 +26,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         [Test]
         public void GetAsync_ShouldReturnDefaultGroup()
         {
-            SetToDefaults();
+            ReturnToDefaults();
 
             var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
             Assert.IsNotNull(groups);

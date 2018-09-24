@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
         
 
         [OneTimeTearDown]
-        public void RestoreToDefaults()
+        public void ReturnToDefaults()
         {
             var defaultTestMetadataValue = "testMetadata";
 
