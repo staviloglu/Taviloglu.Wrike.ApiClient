@@ -24,7 +24,6 @@
     <Folder Include="Tasks\" />
     <Folder Include="Timelogs\" />
     <Folder Include="TimelogCategories\" />
-    <Folder Include="Users\" />
     <Folder Include="Webhooks\" />
     <Folder Include="Workflows\" />
   </ItemGroup>

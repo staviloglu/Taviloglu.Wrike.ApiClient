@@ -1,45 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Users;
 
 namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeUsersClient
     {
-        public IWrikeUsersClient Users
-        {
-            get
-            {
-                return (IWrikeUsersClient)this;
-            }
-        }
-        async Task<WrikeUser> IWrikeUsersClient.GetAsync(string id)
-        {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+        public IWrikeUsersClient Users { get { return (IWrikeUsersClient)this; } }         
 
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
+        async Task<WrikeUser> IWrikeUsersClient.GetAsync(WrikeClientIdParameter id)
+        {
             var response = await SendRequest<WrikeUser>($"users/{id}", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<WrikeUser> IWrikeUsersClient.UpdateAsync(string id, WrikeUserProfile profile)
+        async Task<WrikeUser> IWrikeUsersClient.UpdateAsync(WrikeClientIdParameter id, WrikeUserProfile profile)
         {
-            if (id == null)
+            if (profile == null)
             {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
+                throw new ArgumentNullException(nameof(profile));
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()

@@ -10,7 +10,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             var contacts = await client.Contacts.GetAsync();
 
-            //var user = await client.Users.GetAsync("userId");
+            var user = await client.Users.GetAsync(contacts[1].Id);
 
 
 

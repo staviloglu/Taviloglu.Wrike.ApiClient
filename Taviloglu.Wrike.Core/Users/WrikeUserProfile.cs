@@ -6,6 +6,12 @@ namespace Taviloglu.Wrike.Core.Users
 {
     public sealed class WrikeUserProfile : IWrikeObject
     {
+        /// <summary>
+        /// Initializes new instance of <see cref="WrikeUserProfile"/> class with accountId, role and external info.
+        /// </summary>
+        /// <param name="accountId">Account ID</param>
+        /// <param name="role">Role in account</param>
+        /// <param name="external">Make user external</param>
         public WrikeUserProfile(string accountId, WrikeUserRole role, bool external = false)
         {
             if (accountId == null)
@@ -15,13 +21,14 @@ namespace Taviloglu.Wrike.Core.Users
 
             if (accountId.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(accountId), "accountId can not be empty");
+                throw new ArgumentException("value can not be empty", nameof(accountId));
             }
 
             AccountId = accountId;
             Role = role;
             External = external;
         }
+
         /// <summary>
         /// Account ID
         /// </summary>

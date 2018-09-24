@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Users;
 
 namespace Taviloglu.Wrike.ApiClient
@@ -15,7 +14,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="id">userId</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-user"/>
-        Task<WrikeUser> GetAsync(string id);
+        Task<WrikeUser> GetAsync(WrikeClientIdParameter id);
 
         /// <summary>
         /// Update users by ID (accessible to Admins only).
@@ -24,6 +23,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="id">User Id</param>
         /// <param name="profile">Profile to be updated</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-user"/>
-        Task<WrikeUser> UpdateAsync(string id, WrikeUserProfile profile);
+        Task<WrikeUser> UpdateAsync(WrikeClientIdParameter id, WrikeUserProfile profile);
     }
 }
