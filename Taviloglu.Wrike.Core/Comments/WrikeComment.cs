@@ -8,7 +8,7 @@ namespace Taviloglu.Wrike.Core
     public abstract class WrikeComment : WrikeObjectWithId
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WrikeComment"/> class.
+        /// Initializes a new instance of the <see cref="WrikeComment"/> class with text.
         /// </summary>
         /// <param name="text">Comment text, can not be empty</param>
         public WrikeComment(string text)
