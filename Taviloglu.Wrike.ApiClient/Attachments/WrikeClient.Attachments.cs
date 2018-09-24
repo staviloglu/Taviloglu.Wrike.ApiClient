@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Attachments;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.ApiClient

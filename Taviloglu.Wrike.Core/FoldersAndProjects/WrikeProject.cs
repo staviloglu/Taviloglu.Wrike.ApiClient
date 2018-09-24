@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Taviloglu.Wrike.Core.Json;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.FoldersAndProjects
 {
     public sealed class WrikeProject : IWrikeObject
     {

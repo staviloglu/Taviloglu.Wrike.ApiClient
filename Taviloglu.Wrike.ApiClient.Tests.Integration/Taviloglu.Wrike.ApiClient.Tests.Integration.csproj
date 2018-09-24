@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +20,6 @@
     <Folder Include="CustomFields\" />
     <Folder Include="Dependencies\" />
     <Folder Include="FoldersAndProjects\" />
-    <Folder Include="Ids\" />
     <Folder Include="Invitations\" />
     <Folder Include="Tasks\" />
     <Folder Include="Timelogs\" />

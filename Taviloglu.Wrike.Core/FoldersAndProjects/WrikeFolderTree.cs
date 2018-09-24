@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.Colors;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.FoldersAndProjects
 {
 
     public sealed class WrikeFolderTree : WrikeObjectWithId

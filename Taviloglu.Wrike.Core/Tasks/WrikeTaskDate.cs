@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using Taviloglu.Wrike.Core.Json;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Tasks
 {
     public sealed class WrikeTaskDate : IWrikeObject
     {

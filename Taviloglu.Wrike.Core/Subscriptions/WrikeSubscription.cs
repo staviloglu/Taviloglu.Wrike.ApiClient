@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Subscriptions
 {
     public class WrikeSubscription : IWrikeObject
     {

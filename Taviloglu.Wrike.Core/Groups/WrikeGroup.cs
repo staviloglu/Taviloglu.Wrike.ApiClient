@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Groups
 {
     /// <summary>
     /// User Groups are customizable groups made up of selected users.

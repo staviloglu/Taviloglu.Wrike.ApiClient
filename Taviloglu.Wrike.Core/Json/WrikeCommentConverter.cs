@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Taviloglu.Wrike.Core.Comments;
 
 namespace Taviloglu.Wrike.Core.Json
 {

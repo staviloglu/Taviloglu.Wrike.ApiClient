@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using Taviloglu.Wrike.Core.Json;
+using Taviloglu.Wrike.Core.Users;
 
 namespace Taviloglu.Wrike.Core.Invitations
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Accounts;
 using Taviloglu.Wrike.Core.TimelogCategories;
 
 namespace Taviloglu.Wrike.ApiClient

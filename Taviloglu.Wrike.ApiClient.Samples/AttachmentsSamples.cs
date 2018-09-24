@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.ApiClient.Extensions;
-using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {

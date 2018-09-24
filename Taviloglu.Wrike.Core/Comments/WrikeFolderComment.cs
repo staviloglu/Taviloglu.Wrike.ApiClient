@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Comments
 {
     public class WrikeFolderComment : WrikeComment
     {

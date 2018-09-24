@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using Taviloglu.Wrike.Core.Colors;
 
 namespace Taviloglu.Wrike.Core.Tests.Unit
 {

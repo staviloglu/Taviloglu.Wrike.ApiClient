@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.CustomFields;
 using Taviloglu.Wrike.Core.Json;
+using Taviloglu.Wrike.Core.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient
 {

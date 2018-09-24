@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Workflows
 {
     public class WrikeWorkflow : WrikeObjectWithId
     {

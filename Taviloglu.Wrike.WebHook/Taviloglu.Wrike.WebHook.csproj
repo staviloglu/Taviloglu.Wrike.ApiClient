@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.10</Version>
+    <Version>2.0.0</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>- Provides a ControllerBase class to respond to webhook post requests coming from Wrike. 
@@ -13,10 +13,9 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-webhooks webhook http-post controllerBase</PackageTags>
-    <PackageReleaseNotes>- fixed naming error WrikeWebHookTaskSahredsRemovedEvent &gt;&gt; WrikeWebHookTaskSharedsRemovedEvent 
-- fixed naming error WrikeWebHookTaskSahredsAddedEvent &gt;&gt; WrikeWebHookTaskSharedsAddedEvent</PackageReleaseNotes>
-    <AssemblyVersion>1.0.10.0</AssemblyVersion>
-    <FileVersion>1.0.10.0</FileVersion>
+    <PackageReleaseNotes>- version update</PackageReleaseNotes>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

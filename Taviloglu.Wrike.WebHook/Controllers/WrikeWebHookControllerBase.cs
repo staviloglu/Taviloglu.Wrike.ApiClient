@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
-using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Webhooks;
 using Taviloglu.Wrike.WebHook.Extensions;
 
 namespace Taviloglu.Wrike.WebHook

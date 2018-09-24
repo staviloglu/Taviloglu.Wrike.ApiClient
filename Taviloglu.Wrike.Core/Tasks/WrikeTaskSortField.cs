@@ -1,4 +1,4 @@
-﻿namespace Taviloglu.Wrike.Core
+﻿namespace Taviloglu.Wrike.Core.Tasks
 {
     public enum WrikeTaskSortField
     {

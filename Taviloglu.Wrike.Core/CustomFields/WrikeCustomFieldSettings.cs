@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.CustomFields
 {
     public class WrikeCustomFieldSettings : IWrikeObject
     {

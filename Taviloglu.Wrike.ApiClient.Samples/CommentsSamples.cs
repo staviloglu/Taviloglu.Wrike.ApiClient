@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Comments;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {

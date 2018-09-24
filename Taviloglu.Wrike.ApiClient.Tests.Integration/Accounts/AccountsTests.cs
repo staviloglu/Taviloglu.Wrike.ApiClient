@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Accounts;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
 {

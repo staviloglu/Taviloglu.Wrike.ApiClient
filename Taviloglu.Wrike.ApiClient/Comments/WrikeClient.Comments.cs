@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Comments;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.ApiClient

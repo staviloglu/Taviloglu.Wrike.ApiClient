@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.CustomFields;
 using Taviloglu.Wrike.Core.Json;
+using Taviloglu.Wrike.Core.Subscriptions;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Accounts
 {
 
     public class WrikeAccount : WrikeObjectWithId

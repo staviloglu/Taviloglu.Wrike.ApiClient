@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Taviloglu.Wrike.Core.Json;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Comments
 {
     public abstract class WrikeComment : WrikeObjectWithId
     {

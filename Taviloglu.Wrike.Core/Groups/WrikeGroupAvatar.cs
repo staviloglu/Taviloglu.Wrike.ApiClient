@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Groups
 {
     /// <summary>
     /// Group avatar

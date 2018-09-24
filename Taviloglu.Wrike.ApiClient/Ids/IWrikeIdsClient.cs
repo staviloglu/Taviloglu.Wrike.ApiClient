@@ -14,6 +14,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/legacy-api-v2-ids-converter"/>
-        Task<List<WrikeId>> GetAsync(WrikeEntityType entityType, List<string> ids);
+        Task<List<WrikeApiV2Id>> GetAsync(WrikeEntityType entityType, List<int> ids);
     }
 }

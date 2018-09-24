@@ -2,9 +2,11 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.Colors;
+using Taviloglu.Wrike.Core.CustomFields;
 using Taviloglu.Wrike.Core.Json;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.FoldersAndProjects
 {
     /// <summary>
     /// Folder

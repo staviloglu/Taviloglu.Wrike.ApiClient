@@ -2,8 +2,9 @@
 using Newtonsoft.Json.Converters;
 using System;
 using Taviloglu.Wrike.Core.Json;
+using Taviloglu.Wrike.Core.Tasks;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Webhooks
 {
     /// <summary>
     /// WrikeTaskDate object should be used, but wrike sends request with different property names.

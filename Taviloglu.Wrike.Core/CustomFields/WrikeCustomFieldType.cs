@@ -1,4 +1,4 @@
-﻿namespace Taviloglu.Wrike.Core
+﻿namespace Taviloglu.Wrike.Core.CustomFields
 {
     public enum WrikeCustomFieldType
     {

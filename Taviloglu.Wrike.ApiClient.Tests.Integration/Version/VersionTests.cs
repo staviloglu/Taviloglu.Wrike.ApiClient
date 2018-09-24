@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Version;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Version
 {

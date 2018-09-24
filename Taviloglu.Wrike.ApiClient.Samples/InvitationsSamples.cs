@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
+﻿using System.Threading.Tasks;
 using Taviloglu.Wrike.Core.Invitations;
+using Taviloglu.Wrike.Core.Users;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {

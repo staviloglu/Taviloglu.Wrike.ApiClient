@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Webhooks
 {
     /// <summary>
     /// Webhooks allow you to subscribe to notifications about changes in Wrike instead of having to rely on periodic polling. 

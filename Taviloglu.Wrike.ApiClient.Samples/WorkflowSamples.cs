@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Extensions;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Colors;
+using Taviloglu.Wrike.Core.Tasks;
+using Taviloglu.Wrike.Core.Workflows;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {

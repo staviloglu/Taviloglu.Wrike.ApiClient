@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Tasks;
+using Taviloglu.Wrike.Core.Workflows;
 
 namespace Taviloglu.Wrike.ApiClient.Extensions
 {

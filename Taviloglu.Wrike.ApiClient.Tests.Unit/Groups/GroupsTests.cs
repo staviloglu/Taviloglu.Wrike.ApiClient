@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Taviloglu.Wrike.Core;
+using Taviloglu.Wrike.Core.Groups;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Groups
 {

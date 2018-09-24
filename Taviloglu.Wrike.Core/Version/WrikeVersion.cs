@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Taviloglu.Wrike.Core
+namespace Taviloglu.Wrike.Core.Version
 {
     public sealed class WrikeVersion : IWrikeObject
     {
