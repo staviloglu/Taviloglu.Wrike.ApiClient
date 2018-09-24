@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.TimelogCategories;
@@ -18,6 +19,11 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeAccount> IWrikeAccountsClient.GetAsync(WrikeMetadata metadata, List<string> fields)
         {
+            if (fields!= null && fields.Count> 0 && fields.Except(WrikeAccount.OptionalFields.List).Any())
+            {
+                throw new ArgumentOutOfRangeException(nameof(fields), "Use only values in WrikeAccount.OptionalFields");
+            }
+
             var uriBuilder = new WrikeGetUriBuilder("account")
                 .AddParameter("metadata", metadata).
                 AddParameter("fields", fields);

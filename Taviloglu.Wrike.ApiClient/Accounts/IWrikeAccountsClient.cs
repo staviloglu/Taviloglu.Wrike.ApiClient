@@ -10,7 +10,7 @@ namespace Taviloglu.Wrike.ApiClient
     public interface IWrikeAccountsClient
     {
         /// <summary>
-        /// Returns all accounts to which user has access.
+        /// Returns current account.
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
         /// <param name="metadata">Metadata filter, exact match for metadata key or key-value pair.</param>
