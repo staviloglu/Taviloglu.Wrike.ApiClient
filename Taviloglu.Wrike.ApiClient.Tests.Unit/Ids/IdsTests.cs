@@ -13,12 +13,5 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Ids
         {
             Assert.IsInstanceOf(typeof(IWrikeIdsClient), TestConstants.WrikeClient.Ids);
         }
-
-        [Test]
-        [TestCaseSource(typeof(TestConstants), "StringListParameterCanNotBeNullOrEmpty")]
-        public void GetAsyncWithIds_Throws<T>(T argumentException, List<string> ids) where T : ArgumentException
-        {
-            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Ids.GetAsync(WrikeEntityType.ApiV2Account,ids));
-        }
     }
 }

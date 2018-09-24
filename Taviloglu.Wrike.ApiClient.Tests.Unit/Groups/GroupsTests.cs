@@ -16,21 +16,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Groups
         }
 
         [Test]
-        [TestCaseSource(typeof(TestConstants), "SrtingParameterCanNotBeNullOrEmpty")]
-        public void UpdateAsync_Throws<T>(T argumentException, string id) where T : ArgumentException
-        {
-            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Groups.UpdateAsync(id));
-        }
-
-        [Test]
-        [TestCaseSource(typeof(TestConstants), "SrtingParameterCanNotBeNullOrEmpty")]
-        public void DeleteAsync_Throws<T>(T argumentException, string id) where T : ArgumentException
-        {
-            Assert.ThrowsAsync<T>(() => TestConstants.WrikeClient.Groups.UpdateAsync(id));
-        }
-
-
-        [Test]
         public void CreateAsync_NewGroupNull_ThrowArgumentNullException()
         {
             WrikeGroup newGroup = null;
