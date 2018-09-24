@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Version;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Version
@@ -10,7 +9,8 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Version
         [Test]
         public void GetAsync_ShouldRetunMajor1Minor0()
         {
-            var expectedWrikeVersion = new WrikeVersion {
+            var expectedWrikeVersion = new WrikeVersion
+            {
                 Major = "1",
                 Minor = "0"
             };
