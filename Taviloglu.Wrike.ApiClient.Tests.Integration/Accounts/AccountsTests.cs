@@ -38,7 +38,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
                 WrikeAccount.OptionalFields.Subscription
             };
 
-            var actualAccount = WrikeClientFactory.GetWrikeClient().Accounts.GetAsync(fields: optionalFields).Result;
+            var actualAccount = WrikeClientFactory.GetWrikeClient().Accounts.GetAsync(optionalFields: optionalFields).Result;
 
             Assert.AreEqual(CurrentAccountId, actualAccount.Id);
             Assert.IsNotNull(actualAccount.Subscription);

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using Taviloglu.Wrike.Core;
 
@@ -34,6 +35,45 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             Assert.AreEqual(DefaultGroupId, groups.First().Id);
         }
 
+        [Test]
+        public void GetAsync_ShouldReturnDefaultGroupWithOptionalFields()
+        {
+            ReturnToDefaults();
+
+            var optionalFields = new List<string> { WrikeGroup.OptionalFields.Metadata };
+
+            var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(optionalFields: optionalFields).Result;
+            Assert.IsNotNull(groups);
+            Assert.AreEqual(1, groups.Count);
+            Assert.AreEqual(DefaultGroupId, groups.First().Id);
+            Assert.IsNotNull(groups.First().Metadata);
+        }
+
+        [Test]
+        public void GetAsyncWithId_ShouldReturnDefaultGroup()
+        {
+            ReturnToDefaults();
+
+            var group = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(DefaultGroupId).Result;
+
+            Assert.IsNotNull(group);
+            Assert.AreEqual(DefaultGroupId, group.Id);
+        }
+
+        [Test]
+        public void GetAsyncWithId_ShouldReturnDefaultGroupWithOptionalFields()
+        {
+            ReturnToDefaults();
+
+            var optionalFields = new List<string> { WrikeGroup.OptionalFields.Metadata };
+
+            var group = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(DefaultGroupId, optionalFields: optionalFields).Result;
+
+            Assert.IsNotNull(group);
+            Assert.AreEqual(DefaultGroupId, group.Id);
+            Assert.IsNotNull(group.Metadata);
+        }
+
 
         [Test]
         public void CreateAsync_ShouldAddNewGroupWithTitle()
@@ -44,6 +84,8 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
 
             Assert.IsNotNull(createdGroup);
             Assert.AreEqual(newGroup.Title, createdGroup.Title);
+
+            //TODO: test other parameters
         }
         
         [Test]
@@ -57,6 +99,8 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
 
             Assert.IsNotNull(updatedGroup);
             Assert.AreEqual(expectedGroupTitle, updatedGroup.Title);
+
+            //TODO: test other parameters
         }
 
         [Test]
