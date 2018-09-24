@@ -34,6 +34,16 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeAccount> IWrikeAccountsClient.UpdateAsync(List<WrikeMetadata> metadataList)
         {
+            if (metadataList == null)
+            {
+                throw new ArgumentNullException(nameof(metadataList));
+            }
+
+            if (metadataList.Count == 0)
+            {
+                throw new ArgumentException("value can not be empty", nameof(metadataList));
+            }
+
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("metadata", metadataList);
 

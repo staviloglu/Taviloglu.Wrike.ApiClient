@@ -24,5 +24,21 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Accounts
             Assert.IsTrue(ex.Message.Contains("Use only values in WrikeAccount.OptionalFields"));
             
         }
+
+        [Test]
+        public void UpdateAsync_WhenMetadataListNull_ThrowArgumentNullException()
+        {
+            var ex = Assert.ThrowsAsync<ArgumentNullException>(() => TestConstants.WrikeClient.Accounts.UpdateAsync(null));
+            Assert.AreEqual("metadataList", ex.ParamName);
+        }
+
+        [Test]
+        public void UpdateAsync_WhenMetadataListEmpty_ThrowArgumentException()
+        {
+            var ex = Assert.ThrowsAsync<ArgumentException>(() => TestConstants.WrikeClient.Accounts
+            .UpdateAsync(new List<WrikeMetadata>()));
+            Assert.AreEqual("metadataList", ex.ParamName);
+            Assert.IsTrue(ex.Message.Contains("value can not be empty"));
+        }
     }
 }
