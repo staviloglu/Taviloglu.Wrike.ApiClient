@@ -6,13 +6,7 @@ namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeColorsClient
     {
-        public IWrikeColorsClient Colors
-        {
-            get
-            {
-                return (IWrikeColorsClient)this;
-            }
-        }
+        public IWrikeColorsClient Colors { get { return (IWrikeColorsClient)this; } }
 
         async Task<List<WrikeColor>> IWrikeColorsClient.GetAsync()
         {

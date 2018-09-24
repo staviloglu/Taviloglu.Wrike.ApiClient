@@ -33,7 +33,7 @@ namespace Taviloglu.Wrike.Core
 
             if (hex.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be empty", nameof(hex));
+                throw new ArgumentException("value can not be emtpy", nameof(hex));
             }
 
             Name = name;

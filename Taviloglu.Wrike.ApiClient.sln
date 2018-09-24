@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.WebHook.Sam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.ApiClient.Extensions", "Taviloglu.Wrike.ApiClient.Extensions\Taviloglu.Wrike.ApiClient.Extensions.csproj", "{46113E60-057D-4D16-97A5-69BFC55514D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.ApiClient.Tests.Integration", "Taviloglu.Wrike.ApiClient.Tests.Integration\Taviloglu.Wrike.ApiClient.Tests.Integration.csproj", "{234545AD-F639-46BC-A11E-1D492063A660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.ApiClient.Tests.Integration", "Taviloglu.Wrike.ApiClient.Tests.Integration\Taviloglu.Wrike.ApiClient.Tests.Integration.csproj", "{234545AD-F639-46BC-A11E-1D492063A660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.ApiClient.Tests.Unit", "Taviloglu.Wrike.ApiClient.Tests.Unit\Taviloglu.Wrike.ApiClient.Tests.Unit.csproj", "{92168BCC-81A1-40EB-BB1D-91BD28135148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taviloglu.Wrike.ApiClient.Tests.Unit", "Taviloglu.Wrike.ApiClient.Tests.Unit\Taviloglu.Wrike.ApiClient.Tests.Unit.csproj", "{92168BCC-81A1-40EB-BB1D-91BD28135148}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taviloglu.Wrike.Core.Tests.Unit", "Taviloglu.Wrike.Core.Tests.Unit\Taviloglu.Wrike.Core.Tests.Unit.csproj", "{35BC9519-A79D-4657-8137-192EB9346E64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{92168BCC-81A1-40EB-BB1D-91BD28135148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92168BCC-81A1-40EB-BB1D-91BD28135148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92168BCC-81A1-40EB-BB1D-91BD28135148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BC9519-A79D-4657-8137-192EB9346E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BC9519-A79D-4657-8137-192EB9346E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BC9519-A79D-4657-8137-192EB9346E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BC9519-A79D-4657-8137-192EB9346E64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
