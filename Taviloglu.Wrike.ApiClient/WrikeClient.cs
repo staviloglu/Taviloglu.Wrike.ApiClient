@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.Dto;
+using Taviloglu.Wrike.ApiClient.Exceptions;
 using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
@@ -23,6 +24,16 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="host"></param>
         public WrikeClient(string bearerToken, string host = "www.wrike.com")
         {
+            if (bearerToken == null)
+            {
+                throw new ArgumentNullException(nameof(bearerToken));
+            }
+
+            if (bearerToken.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be emtpy", nameof(bearerToken));
+            }
+
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
@@ -30,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (host.Trim() == string.Empty)
             {
-                throw new ArgumentException($"{nameof(host)} can not be empty",nameof(host));
+                throw new ArgumentException("value can not be emtpy",nameof(host));
             }
 
             _httpClient = new HttpClient();
@@ -112,7 +123,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             if (!string.IsNullOrWhiteSpace(response.Error))
             {
-                throw new WrikeException(response.Error, response.ErrorDescription);
+                throw new WrikeApiException(response.Error, response.ErrorDescription);
             }
 
             return response.Data;
@@ -122,7 +133,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             if (!string.IsNullOrWhiteSpace(response.Error))
             {
-                throw new WrikeException(response.Error, response.ErrorDescription);
+                throw new WrikeApiException(response.Error, response.ErrorDescription);
             }
 
             return response.Data[0];
