@@ -29,11 +29,12 @@ namespace Taviloglu.Wrike.ApiClient
         /// List contacts of specified users and user groups.
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="contactIds">string list of contactIds</param>
+        /// <param name="contactIds">List of contact Ids</param>
         /// <param name="metadata">Metadata filter, exact match for metadata key or key-value pair</param>
         /// <param name="retrieveMetadata"></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
-        Task<List<WrikeUser>> GetAsync(List<string> contactIds, WrikeMetadata metadata = null, bool? retrieveMetadata = null);
+        Task<List<WrikeUser>> GetAsync(WrikeClientIdListParameter contactIds, WrikeMetadata metadata = null, 
+            bool? retrieveMetadata = null);
 
         /// <summary>
         /// Update contact of requesting user by ID (use 'Users.UpdateAsync' method to update other users). Account Admins may use this method to update group info by group ID.
@@ -42,6 +43,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="id">ContactId / UserId</param>
         /// <param name="metadata">Metadata to be updated</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-contact"/>        
-        Task<WrikeUser> UpdateAsync(string id, List<WrikeMetadata> metadata = null);
+        Task<WrikeUser> UpdateAsync(WrikeClientIdParameter id, List<WrikeMetadata> metadata = null);
     }
 }
