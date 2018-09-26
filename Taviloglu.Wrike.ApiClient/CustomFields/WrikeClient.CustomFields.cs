@@ -21,25 +21,9 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeCustomField>> IWrikeCustomFieldsClient.GetAsync(List<string> customFieldIds)
-        {
-            if (customFieldIds == null)
-            {
-                throw new ArgumentNullException(nameof(customFieldIds));
-            }
-
-            if (customFieldIds.Count == 0)
-            {
-                throw new ArgumentException("customFieldIds can not be empty", nameof(customFieldIds));
-            }
-
-            if (customFieldIds.Count > 100)
-            {
-                throw new ArgumentException("Max. 100 customFieldIds can be used", nameof(customFieldIds));
-            }
-
-            var customFieldsValue = string.Join(",", customFieldIds);
-            var response = await SendRequest<WrikeCustomField>($"customfields/{customFieldsValue}", HttpMethods.Get).ConfigureAwait(false);
+        async Task<List<WrikeCustomField>> IWrikeCustomFieldsClient.GetAsync(WrikeClientIdListParameter customFieldIds)
+        {   
+            var response = await SendRequest<WrikeCustomField>($"customfields/{customFieldIds}", HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
@@ -64,23 +48,13 @@ namespace Taviloglu.Wrike.ApiClient
         }
 
         async Task<WrikeCustomField> IWrikeCustomFieldsClient.UpdateAsync(
-            string id,
+            WrikeClientIdParameter id,
             string title,
             WrikeCustomFieldType? type,
             List<string> addShareds,
             List<string> removeShareds,
             WrikeCustomFieldSettings settings)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", title)
                 .AddParameter("type", type)

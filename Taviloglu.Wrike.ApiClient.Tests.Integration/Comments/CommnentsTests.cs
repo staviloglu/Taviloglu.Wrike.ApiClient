@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         const string DefaultFolderId = "IEACGXLUI4IEQ6NG";
 
         [OneTimeTearDown]
-        public void SetToDefaults()
+        public void ReturnToDefaults()
         {
             var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync().Result;
 

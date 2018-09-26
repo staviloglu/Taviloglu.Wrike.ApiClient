@@ -23,7 +23,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="customFieldIds"></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-custom-fields"/>
-        Task<List<WrikeCustomField>> GetAsync(List<string> customFieldIds);
+        Task<List<WrikeCustomField>> GetAsync(WrikeClientIdListParameter customFieldIds);
 
         /// <summary>
         /// Create custom field in specified account
@@ -45,6 +45,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="settings">Custom field type settings</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-custom-field"/>        
         Task<WrikeCustomField> UpdateAsync(
-            string id, string title = null, WrikeCustomFieldType? type = null, List<string> addShareds = null, List<string> removeShareds = null, WrikeCustomFieldSettings settings = null);
+            WrikeClientIdParameter id, string title = null, WrikeCustomFieldType? type = null, List<string> addShareds = null, List<string> removeShareds = null, WrikeCustomFieldSettings settings = null);
     }
 }

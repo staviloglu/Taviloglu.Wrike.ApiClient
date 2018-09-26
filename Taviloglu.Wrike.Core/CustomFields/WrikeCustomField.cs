@@ -17,12 +17,7 @@ namespace Taviloglu.Wrike.Core.CustomFields
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(title), "title can not be empty");
-            }
-
-            if (string.IsNullOrWhiteSpace(title))
-            {
-                throw new ArgumentException("title can not be null or empty!", "title");
+                throw new ArgumentException("value can not be empty", nameof(title));
             }
 
             Title = title;

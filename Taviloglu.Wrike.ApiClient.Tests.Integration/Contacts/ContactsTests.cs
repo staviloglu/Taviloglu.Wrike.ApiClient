@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
         const string TestMetadataValue = "testMetaValue";
 
         [OneTimeTearDown]
-        public void SetToDefaults()
+        public void ReturnToDefaults()
         {
             var updatedContact = WrikeClientFactory.GetWrikeClient().Contacts.UpdateAsync(DefaultContactId,
                 new List<Core.WrikeMetadata> { new Core.WrikeMetadata(TestMetadataKey, TestMetadataValue) }).Result;

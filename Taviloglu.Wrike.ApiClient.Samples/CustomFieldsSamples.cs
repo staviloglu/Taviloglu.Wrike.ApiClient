@@ -11,6 +11,12 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         {
             var customFields = await client.CustomFields.GetAsync();
 
+            var newCustomField = new WrikeCustomField("TestCustomField", WrikeCustomFieldType.Text);
+            newCustomField = await client.CustomFields.CreateAsync(newCustomField);
+
+            customFields = await client.CustomFields.GetAsync();
+
+
 
             foreach (var customField in customFields)
             {
