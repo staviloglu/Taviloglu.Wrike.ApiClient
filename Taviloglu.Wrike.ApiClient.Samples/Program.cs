@@ -29,11 +29,11 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //TimelogSamples.Run(wrikeClient).Wait();
 
-            TimelogCategoriesSamples.Run(wrikeClient).Wait();
+            //TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
-            //TasksSamples.Run(wrikeClient).Wait();
+            TasksSamples.Run(wrikeClient).Wait();
 
             //WorkflowSamples.Run(wrikeClient).Wait();
 

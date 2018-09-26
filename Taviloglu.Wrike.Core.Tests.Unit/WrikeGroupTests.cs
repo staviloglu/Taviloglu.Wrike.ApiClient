@@ -12,7 +12,7 @@ namespace Taviloglu.Wrike.Core.Tests.Unit
         {
             var ex = Assert.Throws<ArgumentException>(() => new WrikeGroup(string.Empty));
             Assert.AreEqual("title", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("value can not be emtpy"));
+            Assert.IsTrue(ex.Message.Contains("value can not be empty"));
         }
 
 

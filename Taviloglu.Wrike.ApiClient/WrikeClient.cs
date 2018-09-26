@@ -31,7 +31,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (bearerToken.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy", nameof(bearerToken));
+                throw new ArgumentException("value can not be empty", nameof(bearerToken));
             }
 
             if (host == null)
@@ -41,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (host.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy",nameof(host));
+                throw new ArgumentException("value can not be empty",nameof(host));
             }
 
             _httpClient = new HttpClient();

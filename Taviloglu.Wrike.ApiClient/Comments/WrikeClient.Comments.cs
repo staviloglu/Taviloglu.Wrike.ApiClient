@@ -46,19 +46,9 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task IWrikeCommentsClient.DeleteAsync(string commentId)
+        async Task IWrikeCommentsClient.DeleteAsync(WrikeClientIdParameter id)
         {
-            if (commentId == null)
-            {
-                throw new ArgumentNullException(nameof(commentId));
-            }
-
-            if (commentId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(commentId));
-            }
-
-            await SendRequest<WrikeComment>($"comments/{commentId}", HttpMethods.Delete).ConfigureAwait(false);
+            await SendRequest<WrikeComment>($"comments/{id}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
         async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(bool? plainText, int? limit, WrikeDateFilterRange updatedDate)
@@ -74,19 +64,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeFolderComment>> IWrikeCommentsClient.GetInFolderAsync(string folderId, bool? plainText)
+        async Task<List<WrikeFolderComment>> IWrikeCommentsClient.GetInFolderAsync(WrikeClientIdParameter folderId, bool? plainText)
         {
-            if (folderId == null)
-            {
-                throw new ArgumentNullException(nameof(folderId));
-            }
-
-            if (folderId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(folderId));
-            }
-
-
             var requestUri = $"folders/{folderId}/comments";
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
@@ -96,18 +75,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeTaskComment>> IWrikeCommentsClient.GetInTaskAsync(string taskId, bool? plainText)
+        async Task<List<WrikeTaskComment>> IWrikeCommentsClient.GetInTaskAsync(WrikeClientIdParameter taskId, bool? plainText)
         {
-            if (taskId == null)
-            {
-                throw new ArgumentNullException(nameof(taskId));
-            }
-
-            if (taskId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(taskId));
-            }
-
             var requestUri = $"tasks/{taskId}/comments";
 
             var uriBuilder = new WrikeGetUriBuilder(requestUri)
@@ -117,44 +86,17 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(List<string> commentIds, bool? plainText)
+        async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(WrikeClientIdListParameter commentIds, bool? plainText)
         {
-            if (commentIds == null)
-            {
-                throw new ArgumentNullException(nameof(commentIds));
-            }
-
-            if (commentIds.Count == 0)
-            {
-                throw new ArgumentException("value can not be empty", nameof(commentIds));
-            }
-
-            if (commentIds.Count > 100)
-            {
-                throw new ArgumentException("Max. 100 commentIds can be used", nameof(commentIds));
-            }
-
-            var requestUri = "comments/";
-            var commentIdsValue = string.Join(",", commentIds);
-            requestUri = requestUri + commentIdsValue;
+            var requestUri = $"comments/{commentIds}";
             var uriBuilder = new WrikeGetUriBuilder(requestUri).AddParameter("plainText", plainText);
 
             var response = await SendRequest<WrikeComment>(uriBuilder.GetUri(), HttpMethods.Get, jsonConverter:new WrikeCommentConverter()).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeComment> IWrikeCommentsClient.UpdateAsync(string id, string text, bool? plainText)
+        async Task<WrikeComment> IWrikeCommentsClient.UpdateAsync(WrikeClientIdParameter id, string text, bool? plainText)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(id));
-            }
-
             if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));

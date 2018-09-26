@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.Core.Colors
 
             if (name.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy", nameof(name));
+                throw new ArgumentException("value can not be empty", nameof(name));
             }
 
             if (hex == null)
@@ -33,7 +33,7 @@ namespace Taviloglu.Wrike.Core.Colors
 
             if (hex.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy", nameof(hex));
+                throw new ArgumentException("value can not be empty", nameof(hex));
             }
 
             Name = name;

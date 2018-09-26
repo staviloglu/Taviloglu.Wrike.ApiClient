@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.Core.Groups
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy", nameof(title));
+                throw new ArgumentException("value can not be empty", nameof(title));
             }
 
             Title = title;

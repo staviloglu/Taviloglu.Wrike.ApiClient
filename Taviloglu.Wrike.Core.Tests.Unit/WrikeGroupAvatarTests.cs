@@ -12,7 +12,7 @@ namespace Taviloglu.Wrike.Core.Tests.Unit
         {
             var ex = Assert.Throws<ArgumentException>(()=> new WrikeGroupAvatar("colorName", string.Empty));
             Assert.AreEqual("letters", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("value can not be emtpy"));
+            Assert.IsTrue(ex.Message.Contains("value can not be empty"));
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace Taviloglu.Wrike.Core.Tests.Unit
         {
             var ex = Assert.Throws<ArgumentException>(() => new WrikeGroupAvatar(string.Empty, "GN"));
             Assert.AreEqual("color", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("value can not be emtpy"));
+            Assert.IsTrue(ex.Message.Contains("value can not be empty"));
         }
 
         [Test]

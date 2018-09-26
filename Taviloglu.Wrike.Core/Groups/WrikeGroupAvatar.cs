@@ -23,7 +23,7 @@ namespace Taviloglu.Wrike.Core.Groups
 
             if (letters.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy", nameof(letters));
+                throw new ArgumentException("value can not be empty", nameof(letters));
             }
 
             if (letters.Length > 2)
@@ -38,7 +38,7 @@ namespace Taviloglu.Wrike.Core.Groups
 
             if (color.Trim() == string.Empty)
             {
-                throw new ArgumentException("value can not be emtpy", nameof(color));
+                throw new ArgumentException("value can not be empty", nameof(color));
             }
 
             Color = color;

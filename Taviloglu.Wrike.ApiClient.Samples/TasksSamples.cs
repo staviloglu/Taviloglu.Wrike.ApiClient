@@ -9,6 +9,10 @@ namespace Taviloglu.Wrike.ApiClient.Samples
     {
         public static async Task Run(WrikeClient client)
         {
+
+            var tasks = await client.Tasks.GetAsync();
+
+
             //many other optional parameters
             //var tasks = await client.Tasks.GetAsync(
             //    createdDate: new WrikeDateFilterRange(new DateTime(2018, 1, 1), new DateTime(2018, 2, 5)),

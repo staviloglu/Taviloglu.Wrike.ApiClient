@@ -27,7 +27,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="taskId"></param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
-        Task<List<WrikeTaskComment>> GetInTaskAsync(string taskId, bool? plainText=null);
+        Task<List<WrikeTaskComment>> GetInTaskAsync(WrikeClientIdParameter taskId, bool? plainText=null);
 
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="folderId"></param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
-        Task<List<WrikeFolderComment>> GetInFolderAsync(string folderId, bool? plainText=null);
+        Task<List<WrikeFolderComment>> GetInFolderAsync(WrikeClientIdParameter folderId, bool? plainText=null);
 
         /// <summary>
         /// Get single or multiple comments by their IDs.
@@ -46,14 +46,15 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="commentIds"></param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-comments"/>
-        Task<List<WrikeComment>> GetAsync(List<string> commentIds, bool? plainText = null);
+        Task<List<WrikeComment>> GetAsync(WrikeClientIdListParameter commentIds, bool? plainText = null);
 
         /// <summary>
         /// Delete comment by ID.
         /// Scopes: Default, wsReadWrite
         /// </summary>
+        /// <param name="id">Comment Id</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-comment"/>        
-        Task DeleteAsync(string commentId);
+        Task DeleteAsync(WrikeClientIdParameter id);
 
         /// <summary>
         ///  Update Comment by ID. A comment is available for updates only during the 5 minutes after creation.
@@ -63,7 +64,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="plainText">Get comment text as plain text, HTML otherwise, Default: false</param>
         /// <param name="text">Comment text, can not be empty</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/update-comment"/>
-        Task<WrikeComment> UpdateAsync(string id, string text, bool? plainText = null);
+        Task<WrikeComment> UpdateAsync(WrikeClientIdParameter id, string text, bool? plainText = null);
 
         /// <summary>
         ///  Create a comment in the folder/task. The virtual Root and Recycle Bin folders cannot have comments.

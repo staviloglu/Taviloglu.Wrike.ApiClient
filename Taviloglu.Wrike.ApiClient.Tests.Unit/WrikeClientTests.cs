@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit
         {
             var ex = Assert.Throws<ArgumentException>(() => new WrikeClient("bearerToken", string.Empty));
             Assert.AreEqual("host", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("value can not be emtpy"));
+            Assert.IsTrue(ex.Message.Contains("value can not be empty"));
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit
         {
             var ex = Assert.Throws<ArgumentException>(() => new WrikeClient(string.Empty));
             Assert.AreEqual("bearerToken", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("value can not be emtpy"));
+            Assert.IsTrue(ex.Message.Contains("value can not be empty"));
         }
     }
 }
