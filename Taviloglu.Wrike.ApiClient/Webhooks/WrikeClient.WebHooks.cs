@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Webhooks;
 
 namespace Taviloglu.Wrike.ApiClient
