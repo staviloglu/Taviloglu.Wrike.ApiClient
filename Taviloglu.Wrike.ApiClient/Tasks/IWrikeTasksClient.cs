@@ -31,14 +31,14 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="priorityBefore">Put newly created task before specified task in task list</param>
         /// <param name="priorityAfter">Put newly created task after specified task in task list</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-task"/>
-        Task<WrikeTask> CreateAsync(string folderId, WrikeTask newTask, string priorityBefore = null, string priorityAfter = null);
+        Task<WrikeTask> CreateAsync(WrikeClientIdParameter folderId, WrikeTask newTask, string priorityBefore = null, string priorityAfter = null);
 
         /// <summary>
         /// Delete task by Id
         /// Scopes: Default, wsReadWrite
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-tasks"/>        
-        Task<WrikeTask> DeleteAsync(string taskId);
+        Task<WrikeTask> DeleteAsync(WrikeClientIdParameter taskId);
 
         /// <summary>
         /// Search among all tasks in the account.
@@ -106,10 +106,10 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Returns complete information about single or multiple tasks. 
         ///  Scopes: Default, wsReadWrite
         /// </summary>
-        /// <param name="taskIds">MaxCount 100</param>
+        /// <param name="taskIds">Task Ids</param>
         /// <param name="optionalFields">Use <see cref="WrikeTask.OptionalFields"/> values Only Recurrent and AttachmentCount supported</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
-        Task<List<WrikeTask>> GetAsync(List<string> taskIds, List<string> optionalFields = null);
+        Task<List<WrikeTask>> GetAsync(WrikeClientIdListParameter taskIds, List<string> optionalFields = null);
 
         /// <summary>
         /// Update task
@@ -137,7 +137,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="customStatus">Custom status ID</param>
         /// <param name="restore">Restore task from Recycled Bin</param>
         /// <returns></returns>
-        Task<WrikeTask> UpdateAsync(string taskId,
+        Task<WrikeTask> UpdateAsync(WrikeClientIdParameter taskId,
             string title = null,
             string description = null,
             WrikeTaskStatus? status = null,

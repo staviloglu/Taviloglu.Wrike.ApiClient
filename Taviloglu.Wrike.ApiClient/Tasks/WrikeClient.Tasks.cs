@@ -26,18 +26,8 @@ namespace Taviloglu.Wrike.ApiClient
             }
         }
 
-        async Task<WrikeTask> IWrikeTasksClient.CreateAsync(string folderId, WrikeTask newTask, string priorityBefore, string priorityAfter)
+        async Task<WrikeTask> IWrikeTasksClient.CreateAsync(WrikeClientIdParameter folderId, WrikeTask newTask, string priorityBefore, string priorityAfter)
         {
-            if (folderId == null)
-            {
-                throw new ArgumentNullException(nameof(folderId));
-            }
-
-            if (folderId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("folderId can not be empty", nameof(folderId));
-            }
-
             if (newTask == null)
             {
                 throw new ArgumentNullException(nameof(newTask));
@@ -75,18 +65,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<WrikeTask> IWrikeTasksClient.DeleteAsync(string id)
+        async Task<WrikeTask> IWrikeTasksClient.DeleteAsync(WrikeClientIdParameter id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
             var response = await SendRequest<WrikeTask>($"tasks/{id}", HttpMethods.Delete).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
@@ -136,23 +116,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(List<string> taskIds, List<string> optionalFields)
+        async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(WrikeClientIdListParameter taskIds, List<string> optionalFields)
         {
-            if (taskIds == null)
-            {
-                throw new ArgumentNullException(nameof(taskIds));
-            }
-
-            if (taskIds.Count == 0)
-            {
-                throw new ArgumentException("taskIds can not be empty", nameof(taskIds));
-            }
-
-            if (taskIds.Count > 100)
-            {
-                throw new ArgumentException("Max. 100 taskIds can be used", nameof(taskIds));
-            }
-
             var supportedOptionalFields = new List<string> { WrikeTask.OptionalFields.Recurrent, WrikeTask.OptionalFields.AttachmentCount };
 
             if (optionalFields != null &&
@@ -177,7 +142,7 @@ namespace Taviloglu.Wrike.ApiClient
         }
 
         async Task<WrikeTask> IWrikeTasksClient.UpdateAsync(
-            string id,
+            WrikeClientIdParameter id,
             string title,
             string description,
             WrikeTaskStatus? status,
@@ -200,16 +165,6 @@ namespace Taviloglu.Wrike.ApiClient
             string customStatus,
             bool? restore)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", title)
                 .AddParameter("description", description)

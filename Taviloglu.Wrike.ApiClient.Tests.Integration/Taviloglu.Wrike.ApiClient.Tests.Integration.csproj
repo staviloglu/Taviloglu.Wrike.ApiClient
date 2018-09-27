@@ -19,7 +19,6 @@
     <Folder Include="Attachments\" />
     <Folder Include="Dependencies\" />
     <Folder Include="FoldersAndProjects\" />
-    <Folder Include="Tasks\" />
     <Folder Include="Timelogs\" />
     <Folder Include="Webhooks\" />
   </ItemGroup>

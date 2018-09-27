@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.Core.Tasks
     public sealed class WrikeTask : WrikeObjectWithId
     {
         /// <summary>
-        /// Use this constructor for creating new tasks
+        /// Initializes a new instance of the <see cref="WrikeTask"></see> class with title
         /// </summary>
         /// <param name="title">Title of task, required</param>
         /// <param name="description">Description of task, will be left blank, if not set</param>
@@ -52,7 +52,7 @@ namespace Taviloglu.Wrike.Core.Tasks
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(title), "title can not be empty");
+                throw new ArgumentException("value can not be empty", nameof(title));
             }
 
             Title = title;
@@ -254,6 +254,7 @@ namespace Taviloglu.Wrike.Core.Tasks
         /// </summary>
         public class OptionalFields
         {
+            public static List<string> List = new List<string> { AuthorIds, HasAttachments, AttachmentCount , ParentIds , SuperParentIds , SharedIds , ResponsibleIds, Description, BriefDescription, Recurrent, SuperTaskIds, SubTaskIds, DependencyIds, Metadata };
             /// <summary>
             /// Author IDs
             /// </summary>

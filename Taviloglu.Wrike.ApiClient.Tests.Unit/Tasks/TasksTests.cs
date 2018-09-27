@@ -21,7 +21,8 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Tasks
             WrikeTask newTask = null;
             string folderId = "folderId";
 
-            Assert.ThrowsAsync<ArgumentNullException>(() => TestConstants.WrikeClient.Tasks.CreateAsync(folderId, newTask));
+            var ex = Assert.ThrowsAsync<ArgumentNullException>(() => TestConstants.WrikeClient.Tasks.CreateAsync(folderId, newTask));
+            Assert.AreEqual("newTask", ex.ParamName);
         }
     }
 }

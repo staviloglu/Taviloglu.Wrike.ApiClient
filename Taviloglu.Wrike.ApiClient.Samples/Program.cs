@@ -33,7 +33,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //ContactsSamples.Run(wrikeClient).Wait();
 
-            //TasksSamples.Run(wrikeClient).Wait();
+            TasksSamples.Run(wrikeClient).Wait();
 
             //WorkflowSamples.Run(wrikeClient).Wait();
 
@@ -43,7 +43,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //CustomFieldsSamples.Run(wrikeClient).Wait();
 
-            UsersSamples.Run(wrikeClient).Wait();
+            //UsersSamples.Run(wrikeClient).Wait();
 
             //try other samples...
 

@@ -1,9 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using Taviloglu.Wrike.Core.Groups;
-using Taviloglu.Wrike.Core.Invitations;
-using Taviloglu.Wrike.Core.Users;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Invitations
 {
