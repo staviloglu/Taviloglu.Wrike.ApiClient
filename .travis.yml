@@ -2,10 +2,12 @@ language: csharp
 solution: Taviloglu.Wrike.ApiClient.sln
 mono: none
 dotnet: 1.1.5
+script:
+ - dotnet restore
 before_install:
   - sudo apt-get install nunit-console
 before_script:
- - dotnet restore
+  - nuget restore Taviloglu.Wrike.ApiClient.sln
  after_script:
   - nunit-console Taviloglu.Wrike.ApiClient.Tests.Unit/bin/Release/netcoreapp2.0/Taviloglu.Wrike.ApiClient.Tests.Unit.dlliloglu.Wrike.ApiClient.Tests.Unit.dll"
 
