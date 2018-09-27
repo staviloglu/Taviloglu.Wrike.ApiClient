@@ -23,7 +23,7 @@ namespace Taviloglu.Wrike.Core.Timelogs
 
             if (taskId.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(taskId), "taskId can not be empty");
+                throw new ArgumentException("value can not be empty", nameof(taskId));
             }
 
             if (comment == null)
@@ -33,12 +33,12 @@ namespace Taviloglu.Wrike.Core.Timelogs
 
             if (comment.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(comment), "comment can not be empty");
+                throw new ArgumentException("value can not be empty", nameof(comment));
             }
 
             if (hours < 0 || hours > 24)
             {
-                throw new ArgumentException("hours must be in [0,24] range", nameof(hours));
+                throw new ArgumentOutOfRangeException(nameof(hours), "value must be in [0,24] range");
             }
 
             //TODO: check trackedDate

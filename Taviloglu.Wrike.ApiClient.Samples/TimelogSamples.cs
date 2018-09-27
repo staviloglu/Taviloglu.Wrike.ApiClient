@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Taviloglu.Wrike.Core.Timelogs;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {
@@ -8,6 +10,12 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         {
             //Get all timelog records in all accounts.
             var timelogs = await client.Timelogs.GetAsync();
+
+            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", "test timelog", 1m, DateTime.Now);
+            newTimelog = await client.Timelogs.CreateAsync(newTimelog);
+
+
+
 
             //Get all timelog records for a task.
             //var timelogs = await client.Timelogs.GetAsync(taskId: "IEABX2HEKQGPEIPC");

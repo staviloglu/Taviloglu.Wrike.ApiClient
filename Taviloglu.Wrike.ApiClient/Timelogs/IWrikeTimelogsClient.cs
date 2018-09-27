@@ -24,21 +24,22 @@ namespace Taviloglu.Wrike.ApiClient
         /// Update timelog by Id
         /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// <param name="timelogId"></param>
+        /// <param name="id">Timelog ID</param>
         /// <param name="comment">Timelog comment</param>
         /// <param name="hours">New timelog tracked hours</param>
         /// <param name="trackedDate">New timelog date </param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// <param name="categoryId">Timelog category</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-timelog"/>
-        Task<WrikeTimelog> UpdateAsync(string timelogId, string comment = null, int? hours = null, DateTime? trackedDate = null, bool? plainText = null, string categoryId = null);
+        Task<WrikeTimelog> UpdateAsync(WrikeClientIdParameter id, string comment = null, int? hours = null, DateTime? trackedDate = null, bool? plainText = null, string categoryId = null);
 
         /// <summary>
         /// Delete Timelog record by ID
         /// Scopes: Default, wsReadWrite
         /// </summary>
+        /// <param name="id">Timelog ID</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-timelog"/>        
-        Task DeleteAsync(string timelogId);
+        Task DeleteAsync(WrikeClientIdParameter id);
 
         /// <summary>
         /// Scopes: Default, wsReadOnly, wsReadWrite
@@ -53,7 +54,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="descendants">Adds all descendant tasks to search scope</param>
         /// <param name="subTasks">Adds subtasks to search scope</param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise.</param>
-        /// <param name="categories">Get timelog records for specified categories</param>
+        /// <param name="categories">Get timelog records for specified timelog categories</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelogs"/>        
         Task<List<WrikeTimelog>> GetAsync(
             string contactId = null,
@@ -72,9 +73,9 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Get timelog record by ID. 
         ///  Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
-        /// <param name="id">TimelogId</param>
+        /// <param name="id">Timelog Id</param>
         /// <param name="plainText">Get comment text as plain text, HTML otherwise</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-timelogs"/>
-        Task<WrikeTimelog> GetAsync(string id, bool? plainText = null);
+        Task<WrikeTimelog> GetAsync(WrikeClientIdParameter id, bool? plainText = null);
     }
 }
