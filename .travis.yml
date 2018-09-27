@@ -9,5 +9,5 @@ before_install:
 before_script:
   - nuget restore Taviloglu.Wrike.ApiClient.sln
  after_script:
-  - nunit-console Taviloglu.Wrike.ApiClient.Tests.Unit/bin/Release/netcoreapp2.0/Taviloglu.Wrike.ApiClient.Tests.Unit.dlliloglu.Wrike.ApiClient.Tests.Unit.dll"
+  - nunit-console Taviloglu.Wrike.ApiClient.Tests.Unit/bin/Release/netcoreapp2.0/Taviloglu.Wrike.ApiClient.Tests.Unit.dlliloglu.Wrike.ApiClient.Tests.Unit.dll
 
