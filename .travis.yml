@@ -4,7 +4,7 @@ mono: none
 dotnet: 1.1.5
 before_install:
   - sudo apt-get install nunit-console
-script:
+before_script:
  - dotnet restore
  after_script:
   - nunit-console Taviloglu.Wrike.ApiClient.Tests.Unit/bin/Release/netcoreapp2.0/Taviloglu.Wrike.ApiClient.Tests.Unit.dlliloglu.Wrike.ApiClient.Tests.Unit.dll"
