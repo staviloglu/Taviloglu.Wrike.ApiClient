@@ -1,2 +1,8 @@
 language: csharp
 solution: Taviloglu.Wrike.ApiClient.sln
+mono: none
+dotnet: 1.1.5
+script:
+ - dotnet restore
+before_install:
+  - sudo apt-get install nunit-console
