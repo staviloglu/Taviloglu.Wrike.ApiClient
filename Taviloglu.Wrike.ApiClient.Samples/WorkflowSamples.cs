@@ -12,7 +12,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
     {
         public static async Task Run(WrikeClient client)
         {
-            //var workflows = await client.Workflows.GetAsync(accountId);
+            var workflows = await client.Workflows.GetAsync();
 
             //var newWorkFlow = new WrikeWorkflow("MyNewWorkflow");
 

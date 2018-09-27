@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Taviloglu.Wrike.ApiClient.Tests.Integration
+﻿namespace Taviloglu.Wrike.ApiClient.Tests.Integration
 {
     public static class WrikeClientFactory
     {
@@ -16,6 +12,5 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration
         {
             return _wrikeClient;
         }
-
     }
 }

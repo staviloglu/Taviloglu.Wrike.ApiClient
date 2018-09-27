@@ -6,9 +6,8 @@ namespace Taviloglu.Wrike.Core.Workflows
 {
     public class WrikeWorkflow : WrikeObjectWithId
     {
-
         /// <summary>
-        /// Use this constructor for creating new workflows
+        /// Initializes a new instance of the <see cref="WrikeWorkflow"></see> class with name
         /// </summary>
         /// <param name="name"></param>
         public WrikeWorkflow(string name)
@@ -20,7 +19,7 @@ namespace Taviloglu.Wrike.Core.Workflows
 
             if (name.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(name), "id can not be empty");
+                throw new ArgumentException("value can not be empty",nameof(name));
             }
 
             Name = name;
@@ -29,7 +28,7 @@ namespace Taviloglu.Wrike.Core.Workflows
         /// Name (128 symbols max)
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Defines default workflow
         /// </summary>

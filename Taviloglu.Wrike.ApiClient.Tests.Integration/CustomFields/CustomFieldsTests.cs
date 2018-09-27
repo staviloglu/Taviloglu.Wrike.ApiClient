@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Taviloglu.Wrike.Core.CustomFields;
 
-namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
+namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
 {
     [TestFixture]
     public class CustomFieldsTests

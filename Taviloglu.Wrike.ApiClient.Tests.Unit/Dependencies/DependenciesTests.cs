@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Taviloglu.Wrike.ApiClient.Tests.Unit.CustomFields
+namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Dependencies
 {
     [TestFixture]
     public class DependenciesTests

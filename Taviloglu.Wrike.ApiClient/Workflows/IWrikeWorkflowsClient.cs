@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Workflows;
 
 namespace Taviloglu.Wrike.ApiClient
@@ -11,7 +10,7 @@ namespace Taviloglu.Wrike.ApiClient
     public interface IWrikeWorkflowsClient
     {
         /// <summary>
-        /// RReturns list of workflows with custom statuses. 
+        /// Returns list of workflows with custom statuses. 
         /// Scopes: Default, amReadOnlyWorkflow, amReadWriteWorkflow, wsReadOnly, wsReadWrite
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-workflows"/>
@@ -25,12 +24,12 @@ namespace Taviloglu.Wrike.ApiClient
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-workflow"/>
         Task<WrikeWorkflow> CreateAsync(WrikeWorkflow newWorkflow);
 
-
         /// <summary>
         /// Update workflow or custom statuses
+        /// Scopes: amReadWriteWorkflow
         /// </summary>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-workflow"/>
-        Task<WrikeWorkflow> UpdateAsync(string id,
+        Task<WrikeWorkflow> UpdateAsync(WrikeClientIdParameter id,
             string name = null, bool? isHidden = null, WrikeCustomStatus customStatus = null);
     }
 }

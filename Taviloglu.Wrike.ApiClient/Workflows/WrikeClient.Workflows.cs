@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Workflows;
 
 namespace Taviloglu.Wrike.ApiClient
@@ -36,18 +35,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeWorkflow> IWrikeWorkflowsClient.UpdateAsync(string id, string name, bool? isHidden, WrikeCustomStatus customStatus)
+        async Task<WrikeWorkflow> IWrikeWorkflowsClient.UpdateAsync(WrikeClientIdParameter id, string name, bool? isHidden, WrikeCustomStatus customStatus)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                .AddParameter("name", name)
                .AddParameter("hidden", isHidden)

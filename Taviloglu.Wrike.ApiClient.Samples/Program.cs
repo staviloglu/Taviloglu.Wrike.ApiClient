@@ -35,13 +35,13 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //TasksSamples.Run(wrikeClient).Wait();
 
-            //WorkflowSamples.Run(wrikeClient).Wait();
+            WorkflowSamples.Run(wrikeClient).Wait();
 
             //GroupsSamples.Run(wrikeClient).Wait();
 
             //InvitationsSamples.Run(wrikeClient).Wait();
 
-            CustomFieldsSamples.Run(wrikeClient).Wait();
+            //CustomFieldsSamples.Run(wrikeClient).Wait();
 
             //UsersSamples.Run(wrikeClient).Wait();
 

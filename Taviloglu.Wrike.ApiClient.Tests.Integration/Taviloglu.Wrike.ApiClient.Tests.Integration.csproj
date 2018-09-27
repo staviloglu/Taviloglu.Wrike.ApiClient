@@ -23,7 +23,6 @@
     <Folder Include="Tasks\" />
     <Folder Include="Timelogs\" />
     <Folder Include="Webhooks\" />
-    <Folder Include="Workflows\" />
   </ItemGroup>
 
 </Project>
