@@ -22,19 +22,20 @@ namespace Taviloglu.Wrike.ApiClient
         /// Delete invitation by ID.
         /// Scopes: amReadWriteInvitation
         /// </summary>
+        /// <param name="id">Invitiation ID</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-invitation"/>        
-        Task DeleteAsync(string invitationId);
+        Task DeleteAsync(WrikeClientIdParameter id);
 
         /// <summary>
         ///  Update invitation by ID and/or resend invitation.
         ///  Scopes: amReadWriteInvitation
         /// </summary>
-        /// <param name="invitationId">Invitation ID</param>
+        /// <param name="id">Invitation ID</param>
         /// <param name="external">Change external flag for pending invitation. Flag 'External' can be applied only to the role 'User'</param>
         /// <param name="resend">Resend invitation</param>
         /// <param name="role">Change role of user in account for pending invitation </param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/update-invitation"/>
-        Task<WrikeInvitation> UpdateAsync(string invitationId, bool? resend = null, WrikeUserRole? role = null, bool? external = null);
+        Task<WrikeInvitation> UpdateAsync(WrikeClientIdParameter id, bool? resend = null, WrikeUserRole? role = null, bool? external = null);
 
 
         /// <summary>

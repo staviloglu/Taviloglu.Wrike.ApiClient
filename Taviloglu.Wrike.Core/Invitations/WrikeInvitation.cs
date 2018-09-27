@@ -11,9 +11,17 @@ namespace Taviloglu.Wrike.Core.Invitations
     /// </summary>
     public class WrikeInvitation : WrikeObjectWithId
     {
-        public WrikeInvitation(string email, 
-            string firstName = null, 
-            string lastName = null, 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrikeInvitation"/> class with email.
+        /// </summary>
+        /// <param name="email">Create an invitation for email</param>
+        /// <param name="firstName">First name of invited user</param>
+        /// <param name="lastName">Last name of invited user</param>
+        /// <param name="role">Set user role in account</param>
+        /// <param name="external">Set external flag for invited user. Flag 'External' can be applied only to the role 'User'</param>
+        public WrikeInvitation(string email,
+            string firstName = null,
+            string lastName = null,
             WrikeUserRole role = WrikeUserRole.User, bool external = false)
         {
             if (email == null)
@@ -23,7 +31,7 @@ namespace Taviloglu.Wrike.Core.Invitations
 
             if (email.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(email), "email can not be empty");
+                throw new ArgumentException("value can not be empty", nameof(email));
             }
 
             Email = email;
@@ -92,5 +100,4 @@ namespace Taviloglu.Wrike.Core.Invitations
         [JsonProperty("external")]
         public bool External { get; set; }
     }
-
 }

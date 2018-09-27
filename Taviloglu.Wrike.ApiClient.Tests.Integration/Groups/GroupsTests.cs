@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Groups;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups

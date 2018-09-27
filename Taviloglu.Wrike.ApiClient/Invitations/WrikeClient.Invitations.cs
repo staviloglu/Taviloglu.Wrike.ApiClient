@@ -20,7 +20,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             if (newInvitation == null)
             {
-                throw new ArgumentNullException(nameof(newInvitation), "newInvitation can not be null");
+                throw new ArgumentNullException(nameof(newInvitation));
             }            
 
             var contenBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -36,18 +36,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task IWrikeInvitationsClient.DeleteAsync(string id)
+        async Task IWrikeInvitationsClient.DeleteAsync(WrikeClientIdParameter id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty",nameof(id));
-            }
-
             await SendRequest<WrikeInvitation>($"invitations/{id}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
@@ -57,18 +47,8 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeInvitation> IWrikeInvitationsClient.UpdateAsync(string id, bool? resend, WrikeUserRole? role, bool? external)
+        async Task<WrikeInvitation> IWrikeInvitationsClient.UpdateAsync(WrikeClientIdParameter id, bool? resend, WrikeUserRole? role, bool? external)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("resend", resend)
                 .AddParameter("role", role)
