@@ -8,5 +8,5 @@ before_install:
  - sudo apt-get install nunit-console
 after_script:
  - dotnet test ./Taviloglu.Wrike.ApiClient.Tests.Unit/Taviloglu.Wrike.ApiClient.Tests.Unit.csproj
- - dotnet test ./Taviloglu.Wrike.ApiClient.Core.Tests.Unit/Taviloglu.Wrike.ApiClient.Core.Tests.Unit.csproj
+ - dotnet test ./Taviloglu.Wrike.Core.Tests.Unit/Taviloglu.Wrike.Core.Tests.Unit.csproj
  - dotnet test ./Taviloglu.Wrike.ApiClient.Tests.Integration/Taviloglu.Wrike.ApiClient.Tests.Integration.csproj
