@@ -5,8 +5,9 @@ namespace Taviloglu.Wrike.ApiClient
     /// <summary>
     /// 
     /// </summary>
-    public class WrikeClientIdParameter
+    public struct WrikeClientIdParameter
     {
+        private readonly string _id;
         /// <summary>
         /// 
         /// </summary>
@@ -23,7 +24,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentException($"value can not be empty string", nameof(id));
             }
 
-            Value = id;
+            _id = id;
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient
         }
 
         public static implicit operator string(WrikeClientIdParameter id)
-        {   
+        {
             return id.ToString();
         }
 
@@ -48,6 +49,17 @@ namespace Taviloglu.Wrike.ApiClient
         /// <summary>
         /// Given Id
         /// </summary>
-        public string Value { get; private set; }
+        public string Value
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_id))
+                {
+                    throw new ArgumentNullException("id");
+                }
+
+                return _id;
+            }
+        }
     }
 }

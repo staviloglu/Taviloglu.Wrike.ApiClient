@@ -6,8 +6,10 @@ namespace Taviloglu.Wrike.ApiClient
     /// <summary>
     /// 
     /// </summary>
-    public class WrikeClientIdListParameter
+    public struct WrikeClientIdListParameter
     {
+        readonly List<WrikeClientIdParameter> _idList;
+
         /// <summary>
         /// 
         /// </summary>
@@ -35,16 +37,11 @@ namespace Taviloglu.Wrike.ApiClient
                 wrikeClientIdParameterList.Add(new WrikeClientIdParameter(id));
             }
 
-            Values = wrikeClientIdParameterList;
+            _idList = wrikeClientIdParameterList;
         }
 
         public static implicit operator List<string>(WrikeClientIdListParameter idList)
         {
-            if (idList == null)
-            {
-                throw new ArgumentNullException(nameof(idList));
-            }
-
             var retVal = new List<string>();
             foreach (var id in idList.Values)
             {
@@ -60,10 +57,18 @@ namespace Taviloglu.Wrike.ApiClient
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<WrikeClientIdParameter> Values { get; private set; }
+        
+        public List<WrikeClientIdParameter> Values {
+            get
+            {
+                if (_idList == null || _idList.Count == 0)
+                {
+                    throw new ArgumentNullException("idList");
+                }
+
+                return _idList;
+            }
+        }
 
         /// <summary>
         /// Returns a string that has Ids comma seperated
