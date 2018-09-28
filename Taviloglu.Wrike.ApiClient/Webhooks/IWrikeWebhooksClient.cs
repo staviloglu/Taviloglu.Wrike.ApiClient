@@ -1,42 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core.Webhooks;
+using Taviloglu.Wrike.Core.WebHooks;
 
 namespace Taviloglu.Wrike.ApiClient
 {
     /// <summary>
-    /// Webhook operations
+    /// WebHook operations
     /// </summary>
     public interface IWrikeWebHooksClient
     {
         /// <summary>
         ///  Creates a webhook for a particular account.
-        /// </summary>        /// 
-        /// <param name="newWebhook">Use ctor <see cref="WrikeWebHook.WrikeWebHook(string, string)"/></param>
+        /// </summary>
         /// <param name="folderId"></param>
+        /// <param name="newWebHook"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebhook, string folderId = null);
+        Task<WrikeWebHook> CreateAsync(WrikeClientIdParameter folderId, WrikeWebHook newWebHook);
 
         /// <summary>
         /// Returns a list of all existing webhooks
         /// </summary>
-        /// <param name="accountId">Returns a list of webhooks in a specified account.</param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<List<WrikeWebHook>> GetAsync(string accountId = null);
+        Task<List<WrikeWebHook>> GetAsync();
 
         /// <summary>
         /// Returns information for the specified webhooks.
         /// </summary>
         /// <param name="webhookIds">Max count 100</param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<List<WrikeWebHook>> GetAsync(List<string> webhookIds);
+        Task<List<WrikeWebHook>> GetAsync(WrikeClientIdListParameter webhookIds);
 
         /// <summary>
         /// Deletes webhook by ID.
         /// </summary>
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task DeleteAsync(string webhookId);
+        Task DeleteAsync(WrikeClientIdParameter webhookId);
 
         /// <summary>
         ///   Modifies the webhooks state to suspend or resume. Suspended webhooks do not send notifications.
@@ -44,6 +43,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="status"></param>
         /// <param name="webhookId"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebHook> UpdateAsync(string webhookId, WrikeWebHookStatus status);
+        Task<WrikeWebHook> UpdateAsync(WrikeClientIdParameter webhookId, WrikeWebHookStatus status);
     }
 }

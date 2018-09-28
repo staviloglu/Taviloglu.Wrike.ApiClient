@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Taviloglu.Wrike.Core.Webhooks
+namespace Taviloglu.Wrike.Core.WebHooks
 {
     public sealed class WrikeWebHookTaskParentsRemovedEvent : WrikeWebHookEvent
     {

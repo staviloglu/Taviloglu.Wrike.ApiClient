@@ -1,4 +1,4 @@
-﻿namespace Taviloglu.Wrike.Core.Webhooks
+﻿namespace Taviloglu.Wrike.Core.WebHooks
 {
     public enum WrikeWebHookEventType
     {

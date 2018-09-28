@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using Taviloglu.Wrike.Core.Webhooks;
+using Taviloglu.Wrike.Core.WebHooks;
 
 namespace Taviloglu.Wrike.WebHook.Samples.Controllers
 {

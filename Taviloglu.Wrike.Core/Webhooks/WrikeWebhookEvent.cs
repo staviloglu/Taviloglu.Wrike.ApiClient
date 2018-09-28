@@ -2,14 +2,14 @@
 using Newtonsoft.Json.Converters;
 using System;
 
-namespace Taviloglu.Wrike.Core.Webhooks
+namespace Taviloglu.Wrike.Core.WebHooks
 {
     public class WrikeWebHookEvent : IWrikeObject
     {   
         [JsonProperty("taskId")]
         public string TaskId { get; set; }
         [JsonProperty("webhookId")]
-        public string WebhookId { get; set; }
+        public string WebHookId { get; set; }
         [JsonProperty("eventAuthorId")]
         public string EventAuthorId { get; set; }
         [JsonProperty("eventType")]

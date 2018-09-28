@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Taviloglu.Wrike.Core.Webhooks
+namespace Taviloglu.Wrike.Core.WebHooks
 {
     public sealed class WrikeWebHookCommentEvent : WrikeWebHookEvent
     {

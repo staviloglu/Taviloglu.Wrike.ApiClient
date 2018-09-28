@@ -25,35 +25,31 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         }
 
         [Test]
-        public void GetAsync_ShouldReturnDefaultGroup()
+        public void GetAsync_ShouldReturnOneOrMoreGroup()
         {
-            ReturnToDefaults();
-
             var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
             Assert.IsNotNull(groups);
-            Assert.AreEqual(1, groups.Count);
-            Assert.AreEqual(DefaultGroupId, groups.First().Id);
+            Assert.GreaterOrEqual(groups.Count, 1);
         }
 
         [Test]
         public void GetAsync_ShouldReturnDefaultGroupWithOptionalFields()
         {
-            ReturnToDefaults();
-
             var optionalFields = new List<string> { WrikeGroup.OptionalFields.Metadata };
 
             var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(optionalFields: optionalFields).Result;
             Assert.IsNotNull(groups);
-            Assert.AreEqual(1, groups.Count);
-            Assert.AreEqual(DefaultGroupId, groups.First().Id);
-            Assert.IsNotNull(groups.First().Metadata);
+            Assert.GreaterOrEqual(groups.Count, 1);
+
+            var defaultGroup = groups.First(g => g.Id == DefaultGroupId);
+
+            Assert.AreEqual(DefaultGroupId, defaultGroup.Id);
+            Assert.IsNotNull(defaultGroup.Metadata);
         }
 
         [Test]
         public void GetAsyncWithId_ShouldReturnDefaultGroup()
         {
-            ReturnToDefaults();
-
             var group = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(DefaultGroupId).Result;
 
             Assert.IsNotNull(group);
@@ -63,8 +59,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         [Test]
         public void GetAsyncWithId_ShouldReturnDefaultGroupWithOptionalFields()
         {
-            ReturnToDefaults();
-
             var optionalFields = new List<string> { WrikeGroup.OptionalFields.Metadata };
 
             var group = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(DefaultGroupId, optionalFields: optionalFields).Result;
@@ -79,7 +73,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         public void CreateAsync_ShouldAddNewGroupWithTitle()
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");
-
             var createdGroup = WrikeClientFactory.GetWrikeClient().Groups.CreateAsync(newGroup).Result;
 
             Assert.IsNotNull(createdGroup);

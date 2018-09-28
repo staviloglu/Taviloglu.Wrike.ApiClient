@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace Taviloglu.Wrike.Core.Webhooks
+namespace Taviloglu.Wrike.Core.WebHooks
 {
     public sealed class WrikeWebHookTaskStatusChangedEvent : WrikeWebHookEvent
     {

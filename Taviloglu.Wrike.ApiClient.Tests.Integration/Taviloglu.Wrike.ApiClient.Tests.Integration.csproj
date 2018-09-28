@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Attachments\" />
     <Folder Include="Dependencies\" />
-    <Folder Include="Webhooks\" />
   </ItemGroup>
 
 </Project>
