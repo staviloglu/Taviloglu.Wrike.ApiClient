@@ -18,7 +18,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.WebHooks
         {
             WrikeWebHook newWebHook = null;
 
-            var ex = Assert.ThrowsAsync<ArgumentNullException>(() => TestConstants.WrikeClient.WebHooks.CreateAsync("folderId",newWebHook));
+            var ex = Assert.ThrowsAsync<ArgumentNullException>(() => TestConstants.WrikeClient.WebHooks.CreateAsync(newWebHook));
             Assert.AreEqual("newWebHook", ex.ParamName);
         }
     }

@@ -14,7 +14,7 @@ namespace Taviloglu.Wrike.Core.WebHooks
         ///  url of the server which will receive the payload.
         /// </summary>
         /// <param name="hookUrl">URL of the server which will receive the payload. (https)</param>
-        public WrikeWebHook(string hookUrl)
+        public WrikeWebHook(string hookUrl, string folderId = null)
         {
             if (hookUrl == null)
             {
@@ -32,6 +32,7 @@ namespace Taviloglu.Wrike.Core.WebHooks
             }
 
             HookUrl = hookUrl;
+            FolderId = folderId;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace Taviloglu.Wrike.Core.WebHooks
         /// Folder Id
         /// </summary>
         [JsonProperty("folderId")]
-        public string FolderId { get; set; }
+        public string FolderId { get; private set; }
 
         /// <summary>
         /// URL of the server which will receive the payload.

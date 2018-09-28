@@ -14,18 +14,25 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeWebHooksClient)this;
             }
         }
-        async Task<WrikeWebHook> IWrikeWebHooksClient.CreateAsync(WrikeClientIdParameter folderId, WrikeWebHook newWebHook)
+        async Task<WrikeWebHook> IWrikeWebHooksClient.CreateAsync(WrikeWebHook newWebHook)
         {
             if (newWebHook == null)
             {
                 throw new ArgumentNullException(nameof(newWebHook));
+            }
+
+            string requestUri = "webhooks";
+
+            if (!string.IsNullOrWhiteSpace(newWebHook.FolderId))
+            {
+                requestUri = $"folders/{newWebHook.FolderId}/webhooks";
             }
            
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("hookUrl", newWebHook.HookUrl);
 
 
-            var response = await SendRequest<WrikeWebHook>($"folders/{folderId}/webhooks",
+            var response = await SendRequest<WrikeWebHook>(requestUri,
                 HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
 
             return GetReponseDataFirstItem(response);

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
+﻿using System.Threading.Tasks;
 using Taviloglu.Wrike.Core.WebHooks;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
@@ -21,7 +19,10 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
 
             var newWebHook = new WrikeWebHook(TestWebHookAddress);
-            newWebHook = await client.WebHooks.CreateAsync("folderId", newWebHook);
+            newWebHook = await client.WebHooks.CreateAsync(newWebHook);
+
+            //var newWebHook = new WrikeWebHook(TestWebHookAddress, "folderID");
+            //newWebHook = await client.WebHooks.CreateAsync(newWebHook);
 
 
             newWebHook = await client.WebHooks.UpdateAsync(newWebHook.Id, WrikeWebHookStatus.Suspended);

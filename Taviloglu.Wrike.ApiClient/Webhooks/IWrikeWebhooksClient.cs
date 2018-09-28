@@ -15,7 +15,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="folderId"></param>
         /// <param name="newWebHook"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
-        Task<WrikeWebHook> CreateAsync(WrikeClientIdParameter folderId, WrikeWebHook newWebHook);
+        Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebHook);
 
         /// <summary>
         /// Returns a list of all existing webhooks

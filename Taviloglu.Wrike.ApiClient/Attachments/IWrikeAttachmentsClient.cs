@@ -20,7 +20,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="createdDate">Created date filter. Required to request attachments in account. Time range duration should be less than 31 day.</param>
         /// <param name="withUrls">Get attachment URLs.</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-attachments"/>
-        Task<List<WrikeAttachment>> GetAsync(string folderId=null, string taskId=null,
+        Task<List<WrikeAttachment>> GetAsync(string folderId = null, string taskId = null,
             bool? versions = null,
             WrikeDateFilterRange createdDate = null,
             bool? withUrls = null);
