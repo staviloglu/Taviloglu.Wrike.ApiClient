@@ -37,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (value is WrikeClientIdParameter)
             {
-                var myValue = value as WrikeClientIdParameter;
+                var myValue = (WrikeClientIdParameter)value;
 
                 AddString(name, myValue.Value);
                 return this;
