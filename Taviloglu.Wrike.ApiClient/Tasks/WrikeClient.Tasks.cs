@@ -33,8 +33,6 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentNullException(nameof(newTask));
             }
 
-            var requestUri = $"folders/{folderId}/tasks";
-
             var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", newTask.Title)
                 .AddParameter("description", newTask.Description)
@@ -59,9 +57,8 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 postDataBuilder.AddParameter("customStatus", newTask.CustomStatusId);
             }
-
-            var postContent = postDataBuilder.GetContent();
-            var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
+            
+            var response = await SendRequest<WrikeTask>($"folders/{folderId}/tasks", HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
 
@@ -80,7 +77,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"folders/{folderId}/tasks";
             }
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
             .AddParameter("descendants", addDescendants)
             .AddParameter("title", title)
             .AddParameter("status", status)
@@ -124,17 +121,13 @@ namespace Taviloglu.Wrike.ApiClient
                 (optionalFields.Count > 2 ||
                 optionalFields.Any(o => !supportedOptionalFields.Contains(o))))
             {
-                throw new ArgumentException("Only Recurrent and AttachmentCount is supported.");
+                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent and AttachmentCount is supported.");
             }
 
-            var requestUri = "tasks/" + string.Join(",", taskIds);
+            var uriBuilder = new WrikeUriBuilder($"tasks/{taskIds}")
+                .AddParameter("fields",optionalFields);
 
-            if (optionalFields != null && optionalFields.Count > 0)
-            {
-                requestUri += "?fields=" + JsonConvert.SerializeObject(optionalFields);
-            }
-
-            var response = await SendRequest<WrikeTask>(requestUri, HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             
             //TODO: can not get recurrent property even it is provided bug?
 

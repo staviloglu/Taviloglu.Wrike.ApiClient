@@ -43,7 +43,9 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
-        public class OptionalFields {
+        public class OptionalFields
+        {
+            public static List<string> List = new List<string> { Metadata, HasAttachments, AttachmentCount, Description, BriefDescription, CustomFields, CustomColumnIds, SuperParentIds };
             public const string Metadata = "metadata";
             public const string HasAttachments = "hasAttachments";
             public const string AttachmentCount = "attachmentCount";

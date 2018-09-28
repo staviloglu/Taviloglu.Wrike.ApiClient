@@ -13,14 +13,10 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task IWrikeGroupsClient.DeleteAsync(WrikeClientIdParameter id, bool isTest)
         {
-            var requestUri = $"groups/{id}";
-
-            if (isTest)
-            {
-                requestUri += "?test=true";
-            }
-
-            await SendRequest<WrikeGroup>(requestUri, HttpMethods.Delete).ConfigureAwait(false);
+            var uriBuilder = new WrikeUriBuilder($"groups/{id}")
+                .AddParameter("test", isTest);
+            
+            await SendRequest<WrikeGroup>(uriBuilder.GetUri(), HttpMethods.Delete).ConfigureAwait(false);
         }
 
         async Task<WrikeGroup> IWrikeGroupsClient.GetAsync(WrikeClientIdParameter id, List<string> optionalFields)
@@ -30,7 +26,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeGroup.OptionalFields");
             }
 
-            var uriBuilder = new WrikeGetUriBuilder($"groups/{id}")
+            var uriBuilder = new WrikeUriBuilder($"groups/{id}")
            .AddParameter("fields", optionalFields);
 
             var response = await SendRequest<WrikeGroup>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
@@ -44,7 +40,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeGroup.OptionalFields");
             }
 
-            var uriBuilder = new WrikeGetUriBuilder("groups")
+            var uriBuilder = new WrikeUriBuilder("groups")
             .AddParameter("metadata", metaDataFilter)
             .AddParameter("fields", optionalFields);
 

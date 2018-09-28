@@ -55,7 +55,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             var requestUri = "comments";
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("plainText", plainText)
                 .AddParameter("limit", limit)
                 .AddParameter("udatedDate", updatedDate);
@@ -68,7 +68,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             var requestUri = $"folders/{folderId}/comments";
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("plainText", plainText);
 
             var response = await SendRequest<WrikeFolderComment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
@@ -79,7 +79,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             var requestUri = $"tasks/{taskId}/comments";
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("plainText", plainText);
 
             var response = await SendRequest<WrikeTaskComment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
@@ -89,7 +89,7 @@ namespace Taviloglu.Wrike.ApiClient
         async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(WrikeClientIdListParameter commentIds, bool? plainText)
         {
             var requestUri = $"comments/{commentIds}";
-            var uriBuilder = new WrikeGetUriBuilder(requestUri).AddParameter("plainText", plainText);
+            var uriBuilder = new WrikeUriBuilder(requestUri).AddParameter("plainText", plainText);
 
             var response = await SendRequest<WrikeComment>(uriBuilder.GetUri(), HttpMethods.Get, jsonConverter:new WrikeCommentConverter()).ConfigureAwait(false);
             return GetReponseDataList(response);

@@ -35,6 +35,14 @@ namespace Taviloglu.Wrike.ApiClient
                 return this;
             }
 
+            if (value is WrikeClientIdParameter)
+            {
+                var myValue = value as WrikeClientIdParameter;
+
+                AddString(name, myValue.Value);
+                return this;
+            }
+
             if (value is int)
             {
                 AddInt(name, (int)value);
@@ -69,7 +77,7 @@ namespace Taviloglu.Wrike.ApiClient
                 return this;
             }
 
-            throw new ArgumentException($"{value.GetType()} is not implemented");
+            throw new ArgumentException($"{value.GetType()} is not implemented in WrikeFormUrlEncodedContentBuilder",name);
         }
 
         private void AddEnum(string parameterName, Enum parameterValue)

@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeAccount.OptionalFields");
             }
 
-            var uriBuilder = new WrikeGetUriBuilder("account")
+            var uriBuilder = new WrikeUriBuilder("account")
                 .AddParameter("metadata", metadata).
                 AddParameter("fields", optionalFields);
 

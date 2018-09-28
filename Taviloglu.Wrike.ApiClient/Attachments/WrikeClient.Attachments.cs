@@ -41,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"tasks/{taskId}/attachments";
             }
             
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
             .AddParameter("versions", versions)
             .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("withUrls", withUrls);
@@ -65,7 +65,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             var requestUri = $"attachments/{id}/";
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
            .AddParameter("versions", versions);
 
             var response = await SendRequest<WrikeAttachment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);

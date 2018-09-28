@@ -36,7 +36,9 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
         [Test]
         public void GetAsyncWithIds_ShouldReturnDefaultTasks()
         {
-            var tasks = WrikeClientFactory.GetWrikeClient().Tasks.GetAsync(DefaultTaskIds).Result;
+            var supportedOptionalFields = new List<string> { WrikeTask.OptionalFields.Recurrent, WrikeTask.OptionalFields.AttachmentCount };
+
+            var tasks = WrikeClientFactory.GetWrikeClient().Tasks.GetAsync(DefaultTaskIds, supportedOptionalFields).Result;
             Assert.IsNotNull(tasks);
             Assert.AreEqual(2, tasks.Count);
             Assert.IsTrue(DefaultTaskIds.Contains(tasks[0].Id));

@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.ApiClient
                 throw new ArgumentException("value can not be empty", nameof(ids));
             }
 
-            var uriBuilder = new WrikeGetUriBuilder("ids")
+            var uriBuilder = new WrikeUriBuilder("ids")
                 .AddParameter("type", entityType)
                 .AddParameter("ids", ids);
 

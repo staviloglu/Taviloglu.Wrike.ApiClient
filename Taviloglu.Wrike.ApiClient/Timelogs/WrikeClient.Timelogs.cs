@@ -86,7 +86,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (notNullCount > 1) throw new ArgumentException("only one of contactId, folderId, taskId or categoryId can be used");
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
             .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("trackedDate", trackedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"))
             .AddParameter("me", me)
@@ -101,7 +101,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeTimelog> IWrikeTimelogsClient.GetAsync(WrikeClientIdParameter id, bool? plainText)
         {
-            var uriBuilder = new WrikeGetUriBuilder($"timelogs/{id}")
+            var uriBuilder = new WrikeUriBuilder($"timelogs/{id}")
             .AddParameter("plainText", plainText);
 
             var response = await SendRequest<WrikeTimelog>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);

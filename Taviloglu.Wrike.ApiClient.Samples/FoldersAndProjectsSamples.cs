@@ -1,16 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.FoldersAndProjects;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {
     public static class FoldersAndProjectsSamples
     {
+        const string TestFolderId = "IEACGXLUI4IHJMYP";
+
+        static readonly List<string> DefaultFolderIds = new List<string> { "IEACGXLUI7777777", "IEACGXLUI7777776", "IEACGXLUI4IEQ6NG", "IEACGXLUI4IEQ6NH", "IEACGXLUI4IEQ6NB", TestFolderId };
+
         public static async Task Run(WrikeClient client)
         {
             //try other options...
             var folderTrees = await client.FoldersAndProjects.GetFolderTreeAsync();
+
+            var folders = await client.FoldersAndProjects.GetFoldersAsync(DefaultFolderIds);
+
+
+            //var copiedFolder = await client.FoldersAndProjects.CopyAsync("IEACGXLUI4IEQ6NB", "IEACGXLUI4IHJMYP","CopiedFolder");
 
             //var folders = await client.FoldersAndProjects.GetFoldersAsync(
             //    new List<string> { "folderId", "folderId" },

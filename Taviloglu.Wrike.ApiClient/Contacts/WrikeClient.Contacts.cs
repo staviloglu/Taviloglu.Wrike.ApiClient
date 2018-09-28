@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.ApiClient
         {
             var requestUri = "contacts";
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("me", me)
                 .AddParameter("metadata", metadata)
                 .AddParameter("deleted", isDeleted);
@@ -31,7 +31,7 @@ namespace Taviloglu.Wrike.ApiClient
         async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(WrikeClientIdListParameter contactIds, WrikeMetadata metadata, bool? retrieveMetadata)
         {
             var requestUri = $"contacts/{contactIds}";
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("metadata", metadata);
             if (retrieveMetadata.HasValue && retrieveMetadata == true)
             {

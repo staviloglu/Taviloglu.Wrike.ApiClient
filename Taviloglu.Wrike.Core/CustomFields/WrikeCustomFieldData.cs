@@ -19,7 +19,7 @@ namespace Taviloglu.Wrike.Core.CustomFields
 
             if (customFieldId == string.Empty)
             {
-                throw new ArgumentException($"{nameof(customFieldId)} can not be empty string",nameof(customFieldId));
+                throw new ArgumentException("value can not be empty string",nameof(customFieldId));
             }
 
             if (value == null)
@@ -29,7 +29,7 @@ namespace Taviloglu.Wrike.Core.CustomFields
 
             if (value == string.Empty)
             {
-                throw new ArgumentException($"{nameof(value)} can not be empty string", nameof(value));
+                throw new ArgumentException("value can not be empty string", nameof(value));
             }
 
             CustomFieldId = customFieldId;
@@ -40,13 +40,13 @@ namespace Taviloglu.Wrike.Core.CustomFields
         /// Custom field id
         /// </summary>
         [JsonProperty("id")]
-        public string CustomFieldId { get; }
+        public string CustomFieldId { get; private set; }
 
         /// <summary>
         /// Custom field value
         /// </summary>
         [JsonProperty("value")]
-        public string Value { get; set; }
+        public string Value { get; private set; }
 
     }
 }

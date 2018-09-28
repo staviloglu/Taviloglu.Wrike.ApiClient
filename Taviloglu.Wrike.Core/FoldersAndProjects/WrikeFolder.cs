@@ -23,7 +23,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException(nameof(title), "title can not be empty");
+                throw new ArgumentException("value can not be empty",nameof(title));
             }
 
             Title = title;
@@ -159,6 +159,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         /// </summary>
         public class OptionalFields
         {
+            public static List<string> List = new List<string> { BriefDescription, CustomColumnIds, AttachmentCount };
             /// <summary>
             /// Get brief description
             /// </summary>

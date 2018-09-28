@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.ApiClient.FoldersAndProjects;
 using Taviloglu.Wrike.Core;
@@ -19,36 +20,28 @@ namespace Taviloglu.Wrike.ApiClient
                 return (IWrikeFoldersAndProjectsClient)this;
             }
         }
-        async Task<List<WrikeFolder>> IWrikeFoldersAndProjectsClient.GetFoldersAsync(List<string> folderIds, List<string> optionalFields)
+        async Task<List<WrikeFolder>> IWrikeFoldersAndProjectsClient.GetFoldersAsync(WrikeClientIdListParameter folderIds, List<string> optionalFields)
         {
-            if (folderIds == null)
+            if (optionalFields != null && optionalFields.Count > 0 && optionalFields.Except(WrikeFolder.OptionalFields.List).Any())
             {
-                throw new ArgumentNullException(nameof(folderIds));
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeFolder.OptionalFields");
             }
 
-            if (folderIds.Count == 0)
-            {
-                throw new ArgumentException("folderIds can not be empty", nameof(folderIds));
-            }
+            var uriBuilder = new WrikeUriBuilder($"folders/{folderIds}")
+                .AddParameter("fields", optionalFields);
 
-            if (folderIds.Count > 100)
-            {
-                throw new ArgumentException("Max. 100 folderIds can be used", nameof(folderIds));
-            }
-
-            var requestUri = "folders/" + string.Join(",", folderIds);
-
-            if (optionalFields != null && optionalFields.Count > 0)
-            {
-                requestUri += "?fields=" + JsonConvert.SerializeObject(optionalFields);
-            }
-
-            var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeFolder>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> fields)
+        async Task<List<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetFolderTreeAsync(string folderId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> optionalFields)
         {
+
+            if (optionalFields != null && optionalFields.Count > 0 && optionalFields.Except(WrikeFolderTree.OptionalFields.List).Any())
+            {
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Use only values in WrikeFolderTree.OptionalFields");
+            }
+
             var requestUri = "folders";
 
             bool useFolderId = !string.IsNullOrWhiteSpace(folderId);
@@ -58,14 +51,15 @@ namespace Taviloglu.Wrike.ApiClient
                 requestUri = $"folders/{folderId}/folders";
             }
 
-            var uriBuilder = new WrikeGetUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder(requestUri)
             .AddParameter("permalink", permalink)
             .AddParameter("descendants", addDescendants)
             .AddParameter("metadata", metadata)
             .AddParameter("customField", customField)
             .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("project", isProject)
-            .AddParameter("fields", fields);
+            .AddParameter("deleted", isDeleted)
+            .AddParameter("fields", optionalFields);
 
             if (!useFolderId)
             {
@@ -76,26 +70,14 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CreateAsync(string folderId, WrikeFolder newFolder)
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CreateAsync(WrikeClientIdParameter folderId, WrikeFolder newFolder)
         {
-            if (folderId == null)
-            {
-                throw new ArgumentNullException(nameof(folderId));
-            }
-
-            if (folderId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("folderId can not be empty", nameof(folderId));
-            }
-
             if (newFolder == null)
             {
                 throw new ArgumentNullException(nameof(newFolder));
             }
 
-            var requestUri = $"folders/{folderId}/folders";
-
-            var postDataBuilder = new WrikeFormUrlEncodedContentBuilder()
+            var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", newFolder.Title)
                 .AddParameter("description", newFolder.Description)
                 .AddParameter("shareds", newFolder.SharedIds)
@@ -104,39 +86,12 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("customColumns", newFolder.CustomColumnIds)
                 .AddParameter("project", newFolder.Project);
 
-            var postContent = postDataBuilder.GetContent();
-            var response = await SendRequest<WrikeFolder>(requestUri, HttpMethods.Post, postContent).ConfigureAwait(false);
+            var response = await SendRequest<WrikeFolder>($"folders/{folderId}/folders", HttpMethods.Post, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
-
-        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.DeleteAsync(string folderId)
+        
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CopyAsync(WrikeClientIdParameter folderId, WrikeClientIdParameter parentFolderId, string title, string titlePrefix, bool? copyDescriptions, bool? copyResponsibles, List<string> addResponsibles, List<string> removeResponsibles, bool copyCustomFields, bool copyCustomStatuses, bool copyStatuses, bool copyParents, DateTime? rescheduleDate, FolderRescheduleMode? rescheduleMode, int entryLimit)
         {
-            if (folderId == null)
-            {
-                throw new ArgumentNullException(nameof(folderId));
-            }
-
-            if (folderId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("folderId can not be empty", nameof(folderId));
-            }
-
-            var response = await SendRequest<WrikeFolder>($"folders/{folderId} ", HttpMethods.Delete).ConfigureAwait(false);
-            return GetReponseDataFirstItem(response);
-        }
-
-        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.UpdateAsync(string folderId, string title, string description, List<string> addParents, List<string> removeParents, List<string> addShareds, List<string> removeShareds, List<WrikeMetadata> metadata, bool? restore, List<WrikeCustomFieldData> customFields, List<string> customColumns, WrikeProject project)
-        {
-            if (folderId == null)
-            {
-                throw new ArgumentNullException(nameof(folderId));
-            }
-
-            if (folderId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("folderId can not be empty", nameof(folderId));
-            }
-
             if (title == null)
             {
                 throw new ArgumentNullException(nameof(title));
@@ -144,7 +99,45 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (title.Trim() == string.Empty)
             {
-                throw new ArgumentException("title can not be empty",nameof(title));
+                throw new ArgumentException("title can not be empty", nameof(title));
+            }
+
+            if (entryLimit < 1 || entryLimit > 250)
+            {
+                throw new ArgumentOutOfRangeException(nameof(entryLimit), "value must be in [1,250] range");
+            }
+
+            var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
+                .AddParameter("parent", parentFolderId)
+                .AddParameter("title", title)
+                .AddParameter("titlePrefix", titlePrefix)
+                .AddParameter("copyDescriptions", copyDescriptions)
+                .AddParameter("copyResponsibles", copyResponsibles)
+                .AddParameter("addResponsibles", addResponsibles)
+                .AddParameter("removeResponsibles", removeResponsibles)
+                .AddParameter("copyCustomFields", copyCustomFields)
+                .AddParameter("copyCustomStatuses", copyCustomStatuses)
+                .AddParameter("copyStatuses", copyStatuses)
+                .AddParameter("copyParents", copyParents)
+                .AddParameter("rescheduleDate", rescheduleDate, new CustomDateTimeConverter("yyyy-MM-dd"))
+                .AddParameter("rescheduleMode", rescheduleMode)
+                .AddParameter("entryLimit", entryLimit);
+
+            var response = await SendRequest<WrikeFolder>($"copy_folder/{folderId}", HttpMethods.Post, 
+                contentBuilder.GetContent()).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
+
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.UpdateAsync(WrikeClientIdParameter folderId, string title, string description, List<string> addParents, List<string> removeParents, List<string> addShareds, List<string> removeShareds, List<WrikeMetadata> metadata, bool? restore, List<WrikeCustomFieldData> customFields, List<string> customColumns, WrikeProject project)
+        {
+            if (title == null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (title.Trim() == string.Empty)
+            {
+                throw new ArgumentException("value can not be empty", nameof(title));
             }
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -164,9 +157,11 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CopyAsync(string parentFolderId, string title, string titlePrefix, bool? copyDescriptions, bool? copyResponsibles, List<string> addResponsibles, List<string> removeResponsibles, bool copyCustomFields, bool copyCustomStatuses, bool copyStatuses, bool copyParents, DateTime? rescheduleDate, FolderRescheduleMode? rescheduleMode, int entryLimit)
+
+        async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.DeleteAsync(WrikeClientIdParameter folderId)
         {
-            throw new NotImplementedException();
+            var response = await SendRequest<WrikeFolder>($"folders/{folderId} ", HttpMethods.Delete).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
         }
     }
 }

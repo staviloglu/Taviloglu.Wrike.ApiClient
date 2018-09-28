@@ -6,17 +6,17 @@ using Taviloglu.Wrike.Core;
 
 namespace Taviloglu.Wrike.ApiClient
 {
-    internal class WrikeGetUriBuilder
+    internal class WrikeUriBuilder
     {
         private List<string> _filters;
         private string _baseUri;
-        public WrikeGetUriBuilder(string baseUri)
+        public WrikeUriBuilder(string baseUri)
         {
             _filters = new List<string>();
             _baseUri = baseUri;
         }
 
-        public WrikeGetUriBuilder AddParameter(string name, object value, JsonConverter jsonConverter = null)
+        public WrikeUriBuilder AddParameter(string name, object value, JsonConverter jsonConverter = null)
         {
             if (value == null)
             {

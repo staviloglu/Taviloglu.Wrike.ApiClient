@@ -25,9 +25,9 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
             //AccountsSamples.Run(wrikeClient).Wait();
 
-            //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
+            FoldersAndProjectsSamples.Run(wrikeClient).Wait();
 
-            TimelogSamples.Run(wrikeClient).Wait();
+            //TimelogSamples.Run(wrikeClient).Wait();
 
             //TimelogCategoriesSamples.Run(wrikeClient).Wait();
 
