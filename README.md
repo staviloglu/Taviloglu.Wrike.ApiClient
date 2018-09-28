@@ -56,7 +56,7 @@ var bearerToken = "your_permanent_token";
 var wrikeClient = new WrikeClient(bearerToken);
 //create new webhook
 //https://developers.wrike.com/documentation/webhooks
-var newWebhook = new WrikeWebHook("accountId", "http://<your-host>/api/wrikewebhook");
+var newWebhook = new WrikeWebHook("accountId", "https://<your-host>/api/wrikewebhook");
 newWebhook = await wrikeClient.WebHooks.CreateAsync(newWebhook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
