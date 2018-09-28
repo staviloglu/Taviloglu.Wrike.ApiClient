@@ -21,7 +21,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             if (id.Trim() == string.Empty)
             {
-                throw new ArgumentException($"value can not be empty string", nameof(id));
+                throw new ArgumentException($"value can not be empty", nameof(id));
             }
 
             _id = id;

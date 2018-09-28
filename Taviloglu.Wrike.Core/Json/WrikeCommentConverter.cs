@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Taviloglu.Wrike.Core.Comments;
 
 namespace Taviloglu.Wrike.Core.Json
 {
-    class WrikeCommentConverter : JsonConverter
+    internal class WrikeCommentConverter : JsonConverter
     {        
 
         public override bool CanConvert(Type objectType)
