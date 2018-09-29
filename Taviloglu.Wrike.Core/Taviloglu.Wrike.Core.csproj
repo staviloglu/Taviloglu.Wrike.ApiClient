@@ -13,12 +13,11 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>- Support for Wrike API v4
-- Reorganise namespaces
-- Reorganise ctors
-- Minor bugfixes</PackageReleaseNotes>
+- Design changes 
+- Bugfixes</PackageReleaseNotes>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.2.0.0</FileVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

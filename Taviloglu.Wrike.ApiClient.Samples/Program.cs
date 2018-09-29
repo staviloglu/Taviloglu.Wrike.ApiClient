@@ -16,6 +16,8 @@
 
             //CommentsSamples.Run(wrikeClient).Wait();
 
+            DependenciesSamples.Run(wrikeClient).Wait();
+
             //AccountsSamples.Run(wrikeClient).Wait();
 
             //FoldersAndProjectsSamples.Run(wrikeClient).Wait();
@@ -40,7 +42,7 @@
 
             //try other samples...
 
-            AttachmentsSamples.Run(wrikeClient).Wait();
+            //AttachmentsSamples.Run(wrikeClient).Wait();
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task IWrikeAttachmentsClient.DeleteAsync(WrikeClientIdParameter id)
         {
-            await SendRequest<WrikeAttachment>($"attachments/{id}", HttpMethods.Delete).ConfigureAwait(false);
+            await SendRequest<WrikeAttachment>($"attachments/{id}", HttpMethods.Delete, jsonConverter: new WrikeAttachmentConverter()).ConfigureAwait(false);
         }
 
         async Task<WrikeTaskAttachment> IWrikeAttachmentsClient.CreateInTaskAsync(WrikeClientIdParameter taskId, string fileName, byte[] fileBytes)

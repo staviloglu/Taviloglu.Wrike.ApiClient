@@ -48,7 +48,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task IWrikeCommentsClient.DeleteAsync(WrikeClientIdParameter id)
         {
-            await SendRequest<WrikeComment>($"comments/{id}", HttpMethods.Delete).ConfigureAwait(false);
+            await SendRequest<WrikeComment>($"comments/{id}", HttpMethods.Delete, jsonConverter: new WrikeCommentConverter()).ConfigureAwait(false);
         }
 
         async Task<List<WrikeComment>> IWrikeCommentsClient.GetAsync(bool? plainText, int? limit, WrikeDateFilterRange updatedDate)

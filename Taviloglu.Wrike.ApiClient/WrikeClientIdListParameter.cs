@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Taviloglu.Wrike.ApiClient
 {
@@ -29,6 +30,16 @@ namespace Taviloglu.Wrike.ApiClient
             if (idList.Count > 100)
             {
                 throw new ArgumentException($"value can contain 100 items max.", nameof(idList));
+            }
+
+            if (idList.Any(s=> s == null))
+            {
+                throw new ArgumentNullException(nameof(idList),"value can not contain null values");
+            }
+
+            if (idList.Any(s => s.Trim() == string.Empty))
+            {
+                throw new ArgumentException("value can not contain empty values", nameof(idList));
             }
 
             var wrikeClientIdParameterList = new List<WrikeClientIdParameter>();

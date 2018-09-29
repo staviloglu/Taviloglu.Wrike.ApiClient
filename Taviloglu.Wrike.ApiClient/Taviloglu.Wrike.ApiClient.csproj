@@ -12,10 +12,12 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Support for Wrike API v4</PackageReleaseNotes>
+    <PackageReleaseNotes>- Support for Wrike API v4
+- Design changes
+- Bugfixes</PackageReleaseNotes>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	
 	<files>
     <file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.dll" />

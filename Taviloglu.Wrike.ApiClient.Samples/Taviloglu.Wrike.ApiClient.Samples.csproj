@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountsSamples.cs" />
+    <Compile Include="DependenciesSamples.cs" />
     <Compile Include="InvitationsSamples.cs" />
     <Compile Include="CommentsSamples.cs" />
     <Compile Include="TimelogCategoriesSamples.cs" />

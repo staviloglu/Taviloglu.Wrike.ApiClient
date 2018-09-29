@@ -32,7 +32,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         {
             var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync().Result;
             Assert.IsNotNull(comments);
-            Assert.Greater(comments.Count, 0);            
+            Assert.Greater(comments.Count, 0);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
 
         [Test]
         public void CreateAsync_ShouldAddNewNewCommentToDefaultTask()
-        {            
+        {
             var newComment = new WrikeTaskComment("My new test comment", DefaultTaskId);
 
             var createdComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;

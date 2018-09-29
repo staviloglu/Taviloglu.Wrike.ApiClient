@@ -8,7 +8,11 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
     [TestFixture]
     public class TasksTests
     {
-        readonly List<string> DefaultTaskIds = new List<string> { "IEACGXLUKQIGFGAK", "IEACGXLUKQIEQ6NC" };
+        const string PredecessorTaskId = "IEACGXLUKQIHWJQW";
+        const string DependentTaskId = "IEACGXLUKQIHWJQT";
+        const string SuccessorTaskId = "IEACGXLUKQIHWJQX";
+
+        readonly List<string> DefaultTaskIds = new List<string> { SuccessorTaskId, DependentTaskId, PredecessorTaskId, "IEACGXLUKQIGFGAK", "IEACGXLUKQIEQ6NC" };
         const string FolderId = "IEACGXLUI4IEQ6NG";
 
         [OneTimeTearDown]
@@ -40,23 +44,23 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
 
             var tasks = WrikeClientFactory.GetWrikeClient().Tasks.GetAsync(DefaultTaskIds, supportedOptionalFields).Result;
             Assert.IsNotNull(tasks);
-            Assert.AreEqual(2, tasks.Count);
+            Assert.AreEqual(DefaultTaskIds.Count, tasks.Count);
             Assert.IsTrue(DefaultTaskIds.Contains(tasks[0].Id));
             Assert.IsTrue(DefaultTaskIds.Contains(tasks[1].Id));
-        }        
+        }
 
         [Test]
         public void CreateAsync_ShouldAddNewTaskWithTitle()
         {
             var newTask = new WrikeTask("Test Task #2");
-            var createdTask = WrikeClientFactory.GetWrikeClient().Tasks.CreateAsync(FolderId,newTask).Result;
+            var createdTask = WrikeClientFactory.GetWrikeClient().Tasks.CreateAsync(FolderId, newTask).Result;
 
             Assert.IsNotNull(createdTask);
             Assert.AreEqual(newTask.Title, createdTask.Title);
 
             //TODO: test other parameters
         }
-        
+
         [Test]
         public void UpdateAsync_ShouldUpdateTaskTitle()
         {
