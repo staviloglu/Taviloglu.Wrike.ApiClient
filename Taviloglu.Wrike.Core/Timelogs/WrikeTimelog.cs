@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using Taviloglu.Wrike.Core.Extensions;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core.Timelogs
@@ -16,25 +17,9 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// <param name="categoryId">Timelog category</param>
         public WrikeTimelog(string taskId, string comment, decimal hours, DateTime trackedDate, string categoryId = null)
         {
-            if (taskId == null)
-            {
-                throw new ArgumentNullException(nameof(taskId));
-            }
+            taskId.ValidateParameter(nameof(taskId));
 
-            if (taskId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(taskId));
-            }
-
-            if (comment == null)
-            {
-                throw new ArgumentNullException(nameof(comment));
-            }
-
-            if (comment.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(comment));
-            }
+            comment.ValidateParameter(nameof(comment));
 
             if (hours < 0 || hours > 24)
             {

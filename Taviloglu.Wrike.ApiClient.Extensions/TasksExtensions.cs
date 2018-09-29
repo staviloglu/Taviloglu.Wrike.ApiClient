@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient.Extensions
@@ -12,35 +10,25 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
         /// <summary>
         /// Provides a method to get task with single taskId rather than List
         /// </summary>
-        public static async Task<WrikeTask> GetTaskByIdAsync(this IWrikeTasksClient wrikeTasksClient, string taskId)
+        public static async Task<WrikeTask> GetTaskByIdAsync(this IWrikeTasksClient wrikeTasksClient, WrikeClientIdParameter taskId)
         {
-            if (string.IsNullOrWhiteSpace(taskId))
-            {
-                throw new ArgumentNullException(nameof(taskId));
-            }
-
-            var tasks = await wrikeTasksClient.GetAsync(taskIds: new List<string> { taskId });
+            var tasks = await wrikeTasksClient.GetAsync(taskIds: new List<string> { taskId }).ConfigureAwait(false);
             return tasks.FirstOrDefault();
         }
 
         /// <summary>
         /// Provides a method to get a tasks subTasks without the need to call get function for the superTask
         /// </summary>
-        public static async Task<List<WrikeTask>> GetSubTasksBySuperTaskIdAsync(this IWrikeTasksClient wrikeTasksClient, string superTaskId)
+        public static async Task<List<WrikeTask>> GetSubTasksBySuperTaskIdAsync(this IWrikeTasksClient wrikeTasksClient, WrikeClientIdParameter superTaskId)
         {
-            if (string.IsNullOrWhiteSpace(superTaskId))
-            {
-                throw new ArgumentNullException(nameof(superTaskId));
-            }
+            var superTask = await GetTaskByIdAsync(wrikeTasksClient, superTaskId).ConfigureAwait(false);            
 
-            var superTask = await GetTaskByIdAsync(wrikeTasksClient, superTaskId);            
-
-            if (superTask.SubTaskIds.Count<1)
+            if (superTask.SubTaskIds.Count == 0)
             {
                 return new List<WrikeTask>();
             }
 
-            return await wrikeTasksClient.GetAsync(taskIds: superTask.SubTaskIds);
+            return await wrikeTasksClient.GetAsync(taskIds: superTask.SubTaskIds).ConfigureAwait(false);
         }
     }
 }

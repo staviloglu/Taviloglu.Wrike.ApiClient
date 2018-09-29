@@ -14,12 +14,12 @@ namespace Taviloglu.Wrike.Core.Extensions
 
             if (value.Count == 0)
             {
-                throw new ArgumentException($"value can not be empty", parameterName);
+                throw new ArgumentException("value can not be empty", parameterName);
             }
 
             if (value.Count > 100)
             {
-                throw new ArgumentException($"value can contain 100 items max.", nameof(value));
+                throw new ArgumentException("value can contain 100 items max.", parameterName);
             }
         }
     }

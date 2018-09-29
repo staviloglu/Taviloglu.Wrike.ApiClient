@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using Taviloglu.Wrike.Core.Extensions;
 using Taviloglu.Wrike.Core.Json;
 using Taviloglu.Wrike.Core.Users;
 
@@ -24,15 +25,7 @@ namespace Taviloglu.Wrike.Core.Invitations
             string lastName = null,
             WrikeUserRole role = WrikeUserRole.User, bool external = false)
         {
-            if (email == null)
-            {
-                throw new ArgumentNullException(nameof(email));
-            }
-
-            if (email.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(email));
-            }
+            email.ValidateParameter(nameof(email));
 
             Email = email;
             FirstName = firstName;

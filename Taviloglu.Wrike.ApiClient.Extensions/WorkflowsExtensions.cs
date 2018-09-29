@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Tasks;
 using Taviloglu.Wrike.Core.Workflows;
 
@@ -18,20 +15,31 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
         /// <param name="newWorkflow">new workflow to be created with customStatuses set</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-workflow"/>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-workflow"/>
-        public static async Task<WrikeWorkflow> CreateWorkflowWithCustomStatusesAsync(this IWrikeWorkflowsClient wrikeWorkflowsClient, WrikeWorkflow newWorkflow) {
+        public static async Task<WrikeWorkflow> CreateWorkflowWithCustomStatusesAsync(this IWrikeWorkflowsClient wrikeWorkflowsClient, WrikeWorkflow newWorkflow)
+        {
 
-            if (newWorkflow == null || newWorkflow.CustomStatuses == null || newWorkflow.CustomStatuses.Count <  1)
+            if (newWorkflow == null)
             {
-                throw new ArgumentException("newWorkflow.CustomStatuses count should be greater than zero", nameof(newWorkflow.CustomStatuses));
+                throw new ArgumentNullException(nameof(newWorkflow));
             }
 
-            if (newWorkflow.CustomStatuses.Any(cs=> cs.Id != null))
+            if (newWorkflow.CustomStatuses == null)
             {
-                throw new ArgumentException("newWorkflow.CustomStatuses can not have Id property set", nameof(newWorkflow.CustomStatuses));
+                throw new ArgumentNullException("newWorkflow.CustomStatuses");
             }
 
-            var createdWorkflow = await wrikeWorkflowsClient.CreateAsync(newWorkflow);
-            
+            if (newWorkflow.CustomStatuses.Count == 0)
+            {
+                throw new ArgumentException("value can not be empty", "newWorkflow.CustomStatuses");
+            }
+
+            if (newWorkflow.CustomStatuses.Any(cs => cs.Id != null))
+            {
+                throw new ArgumentException("CustomStatuses can not have Id property set", "newWorkflow.CustomStatuses");
+            }
+
+            var createdWorkflow = await wrikeWorkflowsClient.CreateAsync(newWorkflow).ConfigureAwait(false);
+
             //created workflow will have default active and completed statuses, if newWorkflow.CustomStatuses
             //have same items update the default ones
 
@@ -47,13 +55,13 @@ namespace Taviloglu.Wrike.ApiClient.Extensions
             if (firstActiveCustomStatus != null)
             {
                 firstCompletedCustomStatus.Id = createdWorkflow.CustomStatuses.FirstOrDefault(cs => cs.Group == WrikeTaskStatus.Completed).Id;
-                firstCompletedCustomStatus.Group = null;                
+                firstCompletedCustomStatus.Group = null;
             }
 
             foreach (var customStatus in newWorkflow.CustomStatuses)
             {
                 createdWorkflow = await wrikeWorkflowsClient.UpdateAsync(
-                    createdWorkflow.Id, customStatus: customStatus);
+                    createdWorkflow.Id, customStatus: customStatus).ConfigureAwait(false);
             }
             return createdWorkflow;
         }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Groups
 {
@@ -16,30 +17,14 @@ namespace Taviloglu.Wrike.Core.Groups
         /// <param name="letters">Group letters (2 symbols max)</param>
         public WrikeGroupAvatar(string color, string letters)
         {
-            if (letters == null)
-            {
-                throw new ArgumentNullException(nameof(letters));
-            }
-
-            if (letters.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(letters));
-            }
+            letters.ValidateParameter(nameof(letters));
 
             if (letters.Length > 2)
             {
                 throw new ArgumentException("letters can be 2 characters max.", nameof(letters));
             }
 
-            if (color == null)
-            {
-                throw new ArgumentNullException(nameof(color));
-            }
-
-            if (color.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(color));
-            }
+            color.ValidateParameter(nameof(color));
 
             Color = color;
             Letters = letters;

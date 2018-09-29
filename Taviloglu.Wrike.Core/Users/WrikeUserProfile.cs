@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Users
 {
@@ -14,15 +14,7 @@ namespace Taviloglu.Wrike.Core.Users
         /// <param name="external">Make user external</param>
         public WrikeUserProfile(string accountId, WrikeUserRole role, bool external = false)
         {
-            if (accountId == null)
-            {
-                throw new ArgumentNullException(nameof(accountId));
-            }
-
-            if (accountId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(accountId));
-            }
+            accountId.ValidateParameter(nameof(accountId));
 
             AccountId = accountId;
             Role = role;

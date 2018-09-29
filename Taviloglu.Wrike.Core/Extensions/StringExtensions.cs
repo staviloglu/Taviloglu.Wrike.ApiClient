@@ -13,7 +13,7 @@ namespace Taviloglu.Wrike.Core.Extensions
 
             if (value.Trim() == string.Empty)
             {
-                throw new ArgumentException($"value can not be empty", parameterName);
+                throw new ArgumentException("value can not be empty", parameterName);
             }
         }
     }

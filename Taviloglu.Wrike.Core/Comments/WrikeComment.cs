@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.Extensions;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core.Comments
@@ -13,15 +14,7 @@ namespace Taviloglu.Wrike.Core.Comments
         /// <param name="text">Comment text, can not be empty</param>
         public WrikeComment(string text)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-
-            if (text.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(text));
-            }
+            text.ValidateParameter(nameof(text));
 
             Text = text;
         }

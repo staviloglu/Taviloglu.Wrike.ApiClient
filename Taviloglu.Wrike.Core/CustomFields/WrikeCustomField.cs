@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
 using System.Collections.Generic;
-
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.CustomFields
 {
@@ -10,15 +9,7 @@ namespace Taviloglu.Wrike.Core.CustomFields
     {
         public WrikeCustomField(string title, WrikeCustomFieldType type, List<string> sharedIds = null, WrikeCustomFieldSettings settings = null)
         {
-            if (title == null)
-            {
-                throw new ArgumentNullException(nameof(title));
-            }
-
-            if (title.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(title));
-            }
+            title.ValidateParameter(nameof(title));
 
             Title = title;
             Type = type;

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Colors
 {
@@ -15,26 +15,8 @@ namespace Taviloglu.Wrike.Core.Colors
         /// <param name="hex">HEX code</param>
         public WrikeColor(string name, string hex)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (name.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(name));
-            }
-
-            if (hex == null)
-            {
-                throw new ArgumentNullException(nameof(hex));
-                
-            }
-
-            if (hex.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(hex));
-            }
+            name.ValidateParameter(nameof(name));
+            hex.ValidateParameter(nameof(hex));
 
             Name = name;
             Hex = hex;

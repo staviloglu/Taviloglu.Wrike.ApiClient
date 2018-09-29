@@ -23,6 +23,12 @@
         /// <summary>
         /// OneDrive attachment. When deleted, only stored link is removed
         /// </summary>
-        OneDrive
+        OneDrive,
+
+        /// <summary>
+        /// External attachment
+        /// </summary>
+        External
+
     }
 }

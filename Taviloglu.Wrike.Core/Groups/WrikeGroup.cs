@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Groups
 {
@@ -18,15 +18,7 @@ namespace Taviloglu.Wrike.Core.Groups
         /// <param name="metadata">Metadata to be added to newly created group</param>
         public WrikeGroup(string title, List<string> memberIds = null, List<WrikeMetadata> metadata = null)
         {
-            if (title == null)
-            {
-                throw new ArgumentNullException(nameof(title));
-            }
-
-            if (title.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(title));
-            }
+            title.ValidateParameter(nameof(title));
 
             Title = title;
             MemberIds = memberIds;

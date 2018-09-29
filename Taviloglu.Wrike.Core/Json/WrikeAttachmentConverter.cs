@@ -1,15 +1,16 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using Taviloglu.Wrike.Core.Comments;
+using Taviloglu.Wrike.Core.Attachments;
 
 namespace Taviloglu.Wrike.Core.Json
 {
-    internal class WrikeCommentConverter : JsonConverter
+    internal class WrikeAttachmentConverter : JsonConverter
     {
+
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(WrikeComment);
+            return objectType == typeof(WrikeAttachment);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -18,14 +19,14 @@ namespace Taviloglu.Wrike.Core.Json
 
             JToken token;
 
-            bool isFolderComment = jObject.TryGetValue("folderId", out token) && token.Type == JTokenType.String;
-            if (isFolderComment)
+            bool isFolderAttachment = jObject.TryGetValue("folderId", out token) && token.Type == JTokenType.String;
+            if (isFolderAttachment)
             {
-                return jObject.ToObject<WrikeFolderComment>();
+                return jObject.ToObject<WrikeFolderAttachment>();
             }
             else
             {
-                return jObject.ToObject<WrikeTaskComment>();
+                return jObject.ToObject<WrikeTaskAttachment>();
             }
         }
 

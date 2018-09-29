@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Comments
 {
@@ -7,15 +7,7 @@ namespace Taviloglu.Wrike.Core.Comments
     {
         public WrikeTaskComment(string text, string taskId) : base(text)
         {
-            if (taskId == null)
-            {
-                throw new ArgumentNullException(nameof(taskId));
-            }
-
-            if (taskId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(taskId));
-            }
+            taskId.ValidateParameter(nameof(taskId));
 
             TaskId = taskId;
         }

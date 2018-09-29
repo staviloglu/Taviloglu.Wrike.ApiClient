@@ -10,101 +10,91 @@ namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeAttachmentsClient
     {
-        public IWrikeAttachmentsClient Attachments
+        public IWrikeAttachmentsClient Attachments { get { return (IWrikeAttachmentsClient)this; } }
+
+        async Task<List<WrikeAttachment>> IWrikeAttachmentsClient.GetAsync(bool? versions, WrikeDateFilterRange createdDate, bool? withUrls)
         {
-            get
-            {
-                return (IWrikeAttachmentsClient)this;
-            }
-        }
-
-        async Task<List<WrikeAttachment>> IWrikeAttachmentsClient.GetAsync(string folderId,string taskId, bool? versions, WrikeDateFilterRange createdDate, bool? withUrls)
-        {
-            if (!string.IsNullOrWhiteSpace(taskId) && !string.IsNullOrWhiteSpace(folderId))
-            {
-                throw new ArgumentException("taskId or folderId can be used, not both!");
-            }
-
-            if (string.IsNullOrWhiteSpace(taskId) && string.IsNullOrWhiteSpace(folderId))
-            {
-                throw new ArgumentException("taskId or folderId should be used!");
-            }
-
-            var requestUri = string.Empty;            
-
-            if (!string.IsNullOrWhiteSpace(folderId))
-            {
-                requestUri = $"folders/{folderId}/attachments";
-            }
-            else if (!string.IsNullOrWhiteSpace(taskId))
-            {
-                requestUri = $"tasks/{taskId}/attachments";
-            }
-            
-            var uriBuilder = new WrikeUriBuilder(requestUri)
+            var uriBuilder = new WrikeUriBuilder($"attachments")
             .AddParameter("versions", versions)
             .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("withUrls", withUrls);
-            
 
-            var response = await SendRequest<WrikeAttachment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequest<WrikeAttachment>(uriBuilder.GetUri(), HttpMethods.Get, jsonConverter: new WrikeAttachmentConverter()).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<WrikeAttachment> IWrikeAttachmentsClient.GetAsync(string id, bool? versions)
+        async Task<List<WrikeFolderAttachment>> IWrikeAttachmentsClient.GetInFolderAsync(WrikeClientIdParameter folderId, bool? versions, WrikeDateFilterRange createdDate, bool? withUrls)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            var uriBuilder = new WrikeUriBuilder($"folders/{folderId}/attachments")
+            .AddParameter("versions", versions)
+            .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("withUrls", withUrls);
 
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
-            var requestUri = $"attachments/{id}/";
-
-            var uriBuilder = new WrikeUriBuilder(requestUri)
-           .AddParameter("versions", versions);
-
-            var response = await SendRequest<WrikeAttachment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            return GetReponseDataFirstItem(response);
-
+            var response = await SendRequest<WrikeFolderAttachment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataList(response);
         }
 
-        async Task<Stream> IWrikeAttachmentsClient.DownloadAsync(string id)
+        async Task<List<WrikeTaskAttachment>> IWrikeAttachmentsClient.GetInTaskAsync(WrikeClientIdParameter taskId, bool? versions, WrikeDateFilterRange createdDate, bool? withUrls)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            var uriBuilder = new WrikeUriBuilder($"tasks/{taskId}/attachments")
+            .AddParameter("versions", versions)
+            .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("withUrls", withUrls);
 
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
+            var response = await SendRequest<WrikeTaskAttachment>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataList(response);
+        }
 
+        async Task<List<WrikeAttachment>> IWrikeAttachmentsClient.GetAsync(WrikeClientIdListParameter ids, bool? versions)
+        {
+            var uriBuilder = new WrikeUriBuilder($"attachments/{ids}")
+           .AddParameter("versions", versions);
+
+            var response = await SendRequest<WrikeAttachment>(uriBuilder.GetUri(), HttpMethods.Get, jsonConverter: new WrikeAttachmentConverter()).ConfigureAwait(false);
+            return GetReponseDataList(response);
+        }
+
+        async Task<Stream> IWrikeAttachmentsClient.DownloadAsync(WrikeClientIdParameter id)
+        {
             var response = await SendRequestAndGetStream<Stream>($"attachments/{id}/download", HttpMethods.Get).ConfigureAwait(false);
 
             return response;
         }
 
-        async Task<Stream> IWrikeAttachmentsClient.DownloadPreviewAsync(string id, WrikePreviewDimension? size)
+        async Task<Stream> IWrikeAttachmentsClient.DownloadPreviewAsync(WrikeClientIdParameter id, WrikePreviewDimension? size)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            var uriBuilder = new WrikeUriBuilder($"attachments/{id}/preview")
+                .AddParameter("size", size);
 
-            if (id.Trim() == string.Empty)
-            {
-                throw new ArgumentException("id can not be empty", nameof(id));
-            }
-
-            var response = await SendRequestAndGetStream<Stream>($"attachments/{id}/preview", HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequestAndGetStream<Stream>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
 
             return response;
-        }        
+        }
+
+        async Task IWrikeAttachmentsClient.DeleteAsync(WrikeClientIdParameter id)
+        {
+            await SendRequest<WrikeAttachment>($"attachments/{id}", HttpMethods.Delete).ConfigureAwait(false);
+        }
+
+        async Task<WrikeTaskAttachment> IWrikeAttachmentsClient.CreateInTaskAsync(WrikeClientIdParameter taskId, string fileName, byte[] fileBytes)
+        {
+            var response = await PostFile<WrikeTaskAttachment>($"tasks/{taskId}/attachments", fileName, fileBytes)
+                .ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
+
+        async Task<WrikeFolderAttachment> IWrikeAttachmentsClient.CreateInFolderAsync(WrikeClientIdParameter folderId, string fileName, byte[] fileBytes)
+        {
+            var response = await PostFile<WrikeFolderAttachment>($"folders/{folderId}/attachments", fileName, fileBytes)
+                .ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+
+        }
+
+        async Task<WrikeAttachmentUrl> IWrikeAttachmentsClient.GetAccessUrlAsync(WrikeClientIdParameter id)
+        {
+            var response = await SendRequest<WrikeAttachmentUrl>($"attachments/{id}/url", HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataFirstItem(response);
+        }
     }
 }

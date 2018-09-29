@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.WebHooks
 {
@@ -16,15 +17,8 @@ namespace Taviloglu.Wrike.Core.WebHooks
         /// <param name="hookUrl">URL of the server which will receive the payload. (https)</param>
         public WrikeWebHook(string hookUrl, string folderId = null)
         {
-            if (hookUrl == null)
-            {
-                throw new ArgumentNullException(nameof(hookUrl));
-            }
-
-            if (hookUrl==string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(hookUrl));
-            }
+            hookUrl.ValidateParameter(nameof(hookUrl));
+                
 
             if (!hookUrl.StartsWith("https://"))
             {

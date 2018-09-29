@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Comments
 {
@@ -9,15 +7,7 @@ namespace Taviloglu.Wrike.Core.Comments
     {
         public WrikeFolderComment(string text, string folderId) : base(text)
         {
-            if (folderId == null)
-            {
-                throw new ArgumentNullException(nameof(folderId));
-            }
-
-            if (folderId.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(folderId));
-            }
+            folderId.ValidateParameter(nameof(folderId));
 
             FolderId = folderId;
         }

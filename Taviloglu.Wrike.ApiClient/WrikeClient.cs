@@ -49,6 +49,8 @@ namespace Taviloglu.Wrike.ApiClient
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {bearerToken}");
         }
+
+
         private async Task<System.IO.Stream> SendRequestAndGetStream<T>(
             string requestUri,
             string httpMethod,
@@ -72,6 +74,39 @@ namespace Taviloglu.Wrike.ApiClient
 
             return stream;
         }
+
+        private async Task<WrikeResDto<T>> PostFile<T>(string requestUri, string fileName, byte[] fileBytes)
+        {
+            string json = string.Empty;
+            bool isSuccess = false;
+
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, requestUri))
+            {
+                requestMessage.Headers.Add("X-Requested-With", "XMLHttpRequest");
+                //requestMessage.Headers.Add("X-File-Name", fileName);
+                //requestMessage.Headers.Add("content-type", "application/octet-stream");
+                requestMessage.Content = new ByteArrayContent(fileBytes)
+                {
+                    Headers = {
+                        { "content-type", "application/octet-stream" },
+                        { "X-File-Name", fileName },
+                    }
+                };
+
+                using (var responseMessage = await _httpClient.SendAsync(requestMessage).ConfigureAwait(false))
+                {
+                    isSuccess = responseMessage.IsSuccessStatusCode;
+                    json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);                   
+                }                
+            }
+
+            var wrikeResDto = JsonConvert.DeserializeObject<WrikeResDto<T>>(json);
+            wrikeResDto.IsSuccess = isSuccess;
+
+            return wrikeResDto;
+        }
+
+
         private async Task<WrikeResDto<T>> SendRequest<T>(
             string requestUri,
             string httpMethod,

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.CustomFields
 {
@@ -12,25 +12,9 @@ namespace Taviloglu.Wrike.Core.CustomFields
         /// <param name="value">Custom Field Value</param>
         public WrikeCustomFieldData(string customFieldId, string value) {
 
-            if (customFieldId == null)
-            {
-                throw new ArgumentNullException(nameof(customFieldId));
-            }
+            customFieldId.ValidateParameter(nameof(customFieldId));
 
-            if (customFieldId == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty",nameof(customFieldId));
-            }
-
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            if (value == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(value));
-            }
+            value.ValidateParameter(nameof(value));
 
             CustomFieldId = customFieldId;
             Value = value;

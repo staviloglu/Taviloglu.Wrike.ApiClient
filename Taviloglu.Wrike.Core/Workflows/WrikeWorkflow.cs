@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.Extensions;
 
 namespace Taviloglu.Wrike.Core.Workflows
 {
@@ -12,15 +12,7 @@ namespace Taviloglu.Wrike.Core.Workflows
         /// <param name="name"></param>
         public WrikeWorkflow(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (name.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty",nameof(name));
-            }
+            name.ValidateParameter(nameof(name));
 
             Name = name;
         }

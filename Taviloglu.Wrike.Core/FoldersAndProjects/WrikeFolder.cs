@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Taviloglu.Wrike.Core.Colors;
 using Taviloglu.Wrike.Core.CustomFields;
+using Taviloglu.Wrike.Core.Extensions;
 using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.Core.FoldersAndProjects
@@ -15,16 +16,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
     {
         public WrikeFolder(string title, string description = null, List<string> shareds = null, List<WrikeMetadata> metadatas = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null)
         {
-
-            if (title == null)
-            {
-                throw new ArgumentNullException(nameof(title));
-            }
-
-            if (title.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty",nameof(title));
-            }
+            title.ValidateParameter(nameof(title));
 
             Title = title;
             Description = description;

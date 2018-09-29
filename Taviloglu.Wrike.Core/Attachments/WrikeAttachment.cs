@@ -7,7 +7,7 @@ using Taviloglu.Wrike.Core.Json;
 namespace Taviloglu.Wrike.Core.Attachments
 {
 
-    public sealed class WrikeAttachment : WrikeObjectWithId
+    public abstract class WrikeAttachment : WrikeObjectWithId
     {
         /// <summary>
         /// ID of user who uploaded the attachment
@@ -54,18 +54,6 @@ namespace Taviloglu.Wrike.Core.Attachments
         public int Size { get; set; }
 
         /// <summary>
-        /// ID of related task. Only one of taskId/folderId fields is present
-        /// </summary>
-        [JsonProperty("taskId")]
-        public string TaskId { get; set; }
-
-        /// <summary>
-        /// ID of related folder. Only one of taskId/folderId fields is present
-        /// </summary>
-        [JsonProperty("folderId")]
-        public string FolderId { get; set; }
-
-        /// <summary>
         /// ID of related comment
         /// </summary>
         [JsonProperty("commentId")]
@@ -94,6 +82,18 @@ namespace Taviloglu.Wrike.Core.Attachments
         /// </summary>
         [JsonProperty("reviewIds")]
         public List<string> ReviewIds { get; set; }
+
+        /// <summary>
+        /// If is image
+        /// </summary>
+        [JsonProperty("width")]
+        public int? Width { get; set; }
+
+        /// <summary>
+        /// If is image
+        /// </summary>
+        [JsonProperty("height")]
+        public int? Height { get; set; }
 
 
     }
