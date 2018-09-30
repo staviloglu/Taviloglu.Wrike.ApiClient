@@ -13,6 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>- Support for Wrike API v4
+- Support for oAuth2 authorization process
 - Design changes
 - Bugfixes</PackageReleaseNotes>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
