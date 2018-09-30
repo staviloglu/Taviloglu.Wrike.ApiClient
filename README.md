@@ -62,7 +62,7 @@ newWebHook = await wrikeClient.WebHooks.CreateAsync("folderId",newWebHook);
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
 <table class="tableizer-firstrow">
-<thead><tr><th title="Field #1">Mehod</th>
+<thead><tr><th title="Field #1">Endpoint</th>
 <th title="Field #2">IsImplemented</th>
 <th title="Field #3">Group</th>
 </tr></thead>
