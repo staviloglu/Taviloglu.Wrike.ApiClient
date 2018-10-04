@@ -8,25 +8,64 @@ If you find this library useful and if it saved you time please think about supp
 <a href="https://www.buymeacoffee.com/staviloglu" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Client Usage [![NuGet](https://img.shields.io/nuget/v/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)[![NuGet Downloads](https://img.shields.io/nuget/dt/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)
-Create your Wrike Client with your permanent token and just call the function you need.
+Create your Wrike Client and just call the function you need.
+### Create client with permanent token
+```csharp
+var client = new WrikeClient("permanent_token");
+```
+### Create client with ClientId, ClientSecret, AuthorizationCode (Use oAuth2.0)
+```csharp
+//create the authorization url
+var authorizationUrl = WrikeClient.GetAuthorizationUrl(
+                ClientId,
+                redirectUri: "http://localhost",
+                state: "myTestState",
+                scope: new List<string> { WrikeScopes.Default, WrikeScopes.wsReadWrite });
+//After the user authorizes your client using the authroization url, 
+//wrike will redirect user to the provided redirect_uri with the authorization code
+//See https://developers.wrike.com/documentation/oauth2 for more details
+
+//create client
+var client = new WrikeClient(new WrikeAccessTokenRequest(
+                ClientId,
+                ClientSecret,
+                AuthorizationCode), "redirect_uri");
+
+//refresh token if needed
+client.RefreshToken();
+```
+### Create client with AccessToken and Host
+```csharp
+var accesTokenResponse = WrikeClient.GetAccesToken(new WrikeAccessTokenRequest(
+                ClientId,
+                ClientSecret,
+                AuthorizationCode), "http://localhost");
+
+var client = new WrikeClient(accesTokenResponse.AccessToken, accesTokenResponse.Host);
+
+//you need new client when you need to refresh token
+var refreshTokenResponse = WrikeClient.RefreshToken(ClientId, ClientSecret, 
+                accesTokenResponse.RefreshToken, accesTokenResponse.Host);
+
+client = new WrikeClient(refreshTokenResponse.AccessToken, accesTokenResponse.Host);
+```
+
+### CRUD operations
 ```csharp
 //create client
-var bearerToken = "your_permanent_token";
-var wrikeClient = new WrikeClient(bearerToken);
+var client = new WrikeClient("permanent_token");
 
 //get the list of custom fields
 //https://developers.wrike.com/documentation/api/methods/query-custom-fields
-var customFields = await wrikeClient.CustomFields.GetAsync();
+var customFields = await client.CustomFields.GetAsync();
 
 //create new custom field
 //https://developers.wrike.com/documentation/api/methods/create-custom-field
-var newCustomField = new WrikeCustomField
-{
-    AccountId = "IEABX2HE",
-    Title = "Sinan's custom field",
-    Type = WrikeCustomFieldType.Duration
-};
-newCustomField = await wrikeClient.CustomFields.CreateAsync(newCustomField);
+var newCustomField = new WrikeCustomField("Title", WrikeCustomFieldType.Text);
+newCustomField = await client.CustomFields.CreateAsync(newCustomField);
+
+//delete a task
+await client.Tasks.DeleteAsync("taskId");
 ```
 For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
 
@@ -50,12 +89,11 @@ Create your WrikeWebHookController by subclassing and implementing [WrikeWebHook
 When your WrikeWebHookController is ready for responding to post requests, create a webhook using the Wrike Client
 ```csharp
 //create client
-var bearerToken = "your_permanent_token";
-var wrikeClient = new WrikeClient(bearerToken);
+var client = new WrikeClient("permanent_token");
 //create new webhook
 //https://developers.wrike.com/documentation/webhooks
 var newWebHook = new WrikeWebHook("https://<your-host>/api/wrikewebhook");
-newWebHook = await wrikeClient.WebHooks.CreateAsync("folderId",newWebHook);
+newWebHook = await client.WebHooks.CreateAsync(newWebHook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
 
