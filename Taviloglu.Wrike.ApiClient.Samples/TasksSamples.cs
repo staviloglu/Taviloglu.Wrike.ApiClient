@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Taviloglu.Wrike.Core.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient.Samples
 {
@@ -8,6 +10,11 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         {
 
             var tasks = await client.Tasks.GetAsync();
+
+            var dueDate = DateTime.Now.AddDays(1);
+            var newTask = new WrikeTask($"Due Date Should Be {dueDate.ToString("yyyy-MM-dd")}", dates: new WrikeTaskDate { Due = dueDate });
+            newTask = await client.Tasks.CreateAsync("IEACGXLUI4IEQ6NG", newTask);
+
 
 
             //many other optional parameters

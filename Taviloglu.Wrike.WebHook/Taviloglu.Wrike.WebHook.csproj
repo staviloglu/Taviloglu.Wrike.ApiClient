@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-webhooks webhook http-post controllerBase</PackageTags>
-    <PackageReleaseNotes>- version update</PackageReleaseNotes>
+    <PackageReleaseNotes>- namespace change</PackageReleaseNotes>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

@@ -17,7 +17,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
         public static void RunAuthorizationCodes()
         {
             var authorizationUrl = WrikeClient.GetAuthorizationUrl(
-                "SRGi6qTT",
+                ClientId,
                 redirectUri: "http://localhost",
                 state: "myTestState",
                 scope: new List<string> { WrikeScopes.Default, WrikeScopes.wsReadWrite });
@@ -59,9 +59,6 @@ namespace Taviloglu.Wrike.ApiClient.Samples
 
         private static void GettingAndRefreshingTokenDoneByUser()
         {
-            //not recommended :)
-
-            //TODO: why we need redirectUri?
             var accesTokenResponse = WrikeClient.GetAccesToken(new WrikeAccessTokenRequest(
                 ClientId,
                 ClientSecret,

@@ -72,7 +72,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Initializes a new instance of the <see cref="WrikeClient"/> class.
         /// </summary>
         /// <param name="accessTokenRequest"></param>
-        /// <param name="redirectUri"></param>
+        /// <param name="redirectUri">Must provide if used in authorization url</param>
         public WrikeClient(WrikeAccessTokenRequest accessTokenRequest, string redirectUri)
         {
             if (accessTokenRequest == null)

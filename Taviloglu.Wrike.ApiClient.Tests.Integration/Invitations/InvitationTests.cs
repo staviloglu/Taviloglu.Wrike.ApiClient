@@ -30,8 +30,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Invitations
             Assert.GreaterOrEqual(invitations.Count, 2);
         }
 
-        // TODO: can not create custom invitation Err: not_allowed: Not allowed to use custom invite
-        // learn why!?
+        // TODO: free accounts are not able run below commands
 
         /*
         [Test]
