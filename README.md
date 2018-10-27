@@ -2,7 +2,7 @@
 .NET Client for Wrike API 
 
 ## Donate
-If you find this library useful and if it saved you time please think about [supporting](https://www.buymeacoffee.com/staviloglu) my work, I will appreciate that.
+If you find this library useful and if it saved you time, you can
 <a href="https://www.buymeacoffee.com/staviloglu" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Client Usage [![NuGet](https://img.shields.io/nuget/v/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/) [![NuGet Downloads](https://img.shields.io/nuget/dt/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)
