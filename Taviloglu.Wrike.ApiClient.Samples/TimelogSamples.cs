@@ -11,7 +11,7 @@ namespace Taviloglu.Wrike.ApiClient.Samples
             //Get all timelog records in all accounts.
             var timelogs = await client.Timelogs.GetAsync();
 
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", "test timelog", 1m, DateTime.Now);
+            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog");
             newTimelog = await client.Timelogs.CreateAsync(newTimelog);
 
 

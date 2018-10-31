@@ -38,7 +38,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
         [Test]
         public void CreateAsync_ShouldAddNewTimelogWithComment()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", "test timelog #2", 1m, DateTime.Now);
+            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog #2");
             var createdTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             Assert.IsNotNull(newTimelog);
@@ -46,11 +46,22 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
 
             //TODO: test other parameters
         }
-        
+
+        [Test]
+        public void CreateAsync_ShouldAddNewTimelogWithoutComment()
+        {
+            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now);
+            var createdTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
+
+            Assert.IsNotNull(newTimelog);
+
+            //TODO: test other parameters
+        }
+
         [Test]
         public void UpdateAsync_ShouldUpdateTimelogComment()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", "test timelog #2", 1m, DateTime.Now);
+            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog #2");
             newTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             var expectedComment = "test timelog #2 [Updated]";
@@ -65,7 +76,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
         [Test]
         public void DeleteAsync_ShouldDeleteNewTimelog()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", "test timelog #2", 1m, DateTime.Now);
+            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now);
             var createdTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             WrikeClientFactory.GetWrikeClient().Timelogs.DeleteAsync(createdTimelog.Id).Wait();

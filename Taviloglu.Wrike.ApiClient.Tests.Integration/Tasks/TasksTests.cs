@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields;
+using Taviloglu.Wrike.Core.CustomFields;
 using Taviloglu.Wrike.Core.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
@@ -50,9 +52,11 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
         }
 
         [Test]
-        public void CreateAsync_ShouldAddNewTaskWithTitle()
+        public void CreateAsync_ShouldAddNewTaskWithTitleAndEmptyCustomFieldData()
         {
-            var newTask = new WrikeTask("Test Task #2");
+            
+            var newTask = new WrikeTask("Test Task #2", customFields: new List<WrikeCustomFieldData> { new WrikeCustomFieldData(CustomFieldsTests.DefaultCustomFieldId) });
+            
             var createdTask = WrikeClientFactory.GetWrikeClient().Tasks.CreateAsync(FolderId, newTask).Result;
 
             Assert.IsNotNull(createdTask);

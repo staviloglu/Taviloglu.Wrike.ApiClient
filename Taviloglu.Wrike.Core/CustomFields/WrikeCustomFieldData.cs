@@ -10,11 +10,11 @@ namespace Taviloglu.Wrike.Core.CustomFields
         /// </summary>
         /// <param name="customFieldId">Custom Field ID</param>
         /// <param name="value">Custom Field Value</param>
-        public WrikeCustomFieldData(string customFieldId, string value) {
+        public WrikeCustomFieldData(string customFieldId, string value = "") {
 
             customFieldId.ValidateParameter(nameof(customFieldId));
 
-            value.ValidateParameter(nameof(value));
+            value.EnsureNotNull(nameof(value));
 
             CustomFieldId = customFieldId;
             Value = value;

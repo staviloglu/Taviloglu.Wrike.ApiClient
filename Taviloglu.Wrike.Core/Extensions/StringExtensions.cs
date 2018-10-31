@@ -6,15 +6,19 @@ namespace Taviloglu.Wrike.Core.Extensions
     {
         public static void ValidateParameter(this string value, string parameterName)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(parameterName);
-            }
+            EnsureNotNull(value, parameterName);
 
-            if (value.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", parameterName);
-            }
+            EnsureNotEmpty(value, parameterName);
+        }
+
+        public static void EnsureNotNull(this string value, string parameterName)
+        {
+            if (value == null) throw new ArgumentNullException(parameterName);
+        }
+
+        public static void EnsureNotEmpty(this string value, string parameterName)
+        {
+            if (value.Trim() == string.Empty) throw new ArgumentException("value can not be empty", parameterName);
         }
     }
 }

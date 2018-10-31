@@ -8,7 +8,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
     [TestFixture]
     public class CustomFieldsTests
     {
-        const string DefaultCustomFieldId = "IEACGXLUJUAAZZ4S";
+        public const string DefaultCustomFieldId = "IEACGXLUJUAAZZ4S";
 
         [OneTimeTearDown]
         public void ReturnToDefaults()

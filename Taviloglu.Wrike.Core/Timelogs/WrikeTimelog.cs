@@ -15,11 +15,10 @@ namespace Taviloglu.Wrike.Core.Timelogs
         /// <param name="hours">Time to log in hours, must be in [0..24] hours range</param>
         /// <param name="trackedDate">Date to register time </param>
         /// <param name="categoryId">Timelog category</param>
-        public WrikeTimelog(string taskId, string comment, decimal hours, DateTime trackedDate, string categoryId = null)
+        public WrikeTimelog(string taskId, decimal hours, DateTime trackedDate, string comment=null, string categoryId = null)
         {
             taskId.ValidateParameter(nameof(taskId));
-
-            comment.ValidateParameter(nameof(comment));
+                       
 
             if (hours < 0 || hours > 24)
             {
