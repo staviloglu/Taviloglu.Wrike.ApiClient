@@ -1,4 +1,6 @@
-﻿namespace Taviloglu.Wrike.ApiClient.Tests.Integration
+﻿using System.Threading;
+
+namespace Taviloglu.Wrike.ApiClient.Tests.Integration
 {
     public static class WrikeClientFactory
     {
@@ -10,6 +12,10 @@
 
         public static WrikeClient GetWrikeClient()
         {
+            //Make each test wait for a while
+            //Wrike API has request count limit in a given period of time
+            Thread.Sleep(200);
+
             return _wrikeClient;
         }
     }

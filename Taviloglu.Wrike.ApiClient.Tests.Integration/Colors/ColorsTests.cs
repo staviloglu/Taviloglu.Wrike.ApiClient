@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Colors
 {
-    [TestFixture]
+    [TestFixture, Order(3)]
     public class ColorsTests
     {
         const int ColorCount = 64;

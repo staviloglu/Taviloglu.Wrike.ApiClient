@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.TimelogCategories
 {
-    [TestFixture]
+    [TestFixture, Order(13)]
     public class TimelogCategoriesTests
     {
         [Test]

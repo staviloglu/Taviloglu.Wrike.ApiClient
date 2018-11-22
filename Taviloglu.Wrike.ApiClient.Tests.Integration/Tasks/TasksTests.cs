@@ -7,7 +7,7 @@ using Taviloglu.Wrike.Core.Tasks;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
 {
-    [TestFixture]
+    [TestFixture, Order(12)]
     public class TasksTests
     {
         const string PredecessorTaskId = "IEACGXLUKQIHWJQW";
@@ -31,7 +31,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
             }
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldReturnTasks()
         {
             var tasks = WrikeClientFactory.GetWrikeClient().Tasks.GetAsync().Result;
@@ -39,7 +39,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
             Assert.GreaterOrEqual(tasks.Count, 2);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsyncWithIds_ShouldReturnDefaultTasks()
         {
             var supportedOptionalFields = new List<string> { WrikeTask.OptionalFields.Recurrent, WrikeTask.OptionalFields.AttachmentCount };
@@ -51,7 +51,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
             Assert.IsTrue(DefaultTaskIds.Contains(tasks[1].Id));
         }
 
-        [Test]
+        [Test, Order(3)]
         public void CreateAsync_ShouldAddNewTaskWithTitleAndEmptyCustomFieldData()
         {
             
@@ -65,7 +65,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(4)]
         public void UpdateAsync_ShouldUpdateTaskTitle()
         {
             var newTask = new WrikeTask("Test Task #3");
@@ -80,7 +80,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(5)]
         public void DeleteAsync_ShouldDeleteNewTask()
         {
             var newTask = new WrikeTask("Test Task #4");

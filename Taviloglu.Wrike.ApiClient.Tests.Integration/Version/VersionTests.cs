@@ -3,7 +3,7 @@ using Taviloglu.Wrike.Core.Version;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Version
 {
-    [TestFixture]
+    [TestFixture, Order(16)]
     public class VersionTests
     {
         [Test]

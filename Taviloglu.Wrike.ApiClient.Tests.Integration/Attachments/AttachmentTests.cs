@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Attachments
 {
-    [TestFixture]
+    [TestFixture, Order(2)]
     public class AttachmentTests
     {
         const string FolderId = "IEACGXLUI4IHJMYP";

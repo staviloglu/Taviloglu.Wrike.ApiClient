@@ -4,7 +4,7 @@ using Taviloglu.Wrike.Core.Ids;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Ids
 {
-    [TestFixture]
+    [TestFixture, Order(10)]
     public class IdsTests
     {
         [Test]

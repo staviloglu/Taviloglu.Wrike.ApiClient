@@ -5,7 +5,7 @@ using Taviloglu.Wrike.Core.Timelogs;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
 {
-    [TestFixture]
+    [TestFixture, Order(14)]
     public class TimelogsTests
     {
         const string DefaultTimelogId = "IEACGXLUJQAFEP2L";
@@ -25,7 +25,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
             }
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldReturnTimelogs()
         {
             var timelogs = WrikeClientFactory.GetWrikeClient().Timelogs.GetAsync().Result;
@@ -33,7 +33,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
             Assert.GreaterOrEqual(timelogs.Count, 1);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsync_WithUpdatedDateFilter_ShouldReturnTimelogs()
         {
             var updatedDateFilter = new Core.WrikeDateFilterRange(new DateTime(2000, 1, 1), DateTime.UtcNow);
@@ -49,7 +49,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
 
         // TODO: test other get options fiwth taskId, contactId, folderId, timelogCategoryId
 
-        [Test]
+        [Test, Order(3)]
         public void CreateAsync_ShouldAddNewTimelogWithComment()
         {
             var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog #2");
@@ -61,7 +61,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(4)]
         public void CreateAsync_ShouldAddNewTimelogWithoutComment()
         {
             var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now);
@@ -72,7 +72,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(5)]
         public void UpdateAsync_ShouldUpdateTimelogComment()
         {
             var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog #2");
@@ -87,7 +87,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(6)]
         public void DeleteAsync_ShouldDeleteNewTimelog()
         {
             var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now);

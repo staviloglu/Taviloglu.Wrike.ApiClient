@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Invitations
 {
-    [TestFixture]
+    [TestFixture, Order(11)]
     public class InvitationTests
     {
         readonly List<string> DefaultInvitationIds = new List<string> { "IEACGXLUJEAFESOS", "IEACGXLUJEAFESOO" };

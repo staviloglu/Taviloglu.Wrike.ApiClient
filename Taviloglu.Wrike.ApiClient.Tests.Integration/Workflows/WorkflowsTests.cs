@@ -5,12 +5,12 @@ using Taviloglu.Wrike.Core.Workflows;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Workflows
 {
-    [TestFixture]
+    [TestFixture, Order(18)]
     public class WorkflowsTests
     {
         const string DefaultWorkflowId = "IEACGXLUK775ZIUM"; //can not be updated!
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldReturnWorkflows()
         {
             var workflows = WrikeClientFactory.GetWrikeClient().Workflows.GetAsync().Result;
@@ -20,7 +20,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Workflows
             Assert.IsTrue(workflows.Any(w => w.Id == DefaultWorkflowId));
         }
 
-        [Test]
+        [Test, Order(2)]
         public void CreateAsync_ShouldAddNewWorkflowWithName()
         {
             var newWorkflow = new WrikeWorkflow($"NewWorkflow#{DateTime.Now.ToString("yyyyMMddhhmmss")}");
@@ -34,7 +34,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Workflows
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(3)]
         public void UpdateAsync_ShouldUpdateWorkflowName()
         {
             var newWorkflow = new WrikeWorkflow($"NewWorkflow#{DateTime.Now.ToString("yyyyMMddhhmmss")}");

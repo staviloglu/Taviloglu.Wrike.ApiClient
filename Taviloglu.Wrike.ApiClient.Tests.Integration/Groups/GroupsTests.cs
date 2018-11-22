@@ -5,7 +5,7 @@ using Taviloglu.Wrike.Core.Groups;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
 {
-    [TestFixture]
+    [TestFixture, Order(9)]
     public class GroupsTests
     {
         const string DefaultGroupId = "KX74WSKU";        
@@ -24,7 +24,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             }
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldReturnOneOrMoreGroup()
         {
             var groups = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
@@ -32,7 +32,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             Assert.GreaterOrEqual(groups.Count, 1);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsync_ShouldReturnDefaultGroupWithOptionalFields()
         {
             var optionalFields = new List<string> { WrikeGroup.OptionalFields.Metadata };
@@ -47,7 +47,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             Assert.IsNotNull(defaultGroup.Metadata);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void GetAsyncWithId_ShouldReturnDefaultGroup()
         {
             var group = WrikeClientFactory.GetWrikeClient().Groups.GetAsync(DefaultGroupId).Result;
@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             Assert.AreEqual(DefaultGroupId, group.Id);
         }
 
-        [Test]
+        [Test, Order(4)]
         public void GetAsyncWithId_ShouldReturnDefaultGroupWithOptionalFields()
         {
             var optionalFields = new List<string> { WrikeGroup.OptionalFields.Metadata };
@@ -69,7 +69,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
         }
 
 
-        [Test]
+        [Test, Order(5)]
         public void CreateAsync_ShouldAddNewGroupWithTitle()
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");
@@ -81,7 +81,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             //TODO: test other parameters
         }
         
-        [Test]
+        [Test, Order(6)]
         public void UpdateAsync_ShouldUpdateGroupTitle()
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");
@@ -96,7 +96,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Groups
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(7)]
         public void DeleteAsync_ShouldDeleteNewGroup()
         {
             var newGroup = new WrikeGroup("Sinan's Test Group");

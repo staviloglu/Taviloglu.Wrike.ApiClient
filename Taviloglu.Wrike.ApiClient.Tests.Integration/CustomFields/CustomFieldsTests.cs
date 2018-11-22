@@ -5,7 +5,7 @@ using Taviloglu.Wrike.Core.CustomFields;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
 {
-    [TestFixture]
+    [TestFixture, Order(6)]
     public class CustomFieldsTests
     {
         public const string DefaultCustomFieldId = "IEACGXLUJUAAZZ4S";
@@ -24,7 +24,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
             }
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldReturnCustomFields()
         {
             var customFields = WrikeClientFactory.GetWrikeClient().CustomFields.GetAsync().Result;
@@ -32,7 +32,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
             Assert.Greater(customFields.Count, 0);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsyncWithIds_ShouldReturnCustomFields()
         {
             var customFields = WrikeClientFactory.GetWrikeClient().CustomFields.GetAsync(new List<string> { DefaultCustomFieldId }).Result;
@@ -41,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
             Assert.AreEqual(DefaultCustomFieldId, customFields.First().Id);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void CreateAsync_ShouldAddCreateNewCustomField()
         {
             var newCustomField = new WrikeCustomField("TestCustomField#2", WrikeCustomFieldType.Text);
@@ -54,7 +54,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.CustomFields
             //TODO: test other properties
         }
 
-        [Test]
+        [Test, Order(4)]
         public void UpdateAsync_ShouldUpdateCommentText()
         {
             var newCustomField = new WrikeCustomField("TestCustomField#3", WrikeCustomFieldType.Text);

@@ -6,7 +6,7 @@ using Taviloglu.Wrike.Core.Accounts;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
 {
-    [TestFixture]
+    [TestFixture, Order(1)]
     public class AccountsTests
     {
         const string CurrentAccountId = "IEACGXLU";
@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
             var account = WrikeClientFactory.GetWrikeClient().Accounts.UpdateAsync(metadataList).Result;
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldRetunCurrentAccount()
         {
             var actualAccount = WrikeClientFactory.GetWrikeClient().Accounts.GetAsync().Result;
@@ -30,7 +30,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
             Assert.AreEqual(CurrentAccountId, actualAccount.Id);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsync_ShouldRetunCurrentAccountWithOptionalFields()
         {
             var optionalFields = new List<string> {
@@ -47,7 +47,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Accounts
             Assert.IsNotNull(actualAccount.CustomFields);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void UpdateAsync_ShouldUpdateMetadataValue()
         {
             var expectedValue = "testMetadataValue [Updated]";

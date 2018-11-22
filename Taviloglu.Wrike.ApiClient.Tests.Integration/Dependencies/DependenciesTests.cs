@@ -6,7 +6,7 @@ using Taviloglu.Wrike.Core.Dependencies;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Dependencies
 {
-    [TestFixture]
+    [TestFixture, Order(7)]
     public class DependenciesTests
     {
 
@@ -34,7 +34,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Dependencies
             }
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsyncInTask_ShouldReturnOneOrMoreDependency()
         {
             var dependencies = WrikeClientFactory.GetWrikeClient().Dependencies.GetInTaskAsync(DependentTaskId).Result;
@@ -42,7 +42,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Dependencies
             Assert.GreaterOrEqual(dependencies.Count, 1);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsyncWithIds_ShouldReturnDefaultDependency()
         {
             var dependencies = WrikeClientFactory.GetWrikeClient().Dependencies.GetAsync(new List<string> { DefaultDependencyId }).Result;
@@ -51,7 +51,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Dependencies
             Assert.AreEqual(DefaultDependencyId, dependencies[0].Id);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void CreateAsync_ShouldCreateDependencyFromPredecessorTaskToDependatnTask()
         {
             var newDependency = new WrikeDependency(PredecessorTaskId, DependentTaskId, WrikeDependencyRelationType.FinishToStart);
@@ -62,7 +62,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Dependencies
             Assert.AreEqual(DependentTaskId, newDependency.SuccessorId);
         }
 
-        [Test]
+        [Test, Order(4)]
         public void DeleteAsync_ShouldDeleteDependency()
         {
             var newDependency = new WrikeDependency(PredecessorTaskId, SuccessorTaskId, WrikeDependencyRelationType.StartToFinish);

@@ -2,7 +2,7 @@
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Users
 {
-    [TestFixture]
+    [TestFixture, Order(15)]
     public class UsersTests
     {
         const string DefaultUserId = "KUAERP25";

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
 {
-    [TestFixture]
+    [TestFixture, Order(5)]
     public class ContactsTests
     {
         const string DefaultContactId = "KUAERP25";
@@ -19,7 +19,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
                 new List<Core.WrikeMetadata> { new Core.WrikeMetadata(TestMetadataKey, TestMetadataValue) }).Result;
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAsync_ShouldRetrunThreeContacts()
         {
             var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync().Result;
@@ -29,7 +29,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.AreEqual(expectedContactCount, contacts.Count);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAsync_WhenMe_ShouldReturnDefaultContact()
         {
             var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync(me: true).Result;
@@ -37,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.AreEqual(DefaultContactId, contacts.First().Id);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void GetAsync_WhenIsDeleted_ShouldReturnZeroContacts()
         {
             var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync(isDeleted: true).Result;
@@ -47,7 +47,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.AreEqual(expectedContactCount, contacts.Count);
         }
 
-        [Test]
+        [Test, Order(4)]
         public void GetAsync_WhenRetrieveMetadata_MetadataShouldNotBeNull()
         {
             var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync(me:true, retrieveMetadata:true).Result;
@@ -55,7 +55,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.IsNotNull(contacts.First().Metadata);
         }
 
-        [Test]
+        [Test, Order(5)]
         public void GetAsync_WhenTwoIds_ShouldreturnTwoContacts()
         {
             var contactIds = new List<string>() { DefaultContactId, WrikeBotContactId };
@@ -67,7 +67,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.AreEqual(expectedContactCount, contacts.Count);
         }
 
-        [Test]
+        [Test, Order(6)]
         public void GetAsync_WhenTwoIdsAndRetrieveMetadata_MetadataShouldNotBeNull()
         {
             var contactIds = new List<string>() { DefaultContactId, WrikeBotContactId };
@@ -77,7 +77,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.False(contacts.Any(c=> c.Metadata == null));
         }
 
-        [Test]
+        [Test, Order(7)]
         public void UpdateAsync_ShouldUpdateMetadata()
         {            
             var expectedMetaDataValue = "updatedMetaDataValue";

@@ -5,10 +5,9 @@ using Taviloglu.Wrike.Core.FoldersAndProjects;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
 {
-    [TestFixture]
+    [TestFixture, Order(8)]
     public class FoldersAndProjectsTests
     {
-
         const string RootFolderId = "IEACGXLUI7777777";
         const string RecycleBinFolderId = "IEACGXLUI7777776";
 
@@ -30,7 +29,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
             }
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetFolderTreeAsync_ShouldReturnFolderTrees()
         {
             var folderTrees = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.GetFolderTreeAsync().Result;
@@ -38,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
             Assert.GreaterOrEqual(folderTrees.Count, 5);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetFoldersAsync_ShouldReturnDefaultFolders()
         {
             var folders = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.GetFoldersAsync(DefaultFolderIds).Result;
@@ -46,7 +45,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
             Assert.AreEqual(4, folders.Count);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void CreateAsync_ShouldAddNewFolderWithTitle()
         {
             var newFolder = new WrikeFolder("TestFolder #1");
@@ -60,7 +59,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
         }
 
 
-        [Test]
+        [Test, Order(4)]
         public void CopyAsync_ShouldCopyFolder()
         {
             var parentFolder = new WrikeFolder("My Parent Folder");
@@ -81,7 +80,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
             Assert.AreEqual(parentFolder.Id, copiedFolder.ParentIds.First());
         }
 
-        [Test]
+        [Test, Order(5)]
         public void UpdateAsync_ShouldUpdateFolderTitle()
         {
             var newFolder = new WrikeFolder("My Folder #1");
@@ -98,7 +97,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
             //TODO: test other parameters
         }
 
-        [Test]
+        [Test, Order(6)]
         public void DeleteAsync_ShouldDeleteNewFolder()
         {
             var newFolder = new WrikeFolder("My Folder #2");
