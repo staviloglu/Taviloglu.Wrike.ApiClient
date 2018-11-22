@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeTimelog>($"timelogs/{id}", HttpMethods.Delete).ConfigureAwait(false);
         }
 
-        async Task<List<WrikeTimelog>> IWrikeTimelogsClient.GetAsync(string contactId, string folderId, string taskId, string categoryId, WrikeDateFilterRange createdDate, IWrikeDateFilter trackedDate, bool? me, bool? descendants, bool? subTasks, bool? plainText, List<string> categoryIds)
+        async Task<List<WrikeTimelog>> IWrikeTimelogsClient.GetAsync(string contactId, string folderId, string taskId, string categoryId, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, IWrikeDateFilter trackedDate, bool? me, bool? descendants, bool? subTasks, bool? plainText, List<string> categoryIds)
         {
 
             int notNullCount = 0;
@@ -88,6 +88,7 @@ namespace Taviloglu.Wrike.ApiClient
 
             var uriBuilder = new WrikeUriBuilder(requestUri)
             .AddParameter("createdDate", createdDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("trackedDate", trackedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss"))
             .AddParameter("me", me)
             .AddParameter("descendants", descendants)

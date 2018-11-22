@@ -49,6 +49,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="taskId">Get all timelog records for a task.</param>
         /// <param name="categoryId"> Get all timelog records with specific timelog category.</param>
         /// <param name="createdDate">Created date filter, exact match or range</param>
+        /// <param name="updatedDate">Updated date filter, exact match or range</param>
         /// <param name="trackedDate">Tracked date filter, exact match or range</param>
         /// <param name="me">If present - only timelogs created by current user are returned</param>
         /// <param name="descendants">Adds all descendant tasks to search scope</param>
@@ -62,6 +63,7 @@ namespace Taviloglu.Wrike.ApiClient
             string taskId = null,
             string categoryId = null,
             WrikeDateFilterRange createdDate = null,
+            WrikeDateFilterRange updatedDate = null,
             IWrikeDateFilter trackedDate = null,
             bool? me = null,
             bool? descendants = null,

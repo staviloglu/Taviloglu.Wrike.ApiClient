@@ -31,7 +31,21 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
             var timelogs = WrikeClientFactory.GetWrikeClient().Timelogs.GetAsync().Result;
             Assert.IsNotNull(timelogs);
             Assert.GreaterOrEqual(timelogs.Count, 1);
-        }   
+        }
+
+        [Test]
+        public void GetAsync_WithUpdatedDateFilter_ShouldReturnTimelogs()
+        {
+            var updatedDateFilter = new Core.WrikeDateFilterRange(new DateTime(2000, 1, 1), DateTime.UtcNow);
+            var timelogs = WrikeClientFactory.GetWrikeClient().Timelogs.GetAsync(updatedDate: updatedDateFilter).Result;
+
+            Assert.IsNotNull(timelogs);
+            Assert.NotZero(timelogs.Count);
+            foreach (var timelog in timelogs)
+            {
+                Assert.IsTrue(updatedDateFilter.Start <= timelog.UpdatedDate && timelog.UpdatedDate < updatedDateFilter.End);
+            }
+        }
 
         // TODO: test other get options fiwth taskId, contactId, folderId, timelogCategoryId
 
@@ -86,5 +100,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
 
             Assert.IsTrue(isTimelogDeleted);
         }
+
     }
 }

@@ -9,7 +9,7 @@ using Taviloglu.Wrike.Core.FoldersAndProjects;
 namespace Taviloglu.Wrike.ApiClient
 {
     /// <summary>
-    /// Folder & Project operations
+    /// Folder &amp; Project operations
     /// </summary>
     public interface IWrikeFoldersAndProjectsClient
     {
@@ -34,7 +34,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="updatedDate">Updated date filter, range</param>
         /// <param name="isProject">Get only projects (true) / only folders (false)</param>
         /// <param name="isDeleted">Get folders from Root (false) / Recycle Bin (true)</param>
-        /// <param name="fields">optional fields to be included in the response model. Use <see cref="WrikeFolderTree.OptionalFields"/></param> 
+        /// <param name="optionalFields">optional fields to be included in the response model. Use <see cref="WrikeFolderTree.OptionalFields"/></param> 
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
         Task<List<WrikeFolderTree>> GetFolderTreeAsync(
             string folderId = null,

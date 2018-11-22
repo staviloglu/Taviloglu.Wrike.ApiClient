@@ -65,6 +65,13 @@ namespace Taviloglu.Wrike.Core.Timelogs
         public DateTime CreatedDate { get; set; }
 
         /// <summary>
+        /// Date on which timelog was updated Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+        /// </summary>
+        [JsonProperty("updatedDate")]
+        [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
+        public DateTime UpdatedDate { get; set; }
+
+        /// <summary>
         /// Date for which timelog was recorded Format: yyyy-MM-dd
         /// </summary>
         [JsonProperty("trackedDate")]
