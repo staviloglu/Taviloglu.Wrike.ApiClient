@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike API</Description>
@@ -13,9 +13,10 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>- Added protected parameterless constructor to WrikeComment
-- Added private parameterless constructor to WrikeTaskComment and WrikeFolderComment so JSON.Net can still deserialize the response if comment does not have text value</PackageReleaseNotes>
-    <AssemblyVersion>2.1.1.0</AssemblyVersion>
-    <FileVersion>2.1.1.0</FileVersion>
+- Added private parameterless constructor to WrikeTaskComment and WrikeFolderComment so JSON.Net can still deserialize the response if comment does not have text value
+- Added Color OptionalField to WrikeFolderTree</PackageReleaseNotes>
+    <AssemblyVersion>2.1.2.0</AssemblyVersion>
+    <FileVersion>2.1.2.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

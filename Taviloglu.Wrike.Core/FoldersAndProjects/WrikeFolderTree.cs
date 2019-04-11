@@ -45,7 +45,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         /// </summary>
         public class OptionalFields
         {
-            public static List<string> List = new List<string> { Metadata, HasAttachments, AttachmentCount, Description, BriefDescription, CustomFields, CustomColumnIds, SuperParentIds };
+            public static List<string> List = new List<string> { Metadata, HasAttachments, AttachmentCount, Description, BriefDescription, CustomFields, CustomColumnIds, SuperParentIds, Color };
             public const string Metadata = "metadata";
             public const string HasAttachments = "hasAttachments";
             public const string AttachmentCount = "attachmentCount";
@@ -54,6 +54,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
             public const string CustomFields = "customFields";
             public const string CustomColumnIds = "customColumnIds";
             public const string SuperParentIds = "superParentIds";
+            public const string Color = "color";
         }
     }
 
