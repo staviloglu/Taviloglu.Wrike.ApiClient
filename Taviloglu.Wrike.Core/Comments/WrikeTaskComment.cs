@@ -12,6 +12,9 @@ namespace Taviloglu.Wrike.Core.Comments
             TaskId = taskId;
         }
 
+        [JsonConstructor]
+        private WrikeTaskComment(){ }
+
         /// <summary>
         /// ID of related task.
         /// </summary>

@@ -20,6 +20,16 @@ namespace Taviloglu.Wrike.Core.Comments
         }
 
         /// <summary>
+        /// Parameterless constructor for JSON.Net
+        /// Prevents throwing exception if there is a comment without text.
+        /// </summary>
+        [JsonConstructor]
+        protected WrikeComment()
+        {
+
+        }
+
+        /// <summary>
         /// Author ID
         /// </summary>
         [JsonProperty("authorId")]

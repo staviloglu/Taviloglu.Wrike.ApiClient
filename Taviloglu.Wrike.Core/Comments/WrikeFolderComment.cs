@@ -12,6 +12,9 @@ namespace Taviloglu.Wrike.Core.Comments
             FolderId = folderId;
         }
 
+        [JsonConstructor]
+        private WrikeFolderComment() { }
+
         /// <summary>
         /// ID of related folder.
         /// </summary>
