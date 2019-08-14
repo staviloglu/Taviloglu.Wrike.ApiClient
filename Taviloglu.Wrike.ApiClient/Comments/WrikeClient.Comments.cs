@@ -58,7 +58,7 @@ namespace Taviloglu.Wrike.ApiClient
             var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("plainText", plainText)
                 .AddParameter("limit", limit)
-                .AddParameter("udatedDate", updatedDate);
+                .AddParameter("updatedDate", updatedDate);
 
             var response = await SendRequest<WrikeComment>(uriBuilder.GetUri(), HttpMethods.Get, jsonConverter: new WrikeCommentConverter()).ConfigureAwait(false);
             return GetReponseDataList(response);
