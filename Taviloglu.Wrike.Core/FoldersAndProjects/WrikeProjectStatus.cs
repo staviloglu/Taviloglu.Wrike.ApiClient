@@ -2,6 +2,6 @@
 {
     public enum WrikeProjectStatus
     {
-        Green, Yellow, Red, Completed, OnHold, Cancelled
+        Green, Yellow, Red, Completed, OnHold, Cancelled, Custom
     }
 }
