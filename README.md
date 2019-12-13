@@ -1,4 +1,4 @@
-# Taviloglu.Wrike.ApiClient [![Build Status](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient.svg?branch=master)](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient/)
+# Taviloglu.Wrike.ApiClient [![Build Status](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient.svg?branch=master)](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient/)[![BCH compliance](https://bettercodehub.com/edge/badge/staviloglu/Taviloglu.Wrike.ApiClient?branch=master)](https://bettercodehub.com/)
 .NET Client for Wrike API 
 
 ## Donate
