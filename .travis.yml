@@ -1,7 +1,7 @@
 language: csharp
 solution: Taviloglu.Wrike.ApiClient.sln
 mono: none
-dotnet:  2.1.15
+dotnet:  2.2
 script:
  - dotnet restore
 before_install:
