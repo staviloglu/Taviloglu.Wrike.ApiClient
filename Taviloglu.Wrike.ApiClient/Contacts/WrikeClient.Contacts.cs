@@ -14,9 +14,12 @@ namespace Taviloglu.Wrike.ApiClient
             var requestUri = "contacts";
 
             var uriBuilder = new WrikeUriBuilder(requestUri)
-                .AddParameter("me", me)
                 .AddParameter("metadata", metadata)
                 .AddParameter("deleted", isDeleted);
+                
+            if (me == true) {
+                uriBuilder.AddParameter("me", me);
+            }
 
             if (retrieveMetadata.HasValue && retrieveMetadata == true)
             {
