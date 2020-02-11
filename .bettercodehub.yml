@@ -7,9 +7,19 @@ languages:
       - .*/Taviloglu.Wrike.ApiClient/.*\.cs
       - .*/Taviloglu.Wrike.Core/.*\.cs
       - .*/Taviloglu.Wrike.WebHook/.*\.cs
+      exclude:
+      - .*/Taviloglu.Wrike.ApiClient.Tests.Integration/.*\.cs
+      - .*/Taviloglu.Wrike.Core.Tests.Unit/.*\.cs
+      - .*/Taviloglu.Wrike.ApiClient.Tests.Unit/.*\.cs      
+      - .*/Taviloglu.Wrike.ApiClient.Samples/.*\.cs
+      - .*/Taviloglu.Wrike.WebHook.Samples/.*\.cs
   test:
     include:
       - .*/Taviloglu.Wrike.ApiClient.Tests.Integration/.*\.cs
       - .*/Taviloglu.Wrike.Core.Tests.Unit/.*\.cs
       - .*/Taviloglu.Wrike.ApiClient.Tests.Unit/.*\.cs
-      
+    exclude: 
+      - .*/Taviloglu.Wrike.ApiClient.Extensions/.*\.cs
+      - .*/Taviloglu.Wrike.ApiClient/.*\.cs
+      - .*/Taviloglu.Wrike.Core/.*\.cs
+      - .*/Taviloglu.Wrike.WebHook/.*\.cs
