@@ -9,10 +9,7 @@ languages:
       - /Taviloglu.Wrike.ApiClient.Samples/.*
       - /Taviloglu.Wrike.WebHook.Samples/.*
   test:
-    exclude: 
-      - /Taviloglu.Wrike.ApiClient.Extensions/.*
-      - /Taviloglu.Wrike.ApiClient/.*
-      - /Taviloglu.Wrike.Core/.*
-      - /Taviloglu.Wrike.WebHook/.*
-      - /Taviloglu.Wrike.ApiClient.Samples/.*
-      - /Taviloglu.Wrike.WebHook.Samples/.*
+    include: 
+      - /Taviloglu.Wrike.ApiClient.Tests.Integration/.*\.cs
+      - /Taviloglu.Wrike.Core.Tests.Unit/.*\.cs
+      - /Taviloglu.Wrike.ApiClient.Tests.Unit/.*\.cs
