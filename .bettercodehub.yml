@@ -1,0 +1,15 @@
+component_depth: 1
+languages:
+- name: csharp
+  production:
+    include: 
+      - .*/Taviloglu.Wrike.ApiClient.Extensions/.*\.cs
+      - .*/Taviloglu.Wrike.ApiClient/.*\.cs
+      - .*/Taviloglu.Wrike.Core/.*\.cs
+      - .*/Taviloglu.Wrike.WebHook/.*\.cs
+  test:
+    include:
+      - .*/Taviloglu.Wrike.ApiClient.Tests.Integration/.*\.cs
+      - .*/Taviloglu.Wrike.Core.Tests.Unit/.*\.cs
+      - .*/Taviloglu.Wrike.ApiClient.Tests.Unit/.*\.cs
+      
