@@ -2,24 +2,17 @@ component_depth: 1
 languages:
 - name: csharp
   production:
-    include: 
-      - .*/Taviloglu.Wrike.ApiClient.Extensions/.*\.cs
-      - .*/Taviloglu.Wrike.ApiClient/.*\.cs
-      - .*/Taviloglu.Wrike.Core/.*\.cs
-      - .*/Taviloglu.Wrike.WebHook/.*\.cs
-      exclude:
-      - .*/Taviloglu.Wrike.ApiClient.Tests.Integration/.*\.cs
-      - .*/Taviloglu.Wrike.Core.Tests.Unit/.*\.cs
-      - .*/Taviloglu.Wrike.ApiClient.Tests.Unit/.*\.cs      
-      - .*/Taviloglu.Wrike.ApiClient.Samples/.*\.cs
-      - .*/Taviloglu.Wrike.WebHook.Samples/.*\.cs
+      exclude:      
+      - /Taviloglu.Wrike.ApiClient.Tests.Integration/.*
+      - /Taviloglu.Wrike.Core.Tests.Unit/.*
+      - /Taviloglu.Wrike.ApiClient.Tests.Unit/.*      
+      - /Taviloglu.Wrike.ApiClient.Samples/.*
+      - /Taviloglu.Wrike.WebHook.Samples/.*
   test:
-    include:
-      - .*/Taviloglu.Wrike.ApiClient.Tests.Integration/.*\.cs
-      - .*/Taviloglu.Wrike.Core.Tests.Unit/.*\.cs
-      - .*/Taviloglu.Wrike.ApiClient.Tests.Unit/.*\.cs
     exclude: 
-      - .*/Taviloglu.Wrike.ApiClient.Extensions/.*\.cs
-      - .*/Taviloglu.Wrike.ApiClient/.*\.cs
-      - .*/Taviloglu.Wrike.Core/.*\.cs
-      - .*/Taviloglu.Wrike.WebHook/.*\.cs
+      - /Taviloglu.Wrike.ApiClient.Extensions/.*
+      - /Taviloglu.Wrike.ApiClient/.*
+      - /Taviloglu.Wrike.Core/.*
+      - /Taviloglu.Wrike.WebHook/.*
+      - /Taviloglu.Wrike.ApiClient.Samples/.*
+      - /Taviloglu.Wrike.WebHook.Samples/.*
