@@ -10,6 +10,7 @@
         Date,
         Duration,
         Checkbox,
-        Contacts
+        Contacts,
+        Multiple
     }
 }
