@@ -1,7 +1,6 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Taviloglu.Wrike.Core;
+using NUnit.Framework;
 using Taviloglu.Wrike.Core.Comments;
 
 namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
@@ -11,7 +10,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
     {
         const string DefaultCommentId = "IEACGXLUIMHLQB2D";
         const string DefaultTaskId = "IEACGXLUKQIEQ6NC";
-        const string DefaultFolderId = "IEACGXLUI4IEQ6NG";
+        const string DefaultFolderId = "IEACGXLUI4IEQ6NG";        
 
         [OneTimeTearDown]
         public void ReturnToDefaults()

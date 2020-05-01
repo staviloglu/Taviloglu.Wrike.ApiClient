@@ -40,6 +40,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="id">Dependency Id</param>  
+        /// <param name="relationType">Relation between Predecessor and Successor</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-dependency"/>
         Task<WrikeDependency> UpdateAsync(WrikeClientIdParameter id, WrikeDependencyRelationType relationType);
 

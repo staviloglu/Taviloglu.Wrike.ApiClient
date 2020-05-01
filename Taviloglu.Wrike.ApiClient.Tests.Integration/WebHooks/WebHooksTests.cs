@@ -3,102 +3,101 @@ using System.Collections.Generic;
 using System.Linq;
 using Taviloglu.Wrike.Core.WebHooks;
 
-namespace Taviloglu.Wrike.ApiClient.Tests.Integration.WebHooks
+namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Webhooks
 {
     [TestFixture, Order(17)]
-    public class WebHooksTests
+    public class WebhooksTests
     {
-        const string DefaultWebHookId = "IEACGXLUJAAACP54";
-        const string TestFolderId = "IEACGXLUI4IHJMYP";
+        const string DefaultWebhookId = "IEACGXLUJAAACP54";
+        const string PersonalFolderId = "IEACGXLUI4KZG6UV";
 
         //Thanks to @fredsted
-        //https://github.com/fredsted/webhook.site
-        //https://webhook.site/#/ca5bbc32-9f4c-433c-a8d4-be18041def50/3e31dc6c-0a28-457e-b292-600f39e392c8/0
-        const string TestWebHookAddress = "https://webhook.site/ca5bbc32-9f4c-433c-a8d4-be18041def50";
+        //https://github.com/fredsted/Webhook.site
+        const string TestWebhookAddress = "https://Webhook.site/#!/71de1b3b-cc83-48a5-8c82-69ec10a1bc1e";
 
 
         [OneTimeTearDown]
         public void ReturnToDefaults()
         {
-            var webHooks = WrikeClientFactory.GetWrikeClient().WebHooks.GetAsync().Result;
+            var Webhooks = WrikeClientFactory.GetWrikeClient().WebHooks.GetAsync().Result;
 
-            foreach (var webHook in webHooks)
+            foreach (var Webhook in Webhooks)
             {
-                if (webHook.Id != DefaultWebHookId)
+                if (Webhook.Id != DefaultWebhookId)
                 {
-                    WrikeClientFactory.GetWrikeClient().WebHooks.DeleteAsync(webHook.Id).Wait();
+                    WrikeClientFactory.GetWrikeClient().WebHooks.DeleteAsync(Webhook.Id).Wait();
                 }
             }
         }
 
         [Test, Order(1)]
-        public void GetAsync_ShouldReturnWebHooks()
+        public void GetAsync_ShouldReturnWebhooks()
         {
-            var webhooks = WrikeClientFactory.GetWrikeClient().WebHooks.GetAsync().Result;
-            Assert.IsNotNull(webhooks);
+            var Webhooks = WrikeClientFactory.GetWrikeClient().WebHooks.GetAsync().Result;
+            Assert.IsNotNull(Webhooks);
         }
 
         [Test, Order(2)]
-        public void GetAsync_ShouldReturnDefaultDefaultWebHook()
+        public void GetAsync_ShouldReturnDefaultDefaultWebhook()
         {
-            var webHookIds = new List<string> { DefaultWebHookId };
+            var WebhookIds = new List<string> { DefaultWebhookId };
 
-            var webHooks = WrikeClientFactory.GetWrikeClient().WebHooks.GetAsync(webHookIds).Result;
-            Assert.IsNotNull(webHooks);
-            Assert.AreEqual(1, webHooks.Count);
-            Assert.AreEqual(DefaultWebHookId, webHooks.First().Id);
+            var Webhooks = WrikeClientFactory.GetWrikeClient().WebHooks.GetAsync(WebhookIds).Result;
+            Assert.IsNotNull(Webhooks);
+            Assert.AreEqual(1, Webhooks.Count);
+            Assert.AreEqual(DefaultWebhookId, Webhooks.First().Id);
         }
 
         [Test, Order(3)]
-        public void CreateAsync_ShouldAddNewwebHookWithUrlToFolder()
+        public void CreateAsync_ShouldAddNewWebhookWithUrlToFolder()
         {
-            var newWebHook = new WrikeWebHook(TestWebHookAddress, TestFolderId);
+            var newWebhook = new WrikeWebHook(TestWebhookAddress, PersonalFolderId);
 
-            var createdWebHook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebHook).Result;
+            var createdWebhook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebhook).Result;
 
-            Assert.IsNotNull(createdWebHook);
-            Assert.AreEqual(newWebHook.HookUrl, createdWebHook.HookUrl);
-            Assert.AreEqual(newWebHook.Status, createdWebHook.Status);
-            Assert.AreEqual(newWebHook.FolderId, createdWebHook.FolderId);
+            Assert.IsNotNull(createdWebhook);
+            Assert.AreEqual(newWebhook.HookUrl, createdWebhook.HookUrl);
+            Assert.AreEqual(newWebhook.Status, createdWebhook.Status);
+            Assert.AreEqual(newWebhook.FolderId, createdWebhook.FolderId);
         }
 
         [Test, Order(4)]
-        public void CreateAsync_ShouldAddNewwebHookWithUrlToAccount()
+        public void CreateAsync_ShouldAddNewWebhookWithUrlToAccount()
         {
-            var newWebHook = new WrikeWebHook(TestWebHookAddress);
+            var newWebhook = new WrikeWebHook(TestWebhookAddress);
 
-            var createdWebHook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebHook).Result;
+            var createdWebhook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebhook).Result;
 
-            Assert.IsNotNull(createdWebHook);
-            Assert.AreEqual(newWebHook.HookUrl, createdWebHook.HookUrl);
-            Assert.AreEqual(newWebHook.Status, createdWebHook.Status);
+            Assert.IsNotNull(createdWebhook);
+            Assert.AreEqual(newWebhook.HookUrl, createdWebhook.HookUrl);
+            Assert.AreEqual(newWebhook.Status, createdWebhook.Status);
         }
 
         [Test, Order(5)]
-        public void UpdateAsync_ShouldUpdateWebHookStatus()
+        public void UpdateAsync_ShouldUpdateWebhookStatus()
         {
-            var newWebHook = new WrikeWebHook(TestWebHookAddress, TestFolderId);
-            newWebHook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebHook).Result;
+            var newWebhook = new WrikeWebHook(TestWebhookAddress, PersonalFolderId);
+            newWebhook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebhook).Result;
 
             var expectedStatus = WrikeWebHookStatus.Suspended;
-            var updatedWebHook = WrikeClientFactory.GetWrikeClient().WebHooks.UpdateAsync(newWebHook.Id, expectedStatus).Result;
+            var updatedWebhook = WrikeClientFactory.GetWrikeClient().WebHooks.UpdateAsync(newWebhook.Id, expectedStatus).Result;
 
-            Assert.IsNotNull(updatedWebHook);
-            Assert.AreEqual(expectedStatus, updatedWebHook.Status);
+            Assert.IsNotNull(updatedWebhook);
+            Assert.AreEqual(expectedStatus, updatedWebhook.Status);
         }
 
         [Test, Order(6)]
         public void DeleteAsync_ShouldDeleteNewGroup()
         {
-            var newWebHook = new WrikeWebHook(TestWebHookAddress, TestFolderId);
-            newWebHook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebHook).Result;
+            var newWebhook = new WrikeWebHook(TestWebhookAddress, PersonalFolderId);
+            newWebhook = WrikeClientFactory.GetWrikeClient().WebHooks.CreateAsync(newWebhook).Result;
 
-            WrikeClientFactory.GetWrikeClient().WebHooks.DeleteAsync(newWebHook.Id).Wait();
+            WrikeClientFactory.GetWrikeClient().WebHooks.DeleteAsync(newWebhook.Id).Wait();
 
-            var webHooks = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
-            var isWebHookDeleted = !webHooks.Any(wh => wh.Id == newWebHook.Id);
+            var Webhooks = WrikeClientFactory.GetWrikeClient().Groups.GetAsync().Result;
+            var isWebhookDeleted = !Webhooks.Any(wh => wh.Id == newWebhook.Id);
 
-            Assert.IsTrue(isWebHookDeleted);
+            Assert.IsTrue(isWebhookDeleted);
         }
     }
 }

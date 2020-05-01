@@ -10,8 +10,9 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
     {
         const string RootFolderId = "IEACGXLUI7777777";
         const string RecycleBinFolderId = "IEACGXLUI7777776";
+        const string PersonalFolderId = "IEACGXLUI4KZG6UV";
 
-        readonly List<string> DefaultFolderIds = new List<string> { RootFolderId, RecycleBinFolderId, "IEACGXLUI4IEQ6NG", "IEACGXLUI4IEQ6NH", "IEACGXLUI4IEQ6NB", "IEACGXLUI4IHJMYP" };
+        readonly List<string> DefaultFolderIds = new List<string> { RootFolderId, RecycleBinFolderId, PersonalFolderId };
 
         [OneTimeTearDown]
         public void ReturnToDefaults()
@@ -34,15 +35,16 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
         {
             var folderTrees = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.GetFolderTreeAsync().Result;
             Assert.IsNotNull(folderTrees);
-            Assert.GreaterOrEqual(folderTrees.Count, 5);
+            Assert.GreaterOrEqual(folderTrees.Count, 3);
         }
 
         [Test, Order(2)]
-        public void GetFoldersAsync_ShouldReturnDefaultFolders()
+        public void GetFoldersAsync_ShouldReturnPersonalFolder()
         {
             var folders = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.GetFoldersAsync(DefaultFolderIds).Result;
             Assert.IsNotNull(folders);
-            Assert.AreEqual(4, folders.Count);
+            Assert.AreEqual(1, folders.Count);
+            Assert.AreEqual(PersonalFolderId, folders[0].Id);
         }
 
         [Test, Order(3)]
@@ -50,7 +52,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
         {
             var newFolder = new WrikeFolder("TestFolder #1");
 
-            var createdFolder = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.CreateAsync(RootFolderId, newFolder).Result;
+            var createdFolder = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.CreateAsync(RootFolderId, newFolder).Result;            
 
             Assert.IsNotNull(createdFolder);
             Assert.AreEqual(newFolder.Title, createdFolder.Title);

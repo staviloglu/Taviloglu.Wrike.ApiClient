@@ -21,6 +21,15 @@ namespace Taviloglu.Wrike.ApiClient
         Task<List<WrikeAttachment>> GetAsync(bool? versions = null, WrikeDateFilterRange createdDate = null, bool? withUrls = null);
 
         /// <summary>
+        /// Returns complete information about single or multiple attachments.
+        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// </summary>
+        /// <param name="ids">Attachment ids</param>
+        /// <param name="versions">Get attachments with previous versions.</param>
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-attachments"/>
+        Task<List<WrikeAttachment>> GetAsync(WrikeClientIdListParameter ids, bool? versions = null);
+
+        /// <summary>
         /// Returns all Attachments of a folder.
         /// Scopes: Default, wsReadOnly, wsReadWrite
         /// </summary>
@@ -43,14 +52,7 @@ namespace Taviloglu.Wrike.ApiClient
         Task<List<WrikeTaskAttachment>> GetInTaskAsync(WrikeClientIdParameter taskId, bool? versions = null, WrikeDateFilterRange createdDate = null, bool? withUrls = null);
 
 
-        /// <summary>
-        /// Returns complete information about single or multiple attachments.
-        /// Scopes: Default, wsReadOnly, wsReadWrite
-        /// </summary>
-        /// <param name="ids">Attachment ids</param>
-        /// <param name="versions">Get attachments with previous versions.</param>
-        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-attachments"/>
-        Task<List<WrikeAttachment>> GetAsync(WrikeClientIdListParameter ids, bool? versions = null);
+       
 
         /// <summary>
         /// Returns attachment content. It can be accessed via /attachments/id/download/name.ext URL. In this case, 'name.ext' will be returned as the file name.
@@ -84,6 +86,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="taskId">Task ID to add attachment</param>
+        /// <param name="fileName">Attachment filename</param>
         /// <param name="fileBytes">File bytes</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-wrike-attachment"/>
         Task<WrikeTaskAttachment> CreateInTaskAsync(WrikeClientIdParameter taskId, string fileName, byte[] fileBytes);
@@ -94,6 +97,7 @@ namespace Taviloglu.Wrike.ApiClient
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="folderId">Folder ID to add attachment</param>
+        /// <param name="fileName">Attachment filename</param>
         /// <param name="fileBytes">File bytes</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-wrike-attachment"/>
         Task<WrikeFolderAttachment> CreateInFolderAsync(WrikeClientIdParameter folderId, string fileName, byte[] fileBytes);
