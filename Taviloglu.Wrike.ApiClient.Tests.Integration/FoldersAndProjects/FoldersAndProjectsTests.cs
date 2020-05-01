@@ -11,8 +11,9 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
         const string RootFolderId = "IEACGXLUI7777777";
         const string RecycleBinFolderId = "IEACGXLUI7777776";
         const string PersonalFolderId = "IEACGXLUI4KZG6UV";
+        const string DefaultFolderId = "IEACGXLUI4O6C46Q";
 
-        readonly List<string> DefaultFolderIds = new List<string> { RootFolderId, RecycleBinFolderId, PersonalFolderId };
+        readonly List<string> DefaultFolderIds = new List<string> { RootFolderId, RecycleBinFolderId, PersonalFolderId, DefaultFolderId };
 
         [OneTimeTearDown]
         public void ReturnToDefaults()
@@ -43,7 +44,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
         {
             var folders = WrikeClientFactory.GetWrikeClient().FoldersAndProjects.GetFoldersAsync(DefaultFolderIds).Result;
             Assert.IsNotNull(folders);
-            Assert.AreEqual(1, folders.Count);
+            Assert.AreEqual(2, folders.Count); //personal and default
             Assert.AreEqual(PersonalFolderId, folders[0].Id);
         }
 
