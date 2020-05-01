@@ -8,8 +8,8 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
     [TestFixture, Order(14)]
     public class TimelogsTests
     {
-        const string DefaultTimelogId = "IEACGXLUJQAFEP2L";
-        const string TaskId= "IEACGXLUKQIGFGAK";
+        const string DefaultTimelogId = "IEACGXLUJQAH4GLQ";
+        const string DefaultTaskId = "IEACGXLUKQO6DCNW";
 
         [OneTimeTearDown]
         public void ReturnToDefaults()
@@ -52,7 +52,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
         [Test, Order(3)]
         public void CreateAsync_ShouldAddNewTimelogWithComment()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog #2");
+            var newTimelog = new WrikeTimelog(DefaultTaskId , 1m, DateTime.Now, comment: "test timelog #2");
             var createdTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             Assert.IsNotNull(newTimelog);
@@ -64,7 +64,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
         [Test, Order(4)]
         public void CreateAsync_ShouldAddNewTimelogWithoutComment()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now);
+            var newTimelog = new WrikeTimelog(DefaultTaskId , 1m, DateTime.Now);
             var createdTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             Assert.IsNotNull(newTimelog);
@@ -75,7 +75,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
         [Test, Order(5)]
         public void UpdateAsync_ShouldUpdateTimelogComment()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now, comment: "test timelog #2");
+            var newTimelog = new WrikeTimelog(DefaultTaskId , 1m, DateTime.Now, comment: "test timelog #2");
             newTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             var expectedComment = "test timelog #2 [Updated]";
@@ -90,7 +90,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Timelogs
         [Test, Order(6)]
         public void DeleteAsync_ShouldDeleteNewTimelog()
         {
-            var newTimelog = new WrikeTimelog("IEACGXLUKQIGFGAK", 1m, DateTime.Now);
+            var newTimelog = new WrikeTimelog(DefaultTaskId , 1m, DateTime.Now);
             var createdTimelog = WrikeClientFactory.GetWrikeClient().Timelogs.CreateAsync(newTimelog).Result;
 
             WrikeClientFactory.GetWrikeClient().Timelogs.DeleteAsync(createdTimelog.Id).Wait();

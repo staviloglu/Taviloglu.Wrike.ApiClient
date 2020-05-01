@@ -214,7 +214,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Request access credentials
         /// </summary>
         /// <param name="accessTokenRequest"></param>
-        /// <param name="redirecUri"></param>
+        /// <param name="redirectUri"></param>
         /// See <see href="https://developers.wrike.com/documentation/oauth2"/>
         public static WrikeAccessTokenResponse GetAccesToken(WrikeAccessTokenRequest accessTokenRequest, string redirectUri)
         {

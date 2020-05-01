@@ -12,7 +12,6 @@ namespace Taviloglu.Wrike.ApiClient
         /// <summary>
         ///  Creates a webhook for a particular account.
         /// </summary>
-        /// <param name="folderId"></param>
         /// <param name="newWebHook"></param>
         /// See <see href="https://developers.wrike.com/documentation/webhooks"/>
         Task<WrikeWebHook> CreateAsync(WrikeWebHook newWebHook);
