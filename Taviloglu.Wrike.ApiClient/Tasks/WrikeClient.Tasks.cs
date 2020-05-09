@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -128,8 +127,6 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("fields",optionalFields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            
-            //TODO: can not get recurrent property even it is provided bug?
 
             return GetReponseDataList(response);
         }

@@ -267,7 +267,7 @@ namespace Taviloglu.Wrike.ApiClient
             return parameters;
         }
 
-        private async Task<System.IO.Stream> SendRequestAndGetStream<T>(
+        private async Task<System.IO.Stream> SendRequestAndGetStream(
             string requestUri,
             string httpMethod,
             HttpContent httpContent = null)

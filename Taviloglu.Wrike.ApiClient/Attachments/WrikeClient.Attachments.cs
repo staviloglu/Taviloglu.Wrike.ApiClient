@@ -55,7 +55,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<Stream> IWrikeAttachmentsClient.DownloadAsync(WrikeClientIdParameter id)
         {
-            var response = await SendRequestAndGetStream<Stream>($"attachments/{id}/download", HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequestAndGetStream($"attachments/{id}/download", HttpMethods.Get).ConfigureAwait(false);
 
             return response;
         }
@@ -65,7 +65,7 @@ namespace Taviloglu.Wrike.ApiClient
             var uriBuilder = new WrikeUriBuilder($"attachments/{id}/preview")
                 .AddParameter("size", size);
 
-            var response = await SendRequestAndGetStream<Stream>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            var response = await SendRequestAndGetStream(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
 
             return response;
         }
