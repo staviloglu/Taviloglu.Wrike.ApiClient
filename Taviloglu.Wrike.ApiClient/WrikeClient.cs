@@ -303,8 +303,6 @@ namespace Taviloglu.Wrike.ApiClient
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, requestUri))
             {
                 requestMessage.Headers.Add("X-Requested-With", "XMLHttpRequest");
-                //requestMessage.Headers.Add("X-File-Name", fileName);
-                //requestMessage.Headers.Add("content-type", "application/octet-stream");
                 requestMessage.Content = new ByteArrayContent(fileBytes)
                 {
                     Headers = {

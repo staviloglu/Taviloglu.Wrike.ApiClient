@@ -32,9 +32,8 @@ namespace Taviloglu.Wrike.ApiClient
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("relationType", newDependency.RelationType);
-            //contentBuilder.AddParameter("predecessorId", newDependency.PredecessorId);
-            contentBuilder.AddParameter("successorId", newDependency.SuccessorId);
 
+            contentBuilder.AddParameter("successorId", newDependency.SuccessorId);
 
             var response = await SendRequest<WrikeDependency>($"tasks/{newDependency.PredecessorId}/dependencies", HttpMethods.Post, contentBuilder.GetContent()).ConfigureAwait(false);
 
