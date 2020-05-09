@@ -8,8 +8,9 @@ namespace Taviloglu.Wrike.ApiClient
 {
     internal class WrikeUriBuilder
     {
-        private List<string> _filters;
-        private string _baseUri;
+        private readonly  List<string> _filters;
+        private readonly string _baseUri;
+
         public WrikeUriBuilder(string baseUri)
         {
             _filters = new List<string>();

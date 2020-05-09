@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core.Dependencies;
-using Taviloglu.Wrike.Core.Json;
 
 namespace Taviloglu.Wrike.ApiClient
 {

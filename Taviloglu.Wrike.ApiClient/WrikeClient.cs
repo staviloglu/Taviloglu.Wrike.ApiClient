@@ -114,7 +114,6 @@ namespace Taviloglu.Wrike.ApiClient
             }
 
             var parameters = GetNameValueCollection(_clientId, _clientSecret, _refreshToken, GrantType.refresh_token);
-            // TODO: add scope ?
 
             var response = string.Empty;
 
@@ -150,10 +149,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// See <see href="https://developers.wrike.com/documentation/oauth2"/>
         public static WrikeRefreshTokenResponse RefreshToken(string clientId, string clientSecret, string refreshToken, string host)
         {
-            // TODO validate parameters
-
             var parameters = GetNameValueCollection(clientId, clientSecret, refreshToken, GrantType.refresh_token);
-            // TODO: add scope ?
 
             var response = string.Empty;
 
@@ -252,7 +248,7 @@ namespace Taviloglu.Wrike.ApiClient
         }
 
 
-        private static NameValueCollection GetNameValueCollection(string clientId, string clientSecret, 
+        private static NameValueCollection GetNameValueCollection(string clientId, string clientSecret,
             string grantData, GrantType grantType)
         {
             var parameters = new NameValueCollection();
@@ -265,7 +261,7 @@ namespace Taviloglu.Wrike.ApiClient
             else
             {
                 parameters.Add("refresh_token", grantData);
-            }            
+            }
             parameters.Add("grant_type", grantType.ToString());
 
             return parameters;
@@ -406,17 +402,15 @@ namespace Taviloglu.Wrike.ApiClient
             if (!_disposed)
             {
                 _disposed = true;
-                if (disposing)
+
+                if (disposing && _httpClient != null)
                 {
-                    if (_httpClient != null)
-                    {
-                        _httpClient.Dispose();
-                    }
+                    _httpClient.Dispose();
                 }
             }
         }
 
-        private class HttpMethods
+        private static class HttpMethods
         {
             public const string Get = "GET";
             public const string Post = "POST";

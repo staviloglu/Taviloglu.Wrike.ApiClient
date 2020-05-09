@@ -62,8 +62,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
 
             Assert.IsNotNull(createdTask);
             Assert.AreEqual(newTask.Title, createdTask.Title);
-
-            //TODO: test other parameters
         }
 
         [Test, Order(4)]
@@ -77,8 +75,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Tasks
 
             Assert.IsNotNull(updatedTask);
             Assert.AreEqual(expectedTaskTitle, updatedTask.Title);
-
-            //TODO: test other parameters
         }
 
         [Test, Order(5)]

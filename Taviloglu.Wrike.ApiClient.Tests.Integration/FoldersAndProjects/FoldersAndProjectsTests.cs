@@ -57,8 +57,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
 
             Assert.IsNotNull(createdFolder);
             Assert.AreEqual(newFolder.Title, createdFolder.Title);
-
-            //TODO: test other parameters
         }
 
 
@@ -96,8 +94,6 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.FoldersAndProjects
 
             Assert.IsNotNull(updatedFolder);
             Assert.AreEqual(expectedTitle, updatedFolder.Title);
-
-            //TODO: test other parameters
         }
 
         [Test, Order(6)]

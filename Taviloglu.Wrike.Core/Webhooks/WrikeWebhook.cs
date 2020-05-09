@@ -15,6 +15,7 @@ namespace Taviloglu.Wrike.Core.WebHooks
         ///  url of the server which will receive the payload.
         /// </summary>
         /// <param name="hookUrl">URL of the server which will receive the payload. (https)</param>
+        /// <param name="folderId">FolderId</param>
         public WrikeWebHook(string hookUrl, string folderId = null)
         {
             hookUrl.ValidateParameter(nameof(hookUrl));
