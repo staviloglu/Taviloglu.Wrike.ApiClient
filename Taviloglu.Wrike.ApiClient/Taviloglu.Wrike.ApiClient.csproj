@@ -12,7 +12,10 @@
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Added support for custom HttpClient usage</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added support for custom HttpClient usage
+- WrikeFormUrlEncodedContentBuilder.AddParameter method updated for better performance
+- WrikeUriBuilder.AddParameter method updated for better performance
+- Removed unnecessary check from WrikeClientIdParameter.Value property</PackageReleaseNotes>
     <AssemblyVersion>2.2.2.0</AssemblyVersion>
     <FileVersion>2.2.2.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
