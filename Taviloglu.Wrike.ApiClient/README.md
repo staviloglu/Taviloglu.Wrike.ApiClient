@@ -1,5 +1,5 @@
 # Taviloglu.Wrike.ApiClient [![Build Status](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient.svg?branch=master)](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient/)
-.NET Client for Wrike API 
+.NET Client for Wrike API
 
 ## Donate
 If you find this library useful and if it saved you time please think about supporting my work, I will appreciate that.
@@ -19,7 +19,7 @@ var authorizationUrl = WrikeClient.GetAuthorizationUrl(
                 redirectUri: "http://localhost",
                 state: "myTestState",
                 scope: new List<string> { WrikeScopes.Default, WrikeScopes.wsReadWrite });
-//After the user authorizes your client using the authroization url, 
+//After the user authorizes your client using the authroization url,
 //wrike will redirect user to the provided redirect_uri with the authorization code
 //See https://developers.wrike.com/documentation/oauth2 for more details
 
@@ -42,7 +42,7 @@ var accesTokenResponse = WrikeClient.GetAccesToken(new WrikeAccessTokenRequest(
 var client = new WrikeClient(accesTokenResponse.AccessToken, accesTokenResponse.Host);
 
 //you need new client when you need to refresh token
-var refreshTokenResponse = WrikeClient.RefreshToken(ClientId, ClientSecret, 
+var refreshTokenResponse = WrikeClient.RefreshToken(ClientId, ClientSecret,
                 accesTokenResponse.RefreshToken, accesTokenResponse.Host);
 
 client = new WrikeClient(refreshTokenResponse.AccessToken, accesTokenResponse.Host);
@@ -66,3 +66,12 @@ newCustomField = await client.CustomFields.CreateAsync(newCustomField);
 await client.Tasks.DeleteAsync("taskId");
 ```
 For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
+
+### Provide custom HttpClient instance
+By default, we use the classic `new HttpClient()` way of instantiating our own instance of `HttpClient`. We do, however, provide a way for you to pass in your own customized implementation of it so that you can use whatever custom Policies, Throttling, etc. that you require.
+The recommended way of creating `HttpClients` is using `IHttpClientFactory` as specified by the official Microsoft docs [here](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
+
+In order to provide your own instance of HttpClient for this library to use, you simply need to provide it in the constructor for `WrikeHttpClient`:
+```c#
+var client = new WrikeClient("permanent_token", customHttpClient: customHttpClientImplementation);
+```
