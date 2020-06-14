@@ -27,9 +27,9 @@ namespace Taviloglu.Wrike.ApiClient
         private string _clientSecret;
         private string _redirectUri;
 
-        private void InitializeHttpClient()
+        private void InitializeHttpClient(HttpClient customHttpClient)
         {
-            _httpClient = new HttpClient();
+            _httpClient = customHttpClient ?? new HttpClient();
             _httpClient.BaseAddress = new Uri($@"https://{_host}/api/v4/");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_bearerToken}");
@@ -40,7 +40,9 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="bearerToken">Permanent token / acces token </param>
         /// <param name="host">Host </param>
-        public WrikeClient(string bearerToken, string host = "www.wrike.com")
+        /// <param name="customHttpClient">Custom implementation of HttpClient.
+        /// Commonly used to add throttling to the number of requests made to the Wrike API</param>
+        public WrikeClient(string bearerToken, string host = "www.wrike.com", HttpClient customHttpClient = null)
         {
             if (bearerToken == null)
             {
@@ -65,7 +67,7 @@ namespace Taviloglu.Wrike.ApiClient
             _bearerToken = bearerToken;
             _host = host;
 
-            InitializeHttpClient();
+            InitializeHttpClient(customHttpClient);
         }
 
         /// <summary>
@@ -73,7 +75,9 @@ namespace Taviloglu.Wrike.ApiClient
         /// </summary>
         /// <param name="accessTokenRequest"></param>
         /// <param name="redirectUri">Must provide if used in authorization url</param>
-        public WrikeClient(WrikeAccessTokenRequest accessTokenRequest, string redirectUri)
+        /// <param name="customHttpClient">Custom implementation of HttpClient.
+        /// Commonly used to add throttling to the number of requests made to the Wrike API</param>
+        public WrikeClient(WrikeAccessTokenRequest accessTokenRequest, string redirectUri, HttpClient customHttpClient = null)
         {
             if (accessTokenRequest == null)
             {
@@ -99,7 +103,7 @@ namespace Taviloglu.Wrike.ApiClient
             _bearerToken = accessTokenResponse.AccessToken;
             _host = accessTokenResponse.Host;
 
-            InitializeHttpClient();
+            InitializeHttpClient(customHttpClient);
         }
 
         /// <summary>
