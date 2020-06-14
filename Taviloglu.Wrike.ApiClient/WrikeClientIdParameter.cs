@@ -33,7 +33,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <returns></returns>
         public override string ToString()
         {
-            return Value;
+            return _id;
         }
 
         public static implicit operator string(WrikeClientIdParameter id)
@@ -53,11 +53,6 @@ namespace Taviloglu.Wrike.ApiClient
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_id))
-                {
-                    throw new ArgumentNullException("id");
-                }
-
                 return _id;
             }
         }

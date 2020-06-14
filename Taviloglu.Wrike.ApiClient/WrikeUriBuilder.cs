@@ -30,9 +30,10 @@ namespace Taviloglu.Wrike.ApiClient
                 return this;
             }
 
-            if (value is string)
+            var stringValue = value as string;
+            if (stringValue!= null)
             {
-                AddString(name, (string)value);
+                AddString(name, stringValue);
                 return this;
             }
 
@@ -42,24 +43,27 @@ namespace Taviloglu.Wrike.ApiClient
                 return this;
             }
 
-            if (value is IList)
+            var iListValue = value as IList;
+            if (iListValue != null)
             {
-                if (((IList)value).Count > 0)
+                if (iListValue.Count > 0)
                 {
-                    AddList(name, (IList)value);
+                    AddList(name, iListValue);
                 }
                 return this;
             }
 
-            if (value is Enum)
+            var enumValue = value as Enum;
+            if (enumValue != null)
             {
-                AddEnum(name, (Enum)value);
+                AddEnum(name, enumValue);
                 return this;
             }
 
-            if (value is IWrikeObject)
+            var iWrikeObjectValue = value as IWrikeObject;
+            if (iWrikeObjectValue!=null)
             {
-                AddWrikeObject(name, (IWrikeObject)value, jsonConverter);
+                AddWrikeObject(name, iWrikeObjectValue, jsonConverter);
                 return this;
             }
 
