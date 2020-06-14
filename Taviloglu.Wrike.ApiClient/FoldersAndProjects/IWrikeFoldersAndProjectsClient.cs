@@ -29,12 +29,12 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="folderId">Returns a list of tree entries for subtree of this folder. For root and recycle bin folders, returns folder subtrees of root and recycle bin respectively.</param>
         /// <param name="permalink">Folder permalink, exact match</param>
         /// <param name="addDescendants">Adds all descendant folders to search scope</param>
-        /// <param name="metadata">Folders metadata filter</param> 
+        /// <param name="metadata">Folders metadata filter</param>
         /// <param name="customField">Custom field filter</param>
         /// <param name="updatedDate">Updated date filter, range</param>
         /// <param name="isProject">Get only projects (true) / only folders (false)</param>
         /// <param name="isDeleted">Get folders from Root (false) / Recycle Bin (true)</param>
-        /// <param name="optionalFields">optional fields to be included in the response model. Use <see cref="WrikeFolderTree.OptionalFields"/></param> 
+        /// <param name="optionalFields">optional fields to be included in the response model. Use <see cref="WrikeFolderTree.OptionalFields"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
         Task<List<WrikeFolderTree>> GetFolderTreeAsync(
             string folderId = null,
@@ -55,7 +55,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="newFolder">Use ctor <see cref="WrikeFolder.WrikeFolder(string, string, List{string}, List{WrikeMetadata}, List{WrikeCustomFieldData}, List{string}, WrikeProject)"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/create-folder"/>
         Task<WrikeFolder> CreateAsync(WrikeClientIdParameter folderId, WrikeFolder newFolder);
-        
+
 
         /// <summary>
         /// Copy folder subtree, returns parent folder subtree.
@@ -76,7 +76,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="rescheduleDate">Date to use in task rescheduling. Note that only active tasks can be rescheduled. To activate and reschedule all tasks, use 'rescheduleDate' in combination with copyStatuses = false</param>
         /// <param name="rescheduleMode">Mode to be used for rescheduling (based on first or last date), has effect only if reschedule date is specified. </param>
         /// <param name="entryLimit">Limit maximum allowed number for tasks/folders in tree for copy, operation will fail if limit is exceeded, should be 1..250</param>
-        /// See <see href="https://developers.wrike.com/documentation/api/methods/copy-folder"/> 
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/copy-folder"/>
         Task<WrikeFolder> CopyAsync(WrikeClientIdParameter folderId, WrikeClientIdParameter parentFolderId, string title, string titlePrefix = null, bool? copyDescriptions = null, bool? copyResponsibles = null, List<string> addResponsibles = null, List<string> removeResponsibles = null, bool copyCustomFields = true, bool copyCustomStatuses = true, bool copyStatuses = true, bool copyParents = false, DateTime? rescheduleDate = null, FolderRescheduleMode? rescheduleMode = FolderRescheduleMode.Start, int entryLimit = 250);
 
         /// <summary>
@@ -95,15 +95,28 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="customFields">Custom fields to be updated or deleted (null value removes field)</param>
         /// <param name="customColumns">List of custom fields associated with folder</param>
         /// <param name="project">Project settings (update project or convert folder to project). Use null value to convert project to folder</param>
-        /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-folder"/> 
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-folder"/>
         Task<WrikeFolder> UpdateAsync(WrikeClientIdParameter folderId, string title, string description = null, List<string> addParents = null, List<string> removeParents = null, List<string> addShareds = null, List<string> removeShareds = null, List<WrikeMetadata> metadata = null, bool? restore = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null);
 
         /// <summary>
         /// Move folder and all descendant folders and tasks to Recycle Bin unless they have parents outside of deletion scope
         /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-folder"/>        
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-folder"/>
         Task<WrikeFolder> DeleteAsync(WrikeClientIdParameter folderId);
+
+        /// <summary>
+        /// Returns complete information about specified folders
+        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// </summary>
+        /// <param name="folderIds">MaxCount 100</param>
+        /// <param name="customFields">Use <see cref="WrikeFolder.CustomFields"/></param>
+        /// <param name="optionalFields">Use <see cref="WrikeFolder.OptionalFields"/></param>
+        /// See <see href="https://developers.wrike.com/api/v4/folders-projects/#modify-folder"/>
+	    Task<IEnumerable<WrikeFolder>> UpdateFoldersAsync(
+	        WrikeClientIdListParameter folderIds,
+	        List<WrikeCustomFieldData> customFields,
+	        List<string> optionalFields);
     }
 
 

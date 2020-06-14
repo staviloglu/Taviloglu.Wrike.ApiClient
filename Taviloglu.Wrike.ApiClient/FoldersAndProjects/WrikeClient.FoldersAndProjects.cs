@@ -89,7 +89,7 @@ namespace Taviloglu.Wrike.ApiClient
             var response = await SendRequest<WrikeFolder>($"folders/{folderId}/folders", HttpMethods.Post, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
-        
+
         async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.CopyAsync(WrikeClientIdParameter folderId, WrikeClientIdParameter parentFolderId, string title, string titlePrefix, bool? copyDescriptions, bool? copyResponsibles, List<string> addResponsibles, List<string> removeResponsibles, bool copyCustomFields, bool copyCustomStatuses, bool copyStatuses, bool copyParents, DateTime? rescheduleDate, FolderRescheduleMode? rescheduleMode, int entryLimit)
         {
             if (title == null)
@@ -123,7 +123,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("rescheduleMode", rescheduleMode)
                 .AddParameter("entryLimit", entryLimit);
 
-            var response = await SendRequest<WrikeFolder>($"copy_folder/{folderId}", HttpMethods.Post, 
+            var response = await SendRequest<WrikeFolder>($"copy_folder/{folderId}", HttpMethods.Post,
                 contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
@@ -155,6 +155,19 @@ namespace Taviloglu.Wrike.ApiClient
 
             var response = await SendRequest<WrikeFolder>($"folders/{folderId}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
+        }
+
+        async Task<IEnumerable<WrikeFolder>> IWrikeFoldersAndProjectsClient.UpdateFoldersAsync(WrikeClientIdListParameter folderIds, List<WrikeCustomFieldData> customFields, List<string> optionalFields)
+        {
+	        var uriBuilder = new WrikeUriBuilder($"folders/{folderIds}")
+		        .AddParameter("fields", optionalFields);
+
+	        var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
+		        .AddParameter("customFields", customFields);
+
+	        var response = await SendRequest<WrikeFolder>(uriBuilder.GetUri(), HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+	        return GetReponseDataList(response);
+
         }
 
 
