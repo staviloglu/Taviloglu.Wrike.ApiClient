@@ -64,6 +64,15 @@ newCustomField = await client.CustomFields.CreateAsync(newCustomField);
 //delete a task
 await client.Tasks.DeleteAsync("taskId");
 ```
+### Provide custom HttpClient instance
+By default, we use the classic `new HttpClient()` way of instantiating our own instance of `HttpClient`. We do, however, provide a way for you to pass in your own customized implementation of it so that you can use whatever custom Policies, Throttling, etc. that you require.
+The recommended way of creating `HttpClients` is using `IHttpClientFactory` as specified by the official Microsoft docs [here](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
+
+In order to provide your own instance of HttpClient for this library to use, you simply need to provide it in the constructor for `WrikeHttpClient`:
+```c#
+var client = new WrikeClient("permanent_token", customHttpClient: customHttpClientImplementation);
+```
+
 For more details on usage checkout the [Taviloglu.Wrike.ApiClient.Samples](Taviloglu.Wrike.ApiClient.Samples) project
 
 ## WebHooks Usage [![NuGet](https://img.shields.io/nuget/v/Taviloglu.Wrike.WebHook.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.WebHook/) [![NuGet Downloads](https://img.shields.io/nuget/dt/Taviloglu.Wrike.WebHook.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.WebHook/)
