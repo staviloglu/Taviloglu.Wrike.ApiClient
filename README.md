@@ -101,7 +101,7 @@ var client = new WrikeClient("permanent_token");
 var newWebHook = new WrikeWebHook("https://<your-host>/api/wrikewebhook");
 newWebHook = await client.WebHooks.CreateAsync(newWebHook);
 ```
-Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
+Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/webhooks/)
 
 <table class="tableizer-firstrow">
 <thead><tr><th title="Field #1">Endpoint</th>
