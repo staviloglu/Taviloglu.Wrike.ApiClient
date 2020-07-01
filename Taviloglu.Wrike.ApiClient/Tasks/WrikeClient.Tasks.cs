@@ -56,7 +56,7 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 postDataBuilder.AddParameter("customStatus", newTask.CustomStatusId);
             }
-            
+
             var response = await SendRequest<WrikeTask>($"folders/{folderId}/tasks", HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
@@ -104,10 +104,10 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("fields", fields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            
+
             _lastResponseSize = response.ResponseSize;
             _lastNextPageToken = response.NextPageToken;
-            
+
 
             return GetReponseDataList(response);
         }
@@ -180,6 +180,19 @@ namespace Taviloglu.Wrike.ApiClient
 
             var response = await SendRequest<WrikeTask>($"tasks/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
+        }
+
+        public async Task<IEnumerable<WrikeTask>> UpdateTasksAsync(WrikeClientIdListParameter taskIds, List<WrikeCustomFieldData> customFields,
+	        List<string> optionalFields)
+        {
+	        var uriBuilder = new WrikeUriBuilder($"folders/{taskIds}")
+		        .AddParameter("fields", optionalFields);
+
+	        var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
+		        .AddParameter("customFields", customFields);
+
+	        var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
+	        return GetReponseDataList(response);
         }
     }
 }

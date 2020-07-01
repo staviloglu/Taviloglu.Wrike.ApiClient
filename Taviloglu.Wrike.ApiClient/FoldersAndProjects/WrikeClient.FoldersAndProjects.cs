@@ -167,7 +167,6 @@ namespace Taviloglu.Wrike.ApiClient
 
 	        var response = await SendRequest<WrikeFolder>(uriBuilder.GetUri(), HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
 	        return GetReponseDataList(response);
-
         }
 
 

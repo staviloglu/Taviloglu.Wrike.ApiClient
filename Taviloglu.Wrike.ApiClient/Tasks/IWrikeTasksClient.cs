@@ -22,7 +22,7 @@ namespace Taviloglu.Wrike.ApiClient
         int LastResponseSize { get; }
 
         /// <summary>
-        ///  Create task in folder.  
+        ///  Create task in folder.
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <remarks>If newTask.CustomStatus is set, newTask.Status is ommited</remarks>
@@ -37,7 +37,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Delete task by Id
         /// Scopes: Default, wsReadWrite
         /// </summary>
-        /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-tasks"/>        
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/delete-tasks"/>
         Task<WrikeTask> DeleteAsync(WrikeClientIdParameter taskId);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="metadata">Task metadata filter</param>
         /// <param name="customField">Custom field filter</param>
         /// <param name="customStatuses">Custom statuses filter</param>
-        /// <param name="fields">optional fields to be included in the response model 
+        /// <param name="fields">optional fields to be included in the response model
         /// Use <see cref="WrikeTask.OptionalFields"/></param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-tasks"/>
         Task<List<WrikeTask>> GetAsync(
@@ -103,7 +103,7 @@ namespace Taviloglu.Wrike.ApiClient
 
 
         /// <summary>
-        ///  Returns complete information about single or multiple tasks. 
+        ///  Returns complete information about single or multiple tasks.
         ///  Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="taskIds">Task Ids</param>
@@ -126,7 +126,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="removeShareds">Unshare task from specified users</param>
         /// <param name="addResponsibles">Add specified users to responsible list</param>
         /// <param name="removeResponsibles">Remove specified users from responsible list</param>
-        /// <param name="addFollowers">Add specified users to follow task</param>        
+        /// <param name="addFollowers">Add specified users to follow task</param>
         /// <param name="follow">Add specified users to task followers</param>
         /// <param name="priorityBefore">Put task in task list before specified task</param>
         /// <param name="priorityAfter">Put task in task list after specified task</param>
@@ -159,5 +159,18 @@ namespace Taviloglu.Wrike.ApiClient
             List<WrikeCustomFieldData> customFields = null,
             string customStatus = null,
             bool? restore = null);
+
+        /// <summary>
+        /// Returns complete information about specified folders
+        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// </summary>
+        /// <param name="taskIds">MaxCount 100</param>
+        /// <param name="customFields">Use <see cref="WrikeTask.CustomFields"/></param>
+        /// <param name="optionalFields">Use <see cref="WrikeTask.OptionalFields"/></param>
+        /// See <see href="https://developers.wrike.com/api/v4/folders-projects/#modify-folder"/>
+        Task<IEnumerable<WrikeTask>> UpdateTasksAsync(
+	        WrikeClientIdListParameter taskIds,
+	        List<WrikeCustomFieldData> customFields,
+	        List<string> optionalFields);
     }
 }
