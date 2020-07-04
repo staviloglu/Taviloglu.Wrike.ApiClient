@@ -161,8 +161,8 @@ namespace Taviloglu.Wrike.ApiClient
             bool? restore = null);
 
         /// <summary>
-        /// Returns complete information about specified folders
-        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// Update tasks.
+        /// Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="taskIds">MaxCount 100</param>
         /// <param name="customFields">Use <see cref="WrikeTask.CustomFields"/></param>
