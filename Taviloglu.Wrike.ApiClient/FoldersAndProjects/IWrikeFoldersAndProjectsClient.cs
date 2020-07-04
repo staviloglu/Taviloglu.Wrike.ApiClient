@@ -106,8 +106,8 @@ namespace Taviloglu.Wrike.ApiClient
         Task<WrikeFolder> DeleteAsync(WrikeClientIdParameter folderId);
 
         /// <summary>
-        /// Returns complete information about specified folders
-        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// Update folders
+        /// Scopes: Default, wsReadWrite
         /// </summary>
         /// <param name="folderIds">MaxCount 100</param>
         /// <param name="customFields">Use <see cref="WrikeFolder.CustomFields"/></param>
