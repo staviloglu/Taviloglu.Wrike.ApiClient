@@ -182,11 +182,9 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        public async Task<IEnumerable<WrikeTask>> UpdateTasksAsync(WrikeClientIdListParameter taskIds, List<WrikeCustomFieldData> customFields,
-	        List<string> optionalFields)
+        public async Task<IEnumerable<WrikeTask>> UpdateTasksAsync(WrikeClientIdListParameter taskIds, List<WrikeCustomFieldData> customFields)
         {
-	        var uriBuilder = new WrikeUriBuilder($"folders/{taskIds}")
-		        .AddParameter("fields", optionalFields);
+	        var uriBuilder = new WrikeUriBuilder($"tasks/{taskIds}");
 
 	        var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
 		        .AddParameter("customFields", customFields);
