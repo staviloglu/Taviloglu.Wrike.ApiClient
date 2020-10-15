@@ -1,8 +1,8 @@
 # Taviloglu.Wrike.ApiClient [![Build Status](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient.svg?branch=master)](https://travis-ci.org/staviloglu/Taviloglu.Wrike.ApiClient/) [![BCH compliance](https://bettercodehub.com/edge/badge/staviloglu/Taviloglu.Wrike.ApiClient?branch=master)](https://bettercodehub.com/)
-.NET Client for Wrike API 
+.NET Client for Wrike API. Feel free to show your ❤️ by giving a star ⭐ 
 
 ## Donate
-If you find this library useful and if it saved you time, you can <a href="https://iyzi.link/AAtdxA" target="_blank">support</a> my work.
+If you find this library useful and if it saved you time, you can <a href="https://iyzi.link/AFqJwQ" target="_blank">support</a> my work.
 
 ## Client Usage [![NuGet](https://img.shields.io/nuget/v/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/) [![NuGet Downloads](https://img.shields.io/nuget/dt/Taviloglu.Wrike.ApiClient.svg)](https://www.nuget.org/packages/Taviloglu.Wrike.ApiClient/)
 Create your Wrike Client and just call the function you need.
