@@ -1,6 +1,4 @@
-﻿using Taviloglu.Wrike.ApiClient.TimeLogCategories;
-
-namespace Taviloglu.Wrike.ApiClient
+﻿namespace Taviloglu.Wrike.ApiClient
 {
     /// <summary>
     /// Provides methods to access and modify user content in Wrike through the API
