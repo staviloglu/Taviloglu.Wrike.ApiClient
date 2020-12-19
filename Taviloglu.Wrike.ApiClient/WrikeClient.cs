@@ -15,7 +15,7 @@ namespace Taviloglu.Wrike.ApiClient
     /// <summary>
     /// Provides methods to access and modify user content in Wrike through the API
     /// </summary>
-    public partial class WrikeClient : IDisposable
+    public partial class WrikeClient : IWrikeClient, IDisposable
     {
         private HttpClient _httpClient;
         private bool _disposed;
