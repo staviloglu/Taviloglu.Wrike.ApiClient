@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Taviloglu.Wrike.Core;
 using Taviloglu.Wrike.Core.Version;
 
 namespace Taviloglu.Wrike.ApiClient

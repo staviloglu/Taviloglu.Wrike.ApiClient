@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Taviloglu.Wrike.Core.TimelogCategories;
 
-namespace Taviloglu.Wrike.ApiClient.TimeLogCategories
+namespace Taviloglu.Wrike.ApiClient
 {
     /// <summary>
     /// Timelog Category operations
