@@ -18,40 +18,40 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         /// List of project owner IDs
         /// </summary>
         [JsonProperty("ownerIds")]
-        public List<string> OwnerIds { get; set; }
+        public List<string>? OwnerIds { get; set; }
 
         /// <summary>
         /// Project status
         /// </summary>
         [JsonProperty("status")]
         [JsonConverter ( typeof(StringEnumConverter))]
-        public WrikeProjectStatus Status { get; set; }
+        public WrikeProjectStatus? Status { get; set; }
         /// <summary>
         /// Project start date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("startDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd" })]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// Project end date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("endDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd" })]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Project created date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("createdDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// Project completed date Format: yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonProperty("completedDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
-        public DateTime CompletedDate { get; set; }
+        public DateTime? CompletedDate { get; set; }
     }
 }
