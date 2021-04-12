@@ -18,7 +18,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         /// List of project owner IDs
         /// </summary>
         [JsonProperty("ownerIds")]
-        public List<string>? OwnerIds { get; set; }
+        public List<string> OwnerIds { get; set; }
 
         /// <summary>
         /// Project status
