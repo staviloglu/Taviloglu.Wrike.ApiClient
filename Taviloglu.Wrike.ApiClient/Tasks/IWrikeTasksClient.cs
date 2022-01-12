@@ -135,6 +135,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="metadata">Metadata to be updated (null value removes entry)</param>
         /// <param name="customFields">Custom fields to be updated or deleted (null value removes field) Use <see cref="WrikeTask.OptionalFields"/></param>
         /// <param name="customStatus">Custom status ID</param>
+        /// <param name="effortAllocation">Task Effort allocation</param>
         /// <param name="restore">Restore task from Recycled Bin</param>
         /// <returns></returns>
         Task<WrikeTask> UpdateAsync(WrikeClientIdParameter taskId,
@@ -158,6 +159,7 @@ namespace Taviloglu.Wrike.ApiClient
             List<WrikeMetadata> metadata = null,
             List<WrikeCustomFieldData> customFields = null,
             string customStatus = null,
+            WrikeTaskEffortAllocation effortAllocation = null,
             bool? restore = null);
     }
 }
