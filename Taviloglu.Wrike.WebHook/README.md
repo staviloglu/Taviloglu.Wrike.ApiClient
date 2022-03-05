@@ -25,3 +25,13 @@ var newWebHook = new WrikeWebHook("https://<your-host>/api/wrikewebhook");
 newWebHook = await client.WebHooks.CreateAsync(newWebHook);
 ```
 Then Wrike will send post requests to the url you provided. For more details check out [wrike's documentation](https://developers.wrike.com/documentation/webhooks)
+
+---
+
+**Note:** WrikeWebHook library uses Newtonsoft.json serializer, which is not default serializer on ASP.NET Core 3.0+ or Framework 5.0+ versions. On recent ASP.NET projects you may need to install Microsoft.AspNetCore.Mvc.NewtonsoftJson package and activate it as follows;
+```csharp
+services.AddControllers().AddNewtonsoftJson();
+```
+See [Issue#33](https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/issues/33)
+
+---
