@@ -46,7 +46,9 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("priorityAfter", priorityAfter)
                 .AddParameter("superTasks", newTask.SuperTaskIds)
                 .AddParameter("metadata", newTask.Metadata)
-                .AddParameter("customFields", newTask.CustomFields);
+                .AddParameter("customFields", newTask.CustomFields)
+                .AddParameter("effortAllocation", newTask.EffortAllocation)
+                ;
 
             if (string.IsNullOrWhiteSpace(newTask.CustomStatusId))
             {
@@ -114,13 +116,17 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(WrikeClientIdListParameter taskIds, List<string> optionalFields)
         {
-            var supportedOptionalFields = new List<string> { WrikeTask.OptionalFields.Recurrent, WrikeTask.OptionalFields.AttachmentCount };
+            var supportedOptionalFields = new List<string> { 
+                WrikeTask.OptionalFields.Recurrent, 
+                WrikeTask.OptionalFields.AttachmentCount,
+                WrikeTask.OptionalFields.EffortAllocation
+            };
 
             if (optionalFields != null &&
-                (optionalFields.Count > 2 ||
+                (optionalFields.Count > 3 ||
                 optionalFields.Any(o => !supportedOptionalFields.Contains(o))))
             {
-                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent and AttachmentCount is supported.");
+                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent, AttachmentCount and EffortAllocation is supported.");
             }
 
             var uriBuilder = new WrikeUriBuilder($"tasks/{taskIds}")
@@ -153,6 +159,7 @@ namespace Taviloglu.Wrike.ApiClient
             List<WrikeMetadata> metadata,
             List<WrikeCustomFieldData> customFields,
             string customStatus,
+            WrikeTaskEffortAllocation effortAllocation,
             bool? restore)
         {
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
@@ -176,6 +183,7 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("metadata", metadata)
                 .AddParameter("customFields", customFields)
                 .AddParameter("customStatus", customStatus)
+                .AddParameter("effortAllocation", effortAllocation)
                 .AddParameter("restore", restore);
 
             var response = await SendRequest<WrikeTask>($"tasks/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);

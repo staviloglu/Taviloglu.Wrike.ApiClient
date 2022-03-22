@@ -30,6 +30,7 @@ namespace Taviloglu.Wrike.Core.Tasks
         /// <param name="metadata">Metadata to be added to newly created task</param>
         /// <param name="customFields">List of custom fields to set in newly created task</param>
         /// <param name="customStatus">Custom status ID</param>
+        /// <param name="effortAllocation">Task Effort allocation</param>
         public WrikeTask(
             string title,
             string description = null,
@@ -44,7 +45,8 @@ namespace Taviloglu.Wrike.Core.Tasks
             List<string> superTasks = null,
             List<WrikeMetadata> metadata = null,
             List<WrikeCustomFieldData> customFields = null,
-            string customStatus = null)
+            string customStatus = null,
+            WrikeTaskEffortAllocation effortAllocation = null)
         {
             title.ValidateParameter(nameof(title));
 
@@ -62,6 +64,7 @@ namespace Taviloglu.Wrike.Core.Tasks
             Metadata = metadata;
             CustomFields = customFields;
             CustomStatusId = customStatus;
+            EffortAllocation = effortAllocation;
         }
 
         /// <summary>
@@ -243,6 +246,12 @@ namespace Taviloglu.Wrike.Core.Tasks
         public List<WrikeCustomFieldData> CustomFields { get; set; }
 
         /// <summary>
+        /// Task Effort allocation
+        /// </summary>
+        [JsonProperty("effortAllocation")]
+        public WrikeTaskEffortAllocation EffortAllocation { get; set; }
+
+        /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
         public class OptionalFields
@@ -308,6 +317,10 @@ namespace Taviloglu.Wrike.Core.Tasks
             /// Custom fields
             /// </summary>
             public const string CustomFields = "customFields";
+            /// <summary>
+            /// Effort allocation
+            /// </summary>
+            public const string EffortAllocation = "effortAllocation";
         }
     }
 }

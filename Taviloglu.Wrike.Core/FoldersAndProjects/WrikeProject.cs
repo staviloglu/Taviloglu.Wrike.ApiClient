@@ -53,5 +53,23 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         [JsonProperty("completedDate")]
         [JsonConverter(typeof(CustomDateTimeConverter), new object[] { "yyyy-MM-dd'T'HH:mm:ss'Z'" })]
         public DateTime? CompletedDate { get; set; }
+		
+        /// <summary>
+        /// Custom status ID. Empty if status is not Custom
+        /// </summary>
+        [JsonProperty("customStatusId")]
+        public string CustomStatusId { get; set; }		
+		
+        /// <summary>
+        /// List of project owner IDs to add on update
+        /// </summary>
+        [JsonProperty("ownersAdd")]
+        public List<string> OwnersAdd { get; set; }
+
+        /// <summary>
+        /// List of project owner IDs to remove on update
+        /// </summary>
+        [JsonProperty("ownersRemove")]
+        public List<string> OwnersRemove { get; set; }		
     }
 }
