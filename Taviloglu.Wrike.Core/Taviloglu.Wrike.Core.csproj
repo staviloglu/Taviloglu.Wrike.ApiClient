@@ -2,19 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.5</Version>
+    <Version>2.4.5</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike API</Description>
-    <Copyright>Copyright (c) 2020 SINAN TAVILOGLU</Copyright>
+    <Copyright>Copyright (c) 2022 SINAN TAVILOGLU</Copyright>
     <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>- Properties became nullable in WrikeProject</PackageReleaseNotes>
-    <AssemblyVersion>2.1.5.0</AssemblyVersion>
-    <FileVersion>2.1.5.0</FileVersion>
+    <PackageReleaseNotes>
+      - WrikeProject
+        - CustomStatusId property added.
+        - OwnersAdd property added.
+        - OwnersRemove property added.
+      - WrikeTask
+        - effortAllocation parameter added to the constructor method.
+        - EffortAllocation property added.
+      - WrikeTask.OptionalFields
+        - EffortAllocation constant added.
+      - WrikeTaskEffortAllocation class added.
+      - WrikeTaskEffortMode enum added.
+    </PackageReleaseNotes>
+    <AssemblyVersion>2.4.5.0</AssemblyVersion>
+    <FileVersion>2.4.5.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
