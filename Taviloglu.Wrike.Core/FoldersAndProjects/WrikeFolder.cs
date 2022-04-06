@@ -122,7 +122,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         /// <summary>
         /// Folder workflow ID
         /// </summary>
-        [JsonProperty("workfloId")]
+        [JsonProperty("workflowId")]
         public string WorkflowId { get; set; }
         /// <summary>
         /// List of folder metadata entries
