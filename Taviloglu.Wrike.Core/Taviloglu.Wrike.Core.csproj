@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.4.5</Version>
+    <Version>2.4.6</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike API</Description>
@@ -13,20 +13,10 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>
-      - WrikeProject
-        - CustomStatusId property added.
-        - OwnersAdd property added.
-        - OwnersRemove property added.
-      - WrikeTask
-        - effortAllocation parameter added to the constructor method.
-        - EffortAllocation property added.
-      - WrikeTask.OptionalFields
-        - EffortAllocation constant added.
-      - WrikeTaskEffortAllocation class added.
-      - WrikeTaskEffortMode enum added.
+      Fixed: JsonProperty name of WrikeFolder WorkflowId
     </PackageReleaseNotes>
-    <AssemblyVersion>2.4.5.0</AssemblyVersion>
-    <FileVersion>2.4.5.0</FileVersion>
+    <AssemblyVersion>2.4.6.0</AssemblyVersion>
+    <FileVersion>2.4.6.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
