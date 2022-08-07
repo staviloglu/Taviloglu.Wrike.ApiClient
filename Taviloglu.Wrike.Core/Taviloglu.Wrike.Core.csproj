@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.4.6</Version>
+    <Version>2.4.7</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike API</Description>
@@ -13,10 +13,10 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>
-      Fixed: JsonProperty name of WrikeFolder WorkflowId
-    </PackageReleaseNotes>
-    <AssemblyVersion>2.4.6.0</AssemblyVersion>
-    <FileVersion>2.4.6.0</FileVersion>
+		- Bumped [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) dependency from 11.0.1-beta3 to 13.0.1.
+	</PackageReleaseNotes>
+    <AssemblyVersion>2.4.7.0</AssemblyVersion>
+    <FileVersion>2.4.7.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1-beta3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>

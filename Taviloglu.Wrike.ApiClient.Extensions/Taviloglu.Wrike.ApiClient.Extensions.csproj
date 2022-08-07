@@ -1,35 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
-    <Authors>Sinan Taviloglu</Authors>
-    <Company />
-    <Description>Extension methods to use with WrikeClient which are not provided in Taviloglu.Wrike.ApiClient</Description>
-    <Copyright>Copyright (c) 2018 SINAN TAVILOGLU</Copyright>
-    <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>wrike wrike-client wrike-api rest api extensions</PackageTags>
-    <PackageReleaseNotes>- New extensions added
-- Bugfixes</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Version>2.0.0</Version>
+		<Authors>Sinan Taviloglu</Authors>
+		<Company />
+		<Description>Extension methods to use with WrikeClient which are not provided in Taviloglu.Wrike.ApiClient</Description>
+		<Copyright>Copyright (c) 2022 SINAN TAVILOGLU</Copyright>
+		<PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
+		<RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>wrike wrike-client wrike-api rest api extensions</PackageTags>
+		<PackageReleaseNotes>
+			- New extensions added
+			- Bugfixes
+		</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\Taviloglu.Wrike.ApiClient.Extensions.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>bin\Debug\netstandard2.0\Taviloglu.Wrike.ApiClient.Extensions.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.ApiClient.Extensions.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.ApiClient.Extensions.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj" />
-    <ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Taviloglu.Wrike.ApiClient\Taviloglu.Wrike.ApiClient.csproj" />
+		<ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" />
+	</ItemGroup>
 
 </Project>

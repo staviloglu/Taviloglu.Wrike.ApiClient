@@ -1,34 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
-    <Authors>Sinan Taviloglu</Authors>
-    <Company />
-    <Description>- Provides a ControllerBase class to respond to webhook post requests coming from Wrike. 
-- Handles the post request and provides abstract methods for the events of tasks on wrike.</Description>
-    <Copyright>Copyright (c) 2018 SINAN TAVILOGLU</Copyright>
-    <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>wrike wrike-webhooks webhook http-post controllerBase</PackageTags>
-    <PackageReleaseNotes>- namespace change</PackageReleaseNotes>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Version>2.0.1</Version>
+		<Authors>Sinan Taviloglu</Authors>
+		<Company />
+		<Description>
+			- Provides a ControllerBase class to respond to webhook post requests coming from Wrike.
+			- Handles the post request and provides abstract methods for the events of tasks on wrike.
+		</Description>
+		<Copyright>Copyright (c) 2018 SINAN TAVILOGLU</Copyright>
+		<PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>wrike wrike-webhooks webhook http-post controllerBase</PackageTags>
+		<PackageReleaseNotes>
+			- Bumped [Microsoft.AspNetCore.Mvc.Core](https://github.com/dotnet/aspnetcore/tree/main/src/Mvc/Mvc.Core/src) dependency from the deprecated 2.0.2 to 2.1.0.
+		</PackageReleaseNotes>
+		<AssemblyVersion>2.0.1.0</AssemblyVersion>
+		<FileVersion>2.0.1.0</FileVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.WebHook.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.WebHook.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" />
+	</ItemGroup>
 
 </Project>

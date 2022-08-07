@@ -1,52 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.3.3</Version>
-    <Authors>Sinan Taviloglu</Authors>
-    <Company />
-    <Description>.NET Client for Wrike API</Description>
-    <Copyright>Copyright (c) 2022 SINAN TAVILOGLU</Copyright>
-    <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
-    <PackageReleaseNotes>
-      - IWrikeTaskClient
-        - WrikeTaskEffortAllocation parameter added to UpdateAsync method prototype.
-      - WrikeTaskClient
-        - WrikeTask.OptionalFields.EffortAllocation added to suppported optional fields of GetAsync method.
-        - WrikeTaskEffortAllocation parameter added to UpdateAsync method.
-        - WrikeTask.EffortAllocation support added to CreateAsync method.
-    </PackageReleaseNotes>
-    <AssemblyVersion>2.3.3.0</AssemblyVersion>
-    <FileVersion>2.3.3.0</FileVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	
-	<files>
-    <file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.dll" />
-    <file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.xml" />
-	<file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.pdb" />
-  </files>
-  
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Version>2.3.4</Version>
+		<Authors>Sinan Taviloglu</Authors>
+		<Company />
+		<Description>.NET Client for Wrike API</Description>
+		<Copyright>Copyright (c) 2022 SINAN TAVILOGLU</Copyright>
+		<PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
+		<PackageReleaseNotes>
+			- Bumped [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) dependency from 11.0.1-beta3 to 13.0.1.
+		</PackageReleaseNotes>
+		<AssemblyVersion>2.3.4.0</AssemblyVersion>
+		<FileVersion>2.3.4.0</FileVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\Taviloglu.Wrike.ApiClient.xml</DocumentationFile>
-  </PropertyGroup>
+		<files>
+			<file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.dll" />
+			<file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.xml" />
+			<file src="bin/Release/netstandard2.0/Taviloglu.Wrike.ApiClient.pdb" />
+		</files>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.ApiClient.xml</DocumentationFile>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.4-preview1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1-beta3" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>bin\Debug\netstandard2.0\Taviloglu.Wrike.ApiClient.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" Version="2.4.5" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\Release\netstandard2.0\Taviloglu.Wrike.ApiClient.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.4-preview1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Taviloglu.Wrike.Core\Taviloglu.Wrike.Core.csproj" Version="2.4.5" />
+	</ItemGroup>
 
 </Project>
