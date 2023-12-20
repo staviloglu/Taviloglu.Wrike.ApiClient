@@ -47,7 +47,7 @@ namespace Taviloglu.Wrike.Core.Colors
         /// </summary>
         public enum CustomStatusColor
         {
-            Brown, Red, Purple, Indigo, DarkBlue, Blue, Turquoise, DarkCyan, Green, YellowGreen, Yellow, Orange, Gray, DarkRed,
+            Brown, Red, Purple, Indigo, DarkBlue, Blue, Turquoise, DarkCyan, Green, YellowGreen, Yellow, Orange, Gray, DarkRed
         }
     }
 
