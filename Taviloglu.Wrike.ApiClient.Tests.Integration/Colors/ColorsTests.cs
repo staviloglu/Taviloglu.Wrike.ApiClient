@@ -5,7 +5,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Colors
     [TestFixture, Order(3)]
     public class ColorsTests
     {
-        const int ColorCount = 86;
+        const int ColorCount = 87;
 
         [Test]
         public void GetAsync_ShouldRetun86Colors()
