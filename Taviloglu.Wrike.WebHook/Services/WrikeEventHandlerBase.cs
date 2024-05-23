@@ -9,44 +9,26 @@ namespace Taviloglu.Wrike.WebHook.Services
 {
     public abstract class WrikeEventHandlerBase
     {
-        public virtual OkResult Ok()
-        {
-            return new OkResult();
-        }
-        public virtual OkObjectResult Ok(object value)
-        {
-            return new OkObjectResult(value);
-        }
+        public virtual bool OnEvent(JToken eventData, WrikeWebHookEvent wrikeWebHookEvent) { return false; }
 
-        public virtual BadRequestResult BadRequest()
-        {
-            return new BadRequestResult();
-        }
-        public virtual BadRequestObjectResult BadRequest(object error)
-        {
-            return new BadRequestObjectResult(error);
-        }
-
-        public virtual IActionResult OnEvent(JToken eventData, WrikeWebHookEvent wrikeWebHookEvent) { return null; }
-
-        public virtual IActionResult OnError(Exception ex) { return BadRequest(); }
-        public virtual IActionResult OnTaskCreated(WrikeWebHookEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskDeleted(WrikeWebHookEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskTitleChanged(WrikeWebHookTaskTitleChangedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskImportanceChanged(WrikeWebHookTaskImportanceChangedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskStatusChanged(WrikeWebHookTaskStatusChangedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskDatesChanged(WrikeWebHookTaskDatesChangedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskParentsAdded(WrikeWebHookTaskParentsAddedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskParentsRemoved(WrikeWebHookTaskParentsRemovedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskResponsiblesAdded(WrikeWebHookTaskResponsiblesAddedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskResponsiblesRemoved(WrikeWebHookTaskResponsiblesRemovedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskSharedsAdded(WrikeWebHookTaskSharedsAddedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskSharedsRemoved(WrikeWebHookTaskSharedsRemovedEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTaskDescriptionChanged(WrikeWebHookEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnAttachmentDeleted(WrikeWebHookAttachmentEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnCommentAdded(WrikeWebHookCommentEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnCommentDeleted(WrikeWebHookCommentEvent wrikeWebHookEvent) { return Ok(); }
-        public virtual IActionResult OnTimelogChanged(WrikeWebHookEvent wrikeWebHookEvent) { return Ok(); }
+        public virtual void OnError(Exception ex) { }
+        public virtual void OnTaskCreated(WrikeWebHookEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskDeleted(WrikeWebHookEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskTitleChanged(WrikeWebHookTaskTitleChangedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskImportanceChanged(WrikeWebHookTaskImportanceChangedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskStatusChanged(WrikeWebHookTaskStatusChangedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskDatesChanged(WrikeWebHookTaskDatesChangedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskParentsAdded(WrikeWebHookTaskParentsAddedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskParentsRemoved(WrikeWebHookTaskParentsRemovedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskResponsiblesAdded(WrikeWebHookTaskResponsiblesAddedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskResponsiblesRemoved(WrikeWebHookTaskResponsiblesRemovedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskSharedsAdded(WrikeWebHookTaskSharedsAddedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskSharedsRemoved(WrikeWebHookTaskSharedsRemovedEvent wrikeWebHookEvent) {  }
+        public virtual void OnTaskDescriptionChanged(WrikeWebHookEvent wrikeWebHookEvent) {  }
+        public virtual void OnAttachmentAdded(WrikeWebHookAttachmentEvent wrikeWebHookEvent) {  }
+        public virtual void OnAttachmentDeleted(WrikeWebHookAttachmentEvent wrikeWebHookEvent) {  }
+        public virtual void OnCommentAdded(WrikeWebHookCommentEvent wrikeWebHookEvent) {  }
+        public virtual void OnCommentDeleted(WrikeWebHookCommentEvent wrikeWebHookEvent) {  }
+        public virtual void OnTimelogChanged(WrikeWebHookEvent wrikeWebHookEvent) {  }
     }
 }

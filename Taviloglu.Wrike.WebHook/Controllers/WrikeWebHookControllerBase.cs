@@ -48,63 +48,81 @@ namespace Taviloglu.Wrike.WebHook
             }
 
             var response = _handler.OnEvent(eventData, webHookEvent);
-            if (response != null) { return response;  }
+            if (response ) { return Ok();  }
 
             switch (webHookEvent.Type)
             {
                 case WrikeWebHookEventType.TaskCreated:
-                    return _handler.OnTaskCreated(webHookEvent);
+                    _handler.OnTaskCreated(webHookEvent);
+                    break;
                 case WrikeWebHookEventType.TaskDeleted:
-                    return _handler.OnTaskDeleted(webHookEvent);
+                    _handler.OnTaskDeleted(webHookEvent);
+                    break;
                 case WrikeWebHookEventType.TaskTitleChanged:
                     var titleChangedEvent = eventData.ToObject<WrikeWebHookTaskTitleChangedEvent>();
-                    return _handler.OnTaskTitleChanged(titleChangedEvent);
+                    _handler.OnTaskTitleChanged(titleChangedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskImportanceChanged:
                     var importanceChangedEvent = eventData.ToObject<WrikeWebHookTaskImportanceChangedEvent>();
-                    return _handler.OnTaskImportanceChanged(importanceChangedEvent);
+                    _handler.OnTaskImportanceChanged(importanceChangedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskStatusChanged:
                     var statusChangedEvent = eventData.ToObject<WrikeWebHookTaskStatusChangedEvent>();
-                    return _handler.OnTaskStatusChanged(statusChangedEvent);
+                    _handler.OnTaskStatusChanged(statusChangedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskDatesChanged:
                     var datesChangedEvent = eventData.ToObject<WrikeWebHookTaskDatesChangedEvent>();
-                    return _handler.OnTaskDatesChanged(datesChangedEvent);
+                    _handler.OnTaskDatesChanged(datesChangedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskParentsAdded:
                     var parentsAddedEvent = eventData.ToObject<WrikeWebHookTaskParentsAddedEvent>();
-                    return _handler.OnTaskParentsAdded(parentsAddedEvent);
+                    _handler.OnTaskParentsAdded(parentsAddedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskParentsRemoved:
                     var parentsRemovedEvent = eventData.ToObject<WrikeWebHookTaskParentsRemovedEvent>();
-                    return _handler.OnTaskParentsRemoved(parentsRemovedEvent);
+                    _handler.OnTaskParentsRemoved(parentsRemovedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskResponsiblesAdded:
                     var responsiblesAddedEvent = eventData.ToObject<WrikeWebHookTaskResponsiblesAddedEvent>();
-                    return _handler.OnTaskResponsiblesAdded(responsiblesAddedEvent);
+                    _handler.OnTaskResponsiblesAdded(responsiblesAddedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskResponsiblesRemoved:
                     var responsiblesRemovedEvent = eventData.ToObject<WrikeWebHookTaskResponsiblesRemovedEvent>();
-                    return _handler.OnTaskResponsiblesRemoved(responsiblesRemovedEvent);
+                    _handler.OnTaskResponsiblesRemoved(responsiblesRemovedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskSharedsAdded:
                     var sharedsAddedEvent = eventData.ToObject<WrikeWebHookTaskSharedsAddedEvent>();
-                    return _handler.OnTaskSharedsAdded(sharedsAddedEvent);
+                    _handler.OnTaskSharedsAdded(sharedsAddedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskSharedsRemoved:
                     var sharedsRemovedEvent = eventData.ToObject<WrikeWebHookTaskSharedsRemovedEvent>();
-                    return _handler.OnTaskSharedsRemoved(sharedsRemovedEvent);
+                    _handler.OnTaskSharedsRemoved(sharedsRemovedEvent);
+                    break;
                 case WrikeWebHookEventType.TaskDescriptionChanged:
-                    return _handler.OnTaskDescriptionChanged(webHookEvent);
+                    _handler.OnTaskDescriptionChanged(webHookEvent);
+                    break;
                 case WrikeWebHookEventType.AttachmentAdded:
                     var attachmentAddedEvent = eventData.ToObject<WrikeWebHookAttachmentEvent>();
-                    return _handler.OnAttachmentAdded(attachmentAddedEvent);
+                    _handler.OnAttachmentAdded(attachmentAddedEvent);
+                    break;
                 case WrikeWebHookEventType.AttachmentDeleted:
                     var attachmentDeletedEvent = eventData.ToObject<WrikeWebHookAttachmentEvent>();
-                    return _handler.OnAttachmentDeleted(attachmentDeletedEvent);
+                    _handler.OnAttachmentDeleted(attachmentDeletedEvent);
+                    break;
                 case WrikeWebHookEventType.CommentAdded:
                     var commentAddedEvent = eventData.ToObject<WrikeWebHookCommentEvent>();
-                    return _handler.OnCommentAdded(commentAddedEvent);
+                    _handler.OnCommentAdded(commentAddedEvent);
+                    break;
                 case WrikeWebHookEventType.CommentDeleted:
                     var commentDeletedEvent = eventData.ToObject<WrikeWebHookCommentEvent>();
-                    return _handler.OnCommentDeleted(commentDeletedEvent);
+                    _handler.OnCommentDeleted(commentDeletedEvent);
+                    break;
                 case WrikeWebHookEventType.TimelogChanged:
-                    return _handler.OnTimelogChanged(webHookEvent);
+                    _handler.OnTimelogChanged(webHookEvent);
+                    break;
             }
 
-            return new OkResult();
+            return Ok();
         }
 
        
