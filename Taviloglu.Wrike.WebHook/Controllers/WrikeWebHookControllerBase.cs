@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using Taviloglu.Wrike.Core.WebHooks;
 using Taviloglu.Wrike.WebHook.Extensions;
 using Taviloglu.Wrike.WebHook.Services;
@@ -13,29 +16,53 @@ namespace Taviloglu.Wrike.WebHook
         public WrikeWebHookControllerBase(WrikeEventHandlerBase handler) => _handler = handler;
 
         [HttpPost]
-        public IActionResult Post([FromBody] JArray array)
+        public IActionResult Post()
         {
             //TODO: add security check to ensure the post is coming from Wrike
 
-            if (!Request.IsLocal() && !Request.IsHttps)
+            using (var reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
-                return new BadRequestResult();
-            }
+                var jsonContent = reader.ReadToEnd();
 
-            if (array.Count < 1)
-            {
-                return new BadRequestResult();
-            }
+                if (IsWebHookSetup(jsonContent))
+                {
+                    return HandleWebHookSetup(jsonContent);
+                }
+                else
+                {
+                    var array = new JArray(jsonContent);
+                    if (!Request.IsLocal() && !Request.IsHttps)
+                    {
+                        return new BadRequestResult();
+                    }
 
-            try
-            {
-                return HandleEvent(array.First);
+                    if (array.Count < 1)
+                    {
+                        return new BadRequestResult();
+                    }
+
+                    try
+                    {
+                        return HandleEvent(array.First);
+                    }
+                    catch (Exception ex)
+                    {
+                        _handler.OnError(ex);
+                        return new BadRequestResult();
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                _handler.OnError(ex);
-                return new BadRequestResult();
-            }
+        }
+
+        protected virtual IActionResult HandleWebHookSetup(string jsonContent)
+        {
+            return BadRequest();
+
+        }
+
+        private bool IsWebHookSetup(string jsonContent)
+        {
+            return jsonContent.Contains("WebHook secret verification");
         }
 
         private IActionResult HandleEvent(JToken eventData)
@@ -124,6 +151,8 @@ namespace Taviloglu.Wrike.WebHook
 
             return Ok();
         }
+
+ 
 
        
     }
