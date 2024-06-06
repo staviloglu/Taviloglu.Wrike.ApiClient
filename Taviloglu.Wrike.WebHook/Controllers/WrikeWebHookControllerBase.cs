@@ -41,6 +41,12 @@ namespace Taviloglu.Wrike.WebHook
                         return new BadRequestResult();
                     }
 
+                    string auth = AuthenticateRequest(jsonContent);
+                    if (string.IsNullOrEmpty(auth))
+                    {
+                        return Unauthorized();
+                    }
+
                     try
                     {
                         return HandleEvent(array.First);
@@ -57,7 +63,11 @@ namespace Taviloglu.Wrike.WebHook
         protected virtual IActionResult HandleWebHookSetup(string jsonContent)
         {
             return BadRequest();
+        }
 
+        protected virtual string AuthenticateRequest(string jsonContent)
+        {
+            return null;
         }
 
         private bool IsWebHookSetup(string jsonContent)
