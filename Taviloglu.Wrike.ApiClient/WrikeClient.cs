@@ -331,7 +331,7 @@ namespace Taviloglu.Wrike.ApiClient
             JsonConverter jsonConverter = null)
         {
             HttpResponseMessage responseMessage = null;
-
+            Console.WriteLine(httpContent.ReadAsStringAsync().Result);
             switch (httpMethod)
             {
                 case HttpMethods.Get:
