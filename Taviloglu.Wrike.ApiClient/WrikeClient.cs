@@ -44,6 +44,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// Commonly used to add throttling to the number of requests made to the Wrike API</param>
         public WrikeClient(string bearerToken, string host = "www.wrike.com", HttpClient customHttpClient = null)
         {
+            Console.WriteLine(bearerToken);
             if (bearerToken == null)
             {
                 throw new ArgumentNullException(nameof(bearerToken));
