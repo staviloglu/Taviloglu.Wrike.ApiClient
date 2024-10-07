@@ -333,6 +333,14 @@ namespace Taviloglu.Wrike.ApiClient
         {
             HttpResponseMessage responseMessage = null;
 
+            if(_httpClient == null)
+            {
+                throw new Exception("HttpClient is not initialized!");
+            } else
+            {
+                Console.WriteLine("HttpClient is initialized!");
+            }
+
             switch (httpMethod)
             {
                 case HttpMethods.Get:
