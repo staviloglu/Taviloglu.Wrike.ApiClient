@@ -341,6 +341,7 @@ namespace Taviloglu.Wrike.ApiClient
                 Console.WriteLine("HttpClient is initialized!");
             }
 
+
             switch (httpMethod)
             {
                 case HttpMethods.Get:

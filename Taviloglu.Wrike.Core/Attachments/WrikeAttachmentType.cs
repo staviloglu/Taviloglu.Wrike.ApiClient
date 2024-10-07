@@ -28,7 +28,17 @@
         /// <summary>
         /// External attachment
         /// </summary>
-        External
+        External,
+
+        /// <summary>
+        /// Sharepoint attachment
+        /// </summary>
+        SharePoint,
+
+        /// <summary>
+        /// DAM attachment
+        /// </summary>
+        DAM
 
     }
 }
