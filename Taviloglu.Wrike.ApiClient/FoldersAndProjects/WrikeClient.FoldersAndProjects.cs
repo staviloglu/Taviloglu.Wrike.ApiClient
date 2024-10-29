@@ -129,15 +129,15 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.UpdateAsync(WrikeClientIdParameter folderId, string title, string description, List<string> addParents, List<string> removeParents, List<string> addShareds, List<string> removeShareds, List<WrikeMetadata> metadata, bool? restore, List<WrikeCustomFieldData> customFields, List<string> customColumns, WrikeProject project)
         {
-            if (title == null)
-            {
-                throw new ArgumentNullException(nameof(title));
-            }
+            //if (title == null)
+            //{
+            //    throw new ArgumentNullException(nameof(title));
+            //}
 
-            if (title.Trim() == string.Empty)
-            {
-                throw new ArgumentException("value can not be empty", nameof(title));
-            }
+            //if (title.Trim() == string.Empty)
+            //{
+            //    throw new ArgumentException("value can not be empty", nameof(title));
+            //}
 
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", title)

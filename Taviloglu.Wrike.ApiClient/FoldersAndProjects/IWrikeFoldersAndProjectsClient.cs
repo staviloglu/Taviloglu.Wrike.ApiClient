@@ -96,7 +96,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="customColumns">List of custom fields associated with folder</param>
         /// <param name="project">Project settings (update project or convert folder to project). Use null value to convert project to folder</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/modify-folder"/> 
-        Task<WrikeFolder> UpdateAsync(WrikeClientIdParameter folderId, string title, string description = null, List<string> addParents = null, List<string> removeParents = null, List<string> addShareds = null, List<string> removeShareds = null, List<WrikeMetadata> metadata = null, bool? restore = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null);
+        Task<WrikeFolder> UpdateAsync(WrikeClientIdParameter folderId, string title = null, string description = null, List<string> addParents = null, List<string> removeParents = null, List<string> addShareds = null, List<string> removeShareds = null, List<WrikeMetadata> metadata = null, bool? restore = null, List<WrikeCustomFieldData> customFields = null, List<string> customColumns = null, WrikeProject project = null);
 
         /// <summary>
         /// Move folder and all descendant folders and tasks to Recycle Bin unless they have parents outside of deletion scope
