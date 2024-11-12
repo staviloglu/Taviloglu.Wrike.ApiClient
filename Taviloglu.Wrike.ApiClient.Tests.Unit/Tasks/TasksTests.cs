@@ -31,7 +31,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Tasks
 
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => TestConstants.WrikeClient.Tasks.GetAsync(new List<string> { "taskId1","taskId2"}, notSupportedOptionalFields));
             Assert.AreEqual("optionalFields", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("Only Recurrent, AttachmentCount and EffortAllocation is supported."));
+            Assert.IsTrue(ex.Message.Contains("Only Recurrent, AttachmentCount, EffortAllocation, CustomItemTypeId is supported."));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Unit.Tasks
 
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => TestConstants.WrikeClient.Tasks.GetAsync(new List<string> { "taskId1", "taskId2" }, notSupportedOptionalFields));
             Assert.AreEqual("optionalFields", ex.ParamName);
-            Assert.IsTrue(ex.Message.Contains("Only Recurrent, AttachmentCount and EffortAllocation is supported."));
+            Assert.IsTrue(ex.Message.Contains("Only Recurrent, AttachmentCount, EffortAllocation, CustomItemTypeId is supported."));
         }
     }
 }
