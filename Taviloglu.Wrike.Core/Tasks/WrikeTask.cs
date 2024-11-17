@@ -264,7 +264,12 @@ namespace Taviloglu.Wrike.Core.Tasks
         /// </summary>
         public class OptionalFields
         {
-            public static List<string> List = new List<string> { AuthorIds, HasAttachments, AttachmentCount, ParentIds, SuperParentIds, SharedIds, ResponsibleIds, Description, BriefDescription, Recurrent, SuperTaskIds, SubTaskIds, DependencyIds, Metadata };
+            public static List<string> List = new List<string> { AuthorIds, HasAttachments, AttachmentCount, ParentIds, SuperParentIds, 
+                SharedIds, ResponsibleIds, Description, BriefDescription, Recurrent, 
+                SuperTaskIds, SubTaskIds, DependencyIds, Metadata,
+                CustomFields, EffortAllocation, CustomItemTypeId
+            };
+
             /// <summary>
             /// Author IDs
             /// </summary>
