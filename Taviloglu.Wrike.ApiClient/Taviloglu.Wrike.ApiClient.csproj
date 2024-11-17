@@ -13,7 +13,7 @@
 		<RepositoryType>Git</RepositoryType>
 		<PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
 		<PackageReleaseNotes>
-			- Added CustomItemTypeId optional field support. (Fixes #44)
+			- Added CustomItemTypeId optional field support to Tasks. (Fixes #44)
 		</PackageReleaseNotes>
 		<AssemblyVersion>2.4.0.0</AssemblyVersion>
 		<FileVersion>2.4.0.0</FileVersion>
