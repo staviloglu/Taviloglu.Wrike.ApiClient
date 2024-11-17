@@ -119,14 +119,15 @@ namespace Taviloglu.Wrike.ApiClient
             var supportedOptionalFields = new List<string> { 
                 WrikeTask.OptionalFields.Recurrent, 
                 WrikeTask.OptionalFields.AttachmentCount,
-                WrikeTask.OptionalFields.EffortAllocation
+                WrikeTask.OptionalFields.EffortAllocation,
+                WrikeTask.OptionalFields.CustomItemTypeId
             };
 
             if (optionalFields != null &&
-                (optionalFields.Count > 3 ||
+                (optionalFields.Count > 4 ||
                 optionalFields.Any(o => !supportedOptionalFields.Contains(o))))
             {
-                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent, AttachmentCount and EffortAllocation is supported.");
+                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent, AttachmentCount, EffortAllocation, CustomItemTypeId is supported.");
             }
 
             var uriBuilder = new WrikeUriBuilder($"tasks/{taskIds}")

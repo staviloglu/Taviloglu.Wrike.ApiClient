@@ -46,7 +46,8 @@ namespace Taviloglu.Wrike.Core.Tasks
             List<WrikeMetadata> metadata = null,
             List<WrikeCustomFieldData> customFields = null,
             string customStatus = null,
-            WrikeTaskEffortAllocation effortAllocation = null)
+            WrikeTaskEffortAllocation effortAllocation = null,
+            string customItemTypeId = null)
         {
             title.ValidateParameter(nameof(title));
 
@@ -65,6 +66,7 @@ namespace Taviloglu.Wrike.Core.Tasks
             CustomFields = customFields;
             CustomStatusId = customStatus;
             EffortAllocation = effortAllocation;
+            CustomItemTypeId = customItemTypeId;
         }
 
         /// <summary>
@@ -166,7 +168,7 @@ namespace Taviloglu.Wrike.Core.Tasks
         /// </summary>
         [JsonProperty("authorIds")]
         public List<string> AuthorIds { get; set; }
-        
+
         /// <summary>
         /// Custom status ID
         /// </summary>
@@ -252,11 +254,17 @@ namespace Taviloglu.Wrike.Core.Tasks
         public WrikeTaskEffortAllocation EffortAllocation { get; set; }
 
         /// <summary>
+        /// Custom Item Type ID
+        /// </summary>
+        [JsonProperty("customItemTypeId")]
+        public string CustomItemTypeId { get; set; }
+
+        /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
         public class OptionalFields
         {
-            public static List<string> List = new List<string> { AuthorIds, HasAttachments, AttachmentCount , ParentIds , SuperParentIds , SharedIds , ResponsibleIds, Description, BriefDescription, Recurrent, SuperTaskIds, SubTaskIds, DependencyIds, Metadata };
+            public static List<string> List = new List<string> { AuthorIds, HasAttachments, AttachmentCount, ParentIds, SuperParentIds, SharedIds, ResponsibleIds, Description, BriefDescription, Recurrent, SuperTaskIds, SubTaskIds, DependencyIds, Metadata };
             /// <summary>
             /// Author IDs
             /// </summary>
@@ -321,6 +329,10 @@ namespace Taviloglu.Wrike.Core.Tasks
             /// Effort allocation
             /// </summary>
             public const string EffortAllocation = "effortAllocation";
+            /// <summary>
+            /// Custom Item Type ID
+            /// </summary>
+            public const string CustomItemTypeId = "customItemTypeId";
         }
     }
 }
