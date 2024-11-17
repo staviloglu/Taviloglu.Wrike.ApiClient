@@ -9,7 +9,7 @@
 			- Provides a ControllerBase class to respond to webhook post requests coming from Wrike.
 			- Handles the post request and provides abstract methods for the events of tasks on wrike.
 		</Description>
-		<Copyright>Copyright (c) 2022 SINAN TAVILOGLU</Copyright>
+		<Copyright>Copyright (c) 2024 SINAN TAVILOGLU</Copyright>
 		<PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>

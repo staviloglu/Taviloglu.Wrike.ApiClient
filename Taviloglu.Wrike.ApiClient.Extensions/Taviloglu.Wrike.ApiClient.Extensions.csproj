@@ -6,7 +6,7 @@
 		<Authors>Sinan Taviloglu</Authors>
 		<Company />
 		<Description>Extension methods to use with WrikeClient which are not provided in Taviloglu.Wrike.ApiClient</Description>
-		<Copyright>Copyright (c) 2022 SINAN TAVILOGLU</Copyright>
+		<Copyright>Copyright (c) 2024 SINAN TAVILOGLU</Copyright>
 		<PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
 		<RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
