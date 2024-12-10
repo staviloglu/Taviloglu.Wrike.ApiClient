@@ -58,7 +58,7 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 postDataBuilder.AddParameter("customStatus", newTask.CustomStatusId);
             }
-            
+
             var response = await SendRequest<WrikeTask>($"folders/{folderId}/tasks", HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
@@ -106,18 +106,18 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("fields", fields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            
+
             _lastResponseSize = response.ResponseSize;
             _lastNextPageToken = response.NextPageToken;
-            
+
 
             return GetReponseDataList(response);
         }
 
         async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(WrikeClientIdListParameter taskIds, List<string> optionalFields)
         {
-            var supportedOptionalFields = new List<string> { 
-                WrikeTask.OptionalFields.Recurrent, 
+            var supportedOptionalFields = new List<string> {
+                WrikeTask.OptionalFields.Recurrent,
                 WrikeTask.OptionalFields.AttachmentCount,
                 WrikeTask.OptionalFields.EffortAllocation,
                 WrikeTask.OptionalFields.CustomItemTypeId
@@ -127,11 +127,11 @@ namespace Taviloglu.Wrike.ApiClient
                 (optionalFields.Count > 4 ||
                 optionalFields.Any(o => !supportedOptionalFields.Contains(o))))
             {
-                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent, AttachmentCount, EffortAllocation, CustomItemTypeId is supported.");
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Only Recurrent, AttachmentCount, EffortAllocation, CustomItemTypeId is supported.");
             }
 
             var uriBuilder = new WrikeUriBuilder($"tasks/{taskIds}")
-                .AddParameter("fields",optionalFields);
+                .AddParameter("fields", optionalFields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
 
@@ -161,7 +161,8 @@ namespace Taviloglu.Wrike.ApiClient
             List<WrikeCustomFieldData> customFields,
             string customStatus,
             WrikeTaskEffortAllocation effortAllocation,
-            bool? restore)
+            bool? restore,
+            string convertToCustomItemType)
         {
             var contentBuilder = new WrikeFormUrlEncodedContentBuilder()
                 .AddParameter("title", title)
@@ -185,7 +186,8 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("customFields", customFields)
                 .AddParameter("customStatus", customStatus)
                 .AddParameter("effortAllocation", effortAllocation)
-                .AddParameter("restore", restore);
+                .AddParameter("restore", restore)
+                .AddParameter("convertToCustomItemType", convertToCustomItemType);
 
             var response = await SendRequest<WrikeTask>($"tasks/{id}", HttpMethods.Put, contentBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
