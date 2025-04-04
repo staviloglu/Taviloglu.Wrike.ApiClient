@@ -15,8 +15,8 @@
 		<PackageReleaseNotes>
 			- Added CustomItemTypeId optional field support to Tasks. (Fixes #44)
 		</PackageReleaseNotes>
-		<AssemblyVersion>2.4.0.0</AssemblyVersion>
-		<FileVersion>2.4.0.0</FileVersion>
+		<AssemblyVersion>2.5.0</AssemblyVersion>
+		<FileVersion>2.5.0</FileVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<files>
