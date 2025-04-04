@@ -137,6 +137,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="customStatus">Custom status ID</param>
         /// <param name="effortAllocation">Task Effort allocation</param>
         /// <param name="restore">Restore task from Recycled Bin</param>
+        /// <param name="convertToCustomItemType">Convert task to custom item type</param>
         /// <returns></returns>
         Task<WrikeTask> UpdateAsync(WrikeClientIdParameter taskId,
             string title = null,
@@ -160,6 +161,7 @@ namespace Taviloglu.Wrike.ApiClient
             List<WrikeCustomFieldData> customFields = null,
             string customStatus = null,
             WrikeTaskEffortAllocation effortAllocation = null,
-            bool? restore = null);
+            bool? restore = null,
+            string convertToCustomItemType = null);
     }
 }
