@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
 using Taviloglu.Wrike.Core.Comments;
@@ -9,8 +10,10 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
     public class CommnentsTests
     {
         const string DefaultCommentId = "IEACGXLUIMHLQB2D";
-        const string DefaultTaskId = "IEACGXLUKQIEQ6NC";
-        const string DefaultFolderId = "IEACGXLUI4IEQ6NG";        
+        const string DefaultTaskId = "IEACGXLUKQO6DCNW";
+        const string DefaultFolderId = "IEACGXLUI4O6C46Q";
+
+        private string _addedCommentId = string.Empty;
 
         [OneTimeTearDown]
         public void ReturnToDefaults()
@@ -30,8 +33,10 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         public void CreateAsync_ShouldAddNewNewCommentToDefaultTask()
         {
             var newComment = new WrikeTaskComment("My new test comment", DefaultTaskId);
-
+            
             var createdComment = WrikeClientFactory.GetWrikeClient().Comments.CreateAsync(newComment, plainText: true).Result;
+
+            _addedCommentId = createdComment.Id; //To be used in GetAsyncWithIds_ShouldReturnDefaultComment
 
             Assert.IsNotNull(createdComment);
             Assert.AreEqual(newComment.Text, createdComment.Text);
@@ -104,10 +109,10 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Comments
         [Test, Order(7)]
         public void GetAsyncWithIds_ShouldReturnDefaultComment()
         {
-            var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync(new List<string> { DefaultCommentId }).Result;
+            var comments = WrikeClientFactory.GetWrikeClient().Comments.GetAsync(new List<string> { _addedCommentId }).Result;
             Assert.IsNotNull(comments);
             Assert.AreEqual(1, comments.Count);
-            Assert.AreEqual(DefaultCommentId, comments.First().Id);
+            Assert.AreEqual(_addedCommentId, comments.First().Id);
         }
 
         
