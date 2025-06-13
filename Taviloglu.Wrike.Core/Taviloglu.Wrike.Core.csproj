@@ -2,21 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.5.0</Version>
+    <Version>2.6.0</Version>
     <Authors>Sinan Taviloglu</Authors>
     <Company />
     <Description>Core classes to use with Wrike API</Description>
-    <Copyright>Copyright (c) 2024 SINAN TAVILOGLU</Copyright>
+    <Copyright>Copyright (c) 2025 SINAN TAVILOGLU</Copyright>
     <PackageLicenseUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient</PackageProjectUrl>
     <RepositoryUrl>https://github.com/staviloglu/Taviloglu.Wrike.ApiClient.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>wrike wrike-client wrike-api rest api</PackageTags>
     <PackageReleaseNotes>
-		- Added CustomItemTypeId optional field support to Tasks. (Fixes #44)
+		- Added Robot to WrikeUserType (FIXES #48)
+		- Added Permalink property to WrikeFolderTree
 	</PackageReleaseNotes>
-    <AssemblyVersion>2.5.0.0</AssemblyVersion>
-    <FileVersion>2.5.0.0</FileVersion>
+    <AssemblyVersion>2.6.0.0</AssemblyVersion>
+    <FileVersion>2.6.0.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
