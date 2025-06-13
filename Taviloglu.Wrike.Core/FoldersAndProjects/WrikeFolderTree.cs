@@ -41,6 +41,12 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         public WrikeProject Project { get; set; }
 
         /// <summary>
+        /// Folder permalink, exact match
+        /// </summary>
+        [JsonProperty("permalink")]
+        public string Permalink { get; set; }
+
+        /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
         public class OptionalFields
