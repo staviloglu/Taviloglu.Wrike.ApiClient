@@ -11,6 +11,10 @@
         Duration,
         Checkbox,
         Contacts,
-        Multiple
+        Multiple,
+        LinkToDatabase,
+        CalculatedNumeric,
+        CalculatedDate
+        
     }
 }
