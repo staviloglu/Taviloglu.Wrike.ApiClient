@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -159,7 +159,7 @@ namespace Taviloglu.Wrike.ApiClient
 
         async Task<WrikeFolder> IWrikeFoldersAndProjectsClient.DeleteAsync(WrikeClientIdParameter folderId)
         {
-            var response = await SendRequest<WrikeFolder>($"folders/{folderId} ", HttpMethods.Delete).ConfigureAwait(false);
+            var response = await SendRequest<WrikeFolder>($"folders/{folderId}", HttpMethods.Delete).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
     }
