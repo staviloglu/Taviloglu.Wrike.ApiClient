@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
+using Taviloglu.Wrike.Core.CustomFields;
 
 namespace Taviloglu.Wrike.Core.Users
 {
@@ -102,6 +103,11 @@ namespace Taviloglu.Wrike.Core.Users
         [JsonProperty("location")]
         public string Location { get; set; }
 
+        /// <summary>
+        /// Custom fields
+        /// </summary>
+        [JsonProperty("customFields")]
+        public List<WrikeCustomFieldData> CustomFields { get; set; }
 
     }
 

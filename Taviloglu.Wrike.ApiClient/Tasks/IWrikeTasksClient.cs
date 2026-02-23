@@ -99,7 +99,8 @@ namespace Taviloglu.Wrike.ApiClient
             WrikeMetadata metadata = null,
             WrikeCustomFieldData customField = null,
             List<string> customStatuses = null,
-            List<string> fields = null);
+            List<string> fields = null,
+            List<string> customItemTypes = null);
 
 
         /// <summary>

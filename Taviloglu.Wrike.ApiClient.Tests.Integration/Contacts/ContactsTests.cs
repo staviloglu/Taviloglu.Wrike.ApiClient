@@ -54,6 +54,25 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
         }
 
         [Test, Order(5)]
+        [Ignore("Skip test due lack of permission or license to use custom fields in test account")]
+        public void GetAsync_WhenReceiveCustomFields_CustomFieldsShouldNotBeNull()
+        {
+            var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync(me: true, fields: new List<string> { "customFields" }).Result;
+
+            Assert.IsNotNull(contacts.First().CustomFields);
+        }
+
+        [Test, Order(6)]
+        [Ignore("Skip test due lack of permission or license to use custom fields in test account")]
+        public void GetAsync_WhenRetrieveMetadataAndCustomFields_MetadataAndCustomFieldsShouldNotBeNull()
+        {
+            var contacts = WrikeClientFactory.GetWrikeClient().Contacts.GetAsync(me: true, retrieveMetadata: true, fields: new List<string> { "customFields" }).Result;
+
+            Assert.IsNotNull(contacts.First().Metadata);
+            Assert.IsNotNull(contacts.First().CustomFields);
+        }
+
+        [Test, Order(7)]
         public void GetAsync_WhenTwoIds_ShouldreturnTwoContacts()
         {
             var contactIds = new List<string>() { DefaultContactId, WrikeBotContactId };
@@ -65,7 +84,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.AreEqual(expectedContactCount, contacts.Count);
         }
 
-        [Test, Order(6)]
+        [Test, Order(8)]
         public void GetAsync_WhenTwoIdsAndRetrieveMetadata_MetadataShouldNotBeNull()
         {
             var contactIds = new List<string>() { DefaultContactId, WrikeBotContactId };
@@ -75,7 +94,7 @@ namespace Taviloglu.Wrike.ApiClient.Tests.Integration.Contacts
             Assert.False(contacts.Any(c=> c.Metadata == null));
         }
 
-        [Test, Order(7)]
+        [Test, Order(9)]
         public void UpdateAsync_ShouldUpdateMetadata()
         {            
             var expectedMetaDataValue = "updatedMetaDataValue";

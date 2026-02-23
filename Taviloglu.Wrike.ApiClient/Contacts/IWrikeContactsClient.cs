@@ -18,12 +18,14 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="metadata">Metadata filter, exact match for metadata key or key-value pair</param>
         /// <param name="isDeleted">Deleted flag filter</param>
         /// <param name="retrieveMetadata"></param>
+        /// <param name="fields">List of additional fields to be retrieved</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
         Task<List<WrikeUser>> GetAsync(
             bool? me = null,
             WrikeMetadata metadata = null,
             bool? isDeleted = null,
-            bool? retrieveMetadata = null);
+            bool? retrieveMetadata = null,
+            List<string> fields = null);
 
 
         /// <summary>
@@ -33,9 +35,11 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="contactIds">List of contact Ids</param>
         /// <param name="metadata">Metadata filter, exact match for metadata key or key-value pair</param>
         /// <param name="retrieveMetadata"></param>
+        /// <param name="fields">List of additional fields to be retrieved</param>
         /// See <see href="https://developers.wrike.com/documentation/api/methods/query-contacts"/>
         Task<List<WrikeUser>> GetAsync(WrikeClientIdListParameter contactIds, WrikeMetadata metadata = null, 
-            bool? retrieveMetadata = null);
+            bool? retrieveMetadata = null,
+            List<string> fields = null);
 
         /// <summary>
         /// Update contact of requesting user by ID (use 'Users.UpdateAsync' method to update other users). Account Admins may use this method to update group info by group ID.

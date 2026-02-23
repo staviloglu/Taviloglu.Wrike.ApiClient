@@ -7,9 +7,9 @@ namespace Taviloglu.Wrike.ApiClient
 {
     public partial class WrikeClient : IWrikeContactsClient
     {
-        public IWrikeContactsClient Contacts { get { return (IWrikeContactsClient)this; } }        
+        public IWrikeContactsClient Contacts { get { return (IWrikeContactsClient)this; } }
 
-        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(bool? me, WrikeMetadata metadata, bool? isDeleted, bool? retrieveMetadata)
+        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(bool? me, WrikeMetadata metadata, bool? isDeleted, bool? retrieveMetadata, List<string> fields = null)
         {
             var requestUri = "contacts";
 
@@ -18,25 +18,42 @@ namespace Taviloglu.Wrike.ApiClient
                 .AddParameter("metadata", metadata)
                 .AddParameter("deleted", isDeleted);
 
-            if (retrieveMetadata.HasValue && retrieveMetadata == true)
+            if (fields != null)
             {
-                var fields = new List<string> { "metadata" };
+                if (retrieveMetadata.HasValue && retrieveMetadata == true && !fields.Contains("metadata"))
+                {
+                    fields.Add("metadata");
+                }
                 uriBuilder.AddParameter("fields", fields);
+            }
+            else if (retrieveMetadata.HasValue && retrieveMetadata == true)
+            {
+                var metadataFields = new List<string> { "metadata" };
+                uriBuilder.AddParameter("fields", metadataFields);
             }
 
             var response = await SendRequest<WrikeUser>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);
         }
 
-        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(WrikeClientIdListParameter contactIds, WrikeMetadata metadata, bool? retrieveMetadata)
+        async Task<List<WrikeUser>> IWrikeContactsClient.GetAsync(WrikeClientIdListParameter contactIds, WrikeMetadata metadata, bool? retrieveMetadata, List<string> fields = null)
         {
             var requestUri = $"contacts/{contactIds}";
             var uriBuilder = new WrikeUriBuilder(requestUri)
                 .AddParameter("metadata", metadata);
-            if (retrieveMetadata.HasValue && retrieveMetadata == true)
+
+            if (fields != null)
             {
-                var fields = new List<string> { "metadata" };
+                if (retrieveMetadata.HasValue && retrieveMetadata == true && !fields.Contains("metadata"))
+                {
+                    fields.Add("metadata");
+                }
                 uriBuilder.AddParameter("fields", fields);
+            }
+            else if (retrieveMetadata.HasValue && retrieveMetadata == true)
+            {
+                var metadataFields = new List<string> { "metadata" };
+                uriBuilder.AddParameter("fields", metadataFields);
             }
 
             var response = await SendRequest<WrikeUser>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
